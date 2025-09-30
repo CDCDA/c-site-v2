@@ -1,0 +1,155 @@
+/*
+ * @Description:  皮肤主题
+ */
+
+//棕黄渐变色主题
+$light: (
+  background: linear-gradient(to right, rgb(236 233 230 / 95%), rgb(255 255 255 / 95%)),
+  back: linear-gradient(to right, rgb(236 233 230 / 100%), rgb(255 255 255 / 100%)),
+  bk-svg: rgb(236 233 230 / 100%),
+  bk-pri: white,
+  re-bk-pri: black,
+  bk: #49b1f5,
+  border-color: rgb(180 180 180),
+  font-color: #363636,
+  re-font-color: white,
+  box-shadow: 0 1px 2px 0 #000000,
+  audio-pro-bar: #aca8a8,
+  top-button-color: rgb(255 255 255 / 80%),
+  placeholder: rgb(87, 87, 87),
+  scrollbar-back-color: #49b1f5,
+  scrollbar-thumb-color: hsla(0, 0%, 100%, 0.4)
+);
+
+//白色主题
+$white: (
+  //主背景色
+  back: rgb(255 255 255 / 100%),
+  //反转背景色
+  re-back: rgb(0 0 0 / 100%),
+  //主背景色（透明）
+  back-tr: hsla(0, 0%, 100%, 0.8),
+  //遮罩层
+  modal: hsla(0, 0%, 100%, 0.18823529411764706),
+  //背景色
+  bk: #b4b4b4,
+  //文字颜色
+  font-color: #606266,
+  //文字反转色
+  re-font-color: white,
+  //边框色
+  border-color: #dcdcdc,
+  page-border-color: #888888,
+  //阴影
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3),
+  //阴影反转
+  re-box-shadow: 1px 1px 3px rgba(255, 255, 255, 0.3),
+  //占位色
+  placeholder: #b1b4bc,
+  //hover色
+  hover-color: #dddddd,
+  scrollbar-back-color: '',
+  scrollbar-thumb-color: hsla(0, 0%, 100%, 0.4)
+);
+
+//深色主题
+$dark: (
+  //主背景色
+  background: rgb(0 0 0 / 75%),
+  //主背景色（透明）
+  back-tr: rgb(0 0 0 / 70%),
+  //主背景色（不透明）
+  back: rgb(0 0 0 / 100%),
+  //遮罩层
+  modal: hsla(0, 0%, 100%, 0.18823529411764706),
+  bk: #b4b4b4,
+  //文字颜色
+  font-color: white,
+  //文字反转色
+  re-font-color: black,
+  //边框色
+  border-color: #b4b4b4,
+  //阴影
+  box-shadow: 1px 1px 3px rgba(255, 255, 255, 0.3),
+  //阴影反转
+  re-box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3),
+  //占位色
+  placeholder: #b1b4bc,
+  //hover色
+  hover-color: #dddddd,
+  scrollbar-back-color: '',
+  scrollbar-thumb-color: hsla(0, 0%, 100%, 0.4)
+);
+
+//青色主题
+$green: (
+  // background: rgb(12 51 76/90%),
+  background: linear-gradient(to right, rgb(61 159 169/90%), rgb(12 51 76/90%)),
+  back: linear-gradient(to right, rgb(61 159 169/100%), rgb(12 51 76/100%)),
+  bk-pri: black,
+  re-bk-pri: white,
+  bk: linear-gradient(to right, #358bff, #15c6ff),
+  // font-color: rgb(168, 231, 236),
+  font-color: #fff,
+  re-font-color: rgb(7, 38, 58),
+  box-shadow: 0 2px 8px 0 #000000,
+  audio-pro-bar: #aca8a8,
+  top-button-color: white,
+  placeholder: ''
+);
+
+@mixin flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin flex-column {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+$themes: (
+  theme-light: $light,
+  theme-dark: $dark,
+  theme-white: $white,
+  theme-green: $green
+);
+
+$current-theme: $dark;
+@mixin theme() {
+  @each $key, $val in $themes {
+    $current-theme: $val !global;
+    [data-theme='#{$key}'] {
+      @content;
+    }
+  }
+}
+
+@mixin getValue() {
+  @each $key, $val in $themes {
+    $current-theme: $val !global;
+    [data-theme='#{$key}'] {
+      @content;
+    }
+  }
+}
+
+@mixin full() {
+  height: 100%;
+  width: 100%;
+}
+
+@function get($key) {
+  @return map-get($current-theme, $key);
+}
+
+@mixin background() {
+  background: get('back');
+}
+
+@mixin back() {
+  background: get('back');
+}

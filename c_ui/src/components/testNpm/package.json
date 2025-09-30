@@ -1,0 +1,36 @@
+{
+  "name": "testnpm-002",
+  "version": "1.0.3",
+  "private": false,
+  "description": "一个基于Vue 3的测试组件",
+  "type": "module",
+  "main": "testNpm.cjs.js",
+  "module": "testNpm.es.js",
+  "exports": {
+    ".": {
+      "import": "./testNpm.es.js",
+      "require": "./testNpm.cjs.js"
+    },
+    "./style": {
+      "import": "./export.css",
+      "require": "./export.css"
+    }
+  },
+  "files": [
+    "testNpm.cjs.js",
+    "testNpm.es.js",
+    "testNpm.umd.js",
+    "export.css"
+  ],
+  "keywords": [
+    "vue3",
+    "testNpm",
+    "component"
+  ],
+  "author": "ccc1495",
+  "license": "MIT",
+  "peerDependencies": {
+    "element-plus": "^2.0.0",
+    "vue": "^3.0.0"
+  }
+}

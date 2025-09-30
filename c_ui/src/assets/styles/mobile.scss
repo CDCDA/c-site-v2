@@ -1,0 +1,52 @@
+@media screen and (max-width: 1100px) {
+  /* 顶栏 -- 开始 */
+  .header-bar {
+    display: none !important;
+  }
+  .common-header {
+    padding: 0 15px 0 5px !important;
+    width: calc(100vw - 20px) !important;
+  }
+  .header-name {
+    .weather {
+      display: none !important;
+    }
+  }
+  .recommend-left-bottom,
+  .recommend-right {
+    display: none !important;
+  }
+  .recommend-left {
+    width: 100% !important;
+    margin-right: 0 !important;
+    .recommend-left-bottom {
+      width: 100%;
+    }
+  }
+  .home-main {
+    width: calc(100vw - 30px) !important;
+    .display-header,
+    .display-right {
+      display: none !important;
+    }
+    .display-left,
+    .list-item {
+      width: 100% !important;
+    }
+    .recommend {
+      height: auto !important;
+    }
+    .display-page {
+      margin-top: 0 !important;
+    }
+  }
+}
+
+@media screen and (max-width: 2560px) and (min-width: 1600px) {
+  html {
+    font-size: 20px !important;
+  }
+  .page-main {
+    max-width: 1500px !important;
+  }
+}

@@ -1,0 +1,176 @@
+/*
+ * @Description: app外的element-ui样式
+ */
+
+* {
+  scrollbar-width: initial !important;
+  scrollbar-color: initial !important;
+}
+::-webkit-scrollbar-thumb {
+  background-image: linear-gradient(
+    45deg,
+    get('border-color') 25%,
+    transparent 0,
+    transparent 50%,
+    get('border-color') 0,
+    get('border-color') 75%,
+    transparent 0,
+    transparent
+  ) !important;
+  border-radius: 4px !important;
+}
+
+::-webkit-scrollbar {
+  width: 8px !important; /* 修改宽度 */
+}
+
+//菜单下拉框
+//.el-menu--horizontal .el-menu-item:not(.is-disabled):hover,
+//.el-menu--horizontal > .el-sub-menu .el-sub-menu__title:hover,
+//.el-menu--horizontal > .el-menu-item.is-active {
+//  background-color: transparent;
+//}
+//
+//.el-menu--horizontal .el-menu .el-menu-item {
+//  background-color: transparent;
+//}
+//
+//.el-menu--horizontal.el-menu,
+//.el-menu {
+//  border: none;
+//  background-color: transparent;
+//}
+
+.el-button {
+  //background: transparent;
+  //color: get('font-color');
+  font-size: 0.8rem;
+  //border: 1px solid get('border-color');
+  //transition: all 0.3s ease-in-out;
+  font-family: 'Shark';
+  //outline: none !important;
+  height: 1.6rem;
+  //border-radius: 4px;
+}
+//.el-button:hover {
+//  background: get('border-color') !important;
+//  color: get('re-font-color');
+//  border: 1px solid get('border-color');
+//  outline: none;
+//}
+//.el-button:active {
+//  transform: translateY(1px);
+//}
+
+//加载动画
+.el-loading-spinner {
+  // background-image: url('@/assets/svg/loading.svg'); /*设置自己想要的图片或gif*/
+  background-repeat: no-repeat;
+  background-size: 100px 100px;
+  width: 100px;
+  height: 100px;
+  display: block;
+  position: relative;
+  left: 50%;
+  top: 50%;
+  margin: -75px 0 0 -75px;
+  border-radius: 50%;
+  border: 3px solid transparent;
+  border-top-color: #9370db;
+  animation: spin 2s linear infinite;
+  opacity: 0.85;
+}
+
+.el-loading-spinner:before {
+  content: '';
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  right: 5px;
+  bottom: 5px;
+  border-radius: 50%;
+  border: 3px solid transparent;
+  border-top-color: #ba55d3;
+  -webkit-animation: spin 3s linear infinite;
+  animation: spin 3s linear infinite;
+}
+.el-loading-spinner:after {
+  content: '';
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  right: 15px;
+  bottom: 15px;
+  border-radius: 50%;
+  border: 3px solid transparent;
+  border-top-color: #ff00ff;
+  -webkit-animation: spin 1.5s linear infinite;
+  animation: spin 1.5s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.el-loading-spinner .circular {
+  /*隐藏 默认的 loading 动画*/
+  display: none;
+}
+
+@keyframes left-right {
+  0% {
+    transform: translateX(-1000px);
+  }
+  15% {
+    transform: translateX(-50%);
+  }
+  85% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(1000px);
+  }
+}
+
+.el-message {
+  transform: translateX(-1000px);
+  animation: left-right 3s linear forwards !important;
+  transition: none !important;
+}
+
+.el-notification {
+  background: white;
+  backdrop-filter: blur(10px);
+  border-color: get('modal');
+  .el-notification__content,
+  .el-notification__title,
+  .el-notification__closeBtn {
+    color: black;
+  }
+}
+.el-overlay-dialog {
+  overflow: hidden;
+}
+
+/* 树 -- 开始 */
+.el-tree {
+  background: transparent !important;
+  backdrop-filter: blur(15px);
+  color: get('font-color');
+  font-size: 0.8rem;
+  .el-tree-node__content:hover {
+    background: hsla(0, 0%, 100%, 0.18823529411764706); // hover 节点背景色，否则是白色
+  }
+  .el-tree-node:focus > .el-tree-node__content {
+    background: transparent; // focus 节点背景透明，否则是白色
+  }
+  .el-tree-node__expand-icon {
+    color: get('font-color');
+    font-size: 0.8rem;
+  }
+}

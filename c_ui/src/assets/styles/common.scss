@@ -1,0 +1,304 @@
+
+
+// 网格
+//linear-gradient(90deg,rgba(60,10,30,.05) 5%,transparent 0),linear-gradient(1turn,rgba(60,10,30,.05) 5%,transparent 0)
+
+// 网格
+//linear-gradient(90deg,rgba(37,82,110,.1) 1px,var(--background) 0),linear-gradient(180deg,rgba(37,82,110,.1) 1px,var(--background) 0)
+
+* {
+  scrollbar-width: initial;
+  scrollbar-color: initial;
+}
+
+input {
+  font-family: 'Shark', serif;
+  font-size: 0.75rem;
+}
+
+// 卡片外圈样式
+.c-card {
+  width: calc(100% - 20px);
+  background: get('back');
+  backdrop-filter: blur(5px);
+  box-shadow: get('box-shadow');
+  color: get('font-color');
+  border-radius: 8px;
+  margin-bottom: 20px;
+  padding: 12px 10px 10px 10px;
+  transition: cubic-bezier(0.71, 0.15, 0.16, 1.15) 0.5s;
+  overflow: hidden;
+  backdrop-filter: blur(20px);
+}
+.c-card:hover {
+  // transform: scale(1.02);
+  box-shadow: 0 1px 15px 0 rgb(231, 231, 184);
+}
+
+.c-dotted-line {
+  width: 100%;
+  height: 1px;
+  border-bottom: 2px dashed #979494;
+  margin: 10px 0;
+}
+
+.page-main {
+  width: 90%;
+  max-width: 1200px;
+  margin: 60px auto 0 auto;
+  min-height: calc(100vh - 80px);
+  border-radius: 10px;
+  animation: slide-in 1s forwards ease;
+  //backdrop-filter: blur(5px);
+  position: relative;
+  background: get('back-tr');
+  z-index: 1;
+  overflow: hidden;
+  // transition: all 0.4s ease;
+  // box-shadow: get('box-shadow');
+}
+
+// .page-main::before {
+//   content: '';
+//   background: transparent;
+//   position: absolute;
+//   width: 100%;
+//   height: 100%;
+//   border-radius: 10px;
+//   backdrop-filter: blur(20px);
+//   top: 0;
+//   left: 0;
+//   z-index: -1;
+// }
+
+.page-main-full {
+  width: 100%;
+}
+
+.no-wrap {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: wrap;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+}
+
+/* 旋转边框 -- 开始 */
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+    transform-origin: top;
+  }
+
+  to {
+    transform: rotate(360deg);
+    transform-origin: top;
+  }
+}
+
+.rotate-border::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 120%;
+  height: 120%;
+  background: linear-gradient(#00ccff, #d500f9);
+  animation: rotate 5s linear infinite;
+  z-index: -2;
+}
+
+.rotate-border::after {
+  content: '';
+  position: absolute;
+  background: inherit;
+  inset: 6px;
+  border-radius: inherit;
+  z-index: -1;
+}
+
+.rotate-border-hover:hover::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 120%;
+  height: 120%;
+  background: linear-gradient(#00ccff, #d500f9);
+  animation: rotate 5s linear infinite;
+  z-index: -2;
+}
+
+.rotate-border-hover:hover::after {
+  content: '';
+  position: absolute;
+  background: inherit;
+  inset: 6px;
+  border-radius: inherit;
+  z-index: -1;
+}
+/* 旋转边框 -- 结束 */
+
+/* 管理 -- 结束 */
+.manage-main {
+  width: calc(100% - 22px);
+  height: calc(100% - 20px);
+  margin: 10px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  .manage-query-form {
+    display: flex;
+    justify-content: start;
+    padding: 0 15px;
+    .el-form-item {
+      margin-bottom: 10px;
+      margin-top: 10px;
+      margin-right:15px
+    }
+    background: white;
+    border-radius: 6px;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+    margin-bottom: 10px;
+  }
+  .manage-table-wrap {
+    background: white;
+    border-radius: 6px;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+    margin-bottom: 10px;
+    width: calc(100% - 30px);
+    height: calc(100% - 160px);
+    padding: 15px;
+    .manage-table {
+      height: calc(100% - 47px);
+    }
+    .el-table__body {
+      border-bottom: 1px solid #dcdcdc;
+    }
+    .el-image {
+      border-radius: 4px;
+      width: 120px;
+      height: 80px;
+      box-shadow: get('box-shadow');
+      margin: 3px;
+    }
+  }
+  .manage-pagination {
+    background: white;
+    border-radius: 6px;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+    width: calc(100% - 30px);
+    padding: 0 15px;
+  }
+}
+
+.c-pagination {
+  width: calc(100% - 36px);
+  //position: absolute;
+  bottom: 6px;
+}
+//.c-divider {
+//  margin: 0 0 16px 0;
+//  width: 100%;
+//  animation: re-slide-in 1s forwards ease;
+//}
+.c-divider {
+  border: 2px dashed get('border-color');
+  margin: 15px 0px;
+}
+//.manage-query-form {
+//  text-align: left;
+//  overflow: hidden;
+//  padding-top: 10px;
+//  margin-bottom: 0;
+//  animation: re-slide-in 1s forwards ease;
+//  .el-form-item .el-form-item__label {
+//    width: auto !important;
+//  }
+//}
+.is-hidden {
+  .manage-query-form {
+    display: none;
+  }
+  .manage-table-wrap{
+    height: calc(100% - 95px) ;
+  }
+}
+
+.operation-icon {
+  font-size: 1rem;
+  margin: 0 5px;
+  cursor: pointer;
+}
+.operation-icon:active {
+  transform: translateY(1px);
+}
+
+.manage.page-main.is-full {
+  width: 100vw !important;
+  height: 100vh !important;
+  padding: 0;
+  margin: 0 !important;
+  border-radius: 0;
+  position: absolute;
+  max-width: none;
+
+  z-index: 200;
+}
+/* 管理 -- 结束 */
+
+.md-editor-dark {
+  //--md-bk-color: get('back');
+}
+.default-theme pre code {
+  //background-color: get('back');
+}
+.md-editor-catalog-link span {
+  //color: get('font-color');
+}
+.md-editor-catalog-active span {
+  //color: #ff8c66 !important;
+}
+
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.flex-column-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.flex-start {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+}
+.flex-end {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+}
+.btn-purple{
+  background: #AA20FF;
+  color: white;
+  border: none;
+  height: 35px;
+  padding: 19px 20px;
+  font-size: 0.9rem !important;
+  &:active{ background:#AA20FF;}
+}
+.btn-white{
+  background: white;
+  height: 35px;
+  padding: 18px 19px;
+  font-size: 0.9rem !important;
+  &:active{ background:#AA20FF;}
+}
