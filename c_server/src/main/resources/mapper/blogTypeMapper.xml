@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pw.mapper.BlogTypeMapper">
+
+    <resultMap type="com.pw.vo.BlogTypeVO" id="blogTypeMap">
+        <id property="typeId" column="type_id"/>
+        <result property="typeName" column="type_name"/>
+        <result property="userId" column="user_id"/>
+        <result property="coverUrl" column="cover_url"/>
+        <result property="intro" column="intro"/>
+        <collection property="total" javaType="Integer" ofType="Integer" select="getCountByTypeId"
+                    column="{typeId = type_id}">
+            <result column="total"/>
+        </collection>
+    </resultMap>
+
+    <select id="getCountByTypeId" resultType="Integer">
+        select count(blog_id) as total
+        from "blog"
+        where type_id = '${typeId}'
+    </select>
+
+    <select id="listBlogType" resultMap="blogTypeMap">
+        select distinct type_id,type_name,user_id,cover_url,intro
+        from "blog_type"
+        <if test="userId != null and userId!=''">
+            where user_id = '${userId}'
+        </if>
+        <if test="pageNum != null and pageNum!='' and pageSize != null and pageSize!=''">
+            LIMIT ${(pageNum-1)*pageSize},${pageSize}
+        </if>
+    </select>
+
+    <select id="countBlogType" resultType="integer">
+        select count(*)
+        from "blog_type"
+        <if test="userId != null and userId!=''">
+            where user_id = '${userId}'
+        </if>
+    </select>
+
+</mapper>
+

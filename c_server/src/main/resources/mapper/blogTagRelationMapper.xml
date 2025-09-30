@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pw.mapper.BlogTagRelationMapper">
+
+    <resultMap type="com.pw.vo.BlogTagVO" id="blogTagMap">
+        <id property="tagId" column="tag_id"/>
+        <result property="tagName" column="tag_name"/>
+        <result property="coverUrl" column="cover_url"/>
+        <collection property="total" javaType="Integer" ofType="Integer" select="getCountByTagId"
+                    column="{tagId = tag_id}">
+            <result column="total"/>
+        </collection>
+    </resultMap>
+
+
+    <select id="insertTags" resultType="Integer">
+        insert into blog_tag_relation
+        (blog_id,tag_id)
+        values
+        <foreach collection="tags" item="tag" index="index" separator=",">
+            (#{blogId},#{tag})
+        </foreach>
+    </select>
+
+    <select id="countByIds" resultType="Integer">
+        select count(DISTINCT tag_name)
+        from "blog_tag" bt
+        join "blog_tag_relation" btr
+        on bt.tag_id = btr.tag_id
+        where btr.blog_id in
+        <foreach collection="ids" item="id" index="index" separator="," close=")" open="(">
+            #{id}
+        </foreach>
+    </select>
+
+    <select id="getCountByTagId" resultType="Integer">
+        select count(tag_id) as total
+        from "blog_tag_relation"
+        where tag_id = '${tagId}'
+    </select>
+
+    <select id="listBlogTag" resultMap="blogTagMap">
+        select distinct bt.tag_id,bt.tag_name,bt.cover_url,bt.tag_type,bt.effect,bt.color
+        from "blog" b
+        join "blog_tag_relation" btr
+        on b.blog_id = btr.blog_id
+        join "blog_tag" bt
+        on bt.tag_id = btr.tag_id
+        <if test="userId != null and userId!=''">
+            where b.user_id = '${userId}'
+        </if>
+        <if test="tagName != null and tagName!=''">
+            and bt.tag_name like concat('%',#{tagName},'%')
+        </if>
+        <if test="pageNum != null and pageNum!='' and pageSize != null and pageSize!=''">
+            LIMIT ${(pageNum-1)*pageSize},${pageSize}
+        </if>
+    </select>
+
+    <select id="countBlogTag" resultType="integer">
+        select count(distinct bt.tag_id)
+        from "blog" b
+        join "blog_tag_relation" btr
+        on b.blog_id = btr.blog_id
+        right join "blog_tag" bt
+        on bt.tag_id = btr.tag_id
+        <if test="userId != null and userId!=''">
+            where b.user_id = '${userId}'
+        </if>
+        <if test="tagName != null and tagName!=''">
+            where bt.tag_name like concat('%',#{tagName},'%')
+        </if>
+        <if test="pageNum != null and pageNum!='' and pageSize != null and pageSize!=''">
+            LIMIT ${(pageNum-1)*pageSize},${pageSize}
+        </if>
+    </select>
+
+    <select id="isTagExit" resultType="Long">
+        select tag_id
+        from "blog_tag"
+        where tag_name = '${tag_name}'
+    </select>
+
+</mapper>
+

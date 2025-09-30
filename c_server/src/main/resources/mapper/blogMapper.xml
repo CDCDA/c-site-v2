@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pw.mapper.BlogMapper">
+    <resultMap type="com.pw.vo.BlogVO" id="blogMap">
+        <id property="blogId" column="blog_id"/>
+        <result property="blogTitle" column="blog_title"/>
+        <result property="content" column="content"/>
+        <result property="mkContent" column="mk_content"/>
+        <result property="userId" column="user_id"/>
+        <result property="typeName" column="type_name"/>
+        <result property="blogAbstract" column="blog_abstract"/>
+        <result property="isOriginal" column="is_original"/>
+        <result property="isRecommend" column="is_recommend"/>
+        <result property="coverUrl" column="cover_url"/>
+        <collection property="tags" javaType="list" ofType="String" select="getTagsByBlogId"
+                    column="{blogId = blog_id}">
+            <result column="tag_id"/>
+            <result column="tag_name"/>
+        </collection>
+    </resultMap>
+
+    <resultMap type="com.pw.vo.BlogTypeDataVO" id="blogTypeDataMap">
+        <result property="typeName" column="type_name"/>
+        <result property="typeId" column="type_id"/>
+        <result property="count" column="count"/>
+        <collection property="blogList" javaType="list" ofType="String" select="subList"
+                    column="{typeId = type_id}">
+            <result column="tag_id"/>
+            <result column="tag_name"/>
+        </collection>
+    </resultMap>
+
+    <!--博客列表查询-->
+    <select id="page" resultMap="blogMap">
+        select
+        DISTINCT (b.blog_id),
+        b.blog_title,
+        b.user_id,
+        b.type_id,
+        b.cover_url,
+        b.create_time,
+        b.update_time,
+        b.blog_abstract,
+        b.is_original,
+        bt.type_name,
+        u.nick_name as author
+        from "blog" b
+        left join "user" u on u.user_id = b.user_id
+        left join "blog_type" bt on b.type_id = bt.type_id
+        left join "blog_tag_relation" btr on b.blog_id = btr.blog_id
+        <where>
+            <if test="param.blogTitle != null and param.blogTitle!=''">
+                and b.blog_title like '%${param.blogTitle}%'
+            </if>
+            <if test="param.userId != null and param.userId!=''">
+                and
+                b.user_id = #{param.userId}
+            </if>
+            <if test="param.typeId != null and param.typeId!=''">
+                and
+                b.type_id = #{param.typeId}
+            </if>
+            <if test="param.tagId != null and param.tagId!=''">
+                and
+                btr.tag_id = #{param.tagId}
+            </if>
+            <if test="param.isOriginal != null and param.isOriginal!=''">
+                and
+                b.is_original = #{param.isOriginal}
+            </if>
+            <if test="param.isRecommend != null and param.isRecommend!=''">
+                and
+                b.is_recommend = #{param.isRecommend}
+            </if>
+            <if test="param.startTime != null and param.endTime != null">
+                and
+                b.create_time between #{param.startTime} and #{param.endTime}
+            </if>
+
+        </where>
+    </select>
+
+    <!--博客列表查询-->
+    <select id="list" resultMap="blogMap">
+        select
+        DISTINCT (b.blog_id),
+        b.blog_title,
+        b.user_id,
+        b.type_id,
+        b.cover_url,
+        b.create_time,
+        b.update_time,
+        b.blog_abstract,
+        b.is_original,
+        bt.type_name,
+        u.nick_name as author
+        from "blog" b
+        left join "user" u on u.user_id = b.user_id
+        left join "blog_type" bt on b.type_id = bt.type_id
+        left join "blog_tag_relation" btr on b.blog_id = btr.blog_id
+        <where>
+            <if test="blogTitle != null and blogTitle!=''">
+                and b.blog_title like '%${blogTitle}%'
+            </if>
+            <if test="userId != null and userId!=''">
+                and
+                b.user_id = #{userId}
+            </if>
+            <if test="typeId != null and typeId!=''">
+                and
+                b.type_id = #{typeId}
+            </if>
+            <if test="tagId != null and tagId!=''">
+                and
+                btr.tag_id = #{tagId}
+            </if>
+            <if test="isOriginal != null and isOriginal!=''">
+                and
+                b.is_original = #{isOriginal}
+            </if>
+            <if test="isRecommend != null and isRecommend!=''">
+                and
+                b.is_recommend = #{isRecommend}
+            </if>
+            <if test="startTime != null and endTime != null">
+                and
+                b.create_time between #{startTime} and #{endTime}
+            </if>
+
+        </where>
+
+        order by create_time desc
+        <if test="pageNum != null and pageNum!='' and pageSize != null and pageSize!=''">
+            LIMIT ${pageSize} OFFSET ${(pageNum-1)*pageSize}
+        </if>
+
+    </select>
+
+    <!--博客列表查询-->
+    <select id="listByType" resultMap="blogTypeDataMap">
+        SELECT bt.type_name,
+               bt.type_id,
+               count(*) as count
+        FROM "blog" b
+            JOIN "blog_type" bt
+        ON b.type_id = bt.type_id
+        GROUP BY bt.type_id, bt.type_name
+    </select>
+
+    <!--博客列表查询-->
+    <select id="subList" resultMap="blogMap">
+        select
+        b.blog_id,
+        b.blog_title,
+        b.user_id,
+        b.type_id,
+        b.cover_url,
+        b.create_time,
+        b.update_time,
+        b.blog_abstract,
+        b.is_original
+        from "blog" b
+        <where>
+            <if test="typeId != null and typeId!=''">
+                and b.type_id = #{typeId}
+            </if>
+        </where>
+        order by b.create_time desc
+        LIMIT 3 OFFSET 0
+    </select>
+
+    <select id="getTagsByBlogId" resultType="com.pw.vo.BlogTagVO">
+        select bt.tag_id, bt.tag_name
+        from "blog" b
+                 join "blog_tag_relation" btr ON b.blog_id = btr.blog_id
+            and b.blog_id = #{blogId}
+                 join "blog_tag" bt on btr.tag_id = bt.tag_id
+    </select>
+
+    <!--按分类博客列表-->
+    <select id="count" resultType="integer">
+        select count(*)
+        from "blog" b
+        <where>
+            <if test="blogTitle != null and blogTitle!=''">
+                and b.blog_title like '%${blogTitle}%'
+            </if>
+            <if test="userId != null and userId!=''">
+                and
+                b.user_id = #{userId}
+            </if>
+            <if test="typeId != null and typeId!=''">
+                and
+                b.type_id = #{typeId}
+            </if>
+            <if test="startTime != null and endTime != null">
+                and
+                b.create_time between #{startTime} and #{endTime}
+            </if>
+            <if test="isRecommend != null and isRecommend!=''">
+                and
+                b.is_recommend = #{isRecommend}
+            </if>
+        </where>
+    </select>
+
+    <!--按id查询-->
+    <select id="getBlogById" resultMap="blogMap">
+        select
+        b.blog_id,
+        b.blog_title,
+        b.content,
+        b.mk_content,
+        b.user_id,
+        b.cover_url,
+        b.blog_abstract,
+        b.create_time,
+        b.create_by,
+        b.update_time,
+        b.update_by,
+        bt.type_id,
+        bt.type_name,
+        u.nick_name as author
+        from "blog" b
+        left join "blog_type" bt ON b.type_id = bt.type_id
+        left join "user" u on b.user_id = u.user_id
+        <where>
+            <if test="blogId != null and blogId!=''">
+                and b.blog_id = #{blogId}
+            </if>
+        </where>
+
+    </select>
+
+    <!--按月份查询-->
+    <select id="countBlogByDateRange" resultType="com.pw.vo.BlogCountVO">
+        SELECT
+        to_char(create_time, 'YYYY-MM') as create_time,
+        count(*) as total
+        FROM
+        blog
+        <where>
+            <if test="userId != null and userId!=''">
+                and user_id = #{userId}
+            </if>
+            <if test="startTime != null and endTime != null">
+                and
+                create_time between #{startTime} and #{endTime}
+            </if>
+        </where>
+        GROUP BY
+        to_char(create_time, 'YYYY-MM')
+    </select>
+
+    <!--按分类统计-->
+    <select id="countBlogByType" resultType="com.pw.vo.BlogTypeCountVO">
+        SELECT bt.type_name,
+        count(*) as total
+        FROM "blog" b
+        JOIN "blog_type" bt ON b.type_id = bt.type_id
+        <where>
+            <if test="userId != null and userId!=''">
+                and b.user_id = #{userId}
+            </if>
+            <if test="startTime != null and startTime!='' and endTime != null and endTime!=''">
+                and
+                b.create_time between #{startTime} and #{endTime}
+            </if>
+        </where>
+        GROUP BY bt.type_id, bt.type_name
+    </select>
+
+    <!--按标签统计-->
+    <select id="countBlogByTag" resultType="com.pw.vo.BlogTagCountVO">
+        SELECT
+        bt.tag_name,
+        count(*) as total
+        FROM "blog" b
+        JOIN "blog_tag_relation" btr ON btr.blog_id = b.blog_id
+        JOIN "blog_tag" bt ON btr.tag_id = bt.tag_id
+        <where>
+            <if test="userId != null and userId!=''">
+                and b.user_id = #{userId}
+            </if>
+            <if test="startTime != null and startTime!='' and endTime != null and endTime!=''">
+                and
+                b.create_time between #{startTime} and #{endTime}
+            </if>
+        </where>
+        GROUP BY
+        bt.tag_id, bt.tag_name
+    </select>
+
+    <select id="getRandomBlog" resultType="Long">
+        SELECT blog_id
+        FROM "blog"
+        ORDER BY RANDOM() LIMIT 1
+    </select>
+
+    <select id="getPreBlog" resultType="Long">
+        SELECT MAX(blog_id)
+        FROM "blog"
+        <if test="blogId != null and blogId!=''">
+            WHERE #{blogId} > blog_id
+        </if>
+    </select>
+
+    <select id="getNextBlog" resultType="Long">
+        SELECT MIN(blog_id)
+        FROM "blog"
+        <if test="blogId != null and blogId!=''">
+            WHERE blog_id > #{blogId}
+        </if>
+
+    </select>
+
+
+</mapper>

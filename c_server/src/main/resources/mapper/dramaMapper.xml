@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pw.mapper.DramaSeriesMapper">
+
+    <!--按月份查询-->
+    <select id="countDramaByType" resultType="com.pw.vo.DramaTypeCountVO">
+        SELECT
+        type,
+        count(*) as total
+        FROM
+        drama_series
+        <where>
+            <if test="userId != null and userId!=''">
+                and user_id = #{userId}
+            </if>
+        </where>
+        GROUP BY type
+    </select>
+</mapper>
+

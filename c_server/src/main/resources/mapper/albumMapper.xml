@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pw.mapper.AlbumMapper">
+    <resultMap type="com.pw.vo.AlbumVO" id="albumMap">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="intro" column="intro"/>
+        <result property="coverUrl" column="cover_url"/>
+        <result property="userId" column="user_id"/>
+        <collection property="images" javaType="list" ofType="com.pw.vo.ImageVO" select="getImagesByAlbumId"
+                    column="{albumId = id}">
+            <result column="id"/>
+            <result column="url"/>
+            <result column="create_time"/>
+        </collection>
+    </resultMap>
+
+    <!--按id查询图片集合-->
+    <select id="getImagesByAlbumId" resultType="com.pw.vo.ImageVO">
+        select i.url,i.id,i.create_time
+        from "album" a
+                 join "image_relation" i ON a.id = i.album_id
+            and a.id = #{albumId}
+    </select>
+
+    <!--按id查询相册-->
+    <select id="getAlbumById" resultMap="albumMap">
+        select
+        a.id,
+        a.name,
+        a.user_id,
+        a.intro,
+        a.cover_url,
+        a.create_time
+        from "album" a
+        <where>
+            <if test="albumId != null and albumId!=''">
+                and a.id =#{albumId}
+            </if>
+        </where>
+    </select>
+
+    <!--相册列表查询-->
+    <select id="page" resultMap="albumMap">
+        select
+        a.id,
+        a.name,
+        a.user_id,
+        a.intro,
+        a.cover_url,
+        a.create_time
+        from "album" a
+        <where>
+            <if test="param.userId != null and param.userId!=''">
+                and
+                a.user_id = #{param.userId}
+            </if>
+            <if test="param.name != null and param.name!=''">
+                and
+                a.name = #{param.name}
+            </if>
+            <if test="param.startTime != null and param.startTime!='' and param.endTime != null and param.endTime!=''">
+                and
+                a.create_time between #{param.startTime} and #{param.endTime}
+            </if>
+        </where>
+        order by create_time desc
+    </select>
+
+
+    <!--相册列表查询-->
+    <select id="count" resultType="integer">
+        select count(*)
+        from "album" a
+        <where>
+            <if test="userId != null and userId!=''">
+                and
+                a.user_id = #{userId}
+            </if>
+            <if test="name != null and name!=''">
+                and
+                a.name = #{name}
+            </if>
+            <if test="startTime != null and startTime!='' and endTime != null and endTime!=''">
+                and
+                a.create_time between #{startTime} and #{endTime}
+            </if>
+        </where>
+    </select>
+
+
+
+</mapper>
+
