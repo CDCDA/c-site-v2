@@ -1,7 +1,7 @@
 import { autoClearTimer } from './timer';
 export const useTableResize = () => {
   autoClearTimer(() => {
-    let queryForm = document.querySelector('.manage-query-form') as any;
+    let queryForm = document.querySelector('.manage-search-form') as any;
     let table = document.querySelector('.manage-table') as any;
     let divider = document.querySelector('.c-divider') as any;
     let buttonGroup = document.querySelector('.manage-button-group') as any;

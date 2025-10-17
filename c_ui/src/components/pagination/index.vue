@@ -103,12 +103,12 @@ export default {
     // 选择分页size
     showSizes: {
       type: Boolean,
-      default: false
+      default: true
     },
     // 页码list
     pageSizeList: {
       type: Array,
-      default: [10, 20]
+      default: [10, 20, 50]
     }
   },
   data() {

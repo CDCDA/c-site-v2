@@ -12,7 +12,7 @@
     <div class="slice-center">
       <div class="slice-item" v-for="(item, i) in sliceList" @click="toSlice(item)">
         <c-image class="slice-item-cover" :src="item.meta.url" />
-        <span class="slice-item-name">{{ item.meta.remark }}</span>
+        <span class="slice-item-name">{{ item.meta.title }}</span>
         <span class="slice-item-divider"></span>
         <span class="slice-item-instoction no-wrap">{{ item.meta.introduction }}</span>
         <!-- <div class="instoction-cover">
@@ -29,12 +29,12 @@ import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import routerViewDialog from '@/components/routerViewDialog/index.vue';
 const router = useRouter();
-const routerDialog = ref(null as any);
-const title = ref(null as any);
-const sliceList = ref([] as any);
+const routerDialog = ref(null) as any;
+const title = ref(null) as any;
+const sliceList = ref([]) as any;
 
 function toSlice(item: any) {
-  title.value = item.meta.remark;
+  title.value = item.meta.title;
   routerDialog.value.open();
   router.push({ name: item.name });
 }

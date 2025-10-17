@@ -63,9 +63,9 @@ const props = defineProps({
     default: { coverUrl: '', tags: [] }
   }
 });
-const loading = ref('rotate' as any);
-const background = ref('' as any);
-const waveHeader = ref(null as any);
+const loading = ref('rotate') as any;
+const background = ref('') as any;
+const waveHeader = ref(null) as any;
 watch(
   () => props.blogData,
   val => {

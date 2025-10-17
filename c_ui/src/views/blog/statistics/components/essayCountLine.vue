@@ -35,14 +35,18 @@ const options = reactive({
         // fontSize: '0.7rem',
         color: 'white' // 设置X轴标签文字颜色为蓝色
       }
+    },
+    splitLine: {
+      show: false // 隐藏背景横线
     }
   },
   series: [
     {
       data: [150, 230, 224, 218, 135, 147, 260],
       type: 'line',
+      color: '#75E7DC',
       lineStyle: {
-        color: '#61D3FB'
+        color: '#75E7DC'
       }
     }
   ],
@@ -53,7 +57,7 @@ const options = reactive({
     bottom: '15%',
     left: '5%'
   }
-} as any);
+}) as any;
 
 function init(list: any) {
   options.xAxis.data = [];
@@ -65,8 +69,8 @@ function init(list: any) {
 }
 
 async function getList() {
-  const { code, msg, rows, total } = (await countEssayByDate({})) as any;
-  if (code === 200 && data) {
+  const { code, data } = (await countEssayByDate({})) as any;
+  if (code === 200) {
     init(data);
   }
 }

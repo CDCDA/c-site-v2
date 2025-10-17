@@ -22,7 +22,10 @@ import java.util.List;
 public interface EssayService extends IService<Essay> {
     IPage<EssayVO> page(IPage<EssayDTO> page, @Param("param") EssayDTO param);
 
-    EssayVO getEssayById(String essayId);
+
+
+
+    EssayVO getEssayById(Long essayId);
 
     Integer count(EssayDTO essayDTO);
 

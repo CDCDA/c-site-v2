@@ -22,7 +22,7 @@ export const pageTypes = (params: any) =>
 export const deleteTypes = (ids: string[]) =>
   request({
     url: '/blog-types/batch-delete',
-    method: 'post',
+    method: 'delete',
     data: ids
   });
 
@@ -37,7 +37,7 @@ export const saveType = (data: any) =>
 // 修改博客分类
 export const updateType = (data: any) =>
   request({
-    url: '/blog-types/' + data.id,
+    url: '/blog-types/' + data.typeId,
     method: 'put',
     data
   });
@@ -54,5 +54,12 @@ export const listTypesWithStats = (params: any) =>
 export const pageBlogsWithTypes = () =>
   request({
     url: '/blog-types/with-blogs',
+    method: 'get'
+  });
+
+// 根据分类id查询分类
+export const getTypeById = (typeId: string) =>
+  request({
+    url: '/blog-types/' + typeId,
     method: 'get'
   });

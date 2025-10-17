@@ -14,45 +14,41 @@
     </div>
     <div class="game-center">
       <div class="divider c-left animated-0s5">
-        <svg-icon iconName="commonSvg-手柄" /> 单机游戏<span
-          >我不知道我是谁，不知道我在哪，我只知道我要大开杀戒了</span
-        >
+        <svg-icon iconName="commonSvg-手柄" /> 单机游戏
+        <span> 我不知道我是谁，不知道我在哪，我只知道我要大开杀戒了</span>
       </div>
       <div class="game-list">
-        <div
-          class="game-item bounceInUp"
-          @click="toOfficial(item)"
-          v-for="item in gameList.filter((game:any)=>game.type=='0')"
-        >
-          <c-image :src="item.coverUrl" />
-          <div class="game-info">
-            <div class="game-info-header">
-              <h3>{{ item.name }}</h3>
-              <el-rate
-                v-model="item.rate"
-                disabled
-                show-score
-                allow-half
-                text-color="#ff9900"
-                size="large"
-                :score-template="`${item.rate * 2}`"
-              />
+        <virtual-scroller :items="singlePlayerGames" item-height="340" content-tag="table">
+          <template #default="{ item }">
+            <div class="game-list">
+              <div class="game-item bounceInUp" @click="toOfficial(item)" v-for="game in item">
+                <c-image :src="game.coverUrl" />
+                <div class="game-info">
+                  <div class="game-info-header">
+                    <h3>{{ game.name }}</h3>
+                    <el-rate
+                      v-model="game.rate"
+                      disabled
+                      show-score
+                      allow-half
+                      text-color="#ff9900"
+                      size="large"
+                      :score-template="`${game.rate * 2}`"
+                    />
+                  </div>
+                  <span class="no-wrap">{{ game.intro }}</span>
+                </div>
+              </div>
             </div>
-
-            <span class="no-wrap">{{ item.intro }}</span>
-          </div>
-        </div>
+          </template>
+        </virtual-scroller>
       </div>
       <div class="divider c-left animated-0s5">
         <svg-icon iconName="commonSvg-手机" />
-        手机游戏<span>打发时间，遗憾的是我是个上线即下线的老咸鱼</span>
+        手机游戏<span>打发时间，不过现在已经不玩了</span>
       </div>
       <div class="game-list">
-        <div
-          class="game-item"
-          @click="toOfficial(item)"
-          v-for="item in gameList.filter((game:any)=>game.type=='1')"
-        >
+        <div class="game-item" @click="toOfficial(item)" v-for="item in MobileGames">
           <c-image :src="item.coverUrl" />
           <div class="game-info">
             <div class="game-info-header">
@@ -76,29 +72,38 @@
 </template>
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
+
+import { VirtualScroller } from 'vue-virtual-scroller-classic';
+
 import { pageGames } from '@/api/game.ts';
-const queryParams = ref({
-  name: null,
-  pageNum: 1,
-  pageSize: 10
-} as any);
-const gameList = ref([] as any);
+const gameList = ref([]) as any;
 async function getList() {
-  const { code, data } = (await pageGames({})) as any;
-  if (code == 200) {
-    gameList.value = rows;
-    gameShowData.value = JSON.parse(JSON.stringify(data.list)).splice(0, 8);
-    gameList.value.forEach((game: any) => {
+  const { code, rows } = await pageGames({ pageSize: 9999 });
+  if (code === 200) {
+    gameShowData.value = JSON.parse(JSON.stringify(rows)).slice(0, 8);
+    rows.forEach((game: any) => {
       game.rate = game.rate / 2;
     });
+
+    const tempSinglePlayerGames = [];
+    for (let i = 0; i < rows.filter((game: any) => game.type === '0').length; i += 4) {
+      tempSinglePlayerGames.push(rows.filter((game: any) => game.type === '0').slice(i, i + 4));
+    }
+    singlePlayerGames.value = tempSinglePlayerGames;
+    console.log(tempSinglePlayerGames);
+    MobileGames.value = rows.filter((game: any) => game.type === '1');
   }
 }
 
-const singlePlayerGames = ref([] as any);
+// 单机游戏
+const singlePlayerGames = ref([]) as any;
 
-const gameShowData = ref([] as any);
+//头部展示游戏
+const gameShowData = ref([]) as any;
 
-const MobileGames = ref([] as any);
+// 手机游戏
+const MobileGames = ref([]) as any;
+
 const animateTimeList = ['0s5', '0s7', '1s', '1s2', '1s5', '1s7', '2s', '2s2', '2s5', '2s7', '3s'];
 
 function getAnimateTime() {

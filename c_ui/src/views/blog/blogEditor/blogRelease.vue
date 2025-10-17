@@ -90,8 +90,8 @@
 </template>
 <script setup lang="ts">
 import { ref, nextTick, onMounted } from 'vue';
-import { saveBlog } from '@/api/blog';
-import upload from '@/components/upload/upload.vue';
+import { saveBlog, updateBlog } from '@/api/blog';
+import upload from '@/components/upload/index.vue';
 import type { UploadProps } from 'element-plus';
 import { ElMessage, ElNotification, ElMessageBox } from 'element-plus';
 import { pageTypes } from '@/api/type';
@@ -117,8 +117,8 @@ const inputValue = ref('');
 const inputVisible = ref(false);
 const InputRef = ref() as any;
 const typeList = ref([]);
-const imageUrl = ref(null as any);
-const tagList = ref([] as any);
+const imageUrl = ref(null) as any;
+const tagList = ref([]) as any;
 function close() {
   dialogVisible.value = false;
 }
@@ -150,9 +150,11 @@ function showInput() {
 }
 
 async function submit() {
-  const { code, msg, rows, total } = (await saveBlog(props.blogData)) as any;
+  const { code, data } = props.blogData.blogId
+    ? await updateBlog(props.blogData)
+    : await saveBlog(props.blogData);
   if (code === 200) {
-    //清空博客本地缓存
+    // 清空博客本地缓存
     window.localStorage.setItem('blogData', '');
     ElMessageBox.confirm('博客发布成功', 'success', {
       distinguishCancelAndClose: true,
@@ -174,18 +176,15 @@ function typeChange(val: any) {
   // console.log(val);
 }
 
-async function getTypeTree() {
-  const params = {
-    userId: props.blogData.userId
-  };
-  const { code, msg, rows, total } = (await pageTypes(params)) as any;
+async function getTypeList() {
+  const { code, rows, total } = (await pageTypes({})) as any;
   if (code === 200) {
     typeList.value = rows;
   }
 }
 
 async function getTagList() {
-  const { code, msg, rows, total } = (await pageTags({})) as any;
+  const { code, rows, total } = (await pageTags({})) as any;
   if (code === 200) {
     tagList.value = rows;
   }
@@ -235,7 +234,7 @@ function setTags() {
 }
 
 onMounted(() => {
-  getTypeTree();
+  getTypeList();
   getTagList();
 });
 defineExpose({

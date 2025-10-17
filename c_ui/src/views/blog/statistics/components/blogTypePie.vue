@@ -62,7 +62,7 @@ const options = reactive({
       ]
     }
   ]
-} as any);
+}) as any;
 
 function init(list: Array<Object>) {
   options.series[0].data = [];
@@ -75,8 +75,8 @@ function init(list: Array<Object>) {
 }
 
 async function getList() {
-  const { code, msg, rows, total } = (await countBlogsByType({ userId: userStore.userId })) as any;
-  if (code === 200 && data) {
+  const { code, data } = (await countBlogsByType({ userId: userStore.userId })) as any;
+  if (code === 200) {
     init(data);
   }
 }

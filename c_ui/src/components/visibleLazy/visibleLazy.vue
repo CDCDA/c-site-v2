@@ -22,7 +22,7 @@ const display = ref('block');
 const animateName = ref('');
 import { autoClearTimer } from '@/utils/timer';
 const isVisible = ref(false); //定义一个dom元素显示与隐藏开关
-const id = ref(`visible-lazy-${generateRandomId()}` as any);
+const id = ref(`visible-lazy-${generateRandomId()}`) as any;
 function generateRandomId() {
   return Math.random().toString(16).substr(2, 16);
 }

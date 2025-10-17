@@ -272,9 +272,9 @@ const trainingPlan = ref([
       }
     ]
   }
-] as any);
+]) as any;
 
-const index = ref(0 as any);
+const index = ref(0) as any;
 
 function getIndex(i: any) {
   headerRoll(i);

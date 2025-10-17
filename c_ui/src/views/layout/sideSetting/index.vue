@@ -34,9 +34,9 @@ const router = useRouter();
 const props = defineProps({
   isHideen: true as any
 });
-const isThemeDialogShow = ref(false as any);
-const isAddLogShow = ref(false as any);
-const isFull = ref(false as any);
+const isThemeDialogShow = ref(false) as any;
+const isAddLogShow = ref(false) as any;
+const isFull = ref(false) as any;
 const menuData = ref([
   {
     iconName: 'commonSvg-博客',
@@ -80,7 +80,7 @@ const menuData = ref([
     value: 'log',
     isShow: false
   }
-] as any);
+]) as any;
 
 const pageMainStyle = ref({
   width: '',
@@ -90,9 +90,9 @@ const pageMainStyle = ref({
   borderRadius: '',
   position: '',
   maxWidth: ''
-} as any);
+}) as any;
 
-const showAll = ref(false as any);
+const showAll = ref(false) as any;
 
 function closeLog() {
   isAddLogShow.value = false;

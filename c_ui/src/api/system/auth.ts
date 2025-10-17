@@ -4,8 +4,6 @@
 import request from '@/utils/request';
 import type { AxiosInstance } from 'axios';
 import axios from 'axios';
-import useUserStore from '@/store/modules/user';
-
 // 登录
 export const login = (params: any) =>
   request({

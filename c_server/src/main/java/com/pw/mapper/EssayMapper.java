@@ -20,7 +20,9 @@ import java.util.List;
 public interface EssayMapper extends BaseMapper<Essay> {
     IPage<EssayVO> page(IPage<EssayDTO> page, @Param("param") EssayDTO param);
 
-    EssayVO getEssayById(String essayId);
+
+
+    EssayVO getEssayById(Long essayId);
 
 
     Integer count(EssayDTO essayDTO);

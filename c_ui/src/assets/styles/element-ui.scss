@@ -42,7 +42,7 @@
 /* 标签 -- 结束 */
 
 /* 输入框 -- 开始 */
-.el-form--inline{
+.el-form--inline {
   .el-input {
     background: get('back');
     // box-shadow: get('box-shadow');
@@ -51,7 +51,6 @@
     width: 200px;
   }
 }
-
 
 .el-input__count {
   background: transparent;
@@ -75,6 +74,7 @@
 .el-input-group {
   //box-shadow: rgba(0, 0, 0, 0.125) 0 0 10px 0;
   border: 1px solid get('border-color');
+  border-radius: 4px;
   .el-input__wrapper {
     border-radius: 0 !important;
     box-shadow: none;
@@ -181,7 +181,7 @@
   font-weight: 100;
   font-size: 0.75rem;
 }
-.el-select__placeholder.is-transparent{
+.el-select__placeholder.is-transparent {
   color: get('placeholder');
 }
 
@@ -363,15 +363,6 @@
   .el-time-panel__btn {
     color: white;
   }
-  //.el-button {
-  //  background: transparent !important;
-  //  color: white;
-  //  border: 1px solid hsla(0, 0%, 100%, 0.4);
-  //}
-  //.el-button:hover {
-  //  background: hsla(0, 0%, 100%, 0.4) !important;
-  //  color: white;
-  //}
   .finder-list-item {
     span,
     .svg-use {
@@ -386,7 +377,6 @@
       background: transparent;
       color: white;
     }
-
   }
   .manage-main {
     .svg-icon {
@@ -424,6 +414,12 @@
   width: 100% !important;
   backdrop-filter: blur(15px);
   line-height: 32px;
+  .c-dialog-title {
+    height: 100%;
+  }
+  .c-dialog-bt-group {
+    height: 35px;
+  }
 }
 // .el-dialog::before {
 //   content: '';
@@ -492,11 +488,11 @@
   border: 1px solid white;
 }
 
-.el-drawer{
-  background: #f0f3f4;
-  .el-drawer__header{
+.el-drawer {
+  background: #fff;
+  .el-drawer__header {
     margin-bottom: 0;
-    .el-drawer__title{
+    .el-drawer__title {
       font-size: 1rem;
     }
   }
@@ -520,8 +516,11 @@
   }
   td.el-table__cell,
   th.el-table__cell.is-leaf {
-    background: transparent;
+    background: get('back');
     // box-shadow: get('box-shadow');
+  }
+  th {
+    background: #f5f7fa !important;
   }
   border-radius: 5px;
   tbody tr:hover > td {
@@ -538,21 +537,17 @@
 
 /* 按钮 -- 开始 */
 .el-button {
-  //background: get('re-font-color');
-  //color: get('font-color');
   font-size: 0.8rem;
-  //border: 1px solid get('border-color');
-  //transition: all 0.3s ease-in-out;
+  border-radius: 4px;
   font-family: 'Shark';
+  padding: 8px 15px;
 }
-//.el-button:hover {
-//  background: get('border-color');
-//  color: get('re-font-color');
-//}
-//.el-button:active {
-//  transform: translateY(1px);
-//}
 /* 按钮 -- 结束 */
+
+.el-switch.is-checked .el-switch__core {
+  background: #00968c;
+  border-color: #00968c;
+}
 
 /* 下拉框 -- 开始 */
 .el-select {

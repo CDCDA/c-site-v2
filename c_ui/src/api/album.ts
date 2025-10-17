@@ -19,11 +19,10 @@ export const pageAlbums = (params: any) =>
   });
 
 // 根据id查询相册
-export const getAlbumById = (params: any) =>
+export const getAlbumById = (id: any) =>
   request({
-    url: '/albums/getAlbumById',
-    method: 'get',
-    params
+    url: '/albums/' + id,
+    method: 'get'
   });
 
 // 保存相册

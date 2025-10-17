@@ -21,7 +21,7 @@ export const pageLogs = (params: any) =>
 // 按时间查询
 export const countLogsByDate = (params: any) =>
   request({
-    url: '/stats/date-range',
+    url: '/update-logs/stats/date-range',
     method: 'get',
     params
   });
@@ -48,4 +48,11 @@ export const updateLog = (id: string, data: any) =>
     url: '/update-logs/' + id,
     method: 'put',
     data
+  });
+
+// 根据id查询
+export const getLogById = (id: string) =>
+  request({
+    url: '/update-logs/' + id,
+    method: 'get'
   });

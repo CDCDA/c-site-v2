@@ -39,20 +39,20 @@ import { onMounted, ref } from 'vue';
 import { countBlogsByDate, countBlogs } from '@/api/blog.ts';
 import useUserStore from '@/store/modules/user';
 import { useLazyAppear } from '@/utils/lazy';
-const total = ref(0 as any);
+const total = ref(0) as any;
 const userStore = useUserStore();
-const countList = ref([] as any);
+const countList = ref([]) as any;
 
 async function getBlogCount() {
-  const { code, msg, rows } = countBlogs({}) as any;
-  if (code === 200 && rows) {
+  const { code, rows } = countBlogs({}) as any;
+  if (code === 200) {
     total.value = rows;
   }
 }
 
 async function getBlogDateRangeCount() {
-  const { code, msg, data } = (await countBlogsByDate({})) as any;
-  if (code === 200 && data) {
+  const { code, data } = (await countBlogsByDate({})) as any;
+  if (code === 200) {
     data.forEach((e: any, i: any) => {
       if (i < 4) {
         const times = e.createTime.split('-');
@@ -68,7 +68,10 @@ async function getBlogDateRangeCount() {
 onMounted(() => {
   getBlogCount();
   getBlogDateRangeCount();
-  useLazyAppear(document.querySelector('.blog-count-card') as any);
+  const element = document.querySelector('.blog-count-card') as any;
+  if (element) {
+    useLazyAppear(element) as any;
+  }
 });
 </script>
 <style lang="scss" scoped>

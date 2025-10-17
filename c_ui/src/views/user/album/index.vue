@@ -32,7 +32,7 @@ import { pageAlbums } from '@/api/album.ts';
 import { formatDate } from '@/utils/date';
 
 const router = useRouter();
-const list = ref([]);
+const list = ref([]) as any;
 
 async function getList() {
   const { code, rows } = await pageAlbums({});

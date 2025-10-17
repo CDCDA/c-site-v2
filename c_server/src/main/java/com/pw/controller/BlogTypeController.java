@@ -1,5 +1,6 @@
 package com.pw.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.ObjectUtils;
 import com.pw.common.controller.BaseController;
@@ -8,6 +9,7 @@ import com.pw.common.utils.JwtTokenUtil;
 import com.pw.common.utils.Result;
 import com.pw.common.utils.EmptyJugeUtil;
 import com.pw.domain.BlogType;
+import com.pw.domain.Comment;
 import com.pw.service.BlogTypeService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -32,6 +34,7 @@ public class BlogTypeController extends BaseController implements convertControl
     @GetMapping
     @Operation(summary = "查询分类分页")
     public Result list(BlogType blogType) {
+        blogType.setUserId(JwtTokenUtil.getLoginUserId());
         return resultIPage(blogTypeService.page(setPage(blogType), convertWrap(blogType)));
     }
 
@@ -68,6 +71,7 @@ public class BlogTypeController extends BaseController implements convertControl
     @PostMapping
     @Operation(summary = "新增博客分类")
     public Result create(@RequestBody BlogType blogType) {
+        blogType.setUserId(JwtTokenUtil.getLoginUserId());
         return resultExit(blogTypeService.save(blogType));
     }
 
@@ -86,7 +90,7 @@ public class BlogTypeController extends BaseController implements convertControl
         return resultExit(blogTypeService.removeById(id));
     }
 
-    @PostMapping("/batch-delete")
+    @DeleteMapping("/batch-delete")
     @Operation(summary = "批量删除博客分类")
     public Result batchDelete(@RequestBody List<Long> ids) {
         return resultExit(blogTypeService.removeByIds(ids));

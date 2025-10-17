@@ -40,7 +40,7 @@ public class EssayController extends BaseController implements convertController
     @Operation(summary = "查询随笔列表")
     public Result list(EssayDTO essay) {
         essay.setUserId(JwtTokenUtil.getLoginUser().getUserId());
-        return resultIPage(essayService.page(setPage(essay)));
+        return resultIPage(essayService.page(setPage(essay), essay));
     }
 
     @GetMapping("/count")
@@ -52,14 +52,14 @@ public class EssayController extends BaseController implements convertController
     @GetMapping("/stats/date-range")
     @Operation(summary = "按时间范围查询随笔列表计数")
     public Result countByDateRange(String startTime, String endTime) throws ParseException {
-        Long userId = JwtTokenUtil.getLoginUser().getUserId();
+        Long userId = JwtTokenUtil.getLoginUserId();
         return resultData(essayService.countEssayByDateRange(userId, startTime, endTime));
     }
 
     @GetMapping("/{id}")
     @Operation(summary = "根据随笔id查询随笔")
     public Result get(@PathVariable Long id) {
-        return resultData(essayService.getById(id));
+        return resultData(essayService.getEssayById(id));
     }
 
     @PostMapping
@@ -125,7 +125,7 @@ public class EssayController extends BaseController implements convertController
         return resultExit(essayService.removeById(id));
     }
 
-    @PostMapping("/batch-delete")
+    @DeleteMapping("/batch-delete")
     @Operation(summary = "批量删除随笔")
     public Result batchDelete(@RequestBody List<Long> ids) {
         return resultExit(essayService.removeByIds(ids));

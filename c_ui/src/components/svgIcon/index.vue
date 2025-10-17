@@ -41,9 +41,7 @@ export default {
       };
     }
   },
-  mounted() {
-    console.log('AAA', this.iconName);
-  }
+  mounted() {}
 };
 </script>
 

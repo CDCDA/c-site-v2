@@ -29,12 +29,12 @@ import { login } from '@/api/system/auth.ts';
 import { useRouter } from 'vue-router';
 
 const router = useRouter();
-const userName = ref('' as any);
-const password = ref('' as any);
+const userName = ref('') as any;
+const password = ref('') as any;
 async function logIn() {
   if (userName && password) {
     const { code } = (await login({ userName: userName, password: password })) as any;
-    if (code == 200) {
+    if (code === 200) {
       router.push('/Main');
     } else {
       ElMessage.error('请输入账号密码');

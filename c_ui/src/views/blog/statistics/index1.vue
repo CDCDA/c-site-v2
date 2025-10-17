@@ -46,57 +46,57 @@ import { countMusic } from '@/api/music.ts';
 import { countTypes } from '@/api/type.ts';
 import { countLogs } from '@/api/system/updateLog';
 import { useTransition } from '@vueuse/core';
-const blogNum = ref(0 as any);
+const blogNum = ref(0) as any;
 const blogNumValue = useTransition(blogNum);
-const albumNum = ref(0 as any);
+const albumNum = ref(0) as any;
 const albumNumValue = useTransition(albumNum);
-const essayNum = ref(0 as any);
+const essayNum = ref(0) as any;
 const essayNumValue = useTransition(essayNum);
-const musicNum = ref(0 as any);
+const musicNum = ref(0) as any;
 const musicNumValue = useTransition(musicNum);
-const typeNum = ref(0 as any);
+const typeNum = ref(0) as any;
 const typeNumValue = useTransition(typeNum);
-const updateLogNum = ref(0 as any);
+const updateLogNum = ref(0) as any;
 const updateLogNumValue = useTransition(updateLogNum);
 
 async function blogCount() {
   const { code, data } = (await countBlogs({})) as any;
-  if (code == 200) {
+  if (code === 200) {
     blogNum.value = data;
   }
 }
 
 async function albumCount() {
   const { code, data } = (await countAlbum()) as any;
-  if (code == 200) {
+  if (code === 200) {
     albumNum.value = data;
   }
 }
 
 async function essayCount() {
   const { code, data } = (await countEssays()) as any;
-  if (code == 200) {
+  if (code === 200) {
     essayNum.value = data;
   }
 }
 
 async function musicCount() {
   const { code, data } = (await countMusic()) as any;
-  if (code == 200) {
+  if (code === 200) {
     musicNum.value = data;
   }
 }
 
 async function typeCount() {
   const { code, data } = (await countTypes()) as any;
-  if (code == 200) {
+  if (code === 200) {
     typeNum.value = data;
   }
 }
 
 async function updateLogCount() {
   const { code, data } = (await countLogs()) as any;
-  if (code == 200) {
+  if (code === 200) {
     updateLogNum.value = data;
   }
 }

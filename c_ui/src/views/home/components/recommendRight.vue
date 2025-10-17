@@ -31,7 +31,7 @@ import { pageBlogs } from '@/api/blog';
 import neonRain from '@/views/assembly/slice/neonRain/index.vue';
 const frontShow = ref(true);
 const router = useRouter() as any;
-const recommends = deleteDictTypes;
+const recommends = ref([]) as any;
 // 博客详情
 function toDetail(item: any) {
   router.push({ name: 'blogDisplay', query: { blogId: item.blogId } });

@@ -65,7 +65,7 @@ public class MusicController extends BaseController implements convertController
         return resultExit(musicService.removeById(id));
     }
 
-    @PostMapping("/batch-delete")
+    @DeleteMapping("/batch-delete")
     @Operation(summary = "批量删除歌曲")
     public Result batchDelete(@RequestBody List<String> ids) {
         return resultExit(musicService.removeByIds(ids));

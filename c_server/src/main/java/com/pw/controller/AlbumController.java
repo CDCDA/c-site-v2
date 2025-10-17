@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.pw.common.utils.ConvertWrapper.convertWrap;
 import static com.pw.common.utils.ResultUtil.*;
 import static com.pw.common.utils.pageUtil.setPage;
 import static org.apache.commons.lang3.ObjectUtils.isEmpty;
@@ -37,8 +38,8 @@ public class AlbumController extends BaseController implements convertController
 
     @GetMapping
     @Operation(summary = "查询相册分页")
-    public Result list(AlbumDTO albumDTO) {
-        return resultIPage(albumService.page(setPage(albumDTO), albumDTO));
+    public Result list(Album album) {
+        return resultIPage(albumService.page(setPage(album), convertWrap(album)));
     }
 
     @GetMapping("/count")
@@ -57,7 +58,7 @@ public class AlbumController extends BaseController implements convertController
     @Operation(summary = "新增相册")
     public Result create(@RequestBody Album album) {
         List<String> urls = new ArrayList<>();
-        album.setUserId(JwtTokenUtil.getLoginUser().getUserId());
+        album.setUserId(JwtTokenUtil.getLoginUserId());
         album.setId(new SnowFlake(1, 0).nextId());
 
         albumService.save(album);
@@ -110,7 +111,7 @@ public class AlbumController extends BaseController implements convertController
         return resultExit(albumService.removeById(id));
     }
 
-    @PostMapping("/batch-delete")
+    @DeleteMapping("/batch-delete")
     @Operation(summary = "批量删除相册")
     public Result batchDelete(@RequestBody List<Long> ids) {
         return resultExit(albumService.removeByIds(ids));

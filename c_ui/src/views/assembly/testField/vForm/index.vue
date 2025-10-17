@@ -16,8 +16,8 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-const tableFeildData = ref([] as any);
-const config = ref([] as any);
+const tableFeildData = ref([]) as any;
+const config = ref([]) as any;
 </script>
 <style lang="scss">
 .v-form {

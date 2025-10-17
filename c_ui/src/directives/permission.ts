@@ -6,12 +6,10 @@ import { ElMessage } from 'element-plus';
 
 export const permission = {
   mounted(el: any, bindling: any) {
-    console.log('AAA', bindling.value);
-
     const userStore = useUserStore();
     //bindling.value为指令的绑定值
     let perVal = bindling.value;
-    console.log('BBB', perVal);
+
     if (!perVal) return;
     if (bindling.value) {
       //假设某用户对某模块只有添加和删除的权限

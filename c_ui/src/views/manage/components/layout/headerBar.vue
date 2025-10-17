@@ -5,7 +5,7 @@
   <div class="headerBar flex-between">
     <div class="left-toolbar">
       <el-icon @click="changeCollapse">
-        <Fold v-if="themeStore.isCollapse" />
+        <Fold v-if="!themeStore.isCollapse" />
         <Expand v-else />
       </el-icon>
       <TagsView></TagsView>
@@ -47,11 +47,11 @@ import useUserStore from '@/store/modules/user';
 import useThemeStore from '@/store/modules/theme.ts';
 import { ElMessageBox } from 'element-plus';
 import ThemeDialog from '@/views/layout/theme/themeDialog.vue';
-import TagsView from '@/views/manage/components/layout/tagsView.vue';
+import TagsView from '@/views/manage/components/layout/tabsView.vue';
 const router = useRouter();
 const userStore = useUserStore() as any;
 const themeStore = useThemeStore() as any;
-const isThemeDialogShow = ref(false as any);
+const isThemeDialogShow = ref(false) as any;
 
 function closeThemeDialog() {
   isThemeDialogShow.value = false;

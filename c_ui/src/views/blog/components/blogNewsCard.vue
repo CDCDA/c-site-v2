@@ -36,7 +36,7 @@ const newsList = ref([
     type: '前端',
     url: 'http://120.48.127.181/file/2cf465cf-6114-4319-ac33-67bbec0983e2.jpeg'
   }
-] as any);
+]) as any;
 </script>
 <style lang="scss" scoped>
 @include theme() {

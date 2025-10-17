@@ -6863,8 +6863,8 @@ const FormValidators = {
 };
 const getApiDefaultData = async (apiSourceInfoId) => {
   let result = [];
-  const { code, msg, data: data2 } = await getApiInfo(apiSourceInfoId);
-  if (code == 200) {
+  const { code, data: data2 } = await getApiInfo(apiSourceInfoId);
+  if (code === 200) {
     const apiInfo = data2;
     const { datasourceId, type, code: code2, apiUrl, id: id2, apiJsonReqJson, methodType } = apiInfo;
     let response = {};
@@ -6900,7 +6900,7 @@ const getApiDefaultData = async (apiSourceInfoId) => {
       };
       response = await proxyApi(params);
     }
-    if (response.code == 200) {
+    if (response.code === 200) {
       result = getResData(type, response.data);
     }
   }
@@ -7203,8 +7203,8 @@ var fieldMixin = {
           if (dsType === "api") {
             this.setDataList(await getApiDefaultData(dsId));
           } else {
-            const { code, msg, data: data2 } = await getDicts(dsId);
-            if (code === 200 && data2) {
+            const { code, data: data2 } = await getDicts(dsId);
+            if (code === 2002) {
               this.setDataList(data2);
             } else {
               this.$message.error(`\u5B57\u5178${dictType}\u8BF7\u6C42\u5931\u8D25\uFF0C`, msg);
@@ -7686,7 +7686,7 @@ const _sfc_main$8D = {
       this.handleButtonWidgetClick();
     },
     async getApiType(id2) {
-      const { code, msg, data: data2 } = await getApiInfo(id2);
+      const { code, data: data2 } = await getApiInfo(id2);
       if (code === 200) {
         this.queryParams.type = data2.type;
       } else {
@@ -23251,7 +23251,7 @@ const _sfc_main$8d = {
     },
     async getApiType(id2) {
       let apiType = "";
-      const { code, msg, data: data2 } = await getApiInfo(id2);
+      const { code, data: data2 } = await getApiInfo(id2);
       if (code === 200) {
         apiType = data2.type;
       } else {
@@ -70507,13 +70507,13 @@ const _sfc_main$1n = {
     },
     async getFormList() {
       const { code, data: data2 } = await getDesignList(this.queryParams);
-      if (code == 200) {
+      if (code === 200) {
         this.formLIst = data2.list;
       }
     },
     async getAssociateForm(id2) {
       const { code, data: data2, msg } = await designFormInfo(id2);
-      if (code == 200) {
+      if (code === 200) {
         this.associateForm = JSON.parse(data2.dataJson);
       } else {
         ElMessage$1.error(`\u5173\u8054\u8868\u5355\u6570\u636E\u8BF7\u6C42\u5931\u8D25,${msg}`);
@@ -70549,7 +70549,7 @@ const _sfc_main$1n = {
           };
         }
         getApiParamList(query).then((r) => {
-          if (r.code == 200) {
+          if (r.code === 200) {
             this.associateApiParam = JSON.parse(r.data);
           }
         });
@@ -70588,7 +70588,7 @@ const _sfc_main$1n = {
       const thirdLevel = [];
       const query = { pageNum: 1, pageSize: 9999, moduleCode: node.data.value };
       const { code, data: data2 } = await getDesignList(query);
-      if (code == 200) {
+      if (code === 200) {
         data2.list.forEach((l) => {
           thirdLevel.push({ label: l.name, value: l.id, leaf: true });
         });
@@ -70619,7 +70619,7 @@ const _sfc_main$1n = {
       const thirdLevel = [];
       const query = { moduleCode: node.data.value };
       const { code, data: data2 } = await listApiSource(query);
-      if (code == 200) {
+      if (code === 200) {
         data2.list.forEach((l) => {
           thirdLevel.push({ label: l.name, value: l.id, leaf: true });
         });

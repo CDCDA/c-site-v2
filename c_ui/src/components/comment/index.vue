@@ -30,7 +30,7 @@ import commentItem from './components/commentItem.vue';
 import { ref, onMounted, watch } from 'vue';
 import { listTreeComments } from '@/api/comment';
 const props = defineProps(['relevanceId', 'type', 'data']);
-const commentList = deleteDictTypes;
+const commentList = ref([]);
 const loading = ref(false);
 const total = ref(0);
 const queryParams = ref({
@@ -40,10 +40,10 @@ const queryParams = ref({
 
 async function getList() {
   loading.value = true;
-  const { code, data } = (await listTreeComments(queryParams.value)) as any;
-  if (code == 200) {
+  const { code, rows, total: totalCount } = await listTreeComments(queryParams.value);
+  if (code === 200) {
     commentList.value = rows;
-    total.value = data.total;
+    total.value = totalCount;
   }
   loading.value = false;
 }
@@ -57,10 +57,6 @@ watch(
   },
   { deep: true }
 );
-
-onMounted(() => {
-  getList();
-});
 </script>
 <style lang="scss" scoped>
 @include theme() {

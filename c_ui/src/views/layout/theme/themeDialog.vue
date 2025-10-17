@@ -106,12 +106,12 @@ import { themes, fontFamilys } from './themeData.ts';
 const emit = defineEmits(['closeThemeDialog']);
 var themeStore = useThemeStore();
 const dialogVisible = ref(true);
-const loading = ref(false as any);
+const loading = ref(false) as any;
 const activeName = ref('static');
 var activeBack = {} as any;
 const activeTheme = ref({}) as any;
 //背景图
-const backs = reactive([] as any);
+const backs = reactive([]) as any;
 
 var localStorage = window.localStorage as any;
 
@@ -272,7 +272,7 @@ function init() {
 
 async function getBackList() {
   const { code, rows } = (await pageWallpapers({ pageSize: 9999 })) as any;
-  if (code == 200) {
+  if (code === 200) {
     Object.assign(backs, rows);
     init();
   }

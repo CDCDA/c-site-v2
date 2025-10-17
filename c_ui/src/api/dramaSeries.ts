@@ -14,7 +14,7 @@ export const pageDramas = (params: any) =>
 // 按分类查询影视数量
 export const countDramasByType = (params: any) =>
   request({
-    url: '/drama-series/countDramasByType',
+    url: '/drama-series/stats/type-count',
     method: 'get',
     params
   });
@@ -39,7 +39,7 @@ export const updateDrama = (params: any) =>
 export const deleteDramas = (params: any) =>
   request({
     url: '/drama-series/batch-delete',
-    method: 'post',
+    method: 'delete',
     data: params
   });
 

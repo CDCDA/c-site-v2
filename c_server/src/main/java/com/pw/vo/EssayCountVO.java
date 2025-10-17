@@ -18,9 +18,7 @@ import java.util.Date;
 @Schema(description  = "随笔统计")
 public class EssayCountVO {
     @Schema(description  = "创建时间")
-    @JsonFormat(pattern = "yyyy-MM")
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private Date createTime;
+    private String createTime;
 
     @Schema(description  = "随笔数量")
     private String total;

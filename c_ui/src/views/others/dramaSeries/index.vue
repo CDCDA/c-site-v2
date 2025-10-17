@@ -84,11 +84,11 @@ import ParallaxWheelSeeding from './components/parallaxWheelSeeding.vue';
 import { coverImages } from './dramaData.ts';
 import { pageDramas } from '@/api/dramaSeries.ts';
 
-const movies = ref([] as any);
+const movies = ref([]) as any;
 
-const teleplays = ref([] as any);
+const teleplays = ref([]) as any;
 
-const animations = ref([] as any);
+const animations = ref([]) as any;
 
 const animateTimeList = ['0s5', '0s7', '1s', '1s2', '1s5', '1s7', '2s', '2s2', '2s5', '2s7', '3s'];
 
@@ -97,15 +97,15 @@ function getAnimateTime() {
 }
 
 async function getList() {
-  const { code, msg, rows, total } = (await pageDramas({})) as any;
-  if (code == 200) {
-    movies.value = data.list.filter((e: any) => {
+  const { code, rows, total } = (await pageDramas({})) as any;
+  if (code === 200) {
+    movies.value = rows.filter((e: any) => {
       return e.type == 0;
     });
-    teleplays.value = data.list.filter((e: any) => {
+    teleplays.value = rows.filter((e: any) => {
       return e.type == 1;
     });
-    animations.value = data.list.filter((e: any) => {
+    animations.value = rows.filter((e: any) => {
       return e.type == 2;
     });
   }

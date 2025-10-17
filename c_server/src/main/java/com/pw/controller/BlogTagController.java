@@ -2,12 +2,15 @@ package com.pw.controller;
 
 import com.pw.common.utils.JwtTokenUtil;
 import com.pw.common.utils.Result;
+import com.pw.common.utils.ResultUtil;
 import com.pw.common.utils.SnowFlake;
 import com.pw.common.controller.BaseController;
 import com.pw.common.controller.convertController;
 import com.pw.domain.BlogTag;
+import com.pw.mapper.BlogTagRelationMapper;
 import com.pw.service.BlogTagRelationSerivce;
 import com.pw.service.BlogTagService;
+import com.pw.vo.BlogTagVO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.apache.commons.lang3.ObjectUtils;
@@ -31,10 +34,14 @@ public class BlogTagController extends BaseController implements convertControll
     @Autowired
     private BlogTagRelationSerivce blogTagRelationSerivce;
 
+    @Autowired
+    private BlogTagRelationMapper blogTagRelationMapper;
+
     @GetMapping
     @Operation(summary = "查询标签分页")
     public Result list(BlogTag blogTag) {
-        return resultIPage(blogTagService.page(setPage(blogTag), convertWrap(blogTag)));
+        List<BlogTagVO> result = blogTagRelationSerivce.listBlogTag(blogTag);
+        return ResultUtil.resultPage(result, blogTagRelationMapper.countBlogTag(blogTag));
     }
 
     @GetMapping("/with-blogs")
@@ -83,7 +90,7 @@ public class BlogTagController extends BaseController implements convertControll
         return resultExit(blogTagService.removeById(id));
     }
 
-    @PostMapping("/batch-delete")
+    @DeleteMapping("/batch-delete")
     @Operation(summary = "批量删除标签")
     public Result batchDelete(@RequestBody List<Long> ids) {
         return resultExit(blogTagService.removeByIds(ids));

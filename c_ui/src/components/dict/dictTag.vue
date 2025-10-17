@@ -1,35 +1,38 @@
 <template>
-  <div>
-    <span v-if="!props.options || props.options.length === 0">
-      {{ props.value }}
+  <div class="dict-tag">
+    <span v-if="!dict || !dict[props.dictType]">
+      {{ props.dictValue }}
     </span>
     <el-tag
       v-else
       :disable-transitions="true"
       :type="tag && tag.listClass ? tag.listClass : 'default'"
     >
-      {{ tag ? tag.label : props.value }}
+      {{ tag ? tag.label : props.dictValue }}
     </el-tag>
   </div>
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted } from 'vue';
-
+import { computed, onMounted, ref } from 'vue';
+import { useDict } from '@/utils/dict.ts';
+const dict = ref({}) as any;
 const props = defineProps({
-  options: {
-    type: Array,
-    default: []
+  dictType: {
+    type: String,
+    default: ''
   },
-  value: {
+  dictValue: {
     default: '0'
   }
 });
 const tag = computed(() => {
-  return props.options.find((x: any) => x.value === props.value);
+  return dict.value[props.dictType].find((x: any) => String(x?.value) === String(props.dictValue));
 }) as any;
 
-onMounted(() => {});
+onMounted(() => {
+  dict.value = useDict([props.dictType]);
+});
 </script>
 
 <style scoped lang="scss"></style>

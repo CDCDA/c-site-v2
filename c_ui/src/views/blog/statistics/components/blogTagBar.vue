@@ -46,6 +46,9 @@ const options = reactive({
     {
       type: 'value',
       name: '单位:个',
+      splitLine: {
+        show: false // 隐藏背景横线
+      },
       axisLabel: {
         textStyle: {
           // fontSize: '0.7rem',
@@ -57,7 +60,11 @@ const options = reactive({
   series: [
     {
       type: 'bar',
-      barWidth: '20px',
+      barWidth: '15',
+      color: '#FAC858',
+      itemStyle: {
+        barBorderRadius: [3, 3, 0, 0] // 设置圆角，[topLeft, topRight, bottomRight, bottomLeft]
+      },
       data: []
     }
   ]
@@ -73,10 +80,8 @@ function init(list: Array<Object>) {
 }
 
 async function getList() {
-  const { code, msg, rows, total } = (await countBlogsByTag({
-    userId: userStore.userId.toString()
-  })) as any;
-  if (code === 200 && data) {
+  const { code, data } = (await countBlogsByTag({})) as any;
+  if (code === 200) {
     init(data);
   }
 }

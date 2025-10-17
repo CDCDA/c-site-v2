@@ -25,7 +25,7 @@ export const saveUser = (data: any) =>
 
 export const updateUser = (data: any) =>
   request({
-    url: '/users/' + data.id,
+    url: '/users/' + data.userId,
     method: 'put',
     data
   });

@@ -29,16 +29,14 @@ import useUserStore from '@/store/modules/user';
 import waterFall from '@/components/waterFall/index.vue';
 const router = useRouter();
 const userStore = useUserStore();
-const loading = ref(false as any);
-const albumData = ref({} as any);
+const loading = ref(false) as any;
+const albumData = ref({}) as any;
 const isShow = ref(false);
 async function getAlbumData() {
   loading.value = true;
-  const { code, msg, rows, total } = (await getAlbumById({
-    albumId: router.currentRoute.value.query.albumId
-  })) as any;
+  const { code, data } = await getAlbumById(router.currentRoute.value.query.albumId);
   if (code === 200) {
-    albumData.value = rows;
+    albumData.value = data;
     loading.value = false;
     isShow.value = true;
   }

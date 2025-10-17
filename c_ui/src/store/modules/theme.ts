@@ -16,7 +16,7 @@ const useThemeStore = defineStore('theme', () => {
   const theme = ref('theme-white');
   //背景类型
   const backType = ref('img');
-  const imgWallpaperList = deleteDictTypes;
+  const imgWallpaperList = ref<any[]>([]);
   const isCollapse = ref(false);
   //背景url
   const backUrl = ref(new URL('@/assets/images/宇宙天际.jpg', import.meta.url).href);
@@ -31,7 +31,7 @@ const useThemeStore = defineStore('theme', () => {
     //字体
     fontFamily: 'Shark',
     dialogType: 'filter'
-  } as any);
+  }) as any;
   return {
     isShow,
     isFooterShow,

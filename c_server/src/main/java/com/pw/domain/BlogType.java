@@ -36,7 +36,7 @@ public class BlogType extends BaseEntity implements Serializable {
 
     @JsonSerialize(using = ToStringSerializer.class)
     @Schema(description = "父级id")
-    private String parentId;
+    private Long parentId;
 
     @Schema(description = "分类名")
     private String typeName;

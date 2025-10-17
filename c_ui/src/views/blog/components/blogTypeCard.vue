@@ -21,22 +21,25 @@ import { listTypesWithStats } from '@/api/type';
 import useUserStore from '@/store/modules/user';
 import { useLazyAppear } from '@/utils/lazy';
 import { useRouter } from 'vue-router';
-const typeList = ref([] as any);
+const typeList = ref([]) as any;
 const router = useRouter();
 function toBlogType(item: any) {
   router.push({ name: 'blogTypePage', query: { typeId: item.typeId } });
 }
 
 async function getTypeTree() {
-  const { code, msg, data } = (await listTypesWithStats({})) as any;
-  if (code === 200 && data) {
+  const { code, data } = (await listTypesWithStats({})) as any;
+  if (code === 200) {
     typeList.value = data.list;
   }
 }
 
 onMounted(() => {
   getTypeTree();
-  useLazyAppear(document.querySelector('.blog-type-card') as any);
+  const element = document.querySelector('.blog-type-card') as any;
+  if (element) {
+    useLazyAppear(element) as any;
+  }
 });
 </script>
 <style lang="scss" scoped>

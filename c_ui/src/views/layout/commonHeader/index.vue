@@ -82,20 +82,22 @@ import searchDialog from './components/blogSearchDialog.vue';
 import { debounce } from 'lodash';
 import { autoClearTimer } from '@/utils/timer';
 import { useRouter, onBeforeRouteUpdate } from 'vue-router';
+import { loadingService } from '@/components/loading/loading.ts';
+
 import useUserStore from '@/store/modules/user';
 import useThemeStore from '@/store/modules/theme.ts';
 const themeStore = useThemeStore();
 const userStore = useUserStore();
-
+const fullscreenLoading = ref(false);
 const router = useRouter() as any;
-const articleElement = ref(null as any);
-const progress = ref('0' as any);
+const articleElement = ref(null) as any;
+const progress = ref('0') as any;
 const isHideen = ref(false);
-const searchVisible = ref(false as any);
+const searchVisible = ref(false) as any;
 const weatherData = ref({});
 const pageName = ref('首页');
 const pageChange = ref(true);
-const menuData = ref([] as any);
+const menuData = ref([]) as any;
 
 const menuHeader = [
   {
@@ -176,7 +178,7 @@ watch(
   { deep: true, immediate: true }
 );
 
-const isWaveShow = ref(false as any);
+const isWaveShow = ref(false) as any;
 
 // 页面滚动时间(防抖)
 const scrollEvent = debounce(() => {
@@ -193,23 +195,26 @@ function close() {
 }
 
 function searchClick() {
+  fullscreenLoading.value = true;
   searchVisible.value = true;
 }
 
 //随机博客
 async function toRandom() {
-  const { data, code } = (await getRandomBlog()) as any;
-  if (code == 200) {
+  loadingService.show({ type: 'loading', text: '正在获取随机博客...' });
+  const { data, code } = await getRandomBlog();
+  if (code === 200) {
     router.push({
       name: 'refresh'
     });
-    autoClearTimer(() => {
+    await autoClearTimer(() => {
       router.push({
         name: 'blogDisplay',
         query: { blogId: data }
       });
-    }, 0);
+    }, 500);
   }
+  loadingService.hide();
 }
 
 function toPersonal() {
@@ -782,7 +787,7 @@ onMounted(() => {
   }
   .is-show.common-header {
     color: get('font-color') !important;
-    backdrop-filter: blur(5px);
+    backdrop-filter: blur(0px);
     box-shadow: get('box-shadow');
     .svg-icon {
       color: get('font-color');

@@ -17,15 +17,23 @@ export const pageTags = (params: any) =>
     params
   });
 
-// 删除标签分类
+// 根据标签统计博客
+export const listWithBlogs = (params: any) =>
+  request({
+    url: '/blog-tags/with-blogs',
+    method: 'get',
+    params
+  });
+
+// 删除标签
 export const deleteTags = (ids: string[]) =>
   request({
     url: '/blog-tags/batch-delete',
-    method: 'post',
+    method: 'delete',
     data: ids
   });
 
-// 保存标签分类
+// 保存标签
 export const saveTag = (data: any) =>
   request({
     url: '/blog-tags',
@@ -33,10 +41,17 @@ export const saveTag = (data: any) =>
     data
   });
 
-// 更新标签分类
+// 更新标签
 export const updateTag = (data: any) =>
   request({
-    url: '/blog-tags/' + data.id,
+    url: '/blog-tags/' + data.tagId,
     method: 'put',
     data
+  });
+
+// 根据标签id查询标签
+export const getTagById = (tagId: string) =>
+  request({
+    url: '/blog-tags/' + tagId,
+    method: 'get'
   });

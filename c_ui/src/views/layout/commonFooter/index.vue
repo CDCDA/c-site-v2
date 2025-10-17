@@ -30,10 +30,10 @@ import { menuData } from '../menuData.ts';
 import { useRouter, onBeforeRouteUpdate } from 'vue-router';
 const router = useRouter();
 const beginDate = new Date('2023-9-1');
-const time = ref('' as any);
-const timeDifference = ref('' as any);
-const meteorDifference = ref('' as any);
-const weenkendDifference = ref('' as any);
+const time = ref('') as any;
+const timeDifference = ref('') as any;
+const meteorDifference = ref('') as any;
+const weenkendDifference = ref('') as any;
 // 计算下一次英仙座流星雨的时间
 function calculateNextPerseidMeteorShower() {
   const now = new Date(); // 当前日期和时间

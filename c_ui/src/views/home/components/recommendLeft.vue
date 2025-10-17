@@ -36,7 +36,7 @@ import TechnologyStackCard from '../../introduction/personalProfile/components/t
 const router = useRouter() as any;
 async function toRange() {
   const { code, data } = (await getRandomBlog()) as any;
-  if (code == 200 && data) {
+  if (code === 200) {
     router.push({
       name: 'blogDisplay',
       query: {

@@ -104,8 +104,8 @@ import useThemeStore from '@/store/modules/theme.ts';
 
 import rollText from '@/components/rollText/index.vue';
 const themeStore = useThemeStore();
-const theme = ref('' as any);
-const loading = ref('rotate' as any);
+const theme = ref('') as any;
+const loading = ref('rotate') as any;
 
 const slogans = ref([
   '记录',
@@ -114,21 +114,21 @@ const slogans = ref([
   '还有远方的苟且',
   '几年很快的',
   '风一吹就没了'
-] as any);
+]) as any;
 
-const headerList = ref([] as any);
+const headerList = ref([]) as any;
 const router = useRouter() as any;
-const typeList = ref([] as any);
-const typeBlogList = ref({} as any);
+const typeList = ref([]) as any;
+const typeBlogList = ref({}) as any;
 const queryParams = ref({
   pageNum: 1,
   pageSize: 10,
   userId: null
-} as any);
+}) as any;
 
 async function getUpdateLogList() {
   const { code, rows } = await pageLogs({ operation: '', pageNum: 1, pageSize: 999 });
-  if (code == 200) {
+  if (code === 200) {
     headerList.value = rows;
     headerList.value.forEach((x: any) => {
       x.text = x.operation;
@@ -151,22 +151,20 @@ function toMainPage() {
  */
 
 async function getTypeBlogList() {
-  // 添加加载状态
   loading.value = true;
-  try {
-    const { code, data } = (await listBlogsByType({ number: 3 })) as any;
-    if (code === 200 && data.length > 0) {
-      typeBlogList.value = data;
-      autoClearTimer(() => {
-        for (const typeBlog of typeBlogList.value) {
-          typeBlog.blogList.forEach((item: any) => {
-            useLazyAppear(document.querySelector(`.list-item-${item.blogId}`) as any);
-          });
-        }
-      }, 500);
-    }
-  } finally {
-    loading.value = false;
+  const { code, data } = (await listBlogsByType({ number: 3 })) as any;
+  if (code === 200) {
+    typeBlogList.value = data;
+    autoClearTimer(() => {
+      for (const typeBlog of typeBlogList.value) {
+        typeBlog.blogList.forEach((item: any) => {
+          const element = document.querySelector(`.list-item-${item.blogId}`) as HTMLElement;
+          if (element) {
+            useLazyAppear(element);
+          }
+        });
+      }
+    }, 500);
   }
 }
 

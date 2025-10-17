@@ -20,7 +20,7 @@
                 <el-input v-model="form.nickName"></el-input>
               </el-form-item>
               <el-form-item label="账&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;号">
-                <span>{{ userInfo.userName }}</span>
+                <span>{{ form.userName }}</span>
               </el-form-item>
               <el-form-item label="联系电话">
                 <el-input v-model="form.phone"></el-input>
@@ -54,23 +54,23 @@
 import { onMounted, ref, reactive } from 'vue';
 import { formatDate } from '@/utils/date';
 import useUserStore from '@/store/modules/user';
-import { getUserById, saveUser } from '@/api/system/user';
+import { getUserById, updateUser } from '@/api/system/user';
 import { ElNotification } from 'element-plus';
-import upload from '@/components/upload/upload.vue';
-const userInfo = ref({} as any);
+import upload from '@/components/upload/index.vue';
+const userInfo = ref({}) as any;
 const userStore = useUserStore();
 import useThemeStore from '@/store/modules/theme.ts';
 const themeStore = useThemeStore();
 themeStore.isFooterShow = false;
-const isEdit = ref(false as any);
-const form = ref({} as any);
-const formRef = ref(null as any);
+const isEdit = ref(false) as any;
+const form = ref({}) as any;
+const formRef = ref(null) as any;
 const rules = ref({
   nickName: [{ required: true, message: 'Please input Activity name', trigger: 'blur' }]
 });
 async function getUserInfo(userId: any) {
-  const { code, msg, rows, total } = (await getUserById(userId)) as any;
-  if (code === 200 && data) {
+  const { code, data } = (await getUserById(userId)) as any;
+  if (code === 200) {
     Object.assign(userInfo.value, data);
     form.value = JSON.parse(JSON.stringify(userInfo.value));
   }
@@ -79,7 +79,7 @@ async function getUserInfo(userId: any) {
 async function submit() {
   await formRef.value.validate(async (valid: any) => {
     if (valid) {
-      const { code, msg, rows, total } = (await saveUser(form.value)) as any;
+      const { code } = await updateUser(form.value);
       if (code === 200) {
         ElNotification({
           title: 'Success',

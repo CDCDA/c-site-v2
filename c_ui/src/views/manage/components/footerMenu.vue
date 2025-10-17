@@ -6,7 +6,7 @@
     <div class="menu-back"></div>
     <div v-for="item in menuList" class="menu-item" @click="menuClick(item)">
       <svg-icon class="menu-icon" :iconName="`commonSvg-${item.meta.svgIcon}`"></svg-icon>
-      <span class="menu-title">{{ item.meta.remark.replace('管理', '') }}</span>
+      <span class="menu-title">{{ item.meta.title.replace('管理', '') }}</span>
     </div>
   </div>
 </template>
@@ -14,9 +14,9 @@
 import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 const router = useRouter();
-const menuList = ref([] as any);
-const isShowMenu = ref(false as any);
-const activeMenu = ref({} as any);
+const menuList = ref([]) as any;
+const isShowMenu = ref(false) as any;
+const activeMenu = ref({}) as any;
 
 function menuClick(item: any) {
   router.push({ name: item.name });

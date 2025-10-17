@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import com.pw.common.entity.BaseEntity;
 
 
@@ -28,6 +30,7 @@ import java.util.List;
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class Album extends BaseEntity implements Serializable {
     @TableId
+    @JsonSerialize(using = ToStringSerializer.class)
     @Schema(description = "主键")
     private Long id;
 

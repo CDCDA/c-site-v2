@@ -58,7 +58,7 @@ const form = ref({
   id: null,
   operation: '',
   operateTime: new Date()
-} as any);
+}) as any;
 
 function close() {
   emit('close');
@@ -79,7 +79,7 @@ async function submit() {
   await formEl.value.validate(async (valid: any) => {
     if (valid) {
       const { code } = (await saveLog(form.value)) as any;
-      if (code == 200) {
+      if (code === 200) {
         ElNotification.success('保存成功');
         emit('getList');
         emit('close');

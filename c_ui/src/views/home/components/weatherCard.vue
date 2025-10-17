@@ -75,13 +75,13 @@
 import { onMounted, ref } from 'vue';
 import { useLazyAppear } from '@/utils/lazy';
 import { autoClearTimer } from '@/utils/timer';
-const weatherData = ref({} as any);
+const weatherData = ref({}) as any;
 onMounted(() => {
   const script = document.createElement('script');
   script.src = '/weatherCard/script.js';
   script.type = 'text/javascript';
   document.body.appendChild(script);
-  useLazyAppear(document.querySelector('.weather-card') as any);
+  useLazyAppear(document.querySelector('.weather-card') as any) as any;
   autoClearTimer(() => {
     let weather = (localStorage as any).getItem('weather');
     if (weather) {

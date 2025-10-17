@@ -65,7 +65,7 @@ public class CateController extends BaseController implements convertController 
         return resultExit(cateService.removeById(id));
     }
 
-    @PostMapping("/batch-delete")
+    @DeleteMapping("/batch-delete")
     @Operation(summary = "批量删除美食")
     public Result batchDelete(@RequestBody List<Long> ids) {
         return resultExit(cateService.removeByIds(ids));

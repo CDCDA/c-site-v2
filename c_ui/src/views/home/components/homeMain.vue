@@ -150,11 +150,11 @@ import TechnologyStackCard from '../../introduction/personalProfile/components/t
 import useThemeStore from '@/store/modules/theme.ts';
 import VisitorCard from '../components/visitorCard.vue';
 const themeStore = useThemeStore();
-const recommends = deleteDictTypes;
-const tRecommends = deleteDictTypes;
+const recommends = ref([]) as any;
+const tRecommends = ref([]) as any;
 const userStore = useUserStore();
-const theme = ref('' as any);
-const loading = ref('rotate' as any);
+const theme = ref('') as any;
+const loading = ref('rotate') as any;
 
 const headerList = ref([
   {
@@ -175,24 +175,22 @@ const headerList = ref([
   }
 ]) as any;
 const router = useRouter() as any;
-const typeList = ref([] as any);
+const typeList = ref([]) as any;
 
 const queryParams = ref({
   pageNum: 1,
   pageSize: 10,
   userId: null
-} as any);
+}) as any;
 
-const total = ref(100 as any);
+const total = ref(100) as any;
 async function getBlogList() {
-  const { code, msg, rows, total } = (await pageBlogs(queryParams.value)) as any;
+  const { code, rows, total } = (await pageBlogs(queryParams.value)) as any;
   if (code === 200) {
     recommends.value = rows;
     tRecommends.value = JSON.parse(JSON.stringify(rows));
     tRecommends.value.length > 6 ? (tRecommends.value.length = 6) : '';
     total.value = total;
-  } else {
-    ElMessage.error('博客数据获取失败', msg);
   }
 }
 
@@ -211,7 +209,7 @@ function toMainPage() {
  */
 
 async function getTypeTree() {
-  const { code, msg, data } = (await listTypesWithStats(queryParams.value)) as any;
+  const { code, data } = (await listTypesWithStats(queryParams.value)) as any;
   if (code === 200) {
     typeList.value = data.list;
     let total = 0;
@@ -227,11 +225,9 @@ async function getTypeTree() {
     typeList.value.forEach((e: any) => {
       if (e.typeId === queryParams.value.typeId) e.isActive = true;
     });
-  } else {
-    ElMessage.error('分类数据获取失败', msg);
   }
 }
-let displacement = ref(72 as any);
+let displacement = ref(72) as any;
 
 function headerRoll(header: any) {
   displacement.value -= 49;
@@ -258,7 +254,7 @@ function toDetail(item: any) {
 }
 
 const routes = router.getRoutes().filter((e: any) => {
-  return e.meta.isHidden !== true && e.meta.remark;
+  return e.meta.isHidden !== true && e.meta.title;
 }) as any;
 
 function toRange() {

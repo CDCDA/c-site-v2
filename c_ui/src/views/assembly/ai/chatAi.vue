@@ -90,15 +90,16 @@
 import { ref, onMounted, nextTick } from 'vue';
 import { Service, UserFilled } from '@element-plus/icons-vue';
 import { sendMessage } from '@/api/chat.ts';
+import useThemeStore from '@/store/modules/theme.ts';
 import { ElMessage, ElNotification } from 'element-plus';
 import rain from '@/views/assembly/slice/rain/index.vue';
 import { MdPreview } from 'md-editor-v3';
 const page = ref(null) as any;
 const options = ref({ scroll: true }) as any;
-
-import { debounce } from 'lodash';
-import useThemeStore from '@/store/modules/theme.ts';
 const themeStore = useThemeStore();
+themeStore.isFooterShow = false;
+import { debounce } from 'lodash';
+
 themeStore.isFooterShow = false;
 const userInput = ref('');
 const loading = ref(false);

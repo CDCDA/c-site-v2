@@ -186,4 +186,10 @@ public class Result<T> extends HashMap<String, Object> {
         super.put("total", iPage.getTotal());
         return this;
     }
+
+    public Result page(T rows, Integer total) {
+        super.put("rows", rows);
+        super.put("total", total);
+        return this;
+    }
 }

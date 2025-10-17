@@ -9,6 +9,8 @@ import ElementPlus from 'element-plus';
 import 'element-plus/dist/index.css';
 import image from './components/image/image.vue';
 import dialog from './components/dialog/index.vue';
+import dictTag from './components/dict/dictTag.vue';
+import dictSelect from './components/dict/dictSelect.vue';
 import '@/assets/styles/animate.scss';
 import '@/assets/styles/element-ui-out-app.scss';
 import '@/assets/styles/mobile.scss';
@@ -23,11 +25,8 @@ import SvgIcon from './components/icon-component.vue';
 import 'virtual:svg-icons-register';
 import visibleLazy from '@/components/visibleLazy/visibleLazy.vue';
 /* vForm 表单构建器 */
-// import VForm3 from '@/../lib/vform/designer.umd.js';
-// import '@/../lib/vform/designer.style.css';
-// import { useRouter } from 'vue-router';
-
-// const router = useRouter();
+import VForm3 from '@/../lib/vform/designer.umd.js';
+import '@/../lib/vform/designer.style.css';
 
 const app = createApp(App);
 
@@ -39,6 +38,8 @@ app.component('svg-icon', SvgIcon);
 app.component('visible-lazy', visibleLazy);
 app.component('c-dialog', dialog);
 app.component('c-image', image);
+app.component('dict-tag', dictTag);
+app.component('dict-select', dictSelect);
 app.provide('$theme', 'theme-light');
 app.use(directives);
 // app.use(VForm3);

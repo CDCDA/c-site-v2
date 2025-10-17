@@ -1,7 +1,7 @@
 <template>
   <div class="blog-editor">
     <el-form :model="blogData" :rules="rules" ref="formEl">
-      <el-form-item label="标题" prop="blogTitle">
+      <el-form-item label="标题" prop="blogTitle" label-width="70px">
         <el-input class="blog-title-editor" placeholder="请输入标题" v-model="blogData.blogTitle" />
       </el-form-item>
       <MdEditor
@@ -104,7 +104,7 @@ import { ElMessageBox, ElNotification } from 'element-plus';
 import useUserStore from '@/store/modules/user';
 import { useRouter } from 'vue-router';
 import { getBlogById } from '@/api/blog';
-import upload from '@/components/upload/upload.vue';
+import upload from '@/components/upload/index.vue';
 const tagVisible = ref(false);
 
 const rules = ref({
@@ -122,8 +122,8 @@ const inputValue = ref('');
 const inputVisible = ref(false);
 const InputRef = ref() as any;
 const typeList = ref([]);
-const imageUrl = ref(null as any);
-const tagList = ref([] as any);
+const imageUrl = ref(null) as any;
+const tagList = ref([]) as any;
 
 //添加标签
 function addTag(tag: any) {
@@ -194,14 +194,14 @@ async function getTypeTree() {
   const params = {
     userId: blogData.value.userId
   };
-  const { code, msg, rows, total } = (await pageTypes(params)) as any;
+  const { code, rows, total } = (await pageTypes(params)) as any;
   if (code === 200) {
     typeList.value = rows;
   }
 }
 
 async function getTagList() {
-  const { code, msg, rows, total } = (await pageTags({})) as any;
+  const { code, rows, total } = (await pageTags({})) as any;
   if (code === 200) {
     tagList.value = rows;
   }
@@ -241,7 +241,7 @@ import axios from 'axios';
 
 const router = useRouter() as any;
 const userStore = useUserStore();
-const loading = ref('rotate' as any);
+const loading = ref('rotate') as any;
 const fullStatus = ref(false) as any;
 const editorRef = ref(null) as any;
 const editorOptions = ref({
@@ -258,7 +258,7 @@ async function onUploadImg(files: any, callback: any) {
         form.append('path', 'blogMaterial');
         axios
           .post(
-            ` ${process.env.NODE_ENV === 'development' ? '/dev-api' : '/prod-api'}/blog/uploadImg`,
+            ` ${process.env.NODE_ENV === 'development' ? '/dev-api' : '/prod-api'}/files`,
             form,
             {
               headers: {
@@ -282,7 +282,7 @@ const blogData = ref({
   typeId: '',
   coverUrl: '',
   blogAbstract: ''
-} as any);
+}) as any;
 
 function resetBlogData() {
   blogData.value = ref({
@@ -292,7 +292,7 @@ function resetBlogData() {
     typeId: '',
     coverUrl: '',
     blogAbstract: ''
-  } as any);
+  }) as any;
 }
 
 //保存博客数据到本地
@@ -303,8 +303,8 @@ function blogSave() {
 
 async function getBlogInfo(id: string) {
   if (!id) return;
-  const { code, msg, rows, total } = (await getBlogById(id)) as any;
-  if (code === 200 && data) {
+  const { code, data } = (await getBlogById(id)) as any;
+  if (code === 200) {
     blogData.value = data;
   }
 }
@@ -326,10 +326,12 @@ onMounted(() => {
   let { blogId } = router.currentRoute.value.query;
   let tempBlogData = window.localStorage.getItem('blogData');
   if (blogId) {
+    console.log('AAA', blogData.value);
     getBlogInfo(blogId);
   } else if (tempBlogData) {
     blogData.value = JSON.parse(tempBlogData);
   }
+
   editorRef.value?.on('pageFullscreen', (status: any) => {
     fullStatus.value = status;
     if (status === true) {
@@ -440,8 +442,10 @@ onMounted(() => {
   font-size: 0.7rem !important;
   height: 1.2rem !important;
   border-radius: 4px !important;
-  :deep(.el-input__wrapper) {
+  border: 1px solid #dcdcdc !important;
+  .el-input__wrapper {
     height: 100% !important;
+    border: none;
     padding: 0 4px;
   }
 }

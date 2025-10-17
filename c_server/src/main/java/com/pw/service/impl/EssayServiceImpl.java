@@ -21,13 +21,14 @@ public class EssayServiceImpl extends ServiceImpl<EssayMapper, Essay> implements
     @Autowired
     EssayMapper essayMapper;
 
+
     @Override
     public IPage<EssayVO> page(IPage<EssayDTO> page, EssayDTO param) {
         return essayMapper.page(page, param);
     }
 
     @Override
-    public EssayVO getEssayById(String essayId) {
+    public EssayVO getEssayById(Long essayId) {
         return essayMapper.getEssayById(essayId);
     }
 

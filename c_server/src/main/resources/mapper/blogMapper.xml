@@ -43,6 +43,7 @@
         b.update_time,
         b.blog_abstract,
         b.is_original,
+        b.is_recommend,
         bt.type_name,
         u.nick_name as author
         from "blog" b

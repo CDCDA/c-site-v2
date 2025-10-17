@@ -31,13 +31,13 @@ const option = reactive({
   //图片垂直间距
   verticalGap: 20,
   width: null
-} as any);
+}) as any;
 
 //列高度数组
-const colHeightList = reactive([] as any);
+const colHeightList = reactive([]) as any;
 
 // 瀑布流数组
-const waterList = ref([] as any);
+const waterList = ref([]) as any;
 
 // 屏幕宽度需要在 mounted 之后拿到
 onMounted(() => {

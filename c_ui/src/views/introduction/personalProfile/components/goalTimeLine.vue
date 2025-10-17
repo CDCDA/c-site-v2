@@ -44,7 +44,7 @@ const goalList = ref([
     date: '2024-1',
     goal: '网站引用资源和数据都改到服务器'
   }
-] as any);
+]) as any;
 </script>
 <style lang="scss" scoped>
 @include theme() {

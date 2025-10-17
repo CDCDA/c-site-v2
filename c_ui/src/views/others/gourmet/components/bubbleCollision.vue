@@ -25,7 +25,7 @@ const rotate = (x: any, y: any, sin: any, cos: any, reverse: any) => {
         y: cos * y + sin * x
       };
 };
-var circles = deleteDictTypes;
+var circles = ref([]) as any;
 var lastExec = null as any;
 var hue = 250 as any;
 var lastCollisions = [] as any;

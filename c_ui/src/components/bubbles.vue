@@ -19,7 +19,7 @@ var c = null as any,
   x = null as any;
 
 // Bubbles.value
-var Bubbles = deleteDictTypes;
+var Bubbles = ref([]) as any;
 
 for (var i = 0; i < particles; i++) {
   Bubbles.value.push({

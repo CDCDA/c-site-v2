@@ -42,7 +42,7 @@ public class DictData extends BaseEntity implements Serializable {
     private String dictType;
 
     @Schema(description = "字典排序")
-    private String dictSort;
+    private Integer dictSort;
 
     @Schema(description = "状态")
     private String status;

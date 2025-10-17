@@ -29,7 +29,7 @@ export const getSongByName = (params: any) =>
   });
 
 //网易云音乐详情接口
-export const getSongById = (params: any) =>
+export const getSongByIdWYY = (params: any) =>
   request({
     url: 'wyy/api/song/detail/?id=' + params.id + '&ids=[' + params.id + ']',
     method: 'get',
@@ -40,7 +40,7 @@ export const getSongById = (params: any) =>
 //http://music.163.com/song/media/outer/url?id=2024416009.mp3
 
 //音乐列表
-export const listSong = (params: any) =>
+export const pageSongs = (params: any) =>
   request({
     url: '/musics',
     method: 'get',
@@ -48,25 +48,33 @@ export const listSong = (params: any) =>
   });
 
 // 保存音乐
-export const saveMusic = (params: any) =>
+export const saveSong = (params: any) =>
   request({
     url: '/musics',
     method: 'post',
     data: params
   });
 
+// 修改音乐
+export const updateSong = (params: any) =>
+  request({
+    url: '/musics/' + params.id,
+    method: 'put',
+    data: params
+  });
+
 // 批量删除音乐
-export const delMusic = (params: any) =>
+export const deleteSongs = (params: any) =>
   request({
     url: '/musics/batch-delete',
-    method: 'post',
+    method: 'delete',
     data: params
   });
 
 // 根据音乐id查询音乐
-export const getMusicById = (params: any) =>
+export const getSongById = (params: any) =>
   request({
-    url: '/musics/getMusicById',
+    url: '/musics/getSongById',
     method: 'get',
     params
   });

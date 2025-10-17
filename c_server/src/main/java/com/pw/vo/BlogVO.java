@@ -5,6 +5,8 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -26,6 +28,7 @@ import java.util.List;
 @Schema(description  = "博客")
 public class BlogVO {
     @TableField
+    @JsonSerialize(using = ToStringSerializer.class)
     @Schema(description  = "博客id")
     private Long blogId;
 

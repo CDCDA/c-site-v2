@@ -33,12 +33,12 @@ import { useRouter } from 'vue-router';
 import { getAnimateTime } from '@/utils/animate.ts';
 const router = useRouter();
 const userStore = useUserStore();
-const typeList = ref([] as any);
+const typeList = ref([]) as any;
 
 async function getTypeList() {
-  const { code, msg, rows, total } = (await listTypesWithStats({})) as any;
-  if (code === 200 && data) {
-    typeList.value = rows;
+  const { code, data } = (await listTypesWithStats({})) as any;
+  if (code === 200) {
+    typeList.value = data.list;
   }
 }
 
@@ -122,7 +122,6 @@ onMounted(() => {
           font-weight: 700;
           text-shadow: rgba(0, 0, 0, 0.1) 0 10px 10px;
           padding-left: 0;
-          line-height: 0.3;
           text-align: left;
         }
         p {

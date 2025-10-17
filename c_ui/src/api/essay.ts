@@ -21,7 +21,7 @@ export const pageEssays = (params: any) =>
 //根据日期范围查询随笔统计数据
 export const countEssayByDate = (params: any) =>
   request({
-    url: '/essays/countEssayByDate',
+    url: '/essays/stats/date-range',
     method: 'get',
     params
   });
@@ -46,7 +46,7 @@ export const updateEssay = (params: any) =>
 export const deleteEssays = (params: any) =>
   request({
     url: '/essays/batch-delete',
-    method: 'post',
+    method: 'delete',
     data: params
   });
 

@@ -21,7 +21,7 @@ export const pageComments = (params: any) =>
 // 查询树形评论列表
 export const listTreeComments = (params: any) =>
   request({
-    url: '/commentsTree',
+    url: '/comments/tree',
     method: 'get',
     params
   });

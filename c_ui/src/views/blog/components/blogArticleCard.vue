@@ -37,7 +37,7 @@ const blogList = ref([
     blogType: 'as',
     updateTime: '2023-6-14'
   }
-] as any);
+]) as any;
 
 function viewBlog(blogData: any) {
   router.push({ name: 'BlogDisplay', query: { blogId: blogData.blogId } });
@@ -52,11 +52,9 @@ async function getBlogList() {
     pageNum: 1,
     pageSize: 5
   };
-  const { code, msg, rows, total } = (await pageBlogs(params)) as any;
+  const { code, rows, total } = (await pageBlogs(params)) as any;
   if (code === 200) {
     blogList.value = rows;
-  } else {
-    ElMessage.error('分类数据获取失败', msg);
   }
 }
 

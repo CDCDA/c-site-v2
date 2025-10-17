@@ -65,7 +65,7 @@
 import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 const router = useRouter();
-const menuList = ref([] as any);
+const menuList = ref([]) as any;
 
 onMounted(() => {});
 </script>

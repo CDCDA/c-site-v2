@@ -65,7 +65,7 @@ public class EquipmentController extends BaseController implements convertContro
         return resultExit(equipmentService.removeById(id));
     }
 
-    @PostMapping("/batch-delete")
+    @DeleteMapping("/batch-delete")
     @Operation(summary = "批量删除设备")
     public Result batchDelete(@RequestBody List<Long> ids) {
         return resultExit(equipmentService.removeByIds(ids));

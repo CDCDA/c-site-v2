@@ -14,7 +14,7 @@ export const pageGames = (params: any) =>
 // 按分类查询游戏数量
 export const countGamesByType = (params: any) =>
   request({
-    url: '/games/countGamesByType',
+    url: '/games/stats/type-count',
     method: 'get',
     params
   });
@@ -39,7 +39,7 @@ export const updateGame = (params: any) =>
 export const deleteGames = (ids: any) =>
   request({
     url: '/games/batch-delete',
-    method: 'post',
+    method: 'delete',
     data: ids
   });
 

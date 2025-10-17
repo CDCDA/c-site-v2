@@ -20,7 +20,7 @@
           <!--          <div class="count">{{ item.list.length }}条</div>-->
         </div>
         <div class="svg-list">
-          <div class="svg-item" v-for="svg in item.list" @click="getSvgCode(svg)">
+          <div class="svg-item" v-for="svg in item.list" @click="getSvgCode(svg, item.value)">
             <svg-icon :iconName="svg.iconName" class="svg-item-icon" />
             <span class="svg-item-name">{{ svg.fileName }}</span>
           </div>
@@ -69,9 +69,9 @@ const svgData = ref([
     value: 'commonSvg',
     list: []
   }
-] as any);
-function getSvgCode(item: any) {
-  copyText(`<svg-icon iconName="commonSvg-${item.fileName}" />`);
+]) as any;
+function getSvgCode(item: any, type: any) {
+  copyText(`<svg-icon iconName="${type}-${item.fileName}" />`);
   ElNotification.success('svg代码复制成功');
 }
 

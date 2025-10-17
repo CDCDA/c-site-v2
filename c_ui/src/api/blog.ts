@@ -2,7 +2,7 @@
  * @Description: 博客接口
  * @Author: cyd 1205489124@qq.com
  * @Date: 2023-07-07 16:59:41
- * @LastEditTime: 2025-09-30 16:02:23
+ * @LastEditTime: 2025-10-09 13:57:48
  */
 import request from '@/utils/request';
 // 分页
@@ -55,7 +55,7 @@ export const countBlogs = (params: any) =>
 export const deleteBlogs = (ids: Array<string>) =>
   request({
     url: '/blogs/batch-delete',
-    method: 'post',
+    method: 'delete',
     data: ids
   });
 
@@ -70,7 +70,7 @@ export const countBlogsByDate = (params: any) =>
 // 按分类统计
 export const countBlogsByType = (params: any) =>
   request({
-    url: '/blogs/by-type',
+    url: '/blogs/stats/type',
     method: 'get',
     params
   });
@@ -78,7 +78,7 @@ export const countBlogsByType = (params: any) =>
 // 按标签统计
 export const countBlogsByTag = (params: any) =>
   request({
-    url: '/blogs/by-tag',
+    url: '/blogs/stats/tag',
     method: 'get',
     params
   });

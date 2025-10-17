@@ -3,6 +3,8 @@ package com.pw.domain;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import com.pw.common.entity.BaseEntity;
 
 
@@ -24,6 +26,7 @@ import lombok.NoArgsConstructor;
 public class BlogTag extends BaseEntity {
 
     @TableId
+    @JsonSerialize(using = ToStringSerializer.class)
     @Schema(description = "标签id")
     private Long tagId;
 
@@ -42,6 +45,9 @@ public class BlogTag extends BaseEntity {
 
     @Schema(description = "颜色")
     private String color;
+
+    @Schema(description  = "标签封面")
+    private String coverUrl;
 
 
 }

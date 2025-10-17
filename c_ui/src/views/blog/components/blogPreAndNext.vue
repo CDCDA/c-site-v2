@@ -48,8 +48,8 @@ const endImg = new URL('@/assets/images/feitu-bridge.jpg', import.meta.url).href
 const preBlogData = ref({}) as any;
 const nextBlogData = ref({}) as any;
 async function getPreNextBlog() {
-  const { code, data } = (await getNeighborBlogs({ blogId: props.blogId })) as any;
-  if (code == 200) {
+  const { code, data } = (await getNeighborBlogs(props.blogId)) as any;
+  if (code === 200) {
     nextBlogData.value = data.nextBlog;
     preBlogData.value = data.preBlog;
   }

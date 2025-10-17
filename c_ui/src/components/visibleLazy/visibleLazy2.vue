@@ -13,7 +13,7 @@ import { ref } from 'vue';
 const isVisible = ref(false);
 import { autoClearTimer } from '@/utils/timer.ts';
 
-const id = ref(`visible-lazy-${generateRandomId()}` as any);
+const id = ref(`visible-lazy-${generateRandomId()}`) as any;
 function generateRandomId() {
   return Math.random().toString(16).substr(2, 16);
 }

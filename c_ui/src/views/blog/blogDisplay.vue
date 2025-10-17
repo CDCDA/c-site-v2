@@ -54,15 +54,15 @@ import { autoClearTimer } from '@/utils/timer';
 import { useLazyAppear } from '@/utils/lazy';
 const preNextShow = ref(false);
 const router = useRouter();
-const footerData = ref({} as any);
-const blogData = ref({ coverUrl: '', tags: [], content: '' } as any);
-const loading = ref('gear' as any);
+const footerData = ref({}) as any;
+const blogData = ref({ coverUrl: '', tags: [], content: '' }) as any;
+const loading = ref('gear') as any;
 const scrollElement = document.querySelector('.el-main');
 function footerClick() {}
 
 async function getBlog(id: any) {
   loading.value = true;
-  const { code, msg, rows, total } = (await getBlogById(id)) as any;
+  const { code, data } = (await getBlogById(id)) as any;
   if (code === 200) {
     blogData.value = data;
   }
@@ -72,7 +72,10 @@ async function getBlog(id: any) {
 onMounted(() => {
   const { blogId } = router.currentRoute.value.query;
   getBlog(blogId);
-  useLazyAppear(document.querySelector('.affix') as any);
+  const affixElement = document.querySelector('.affix') as any;
+  if (affixElement) {
+    useLazyAppear(affixElement);
+  }
   autoClearTimer(() => {
     preNextShow.value = true;
   }, 1000);

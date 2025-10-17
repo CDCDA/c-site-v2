@@ -11,7 +11,7 @@ const useUserStore = defineStore('user', () => {
   const token = ref('');
   const nickName = ref('');
   const email = ref('');
-  const permission = deleteDictTypes;
+  const permission = ref<string[]>([]);
   return {
     userName,
     token,

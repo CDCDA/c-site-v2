@@ -7,13 +7,13 @@
       <div class="user-header">熬夜成仙吧</div>
       <div class="user-avatar">
         <el-avatar :src="userInfo.avatar"></el-avatar>
-        <div class="introduction">我是一名全栈开发工程师</div>
+        <div class="intro">我是一名全栈开发工程师</div>
       </div>
       <div class="user-footer">
         <div class="footer-leftSide">
           <div class="user-name">{{ userInfo.nickName }}</div>
-          <el-tooltip :content="userInfo.introduction">
-            <div class="user-motto no-wrap">{{ userInfo.introduction }}</div>
+          <el-tooltip :content="userInfo.intro">
+            <div class="user-motto no-wrap">{{ userInfo.intro }}</div>
           </el-tooltip>
         </div>
         <div class="footer-rightSide">
@@ -39,7 +39,7 @@ import useUserStore from '@/store/modules/user';
 import { getUserById } from '@/api/system/user';
 import { useLazyAppear } from '@/utils/lazy';
 const userStore = useUserStore();
-const userInfo = ref({} as any);
+const userInfo = ref({}) as any;
 const blogUserCard = ref(null) as any;
 const weixinQrcodeUrl = new URL(
   '@/assets/images/3ca475b86ed6c381f709391a8edf54af.jpg',
@@ -55,8 +55,8 @@ const dialogVisible = ref(false);
 
 // 获取用户信息
 async function getUserInfo(userId: any) {
-  const { code, msg, data } = (await getUserById(userId)) as any;
-  if (code === 200 && data) {
+  const { code, data } = (await getUserById(userId)) as any;
+  if (code === 200) {
     Object.assign(userInfo.value, data);
   }
 }
@@ -103,7 +103,7 @@ onMounted(() => {
       background: white;
       transition: ease-in-out 0.3s;
     }
-    .introduction {
+    .intro {
       position: absolute;
       opacity: 0;
       width: 100%;
@@ -170,7 +170,7 @@ onMounted(() => {
       animation: none;
       border: none;
     }
-    .introduction {
+    .intro {
       opacity: 1;
       transition: cubic-bezier(0.075, 0.82, 0.165, 1) 0.4s;
     }

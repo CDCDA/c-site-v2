@@ -66,6 +66,7 @@
         </div>
       </grid-item>
     </grid-layout>
+    <div class="tip">仅展示最近20条</div>
     <essayComment
       :visible="commentOpen"
       @close="close"
@@ -84,11 +85,11 @@ import useUserStore from '@/store/modules/user';
 import { sformatDate } from '@/utils/date.ts';
 import essayComment from './components/essayComment.vue';
 import { ElNotification } from 'element-plus';
-const imgLoading = ref('rotate' as any);
+const imgLoading = ref('rotate') as any;
 const userStore = useUserStore();
-const essayList = ref([] as any);
+const essayList = ref([]) as any;
 const commentOpen = ref(false);
-const grid = ref(null as any);
+const grid = ref(null) as any;
 const selectEssay = ref({}) as any;
 function close() {
   commentOpen.value = false;
@@ -109,25 +110,25 @@ function handle() {
  * @return {*}
  */
 async function getEssayList() {
-  const { code, data } = (await pageEssays({ pageNum: 1, pageSize: 10 })) as any;
-  if (code === 200 && data) {
+  const { code, rows, total } = (await pageEssays({ pageNum: 1, pageSize: 20 })) as any;
+  if (code === 200) {
     essayList.value = [];
-    let length = data.list.length;
+    let length = rows.length;
     let index = 0;
     for (let i = 0; i < length / 3; i++) {
       for (let j = 0; j < 3; j++) {
-        if (data.list[index])
+        if (rows[index])
           essayList.value.push({
             x: j,
             y: i,
             w: 1,
             h: 10,
-            i: data.list[index].id,
-            images: data.list[index].images,
-            createTime: data.list[index].createTime,
-            content: data.list[index].content,
-            userId: data.list[index].userId,
-            tags: data.list[index].tags ? JSON.parse(data.list[index].tags) : []
+            i: rows[index].id,
+            images: rows[index].images,
+            createTime: rows[index].createTime,
+            content: rows[index].content,
+            userId: rows[index].userId,
+            tags: rows[index].tags ? JSON.parse(rows[index].tags) : []
           });
         index++;
       }
@@ -173,7 +174,7 @@ async function getEssayList() {
   }
 }
 
-const userData = ref({} as any);
+const userData = ref({}) as any;
 
 function toComment(item: any) {
   // ElNotification.info('施工中...');
@@ -183,7 +184,7 @@ function toComment(item: any) {
 
 async function getUserData() {
   const { code, data } = (await getUserById(userStore.userId)) as any;
-  if (code == 200) {
+  if (code === 200) {
     userData.value = data;
   }
 }

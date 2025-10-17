@@ -120,7 +120,7 @@ async function handleTouristLogin() {
     password: '1'
   };
   const { code } = (await login(loginForm.value)) as any;
-  if (code == 200) {
+  if (code === 200) {
     //缓存用户数据
     const token = jwtDecode(Cookies.get('token')) as any;
     console.log(token);
@@ -129,8 +129,6 @@ async function handleTouristLogin() {
     userStore.userName = token.username;
     userStore.permission = ['show'];
     window.localStorage.setItem('userData', JSON.stringify(userStore));
-    getUserInfo(token.aud);
-    logInFadeOut();
     router.push('/home');
   }
   touristLoading.value = false;
@@ -147,8 +145,8 @@ async function handleLogin() {
     return;
   }
   loading.value = true;
-  const { code, data } = (await login(loginForm.value)) as any;
-  if (code == 200) {
+  const { code, data } = await login(loginForm.value);
+  if (code === 200) {
     //缓存用户数据
     const { token, user } = data;
     userStore.token = token;
@@ -160,11 +158,6 @@ async function handleLogin() {
     userStore.permission = ['add', 'delete', 'show', 'operate'];
     window.localStorage.setItem('userData', JSON.stringify(userStore));
     router.push('/home');
-    autoClearTimer(() => {
-      console.log('登录成功，跳转至首页');
-      themeStore.isFooterShow = true;
-      themeStore.isShow = true;
-    }, 1200);
   }
   loading.value = false;
 }
@@ -210,7 +203,7 @@ async function getRegisterCode() {
 }
 async function handleTouristLogIn() {
   const { code } = (await touristLogin()) as any;
-  if (code == 200) {
+  if (code === 200) {
     const token = jwtDecode(Cookies.get('token')) as any;
     userStore.token = Cookies.get('token');
     userStore.userId = token.aud;

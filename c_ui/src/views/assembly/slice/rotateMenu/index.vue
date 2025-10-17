@@ -8,7 +8,7 @@
       <div class="rotate-menu-item" v-for="menu in menuList" @click="toManage(menu)">
         <c-image :lazy="false" class="rotate-img" :src="menu.meta.src" fit="contain" />
         <div class="rotate-menu-title">
-          {{ menu.meta.remark }}
+          {{ menu.meta.title }}
         </div>
       </div>
       <p></p>
@@ -29,12 +29,12 @@ import { useRouter } from 'vue-router';
 const router = useRouter();
 const title = ref('') as any;
 // 管理菜单
-const menuList = deleteDictTypes;
-const activeMenu = ref({} as any);
-const routerDialog = ref(null as any);
+const menuList = ref([]) as any;
+const activeMenu = ref({}) as any;
+const routerDialog = ref(null) as any;
 function toManage(menu: any) {
   console.log(menu);
-  title.value = menu.meta.remark;
+  title.value = menu.meta.title;
   routerDialog.value.open();
   destroyEvent();
   router.push({ name: menu.name });
@@ -70,7 +70,7 @@ function initMenu() {
     oImg[i].style.transition = 'transform 1s ' + (oImgLength - 1 - i) * 0.1 + 's';
   }
   function mTop() {
-    let wH = (document.querySelector('.page-main') as any).clientHeight;
+    let wH = (document.querySelector('.page-main') as any)?.clientHeight;
     oWrap.style.marginTop = wH / 2 - 180 + 'px';
   }
   mTop();
@@ -136,7 +136,6 @@ function initMenu() {
 
 function getMenuList() {
   menuList.value = (router.options.routes as any).find((x: any) => x.name == 'manage').children;
-  console.log(menuList.value);
   setTimeout(() => {
     initMenu();
   }, 0);

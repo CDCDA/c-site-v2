@@ -133,7 +133,7 @@ async function submit() {
   commentData.value.type = props.type;
   commentData.value.parentId = props.parentId;
   const { code, data } = (await saveComment(commentData.value)) as any;
-  if (code == 200) {
+  if (code === 200) {
     ElNotification.success('评论发布成功');
     commentData.value.comment = '';
     emit('getList');

@@ -95,7 +95,7 @@ const options = reactive({
       ]
     }
   ]
-} as any);
+}) as any;
 
 function init(list: Array<Object>) {
   options.series[0].data = [];
@@ -109,7 +109,7 @@ function init(list: Array<Object>) {
 
 async function getGameList() {
   const { code, data } = (await countGamesByType({})) as any;
-  if (code === 200 && data) {
+  if (code === 200) {
     options.series[0].data = [];
     data.forEach((item: any) => {
       let typeName = '';
@@ -128,7 +128,7 @@ async function getGameList() {
 
 async function getDramaList() {
   const { code, data } = (await countDramasByType({})) as any;
-  if (code === 200 && data) {
+  if (code === 200) {
     options.series[1].data = [];
     data.forEach((item: any) => {
       let typeName = '';

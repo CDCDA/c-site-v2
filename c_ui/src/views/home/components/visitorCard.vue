@@ -35,7 +35,7 @@ const visitorInfo = reactive({
     distance: ''
   },
   ip: ''
-} as any);
+}) as any;
 
 // 获取ip
 async function getIp() {
@@ -149,7 +149,10 @@ function range(value: any, percent: any) {
 
 onMounted(() => {
   getIp();
-  useLazyAppear(document.querySelector('.visitor-card') as any);
+  const element = document.querySelector('.visitor-card') as any;
+  if (element) {
+    useLazyAppear(element) as any;
+  }
 });
 </script>
 <style lang="scss" scoped>

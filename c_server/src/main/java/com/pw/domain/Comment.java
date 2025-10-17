@@ -54,10 +54,10 @@ public class Comment extends BaseEntity implements Serializable {
     private String browser;
 
     @Schema(description = "父级回复id")
-    private String parentId;
+    private Long parentId;
 
     @Schema(description = "关联id")
-    private String relevanceId;
+    private Long relevanceId;
 
     @Schema(description = "类型:0:博客；1:随笔；2:相册；3:游戏；4:影视；5:网站；")
     private String type;

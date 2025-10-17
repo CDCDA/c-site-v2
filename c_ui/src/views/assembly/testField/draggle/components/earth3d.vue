@@ -8,7 +8,7 @@
 import { ref, onMounted, watch } from 'vue';
 import baseChart from '@/components/charts/baseChart.vue';
 
-const options = ref({} as any);
+const options = ref({}) as any;
 const tempOptions = {
   backgroundColor: 'transparent',
   globe: {

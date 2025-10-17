@@ -1,5 +1,6 @@
 package com.pw.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.ObjectUtils;
 import com.pw.common.utils.ArraysToTreeUtil;
@@ -38,7 +39,10 @@ public class CommentController extends BaseController implements convertControll
     @GetMapping("/tree")
     @Operation(summary = "查询树形评论列表")
     public Result listTree(Comment comment) {
-        IPage<Comment> result = commentService.page(setPage(comment), convertWrap(comment));
+        LambdaQueryWrapper<Comment> wrapper = new LambdaQueryWrapper<>();
+        wrapper.eq(Comment::getType, comment.getType()).eq(Comment::getRelevanceId, comment.getRelevanceId());
+        wrapper.orderByDesc(Comment::getCreateTime);
+        IPage<Comment> result = commentService.page(setPage(comment), wrapper);
         List<Comment> list = result.getRecords();
         list.forEach(x -> {
             x.setChildren(new ArrayList<>());
@@ -82,7 +86,7 @@ public class CommentController extends BaseController implements convertControll
         return resultExit(commentService.removeById(id));
     }
 
-    @PostMapping("/batch-delete")
+    @DeleteMapping("/batch-delete")
     @Operation(summary = "批量删除评论")
     public Result batchDelete(@RequestBody List<Long> ids) {
         return resultExit(commentService.removeByIds(ids));

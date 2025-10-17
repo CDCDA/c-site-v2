@@ -31,7 +31,7 @@ export const updateEquip = (params: any) =>
 export const delEquip = (ids: any) =>
   request({
     url: '/equipments/batch-delete',
-    method: 'post',
+    method: 'delete',
     data: ids
   });
 

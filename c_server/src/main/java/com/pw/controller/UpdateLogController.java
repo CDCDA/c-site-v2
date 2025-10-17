@@ -1,5 +1,6 @@
 package com.pw.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.pw.common.controller.BaseController;
 import com.pw.common.controller.convertController;
@@ -28,13 +29,15 @@ public class UpdateLogController extends BaseController implements convertContro
     @GetMapping
     @Operation(summary = "查询更新日志列表")
     public Result list(UpdateLog updateLog) {
+        updateLog.setOrderBy("operate_time");
         return resultIPage(updateLogService.page(setPage(updateLog), convertWrap(updateLog)));
     }
 
     @GetMapping("/count")
     @Operation(summary = "查询更新日志数量")
     public Result count(UpdateLog updateLog) {
-        return Result.ok().data(updateLogService.count(convertWrap(updateLog)));
+        LambdaQueryWrapper<UpdateLog> wrapper = new LambdaQueryWrapper<>();
+        return Result.ok().data(updateLogService.count(wrapper));
     }
 
     @GetMapping("/stats/date-range")
@@ -68,7 +71,7 @@ public class UpdateLogController extends BaseController implements convertContro
         return resultExit(updateLogService.removeById(id));
     }
 
-    @PostMapping("/batch-delete")
+    @DeleteMapping("/batch-delete")
     @Operation(summary = "批量删除更新日志")
     public Result batchDelete(@RequestBody List<Long> ids) {
         return resultExit(updateLogService.removeByIds(ids));

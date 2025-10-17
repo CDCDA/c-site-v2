@@ -73,7 +73,7 @@ public class DramaSeriesController extends BaseController implements convertCont
         return resultExit(dramaSeriesService.removeById(id));
     }
 
-    @PostMapping("/batch-delete")
+    @DeleteMapping("/batch-delete")
     @Operation(summary = "批量删除影视")
     public Result batchDelete(@RequestBody List<Long> ids) {
         return resultExit(dramaSeriesService.removeByIds(ids));

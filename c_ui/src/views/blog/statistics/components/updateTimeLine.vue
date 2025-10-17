@@ -24,11 +24,11 @@ import { pageBlogs, getBlogById } from '@/api/blog.ts';
 import useUserStore from '@/store/modules/user';
 
 const userStore = useUserStore();
-const timeLineData = ref([] as any);
+const timeLineData = ref([]) as any;
 
 async function getList() {
-  const { code, msg, rows, total } = (await pageBlogs({ userId: userStore.userId })) as any;
-  if (code === 200 && data) {
+  const { code, rows, total } = (await pageBlogs({ userId: userStore.userId })) as any;
+  if (code === 200) {
     timeLineData.value = rows;
   }
 }

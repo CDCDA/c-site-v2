@@ -7,19 +7,19 @@
     <div class="statistic-main-content">
       <div class="left-side">
         <div class="statistic-item">
-          <div class="item-header flex-center">博客数量</div>
+          <div class="item-header">博客数量</div>
           <div class="item-body">
             <blogCountChart />
           </div>
         </div>
         <div class="statistic-item">
-          <div class="item-header flex-center">博客分类</div>
+          <div class="item-header">博客分类</div>
           <div class="item-body">
             <blogTypePie />
           </div>
         </div>
         <div class="statistic-item">
-          <div class="item-header flex-center">博客标签</div>
+          <div class="item-header">博客标签</div>
           <div class="item-body">
             <blogTagBar />
           </div>
@@ -58,7 +58,7 @@
           </div>
         </div>
         <div class="statistic-item" style="height: calc(70% - 134px)">
-          <div class="item-header flex-center">网站更新日志</div>
+          <div class="item-header">网站更新日志</div>
           <div class="item-body">
             <updateCountLineBar />
           </div>
@@ -66,19 +66,19 @@
       </div>
       <div class="right-side">
         <div class="statistic-item">
-          <div class="item-header flex-center">随笔数量</div>
+          <div class="item-header">随笔数量</div>
           <div class="item-body">
             <essayCountLine />
           </div>
         </div>
         <div class="statistic-item">
-          <div class="item-header flex-center">组件统计</div>
+          <div class="item-header">组件统计</div>
           <div class="item-body">
             <assemblyCountRadar />
           </div>
         </div>
         <div class="statistic-item">
-          <div class="item-header flex-center">游戏影视统计</div>
+          <div class="item-header">游戏影视统计</div>
           <div class="item-body">
             <gameDramaPie />
           </div>
@@ -107,43 +107,43 @@ import { countMusic } from '@/api/music.ts';
 import { countTypes } from '@/api/type.ts';
 import { countLogs } from '@/api/system/updateLog';
 import { useTransition } from '@vueuse/core';
-const blogNum = ref(0 as any);
+const blogNum = ref(0) as any;
 const blogNumValue = useTransition(blogNum);
-const albumNum = ref(0 as any);
+const albumNum = ref(0) as any;
 const albumNumValue = useTransition(albumNum);
-const essayNum = ref(0 as any);
+const essayNum = ref(0) as any;
 const essayNumValue = useTransition(essayNum);
-// const musicNum = ref(0 as any);
+// const musicNum = ref(0) as any;
 // const musicNumValue = useTransition(musicNum);
-const typeNum = ref(0 as any);
+const typeNum = ref(0) as any;
 const typeNumValue = useTransition(typeNum);
-const updateLogNum = ref(0 as any);
+const updateLogNum = ref(0) as any;
 const updateLogNumValue = useTransition(updateLogNum);
-const tagNum = ref(0 as any);
+const tagNum = ref(0) as any;
 const tagNumValue = useTransition(tagNum);
-const sliceNum = ref(0 as any);
+const sliceNum = ref(0) as any;
 const sliceNumValue = useTransition(sliceNum);
-const moduleNum = ref(0 as any);
+const moduleNum = ref(0) as any;
 const moduleNumValue = useTransition(moduleNum);
 const router = useRouter();
 
 async function blogCount() {
   const { code, data } = (await countBlogs({})) as any;
-  if (code == 200) {
+  if (code === 200) {
     blogNum.value = data;
   }
 }
 
 async function albumCount() {
   const { code, data } = (await countAlbum()) as any;
-  if (code == 200) {
+  if (code === 200) {
     albumNum.value = data;
   }
 }
 
 async function essayCount() {
   const { code, data } = (await countEssays()) as any;
-  if (code == 200) {
+  if (code === 200) {
     essayNum.value = data;
   }
 }
@@ -162,28 +162,28 @@ function moduleCount() {
 
 // async function musicCount() {
 //   const { code, data } = (await countMusic()) as any;
-//   if (code == 200) {
+//   if (code === 200) {
 //     musicNum.value = data;
 //   }
 // }
 
 async function typeCount() {
   const { code, data } = (await countTypes()) as any;
-  if (code == 200) {
+  if (code === 200) {
     typeNum.value = data;
   }
 }
 
 async function tagCount() {
   const { code, data } = (await countTags()) as any;
-  if (code == 200) {
+  if (code === 200) {
     tagNum.value = data;
   }
 }
 
 async function updateLogCount() {
   const { code, data } = (await countLogs()) as any;
-  if (code == 200) {
+  if (code === 200) {
     updateLogNum.value = data;
   }
 }

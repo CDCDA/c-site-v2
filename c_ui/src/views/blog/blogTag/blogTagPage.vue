@@ -1,5 +1,5 @@
 <!--
- * @Description:  博客分类
+  * @Description:  博客分类
 -->
 <template>
   <div class="blog-tag-page page-main c-left">
@@ -48,7 +48,6 @@
       :total="total"
       :on-page-change="getBlogList"
       :showSizes="true"
-      :pageSizeList="[10, 20, 30]"
       :on-page-size-change="getBlogList"
       class="pagi page-content"
     />
@@ -57,30 +56,29 @@
 
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
-import { pageTags } from '@/api/tag';
-import { pageBlogs } from '@/api/blog';
+import { listWithBlogs } from '@/api/tag';
+import { countBlogsByTag } from '@/api/blog';
 import { ElMessage } from 'element-plus';
 import useUserStore from '@/store/modules/user';
 import Pagination from '@/components/pagination/index.vue';
 import { useRouter } from 'vue-router';
 const router = useRouter();
 const userStore = useUserStore();
-const loading = ref(false as any);
+const loading = ref(false) as any;
 const queryParams = ref({
   pageNum: 1,
   pageSize: 10,
   tagId: null
-} as any);
-const total = ref(100 as any);
-const tagList = ref([] as any);
-const blogList = deleteDictTypes;
-const isShowView = ref([] as any);
+}) as any;
+const total = ref(100) as any;
+const tagList = ref([]) as any;
+const blogList = ref([]) as any;
+const isShowView = ref([]) as any;
 
 async function getTagList() {
-  const { code, msg, rows, total } = (await pageTags({})) as any;
-  if (code === 200 && data) {
-    tagList.value = rows;
-
+  const { code, data } = (await countBlogsByTag({})) as any;
+  if (code === 200) {
+    tagList.value = data;
     tagList.value.forEach((e: any) => {
       if (e.tagId === queryParams.value.tagId) e.isActive = true;
     });
@@ -102,9 +100,9 @@ function getList(item: any) {
 
 async function getBlogList() {
   loading.value = 'rotate';
-  const { code, msg, rows, total } = await pageBlogs(queryParams.value);
+  const { code, data } = await listWithBlogs(queryParams.value);
   if (code === 200) {
-    blogList.value = rows;
+    blogList.value = data.list;
     blogList.value.forEach((e: any) => {
       e.tags.length > 5 ? (e.tags.length = 5) : '';
     });
@@ -113,13 +111,11 @@ async function getBlogList() {
       tagList.value.unshift({
         tagName: '全部',
         isActive: false,
-        total: total.value
+        total: data.total
       });
     }
-    tagList.value[0].total = total;
+    tagList.value[0].total = data.total;
     loading.value = false;
-  } else {
-    ElMessage.error('博客数据获取失败', msg);
   }
 }
 
@@ -130,7 +126,6 @@ function toDetail(item: any) {
 
 onMounted(() => {
   queryParams.value.tagId = (router as any).currentRoute._value.query.tagId;
-  console.log('AAA', (router as any).currentRoute);
   getTagList();
 });
 </script>

@@ -80,10 +80,10 @@
 <script setup lang="ts">
 import { ref, onMounted, nextTick } from 'vue';
 import { useRouter } from 'vue-router';
-import { saveEssay, getEssayById } from '@/api/essay.ts';
+import { saveEssay, updateEssay, getEssayById } from '@/api/essay.ts';
 import useUserStore from '@/store/modules/user';
 import { ElNotification } from 'element-plus';
-import upload from '@/components/upload/upload.vue';
+import upload from '@/components/upload/index.vue';
 import { formatDate } from '@/utils/date.ts';
 const router = useRouter();
 const formEl = ref(null) as any;
@@ -106,7 +106,7 @@ const essayData = ref({
   imageRelations: [],
   tags: [] as any,
   createTime: new Date()
-} as any);
+}) as any;
 const inputValue = ref('');
 const inputVisible = ref(false);
 const dialogImageUrl = ref('');
@@ -166,8 +166,8 @@ async function submit() {
   }
   await formEl.value.validate(async (valid: any) => {
     if (valid) {
-      const { code, msg, rows, total } = (await saveEssay(form)) as any;
-      if (code == 200) {
+      const { code, rows, total } = form.blogId ? await updateEssay(form) : await saveEssay(form);
+      if (code === 200) {
         resetEssay();
         ElNotification.success({
           title: '随笔发布成功',
@@ -183,16 +183,17 @@ async function submit() {
 }
 
 async function getEssayData(id: any) {
-  const { code, msg, rows, total } = (await getEssayById({ essayId: id })) as any;
-  if (code == 200) {
+  const { code, data } = await getEssayById(id);
+  if (code === 200) {
     Object.assign(essayData.value, data);
     essayData.value.imageRelations = [];
-    data.images.forEach((img: any) => {
-      let spArr = img.split('/');
-      essayData.value.imageRelations.push({ name: spArr[spArr.length - 1], url: img, id: null });
-    });
-    console.log('SSS', essayData.value.imageRelations);
+    if (data.images && data.images.length)
+      data.images.forEach((img: any) => {
+        let spArr = img.split('/');
+        essayData.value.imageRelations.push({ name: spArr[spArr.length - 1], url: img, id: null });
+      });
     if (data.tags) essayData.value.tags = JSON.parse(data.tags);
+    console.log(essayData.value);
   }
 }
 

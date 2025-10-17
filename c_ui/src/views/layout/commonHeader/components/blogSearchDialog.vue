@@ -43,20 +43,20 @@ import { ref, nextTick, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import { autoClearTimer } from '@/utils/timer';
 import { pageBlogs } from '@/api/blog.ts';
-const dialogVisible = ref(true as any);
+const dialogVisible = ref(true) as any;
 const router = useRouter();
 const total = ref(0);
 const searchText = ref('' as String);
 const emit = defineEmits(['close']);
 const queryParams = ref({
   blogTitle: null
-} as any);
-const blogList = ref([] as any);
+}) as any;
+const blogList = ref([]) as any;
 async function getBlogList() {
-  const { code, t, data } = (await pageBlogs(queryParams.value)) as any;
-  if (code == 200) {
+  const { code, rows, total } = (await pageBlogs(queryParams.value)) as any;
+  if (code === 200) {
     blogList.value = rows;
-    total.value = data.total;
+    total.value = total;
   }
 }
 function routeTo(item: any) {

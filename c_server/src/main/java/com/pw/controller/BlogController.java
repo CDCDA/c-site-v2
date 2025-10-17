@@ -75,7 +75,7 @@ public class BlogController extends BaseController implements convertController 
     @Operation(summary = "获取随机博客")
     public Result getRandom() {
         Long blogId = blogService.getRandomBlog();
-        return resultData(blogId);
+        return resultData(String.valueOf(blogId));
     }
 
     @GetMapping("/neighbors/{id}")
@@ -169,7 +169,7 @@ public class BlogController extends BaseController implements convertController 
         return resultExit(blogService.removeById(id));
     }
 
-    @PostMapping("/batch-delete")
+    @DeleteMapping("/batch-delete")
     @Operation(summary = "批量删除博客")
     public Result batchDelete(@RequestBody List<Long> ids) {
         return resultExit(blogService.removeByIds(ids));

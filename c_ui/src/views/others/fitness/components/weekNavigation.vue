@@ -55,7 +55,7 @@ const menu = ref([
     tip: '躺',
     isActive: false
   }
-] as any);
+]) as any;
 const emit = defineEmits(['getIndex']);
 
 function getIndex(item: any, i: any) {

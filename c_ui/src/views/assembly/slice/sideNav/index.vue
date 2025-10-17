@@ -6,7 +6,7 @@
     <div class="link" v-for="item in menuList">
       <div class="text">
         <svg-icon :iconName="`commonSvg-${item.meta.svgIcon}`"></svg-icon>
-        <span>{{ item.meta.remark }}</span>
+        <span>{{ item.meta.title }}</span>
       </div>
     </div>
   </div>
@@ -15,7 +15,7 @@
 import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 const router = useRouter();
-const menuList = ref([] as any);
+const menuList = ref([]) as any;
 
 onMounted(() => {
   menuList.value = (router.options.routes as any).find((x: any) => x.name == 'manage').children;

@@ -29,6 +29,7 @@ public class DictDataController extends BaseController implements convertControl
     @GetMapping
     @Operation(summary = "查询字典数据列表")
     public Result list(DictData dictData) {
+        dictData.setStatus("0");
         return resultIPage(dictDataService.page(setPage(dictData), convertWrap(dictData)));
     }
 
@@ -92,7 +93,7 @@ public class DictDataController extends BaseController implements convertControl
         return resultExit(dictDataService.removeById(id));
     }
 
-    @PostMapping("/batch-delete")
+    @DeleteMapping("/batch-delete")
     @Operation(summary = "批量删除字典数据")
     public Result batchDelete(@RequestBody List<Long> ids) {
         return resultExit(dictDataService.removeByIds(ids));

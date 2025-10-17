@@ -32,13 +32,13 @@ import { reactive, ref, onMounted, watch } from 'vue';
 const isClose = ref(false as boolean);
 import { autoClearTimer } from '@/utils/timer';
 const loader = ref(null) as any;
-const isShow = ref(true as any);
+const isShow = ref(true) as any;
 const scale = ref(1) as any;
 const state = reactive({
   loading: {
     type: 'rotate'
   }
-} as any);
+}) as any;
 function updateInfo(options: any) {
   state.loading = {
     type: options.type
@@ -80,6 +80,9 @@ onMounted(() => {
   width: 100%;
   height: 100%;
   background: black;
+  top: 0;
+  position: absolute;
+  z-index: 99;
 }
 .loader {
   position: absolute;
@@ -143,7 +146,7 @@ onMounted(() => {
 .hexagon {
   position: absolute;
   width: 40px;
-  height: 23px;
+  height: 23.1px;
   background-color: #79859e;
   transform: scale(1.02);
   transform-origin: center;

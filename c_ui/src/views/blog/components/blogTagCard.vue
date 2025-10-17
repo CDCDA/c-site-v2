@@ -35,11 +35,11 @@ const tagList = ref([
     tagName: '',
     count: ''
   }
-] as any);
+]) as any;
 const userStore = useUserStore();
 async function getList() {
   const { code, rows } = (await pageTags({})) as any;
-  if (code === 200 && rows) {
+  if (code === 200) {
     tagList.value = rows;
   }
 }
@@ -59,7 +59,10 @@ function generateRandomColor() {
 
 onMounted(() => {
   getList();
-  useLazyAppear(document.querySelector('.blog-tag-card') as any);
+  const element = document.querySelector('.blog-tag-card') as any;
+  if (element) {
+    useLazyAppear(element) as any;
+  }
 });
 </script>
 <style lang="scss" scoped>

@@ -73,7 +73,7 @@ public class GameController extends BaseController implements convertController 
         return resultExit(gameService.removeById(id));
     }
 
-    @PostMapping("/batch-delete")
+    @DeleteMapping("/batch-delete")
     @Operation(summary = "批量删除游戏")
     public Result batchDelete(@RequestBody List<Long> ids) {
         return resultExit(gameService.removeByIds(ids));

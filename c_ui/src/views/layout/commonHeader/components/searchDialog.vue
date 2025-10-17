@@ -27,7 +27,7 @@
       <div class="c-divider"></div>
       <div class="finder__outer finder-list">
         <div class="finder-list-item" v-for="item in resultRoutes" @click="routeTo(item)">
-          <span>{{ item.meta.remark }}</span>
+          <span>{{ item.meta.title }}</span>
           <svg-icon iconName="commonSvg-右" />
         </div>
       </div>
@@ -38,17 +38,17 @@
 import { ref, nextTick, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import { autoClearTimer } from '@/utils/timer';
-const dialogVisible = ref(true as any);
+const dialogVisible = ref(true) as any;
 const router = useRouter();
 const routes = router.getRoutes().filter((e: any) => {
-  return e.meta.isHidden !== true && e.meta.remark;
+  return e.meta.isHidden !== true && e.meta.title;
 }) as any;
 var resultRoutes = JSON.parse(JSON.stringify(routes));
 const searchText = ref('' as String);
 const emit = defineEmits(['close']);
 function findRoute() {
   resultRoutes = routes.filter((r: any) => {
-    if (r.meta.remark) return r.meta.remark.includes(searchText.value);
+    if (r.meta.title) return r.meta.title.includes(searchText.value);
   });
 }
 

@@ -66,7 +66,7 @@ const data = ref([
     path: 'testComponents',
     label: '测试'
   }
-] as any);
+]) as any;
 
 function handleOpen() {}
 function handleClose() {}

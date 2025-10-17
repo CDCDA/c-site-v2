@@ -240,7 +240,7 @@ const draggableList = reactive([
   //   initY: 0,
   //   toolsShow: false
   // }
-] as any);
+]) as any;
 const draggableOptions = reactive({
   lineVisible: false
 });
@@ -366,7 +366,7 @@ const draggableOptions = reactive({
 //     initY: 245,
 //     toolsShow: false
 //   }
-// ] as any);
+// ]) as any;
 
 function showTools(item: any) {
   item.toolsShow = !item.toolsShow;

@@ -57,7 +57,7 @@ const sakuraOptions = ref({
   num: 15,
   show: true,
   zIndex: -1
-} as any);
+}) as any;
 
 const src = ref(null) as any;
 var userStore = useUserStore();
@@ -144,7 +144,7 @@ const options = ref({
     }
   },
   detectRetina: true
-} as any);
+}) as any;
 
 // watch(
 //   () => visible.value,
@@ -188,8 +188,8 @@ if (userData) {
 }
 
 async function getBackList(themeStore: any) {
-  const { code, data } = (await pageWallpapers({ type: 'img' })) as any;
-  if (code == 200) {
+  const { code, rows } = (await pageWallpapers({ type: 'img' })) as any;
+  if (code === 200) {
     themeStore.imgWallpaperList = rows;
     window.localStorage.setItem('themeData', JSON.stringify(themeStore));
   }
@@ -227,13 +227,17 @@ async function init() {
   }
   //查看是否有token
   if (userStore.token) {
-    const res = (await verifyTokenNoIntercept()) as any;
+    const res = await verifyTokenNoIntercept();
     if (res.data.code === 200) {
       // 上次访问的路由
-      let path = window.localStorage.getItem('lastRouter');
-      if (!path) path = '/home';
-      if (path === '/') path = '/home';
-      router.push({ path });
+      const routerStr = window.localStorage.getItem('lastRouter');
+      if (routerStr) {
+        const route = JSON.parse(routerStr) as any;
+        let path = route?.path || '';
+        if (!path) path = '/home';
+        if (path === '/') path = '/home';
+        router.push({ path, query: router?.query });
+      }
     } else {
       router.push({ path: '/login' });
     }
@@ -266,6 +270,14 @@ onMounted(() => {
 </script>
 
 <style lang="scss">
+:root {
+  --el-color-primary: #00968c !important;
+  --el-color-danger: #f76d6b !important;
+  --el-color-info: #94929c !important;
+  --el-color-warning: #e6a23c !important;
+  --el-color-success: #63c339 !important;
+  --el-color-primary-light-3: #4db6ac !important;
+}
 @font-face {
   font-family: 'DaoLiTi';
   src: url(/AlimamaDaoLoTi/AlimamaDaoLiTi.ttf);

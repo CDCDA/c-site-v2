@@ -53,7 +53,6 @@
       :total="total"
       :on-page-change="getBlogList"
       :showSizes="true"
-      :pageSizeList="[10, 20, 30]"
       :on-page-size-change="getBlogList"
       class="pagi page-content"
     />
@@ -64,7 +63,7 @@
 import { onMounted, ref } from 'vue';
 import { listTypesWithStats } from '@/api/type';
 import { pageBlogs } from '@/api/blog';
-import { ElMessage } from 'element-plus';
+import { ElNotification } from 'element-plus';
 import useUserStore from '@/store/modules/user';
 import Pagination from '@/components/pagination/index.vue';
 import { formatDate } from '@/utils/date.ts';
@@ -72,19 +71,19 @@ import { useRouter } from 'vue-router';
 import { Calendar } from '@element-plus/icons-vue';
 const router = useRouter();
 const userStore = useUserStore();
-const loading = ref('rotate' as any);
+const loading = ref('rotate') as any;
 const queryParams = ref({
   pageNum: 1,
   pageSize: 10,
   typeId: null
-} as any);
-const total = ref(100 as any);
-const typeList = ref([] as any);
-const blogList = deleteDictTypes;
+}) as any;
+const total = ref(100) as any;
+const typeList = ref([]) as any;
+const blogList = ref([]) as any;
 
 async function getTypeList() {
   const { code, data } = (await listTypesWithStats({})) as any;
-  if (code === 200 && data) {
+  if (code === 200) {
     typeList.value = data.list;
     let total = 0;
     typeList.value.forEach((e: any) => {
@@ -116,16 +115,14 @@ function getList(item: any) {
 async function getBlogList() {
   loading.value = 'rotate';
   try {
-    const { code, msg, data } = (await pageBlogs(queryParams.value)) as any;
+    const { code, rows, total: totalCount } = await pageBlogs(queryParams.value);
     if (code === 200) {
-      blogList.value = data.list.map((item: any) => ({
+      blogList.value = rows.map((item: any) => ({
         ...item,
         tags: item.tags.slice(0, 5) // 直接截取前5个标签
       }));
-      total.value = data.total;
+      total.value = totalCount;
     }
-  } catch (error) {
-    ElMessage.error('博客数据获取失败');
   } finally {
     loading.value = false;
   }

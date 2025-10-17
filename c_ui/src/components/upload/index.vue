@@ -63,10 +63,8 @@ import { Select, Switch } from '@element-plus/icons-vue';
 const imageValue = ref([] as any[]);
 const isArr = ref(false);
 const isUrl = ref(false);
-const uploadAction = ` ${
-  process.env.NODE_ENV === 'development' ? '/dev-api' : '/prod-api'
-}/blog/uploadImg`;
-const dialogImageUrl = ref('' as any);
+const uploadAction = ` ${process.env.NODE_ENV === 'development' ? '/dev-api' : '/prod-api'}/files`;
+const dialogImageUrl = ref('') as any;
 const dialogVisible = ref(false);
 const emit = defineEmits(['update:modelValue']);
 const props = defineProps({
@@ -113,7 +111,7 @@ function addNewImageUrl() {
 function handleSuccess(response: any) {
   let imageRelations = imageValue.value;
   imageRelations.pop();
-  if (response.code == 200) {
+  if (response.code === 200) {
     imageRelations.push({
       name: response.data.replace('http://120.48.127.181/file/', ''),
       url: response.data

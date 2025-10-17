@@ -60,12 +60,12 @@ import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import { formatDate } from '@/utils/date.ts';
 import musicPlayer from '@/views/assembly/testField/draggle/components/audioPlayer.vue';
-import { listSong, getSongById } from '@/api/music.ts';
+import { pageSongs, getSongById } from '@/api/music.ts';
 import { ElMessage } from 'element-plus';
-const searchSongs = ref([] as any);
+const searchSongs = ref([]) as any;
 const router = useRouter();
-const isSearch = ref(false as any);
-const searchText = ref('' as any);
+const isSearch = ref(false) as any;
+const searchText = ref('') as any;
 const selectSong = ref({
   id: 1,
   name: '师父',
@@ -73,9 +73,9 @@ const selectSong = ref({
   intro: '有意思的歌',
   userId: 1,
   releaseTime: '2023-03-30 16:00:00'
-} as any);
-const songs = ref([] as any);
-const songList = ref([] as any);
+}) as any;
+const songs = ref([]) as any;
+const songList = ref([]) as any;
 
 function songClick(song: any) {
   getSongData(song.wyyId);
@@ -93,7 +93,7 @@ function getAuthors(artists: any) {
 async function getSongData(id: any) {
   let params = { id: id, ids: [id] };
   const { code, mag, songs } = (await getSongById(params)) as any;
-  if (code == 200) {
+  if (code === 200) {
     selectSong.value = songs[0];
   }
 }
@@ -130,8 +130,8 @@ function getPreSong() {
 }
 
 async function getSongList() {
-  const { code, data } = (await listSong({})) as any;
-  if (code == 200) {
+  const { code, rows } = (await pageSongs({})) as any;
+  if (code === 200) {
     songs.value = rows;
     getSongData(songs.value[0].wyyId);
   }

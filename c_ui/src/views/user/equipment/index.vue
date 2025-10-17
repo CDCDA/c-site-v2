@@ -34,7 +34,7 @@ import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import { pageEquips } from '@/api/equip.ts';
 const router = useRouter();
-const equipmentList = ref([] as any);
+const equipmentList = ref([]) as any;
 
 function getAnimate(i: any) {
   if (i % 4 === 0) {
@@ -53,8 +53,8 @@ function getAnimate(i: any) {
 }
 
 async function getList() {
-  const { code, data } = (await pageEquips({})) as any;
-  if (code == 200) {
+  const { code, rows } = (await pageEquips({})) as any;
+  if (code === 200) {
     equipmentList.value = rows;
   }
 }

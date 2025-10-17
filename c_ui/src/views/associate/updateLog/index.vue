@@ -21,10 +21,10 @@
           <div>
             <time>{{ date }}</time>
             <div class="discovery">
-              <h1 v-for="(e, i) in updateLogs[date]">
+              <h3 v-for="(e, i) in updateLogs[date]">
                 <span>{{ i + 1 }}</span
                 >{{ e }}
-              </h1>
+              </h3>
             </div>
           </div>
         </li>
@@ -35,15 +35,15 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
-import { listUpdateLog } from '@/api/system/updateLog';
+import { pageLogs } from '@/api/system/updateLog';
 import { autoClearTimer } from '@/utils/timer';
-const updateLogs = ref({} as any);
+const updateLogs = ref({}) as any;
 
 async function getList() {
-  const { code, data } = (await listUpdateLog({ operation: '', pageNum: 1, pageSize: 999 })) as any;
-  if (code == 200) {
+  const { code, rows } = (await pageLogs({ operation: '', pageNum: 1, pageSize: 999 })) as any;
+  if (code === 200) {
     updateLogs.value = [];
-    data.list.forEach((e: any) => {
+    rows.forEach((e: any) => {
       if (!updateLogs.value[e.operateTime]) {
         updateLogs.value[e.operateTime] = [];
       }
@@ -186,7 +186,7 @@ onMounted(() => {
 .timeline ul li .discovery {
   text-align: left;
   margin-right: 10px;
-  h1 {
+  h3 {
     width: 90%;
   }
   span {

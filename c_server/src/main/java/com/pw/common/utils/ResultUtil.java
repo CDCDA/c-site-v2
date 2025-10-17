@@ -60,6 +60,10 @@ public class ResultUtil {
         return Result.ok().page(result);
     }
 
+    public static <T> Result resultPage(T rows, Integer total) {
+        return Result.ok().page(rows, total);
+    }
+
     /**
      * list转为Result类型
      *

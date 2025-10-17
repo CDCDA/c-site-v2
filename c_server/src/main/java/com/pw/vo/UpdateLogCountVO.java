@@ -19,9 +19,7 @@ import java.util.Date;
 public class UpdateLogCountVO {
 
     @Schema(description  = "操作更新间")
-    @JsonFormat(pattern = "yyyy-MM")
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private Date operateTime;
+    private String operateTime;
 
     @Schema(description  = "博客数量")
     private String total;

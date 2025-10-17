@@ -41,16 +41,18 @@ import useUserStore from '@/store/modules/user';
 import { useRouter } from 'vue-router';
 import { pageTags } from '@/api/tag.ts';
 const router = useRouter();
-const tagCardList = ref([] as any);
-const tagList = ref([] as any);
+const tagCardList = ref([]) as any;
+const tagList = ref([]) as any;
 
 async function getTagList() {
-  const { code, msg, rows, total } = (await pageTags({})) as any;
-  if (code === 200 && data) {
+  const { code, rows, total } = (await pageTags({ pageSize: 20 })) as any;
+  if (code === 200) {
     tagList.value = rows;
+    const tempList = [];
     for (let i = 0; i < tagList.value.length; i = i + 10) {
-      tagCardList.value.push(tagList.value.slice(i, i + 10));
+      tempList.push(tagList.value.slice(i, i + 10));
     }
+    tagCardList.value = tempList;
   }
 }
 

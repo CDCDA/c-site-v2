@@ -9,7 +9,7 @@
       >
     </el-col>
     <el-col :span="1.5">
-      <el-button
+      <el-button 
         type="success"
         plain
         size="small"

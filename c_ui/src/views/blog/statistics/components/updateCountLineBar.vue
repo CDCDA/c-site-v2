@@ -30,6 +30,9 @@ const options = reactive({
       //y轴上方单位的颜色
       color: '#fff'
     },
+    splitLine: {
+      show: false // 隐藏背景横线
+    },
     axisLabel: {
       textStyle: {
         // fontSize: '0.7rem',
@@ -41,16 +44,21 @@ const options = reactive({
     {
       data: [150, 230, 224, 218, 135, 147, 260],
       type: 'line',
+      color: '#EE6666',
       lineStyle: {
-        color: '#61D3FB'
+        color: '#EE6666'
       }
     },
     {
       data: [150, 230, 224, 218, 135, 147, 260],
       type: 'bar',
-      barWidth: '20px',
+      barWidth: '15',
+      color: '#73C0DE',
+      itemStyle: {
+        barBorderRadius: [3, 3, 0, 0] // 设置圆角，[topLeft, topRight, bottomRight, bottomLeft]
+      },
       barStyle: {
-        color: '#61D3FB'
+        color: '#5470C6'
       }
     }
   ],
@@ -61,7 +69,7 @@ const options = reactive({
     bottom: '15%',
     left: '5%'
   }
-} as any);
+}) as any;
 
 function init(list: any) {
   options.xAxis.data = [];
@@ -76,7 +84,7 @@ function init(list: any) {
 
 async function getList() {
   const { code, data } = (await countLogsByDate({})) as any;
-  if (code === 200 && data) {
+  if (code === 200) {
     init(data);
   }
 }

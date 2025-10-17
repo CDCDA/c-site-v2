@@ -31,7 +31,7 @@ import blogArticle from './components/blogArticle.vue';
 import BlogTags from './components/blogTags.vue';
 // import BlogFloatItem from './components/BlogFloatItem.vue';
 // import { getBlogByUserId } from "@/api/blog";
-const blogList = ref([] as any);
+const blogList = ref([]) as any;
 
 function getBlogData() {
   // getBlogByUserId({ userId: this.$store.state.userId }).then(res => {

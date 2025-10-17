@@ -4,7 +4,7 @@
 
 import { defineStore } from 'pinia';
 
-export const useTagsViewStore = defineStore('tagsView', {
+export const useTabsViewStore = defineStore('tabsView', {
   state: () => ({
     visitedViews: [] as any,
     cachedViews: [],
@@ -15,7 +15,7 @@ export const useTagsViewStore = defineStore('tagsView', {
     delView(view: any) {
       return new Promise(resolve => {
         this.visitedViews.forEach((v: any, i: any) => {
-          if (v.path === view.path) {
+          if (v.name === view.name) {
             this.visitedViews.splice(i, 1);
           }
         });
@@ -35,7 +35,7 @@ export const useTagsViewStore = defineStore('tagsView', {
     delOthersViews(view: any) {
       return new Promise(resolve => {
         this.visitedViews = this.visitedViews.filter(
-          (x: any) => x.path === view.path || x.meta.affix
+          (x: any) => x.name === view.name || x.meta.affix
         );
         resolve({
           visitedViews: [...this.visitedViews]
@@ -44,7 +44,7 @@ export const useTagsViewStore = defineStore('tagsView', {
     },
     delRightViews(view: any) {
       return new Promise(resolve => {
-        const index = this.visitedViews.findIndex((x: any) => x.path === view.path);
+        const index = this.visitedViews.findIndex((x: any) => x.name === view.name);
         this.visitedViews.splice(index + 1, this.visitedViews.length - index - 1);
         resolve({
           visitedViews: [...this.visitedViews]
@@ -54,7 +54,7 @@ export const useTagsViewStore = defineStore('tagsView', {
 
     delLeftViews(view: any) {
       return new Promise(resolve => {
-        const index = this.visitedViews.findIndex((x: any) => x.path === view.path);
+        const index = this.visitedViews.findIndex((x: any) => x.name === view.name);
         this.visitedViews.splice(1, index - 1);
         resolve({
           visitedViews: [...this.visitedViews]

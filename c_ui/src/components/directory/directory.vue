@@ -25,10 +25,10 @@
 <script lang="ts" setup>
 import { onMounted, reactive, ref } from 'vue';
 import { autoClearTimer } from '@/utils/timer';
-const titles = ref(null as any);
-const currentTitle = ref({} as any);
-const progress = ref(null as any);
-const articleElement = ref(null as any);
+const titles = ref(null) as any;
+const currentTitle = ref({}) as any;
+const progress = ref(null) as any;
+const articleElement = ref(null) as any;
 const props = defineProps({
   html: {
     type: String,

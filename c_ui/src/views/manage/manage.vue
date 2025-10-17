@@ -1,19 +1,19 @@
 <!--
- * @Description: 视差管理页
+ * @Description: 后台管理页
 -->
 <template>
   <div class="manage-container flex-start">
     <side-bar></side-bar>
     <div class="manage-wrap">
       <HeaderBar />
-      <div class="router-main">
+      <div class="router-main" :style="{ width: width }">
         <KeepAlive> <router-view /></KeepAlive>
       </div>
     </div>
   </div>
 </template>
 <script setup lang="ts">
-import { onMounted } from 'vue';
+import { onMounted, computed } from 'vue';
 import SideBar from '@/views/manage/components/layout/sideBar.vue';
 import HeaderBar from '@/views/manage/components/layout/headerBar.vue';
 import useThemeStore from '@/store/modules/theme.ts';
@@ -22,7 +22,9 @@ const router = useRouter();
 const themeStore = useThemeStore();
 themeStore.isShow = false;
 themeStore.isFooterShow = false;
-onMounted(() => {});
+const width = computed(() => {
+  return themeStore.isCollapse ? 'calc(100vw - 65px)' : 'calc(100vw - 146px)';
+});
 </script>
 
 <style lang="scss" scoped>
@@ -38,9 +40,10 @@ onMounted(() => {});
     background: #f0f3f4;
   }
   .router-main {
-    width: 100%;
+    width: calc(100vw - 146px);
     height: calc(100% - 2.8rem);
     overflow: auto;
+    transition: width 0.3s ease-in-out;
     .essay-manage-editor {
       width: calc(100% - 60px);
       box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);

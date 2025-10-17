@@ -6,18 +6,16 @@
     <!--按月份查询-->
     <select id="countUpdateLogByDateRange" resultType="com.pw.vo.UpdateLogCountVO">
         SELECT
-        operate_time,
+        to_char(operate_time, 'YYYY年MM月') as operate_time,
         count(*) as total
         FROM
         update_log
         <where>
             <if test="startTime != null and endTime != null">
-                and
-                operate_time between #{startTime} and #{endTime}
+                and operate_time between #{startTime} and #{endTime}
             </if>
         </where>
         GROUP BY
-        DATE_FORMAT(operate_time, "%Y年%m月" )
+        to_char(operate_time, 'YYYY年MM月')
     </select>
 </mapper>
-

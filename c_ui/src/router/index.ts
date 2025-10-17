@@ -8,20 +8,20 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/login',
     name: 'login',
-    meta: { remark: '登录', isHidden: true, cache: false },
+    meta: { title: '登录', isHidden: true, cache: false },
     component: () => import('/src/views/login/login.vue')
   },
   {
     path: '/home',
     name: 'home',
-    meta: { remark: '首页', preload: true },
+    meta: { title: '首页', preload: true },
     component: () => import(/* webpackChunkName: "about" */ '/src/views/home/index.vue')
   },
   {
     path: '/personalInfo',
     name: 'personalInfo',
     meta: {
-      remark: '个人信息',
+      title: '个人信息',
       isHidden: true,
       svgIcon: '人员信息',
       src: '/images/manageImages/个人中心.png'
@@ -31,14 +31,14 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/manage',
     name: 'manage',
-    meta: { remark: '管理页', isHidden: true },
+    meta: { title: '管理页', isHidden: true },
     component: () => import('/src/views/manage/manage.vue'),
     children: [
       {
         path: '/blogManage',
         name: 'blogManage',
         meta: {
-          remark: '博客管理',
+          title: '博客管理',
           isHidden: true,
           svgIcon: 'commonSvg-博客',
           src: '/images/manageImages/博客.png',
@@ -49,14 +49,14 @@ const routes: Array<RouteRecordRaw> = [
       {
         path: '/blogManageEditor',
         name: 'blogManageEditor',
-        meta: { remark: '博客编辑' },
+        meta: { title: '博客编辑' },
         component: () => import('/src/views/blog/blogEditor/editor.vue')
       },
       {
         path: '/typeManage',
         name: 'typeManage',
         meta: {
-          remark: '分类管理',
+          title: '分类管理',
           isHidden: true,
           svgIcon: 'commonSvg-分类1',
           src: '/images/manageImages/分类.png'
@@ -67,7 +67,7 @@ const routes: Array<RouteRecordRaw> = [
         path: '/tagManage',
         name: 'tagManage',
         meta: {
-          remark: '标签管理',
+          title: '标签管理',
           isHidden: true,
           svgIcon: 'commonSvg-标签',
           src: '/images/manageImages/标签.png'
@@ -78,7 +78,7 @@ const routes: Array<RouteRecordRaw> = [
         path: '/essayManage',
         name: 'essayManage',
         meta: {
-          remark: '随笔管理',
+          title: '随笔管理',
           isHidden: true,
           svgIcon: 'commonSvg-随笔',
           src: '/images/manageImages/随笔.png'
@@ -88,14 +88,14 @@ const routes: Array<RouteRecordRaw> = [
       {
         path: '/essayManageEditor',
         name: 'essayManageEditor',
-        meta: { remark: '博客编辑' },
+        meta: { title: '随笔编辑' },
         component: () => import('/src/views/user/essay/components/editor.vue')
       },
       {
         path: '/albumManage',
         name: 'albumManage',
         meta: {
-          remark: '相册管理',
+          title: '相册管理',
           isHidden: true,
           svgIcon: 'commonSvg-相册',
           src: '/images/manageImages/相册.png'
@@ -106,7 +106,7 @@ const routes: Array<RouteRecordRaw> = [
         path: '/gameManage',
         name: 'gameManage',
         meta: {
-          remark: '游戏管理',
+          title: '游戏管理',
           isHidden: true,
           svgIcon: 'commonSvg-游戏',
           src: '/images/manageImages/游戏.png'
@@ -117,7 +117,7 @@ const routes: Array<RouteRecordRaw> = [
         path: '/dramaManage',
         name: 'dramaManage',
         meta: {
-          remark: '影视管理',
+          title: '影视管理',
           isHidden: true,
           svgIcon: 'audioSvg-影视',
           src: '/images/manageImages/影视.png'
@@ -127,14 +127,14 @@ const routes: Array<RouteRecordRaw> = [
       // {
       //   path: '/gourmetManage',
       //   name: 'gourmetManage',
-      //   meta: { remark: '美食管理', isHidden: true, svgIcon: '美食', src: '/images/manageImages/美食.png' },
+      //   meta: { title: '美食管理', isHidden: true, svgIcon: '美食', src: '/images/manageImages/美食.png' },
       //   component: () => import('/src/views/manage/gourmetManage/index1.vue')
       // },
       // {
       //   path: '/musicManage',
       //   name: 'musicManage',
       //   meta: {
-      //     remark: '音乐管理',
+      //     title: '音乐管理',
       //     isHidden: true,
       //     svgIcon: 'audioSvg-音乐',
       //     src: '/images/manageImages/音乐.png'
@@ -145,7 +145,7 @@ const routes: Array<RouteRecordRaw> = [
         path: '/wallpaperManage',
         name: 'wallpaperManage',
         meta: {
-          remark: '壁纸管理',
+          title: '壁纸管理',
           isHidden: true,
           svgIcon: 'commonSvg-壁纸',
           src: '/images/manageImages/壁纸.png'
@@ -156,7 +156,7 @@ const routes: Array<RouteRecordRaw> = [
         path: '/dictManage',
         name: 'dictManage',
         meta: {
-          remark: '字典管理',
+          title: '字典管理',
           isHidden: true,
           svgIcon: 'commonSvg-字典',
           src: '/images/manageImages/字典.png'
@@ -167,7 +167,7 @@ const routes: Array<RouteRecordRaw> = [
         path: '/logManage',
         name: 'logManage',
         meta: {
-          remark: '更新日志管理',
+          title: '更新日志管理',
           isHidden: true,
           svgIcon: 'commonSvg-日志',
           src: '/images/manageImages/日志.png'
@@ -179,117 +179,117 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/profile',
     name: 'profile',
-    meta: { remark: '', isHidden: true },
+    meta: { title: '', isHidden: true },
     component: () => import('/src/views/profile/index.vue')
   },
 
   {
     path: '/blogEditor',
     name: 'blogEditor',
-    meta: { remark: '博客编辑' },
+    meta: { title: '博客编辑' },
     component: () => import('/src/views/blog/blogEditor/index.vue')
   },
   {
     path: '/blogDisplay',
     name: 'blogDisplay',
-    meta: { remark: '博客展示' },
+    meta: { title: '博客展示' },
     component: () => import('/src/views/blog/blogDisplay.vue')
   },
   {
     path: '/blogEditor',
     name: 'blogEditor',
-    meta: { remark: '博客编辑' },
+    meta: { title: '博客编辑' },
     component: () => import('/src/views/blog/blogEditor/index.vue')
   },
   {
     path: '/blogType',
     name: 'blogType',
-    meta: { remark: '分类', icon: 'FolderOpened', parent: 'blog' },
+    meta: { title: '分类', icon: 'FolderOpened', parent: 'blog' },
     component: () => import('/src/views/blog/blogType/index.vue')
   },
   {
     path: '/blogTypePage',
     name: 'blogTypePage',
-    meta: { remark: '博客分类详情' },
+    meta: { title: '博客分类详情' },
     component: () => import('/src/views/blog/blogType/blogTypePage.vue')
   },
   {
     path: '/blogTag',
     name: 'blogTag',
-    meta: { remark: '标签', icon: 'PriceTag', parent: 'blog' },
+    meta: { title: '标签', icon: 'PriceTag', parent: 'blog' },
     component: () => import('/src/views/blog/blogTag/index.vue')
   },
   {
     path: '/blogTagPage',
     name: 'blogTagPage',
-    meta: { remark: '博客标签详情' },
+    meta: { title: '博客标签详情' },
     component: () => import('/src/views/blog/blogTag/blogTagPage.vue')
   },
   {
     path: '/statistics',
     name: 'statistics',
-    meta: { remark: '统计', icon: 'Histogram', parent: 'blog' },
+    meta: { title: '统计', icon: 'Histogram', parent: 'blog' },
     component: () => import('/src/views/blog/statistics/index.vue')
   },
   {
     path: '/album',
     name: 'album',
-    meta: { remark: '相册', icon: 'Camera', parent: 'user' },
+    meta: { title: '相册', icon: 'Camera', parent: 'user' },
     component: () => import('/src/views/user/album/index.vue')
   },
   {
     path: '/albumPage',
     name: 'albumPage',
-    meta: { remark: '相册详情' },
+    meta: { title: '相册详情' },
     component: () => import('/src/views/user/album/albumPage.vue')
   },
   {
     path: '/essay',
     name: 'essay',
-    meta: { remark: '随笔', icon: 'Notebook', parent: 'user' },
+    meta: { title: '随笔', icon: 'Notebook', parent: 'user' },
     component: () => import('/src/views/user/essay/index.vue')
   },
   {
     path: '/essayEditor',
     name: 'essayEditor',
-    meta: { remark: '随笔编辑' },
+    meta: { title: '随笔编辑' },
     component: () => import('/src/views/user/essay/essayEditor.vue')
   },
   // {
   //   path: '/equipment',
   //   name: 'equipment',
-  //   meta: { remark: '装备', icon: 'Suitcase', parent: 'user' },
+  //   meta: { title: '装备', icon: 'Suitcase', parent: 'user' },
   //   component: () => import('/src/views/user/equipment/index1.vue')
   // },
   // {
   //   path: '/music',
   //   name: 'music',
-  //   meta: { remark: '音乐', icon: 'Headset', parent: 'user' },
+  //   meta: { title: '音乐', icon: 'Headset', parent: 'user' },
   //   component: () => import('/src/views/user/music/index.vue')
   // },
   {
     path: '/svg',
     name: 'svg',
-    meta: { remark: 'svg集合', svgIcon: 'svg图片', parent: 'assembly' },
+    meta: { title: 'svg集合', svgIcon: 'svg图片', parent: 'assembly' },
     component: () => import('/src/views/assembly/svg/index.vue')
   },
   {
     path: '/ai',
     name: 'ai',
-    meta: { remark: 'AI', icon: 'Orange', parent: 'assembly' },
+    meta: { title: 'AI', icon: 'Orange', parent: 'assembly' },
     component: () => import('/src/views/assembly/ai/chatAi.vue')
   },
   {
     path: '/slice',
     name: 'slice',
-    meta: { remark: '切片', icon: 'Orange', parent: 'assembly' },
+    meta: { title: '切片', icon: 'Orange', parent: 'assembly' },
     component: () => import('/src/views/assembly/slice/index.vue'),
     children: [
       {
         path: '/rubiks',
         name: 'rubiks',
         meta: {
-          remark: '魔方',
+          title: '魔方',
           introduction: '普通3x3动态魔方',
           url: 'http://120.48.127.181/file/slice/魔方.png'
         },
@@ -299,7 +299,7 @@ const routes: Array<RouteRecordRaw> = [
         path: '/rotatingRubik',
         name: 'rotatingRubik',
         meta: {
-          remark: '图片旋转魔方',
+          title: '图片旋转魔方',
           introduction: '可旋转展示6面图片的魔方',
           url: 'http://120.48.127.181/file/slice/图片旋转魔方.png'
         },
@@ -309,7 +309,7 @@ const routes: Array<RouteRecordRaw> = [
         path: '/3dMenu',
         name: '3dMenu',
         meta: {
-          remark: '3d菜单',
+          title: '3d菜单',
           introduction: '3d菜单',
           url: 'http://120.48.127.181/file/slice/3d菜单.png'
         },
@@ -319,7 +319,7 @@ const routes: Array<RouteRecordRaw> = [
         path: '/cardFlip',
         name: 'cardFlip',
         meta: {
-          remark: '卡片翻转',
+          title: '卡片翻转',
           introduction: '卡片翻转',
           url: 'http://120.48.127.181/file/slice/卡片翻转.png'
         },
@@ -329,7 +329,7 @@ const routes: Array<RouteRecordRaw> = [
         path: '/heartLoading',
         name: 'heartLoading',
         meta: {
-          remark: '心型加载',
+          title: '心型加载',
           introduction: '心型加载',
           url: 'http://120.48.127.181/file/slice/心型加载.png'
         },
@@ -339,7 +339,7 @@ const routes: Array<RouteRecordRaw> = [
         path: '/neonRain',
         name: 'neonRain',
         meta: {
-          remark: '霓虹雨',
+          title: '霓虹雨',
           introduction: '雨',
           url: 'http://120.48.127.181/file/slice/雨.png'
         },
@@ -349,7 +349,7 @@ const routes: Array<RouteRecordRaw> = [
         path: '/stackCard',
         name: 'stackCard',
         meta: {
-          remark: '堆叠卡',
+          title: '堆叠卡',
           introduction: '堆叠卡',
           url: 'http://120.48.127.181/file/slice/堆叠卡.png'
         },
@@ -359,7 +359,7 @@ const routes: Array<RouteRecordRaw> = [
         path: '/rotateMenu',
         name: 'rotateMenu',
         meta: {
-          remark: '旋转菜单',
+          title: '旋转菜单',
           introduction: '旋转菜单',
           url: 'http://120.48.127.181/file/slice/旋转菜单.png'
         },
@@ -369,7 +369,7 @@ const routes: Array<RouteRecordRaw> = [
         path: '/parallax',
         name: 'parallax',
         meta: {
-          remark: '视差',
+          title: '视差',
           introduction: '视差',
           url: 'http://120.48.127.181/file/slice/视差.png'
         },
@@ -379,7 +379,7 @@ const routes: Array<RouteRecordRaw> = [
         path: '/rain',
         name: 'rain',
         meta: {
-          remark: '雨',
+          title: '雨',
           introduction: '雨',
           url: 'http://120.48.127.181/file/slice/雨.png'
         },
@@ -389,7 +389,7 @@ const routes: Array<RouteRecordRaw> = [
         path: '/swiper',
         name: 'swiper',
         meta: {
-          remark: '倾斜轮播',
+          title: '倾斜轮播',
           introduction: '倾斜轮播',
           url: 'http://120.48.127.181/file/slice/雨.png'
         },
@@ -400,14 +400,14 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/testField',
     name: 'testField',
-    meta: { remark: '试验田', icon: 'OfficeBuilding', parent: 'assembly' },
+    meta: { title: '试验田', icon: 'OfficeBuilding', parent: 'assembly' },
     component: () => import('/src/views/assembly/testField/index.vue'),
     children: [
       // {
       //   path: '/vForm',
       //   name: 'vForm',
       //   meta: {
-      //     remark: '低代码',
+      //     title: '低代码',
       //     introduction: '视差',
       //     url: 'http://120.48.127.181/file/testField/低代码.png'
       //   },
@@ -417,7 +417,7 @@ const routes: Array<RouteRecordRaw> = [
         path: '/draggle',
         name: 'draggle',
         meta: {
-          remark: '自由拖拽',
+          title: '自由拖拽',
           introduction: '自由拖拽',
           url: 'http://120.48.127.181/file/testField/自由拖拽.png'
         },
@@ -427,7 +427,7 @@ const routes: Array<RouteRecordRaw> = [
         path: '/ganttChart',
         name: 'ganttChart',
         meta: {
-          remark: '甘特图',
+          title: '甘特图',
           introduction: '甘特图',
           url: 'http://120.48.127.181/file/testField/甘特图.png'
         },
@@ -437,7 +437,7 @@ const routes: Array<RouteRecordRaw> = [
         path: '/editor',
         name: 'editor',
         meta: {
-          remark: '富文本编辑器',
+          title: '富文本编辑器',
           introduction: '富文本编辑器',
           url: 'http://120.48.127.181/file/testField/富文本编辑器.png'
         },
@@ -447,7 +447,7 @@ const routes: Array<RouteRecordRaw> = [
         path: '/jsplumb',
         name: 'jsplumb',
         meta: {
-          remark: '连线绘图',
+          title: '连线绘图',
           introduction: '连线绘图',
           url: 'http://120.48.127.181/file/testField/连线绘图.png'
         },
@@ -457,7 +457,7 @@ const routes: Array<RouteRecordRaw> = [
         path: '/gridLayout',
         name: 'gridLayout',
         meta: {
-          remark: '宫格',
+          title: '宫格',
           introduction: '可选宫格',
           url: 'http://120.48.127.181/file/testField/低代码.png'
         },
@@ -467,7 +467,7 @@ const routes: Array<RouteRecordRaw> = [
       //   path: '/canvas',
       //   name: 'canvas',
       //   meta: {
-      //     remark: 'canvas动画',
+      //     title: 'canvas动画',
       //     introduction: 'canvas动画',
       //     url: 'http://120.48.127.181/file/testField/canvas动画.png'
       //   },
@@ -478,49 +478,49 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/personalProfile',
     name: 'personalProfile',
-    meta: { remark: '个人信息', icon: 'User', parent: 'intro' },
+    meta: { title: '个人信息', icon: 'User', parent: 'intro' },
     component: () => import('/src/views/introduction/personalProfile/index.vue')
   },
   {
     path: '/projectExperience',
     name: 'projectExperience',
-    meta: { remark: '项目经历', icon: 'User', parent: 'intro' },
+    meta: { title: '项目经历', icon: 'User', parent: 'intro' },
     component: () => import('/src/views/introduction/projectExperience/index.vue')
   },
   // {
   //   path: '/fitness',
   //   name: 'fitness',
-  //   meta: { remark: '运动', svgIcon: '运动', parent: 'other' },
+  //   meta: { title: '运动', svgIcon: '运动', parent: 'other' },
   //   component: () => import('/src/views/others/fitness/index1.vue')
   // },
   {
     path: '/game',
     name: 'game',
-    meta: { remark: '游戏', svgIcon: '游戏', parent: 'other' },
+    meta: { title: '游戏', svgIcon: '游戏', parent: 'other' },
     component: () => import('/src/views/others/game/index.vue')
   },
   {
     path: '/drama',
     name: 'drama',
-    meta: { remark: '影视', icon: 'VideoCamera', parent: 'other' },
+    meta: { title: '影视', icon: 'VideoCamera', parent: 'other' },
     component: () => import('/src/views/others/dramaSeries/index.vue')
   },
   // {
   //   path: '/gourmet',
   //   name: 'gourmet',
-  //   meta: { remark: '美食', icon: 'KnifeFork', parent: 'other' },
+  //   meta: { title: '美食', icon: 'KnifeFork', parent: 'other' },
   //   component: () => import('/src/views/others/gourmet/index1.vue')
   // },
   {
     path: '/website',
     name: 'website',
-    meta: { remark: '本站', svgIcon: '关于', parent: 'associate' },
+    meta: { title: '本站', svgIcon: '关于', parent: 'associate' },
     component: () => import('/src/views/associate/website/index.vue')
   },
   {
     path: '/updateLog',
     name: 'updateLog',
-    meta: { remark: '更新日志', svgIcon: '日志', parent: 'associate' },
+    meta: { title: '更新日志', svgIcon: '日志', parent: 'associate' },
     component: () => import('/src/views/associate/updateLog/index.vue')
   },
   {
@@ -531,13 +531,13 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/:catchAll(.*)',
     name: '404',
-    meta: { remark: '', isHidden: true },
+    meta: { title: '', isHidden: true },
     component: () => import('/src/views/error/index.vue')
   },
   {
     path: '/error',
     name: 'error',
-    meta: { remark: '', isHidden: true },
+    meta: { title: '', isHidden: true },
     component: () => import('/src/views/error/index.vue')
   }
 ];
@@ -555,7 +555,8 @@ router.afterEach(() => {
 
 router.beforeEach(async (to: any) => {
   // 记录路由
-  window.localStorage.setItem('lastRouter', to.path);
+  console.log(to);
+  window.localStorage.setItem('lastRouter', JSON.stringify(to));
   // 随机壁纸
   let themeStore = useThemeStore();
   if (!themeStore) return;
@@ -571,9 +572,7 @@ router.beforeEach(async (to: any) => {
     themeStore.isFooterShow = false;
     themeStore.isShow = false;
   } else {
-    autoClearTimer(() => {
-      themeStore.isFooterShow = true;
-    }, 2000);
+    themeStore.isFooterShow = true;
     themeStore.isShow = true;
   }
 });

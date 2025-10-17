@@ -44,7 +44,7 @@ const goalList = ref([
     date: '2024-1',
     goal: '目标4'
   }
-] as any);
+]) as any;
 </script>
 <style lang="scss" scoped>
 @include theme() {
