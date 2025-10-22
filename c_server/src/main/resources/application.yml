@@ -29,7 +29,7 @@ spring:
       fail-on-empty-beans: false # 修正：属性名使用kebab-case
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://120.48.127.181:5432/c_pw?useUnicode=true&characterEncoding=utf8&useSSL=true&autoReconnect=true&reWriteBatchedInserts=true
+    url: jdbc:postgresql://120.48.127.181:5432/C_PW?useUnicode=true&characterEncoding=utf8&useSSL=true&autoReconnect=true&reWriteBatchedInserts=true
     username: postgres
     password: 123456
   #      driver-class-name: com.mysql.jdbc.Driver

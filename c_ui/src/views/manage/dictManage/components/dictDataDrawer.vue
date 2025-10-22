@@ -126,7 +126,7 @@ function handleAdd() {
 function handleEdit(row: any) {
   addOrUpdateDialogRef.value.init({
     operation: 'update',
-    dictType: initParams.value.dictType,
+
     title: '编辑字典数据',
     row
   });
@@ -139,7 +139,6 @@ function getList() {
 const title = ref('');
 
 function init(params: any) {
-  console.log(params);
   initParams.value.dictType = params.dictType;
   title.value = params.title;
   drawer.value = true;

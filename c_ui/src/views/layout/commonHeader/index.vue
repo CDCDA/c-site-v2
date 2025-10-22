@@ -50,6 +50,12 @@
           <svg-icon iconName="commonSvg-搜索" class="header-icon search" @click="searchClick" />
         </i>
       </el-tooltip>
+      <el-tooltip content="语言切换" placement="top">
+        <language class="header-icon language"></language>
+      </el-tooltip>
+      <el-tooltip content="消息" placement="top">
+        <message class="header-icon bell"></message>
+      </el-tooltip>
       <el-tooltip content="控制台" placement="top">
         <i class="svg-icon-wrap">
           <svg-icon
@@ -78,6 +84,8 @@ import { ref, onMounted, watch } from 'vue';
 import { getRandomBlog } from '@/api/blog';
 import commonLink from './components/commonLink.vue';
 import searchDialog from './components/blogSearchDialog.vue';
+import message from './components/message.vue';
+import language from './components/language.vue';
 // import { vMiniWeather, vMiniWeatherIcon } from 'vue3-mini-weather';
 import { debounce } from 'lodash';
 import { autoClearTimer } from '@/utils/timer';
@@ -188,7 +196,7 @@ const scrollEvent = debounce(() => {
         (articleElement.value.scrollHeight - articleElement.value.clientHeight)) *
         100
     ) + '';
-}, 300); // 500ms 防抖时间
+}, 100); // 500ms 防抖时间
 
 function close() {
   searchVisible.value = false;
@@ -246,10 +254,10 @@ function clickMenu(item: any) {
 
 router.options.routes.forEach((route: any) => {
   if (!route.meta) return;
-  const { icon, svgIcon, remark, parent } = route.meta;
+  const { icon, svgIcon, title, parent } = route.meta;
   if (icon || svgIcon) {
     let parentMenu = menuHeader.find((x: any) => x.value == parent) as any;
-    parentMenu?.children.push({ label: remark, icon, svgIcon, name: route.name });
+    parentMenu?.children.push({ label: title, icon, svgIcon, name: route.name });
   }
 });
 menuData.value = menuHeader;
@@ -637,7 +645,7 @@ onMounted(() => {
       align-items: center;
       .svg-icon-wrap {
         position: relative;
-        margin: 10px;
+        margin: 10px 6px;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -790,7 +798,7 @@ onMounted(() => {
     backdrop-filter: blur(0px);
     box-shadow: get('box-shadow');
     .svg-icon {
-      color: get('font-color');
+      color: get('re-font-color');
     }
     // .svg-icon-wrap:hover {
     //   .header-icon.svg-icon {

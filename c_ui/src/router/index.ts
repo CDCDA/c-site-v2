@@ -1,8 +1,10 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router';
 import useThemeStore from '@/store/modules/theme.ts';
+import { pageWallpapers } from '@/api/system/wallpaper.ts';
 
 import { random } from 'lodash';
 import { autoClearTimer } from '@/utils/timer.ts';
+import { imageEmits } from 'element-plus';
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -553,14 +555,25 @@ router.afterEach(() => {
   scrollToView();
 });
 
+async function getWallpaperList(themeStore: any) {
+  const { code, rows } = await pageWallpapers({ type: 'img' });
+  if (code === 200) {
+    themeStore.imgWallpaperList = rows;
+    window.localStorage.setItem('themeData', JSON.stringify(themeStore));
+  }
+}
+
 router.beforeEach(async (to: any) => {
   // 记录路由
-  console.log(to);
   window.localStorage.setItem('lastRouter', JSON.stringify(to));
   // 随机壁纸
   let themeStore = useThemeStore();
   if (!themeStore) return;
   if (themeStore.options && themeStore.options.isRandom) {
+    console.log(themeStore.imgWallpaperList);
+    if (!themeStore.imgWallpaperList) {
+      await getWallpaperList(themeStore);
+    }
     let backUrl =
       themeStore.imgWallpaperList[random(0, themeStore.imgWallpaperList.length - 1)]?.url;
     if (backUrl) {

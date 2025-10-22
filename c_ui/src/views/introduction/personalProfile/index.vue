@@ -9,9 +9,9 @@
       <span>我叫CCCC</span>
       <span>是一名全栈开发工程师</span>
     </div>
-    <div class="ps-timeline c-right animated">
+    <!-- <div class="ps-timeline c-right animated">
       <GoalTimeLine></GoalTimeLine>
-    </div>
+    </div> -->
     <div class="ps-info">
       <div class="ps-info-left c-left animated">
         <div class="title">技术栈</div>
@@ -123,6 +123,7 @@ import GoalTimeLine from './components/goalTimeLine.vue';
         .title {
           text-align: left;
           margin-left: 33px;
+          margin-bottom: 15px;
         }
         .text {
           text-align: left;

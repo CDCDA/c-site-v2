@@ -13,7 +13,7 @@
     >
       <div class="logo flex-center">
         <svg-icon iconName="commonSvg-控制台" style="font-size: 1.2rem; margin-right: 5px" />
-        <span v-if="!themeStore.isCollapse">后台管理</span>
+        <span v-if="!themeStore.isCollapse">控制台</span>
       </div>
       <el-menu-item v-for="(item, i) in menuList" @click="menuClick(item)" :index="item.path">
         <svg-icon

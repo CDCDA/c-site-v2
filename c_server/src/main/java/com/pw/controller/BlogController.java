@@ -132,7 +132,7 @@ public class BlogController extends BaseController implements convertController 
             blogTagRelationSerivce.insertTags(tagIds, blog.getBlogId());
         }
 
-        return Result.ok().data(blog.getBlogId());
+        return Result.ok().data(blog.getBlogId().toString());
     }
 
     @PutMapping("/{id}")
@@ -160,7 +160,7 @@ public class BlogController extends BaseController implements convertController 
             blogTagRelationSerivce.insertTags(ids, blog.getBlogId());
         }
 
-        return Result.ok().data(blog.getBlogId());
+        return Result.ok().data(blog.getBlogId().toString());
     }
 
     @DeleteMapping("/{id}")

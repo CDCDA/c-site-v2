@@ -6,7 +6,7 @@
     class="c-image"
     :src="src"
     :fit="fit"
-    :lazy="true"
+    :lazy="lazy"
     :scroll-container="scrollContainer"
     :preview-src-list="previewSrcList"
     :preview-teleported="true"
@@ -18,7 +18,7 @@
     </template>
     <template #error>
       <div class="image-error-slot">
-        <svg-icon iconName="commonSvg-图片加载失败"></svg-icon>
+        <img style="height: 100%; width: 100%" src="/src/assets/images/404.png" alt="" />
       </div>
     </template>
   </el-image>

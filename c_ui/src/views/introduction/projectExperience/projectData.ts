@@ -1,6 +1,6 @@
 export default [
   {
-    id: 0,
+    id: 'pvs-client',
     coverUrl: new URL('@/assets/projectImage/pvs/img1.png', import.meta.url).href,
     images: [
       new URL('@/assets/projectImage/pvs/img1.png', import.meta.url).href,
@@ -8,14 +8,14 @@ export default [
       new URL('@/assets/projectImage/pvs/img3.png', import.meta.url).href
     ],
     title: '贴片机文件采集驱动',
-    intro: '轮询读取贴片机文件的Java程序，支持驱动在线上传和在线安装，命令行执行',
-    date: ['2024-5-1', '2024-10-6'],
+    intro: '贴片机信息采集程序，支持驱动在线上传和在线安装，打包成exe文件运行',
+    date: ['2024-5-1', '2025-10-6'],
     tags: ['Java', 'Spring Boot', 'PostGreSQL', 'SFTP', 'FTP'],
     isAll: false,
     modules: [
       {
         title: '多个型号贴片机的适配',
-        intro: '雅马哈，西门子，松下等贴片机的读取逻辑适配，包括多文件服务器读取情况视频'
+        intro: '雅马哈，西门子，松下等贴片机的读取和计算逻辑适配，包括分布式服务器读取情况适配'
       },
       {
         title: 'SFTP和FTP连接处理',
@@ -24,23 +24,56 @@ export default [
       },
       {
         title: '嵌套线程处理',
-        intro: '系统整体是一个主线程带多个子线程的嵌套方式,添加心跳包机制预防线程假死'
+        intro:
+          '系统整体是一个主线程带多个子线程的嵌套方式,其实有很多冗余，但是积重难返。添加心跳包监测机制预防线程假死'
+      },
+      {
+        title: '现场问题的长期支持',
+        intro: '实施人员在使用过程中，会遇到各种各样的问题，需要及时解决。'
       }
     ]
   },
   {
-    id: 1,
+    id: 'labelCloud',
+    coverUrl: new URL('@/assets/projectImage/labelCloud/img1.png', import.meta.url).href,
+    images: [
+      new URL('@/assets/projectImage/labelCloud/img1.png', import.meta.url).href,
+      new URL('@/assets/projectImage/labelCloud/img2.png', import.meta.url).href,
+      new URL('@/assets/projectImage/labelCloud/img3.png', import.meta.url).href
+    ],
+    title: '云标签打印系统',
+    intro: '配合MES系统的子工程',
+    date: ['2024-5-1', '2024-10-6'],
+    tags: ['Java', 'JavaScript', 'Css', 'vue2', 'Spring Boot', 'SQLServer'],
+    isAll: false,
+    modules: [
+      {
+        title: '与MES主工程的定时数据交互',
+        intro: '通过定时任务交换订单、标签等数据的信息'
+      },
+      {
+        title: '标签打印',
+        intro: '按设计好的标签模板，处理标签数据逻辑'
+      },
+      {
+        title: '部分前端工作',
+        intro: ''
+      }
+    ]
+  },
+  {
+    id: 'node-red',
     coverUrl: new URL('@/assets/projectImage/node-red/img1.png', import.meta.url).href,
     images: [new URL('@/assets/projectImage/node-red/img1.png', import.meta.url).href],
     title: 'node-red数采程序',
     intro: '贴片机文件采集驱动的升级版本，流程可视化，日志可视化，动态导入，网关监控',
-    date: ['2024-5-1', '2024-10-6'],
+    date: ['2024-10-1', '2025-12-6'],
     tags: ['Javascript', 'Jquery', 'Html', 'Css', 'Node'],
     isAll: false,
     modules: [
       {
         title: '新增多种节点',
-        intro: '使用Jquery和JavaScript开发SFTP文件轮询，文件监听，文件解析等新节点'
+        intro: '使用Jquery和nodeJs开发SFTP文件轮询，文件监听，文件解析等新节点'
       },
       {
         title: '贴片机文件采集流程设计',
@@ -49,12 +82,61 @@ export default [
       {
         title: '大批量文件采集处理',
         intro:
-          '不同于贴片机文件采集，存在特殊的大批量文件采集过站情况，需从多个文件服务器的成百上千个目录下监听文件，需要预防某些服务器掉线、网络波动等问题，添加监听分段式重启机制，添加监听防抖，添加定时更新解析方案机制，添加加防止文件堆积机制等'
+          '不同于常规贴片机文件采集，存在特殊的大批量文件采集过站情况，需从多个文件服务器的成百上千个目录下监听文件，' +
+          '需要预防某些服务器掉线、网络波动等问题，添加监听分段式重启机制，添加监听防抖，添加定时更新解析方案机制，' +
+          '添加加防止文件堆积机制等。\n实际上应该用其他高性能语言来写，nodejs的性能受限于单cpu，但是当初没有和我说清楚要求，最后不得不花费一些时间来优化'
       }
     ]
   },
   {
-    id: 2,
+    id: 'mes-v5',
+    coverUrl: new URL('@/assets/projectImage/pvs/img1.png', import.meta.url).href,
+    images: [
+      new URL('@/assets/projectImage/pvs/img1.png', import.meta.url).href,
+      new URL('@/assets/projectImage/pvs/img3.png', import.meta.url).href,
+      new URL('@/assets/projectImage/pvs/img3.png', import.meta.url).href
+    ],
+    title: 'mes系统-v5',
+    intro:
+      '需求是像微服务一样，每个模块都可以独立部署，采用无界框架实现，完成框架后移交给其他部门开发',
+    date: ['2025-8-30', '2025-9-15'],
+    tags: ['vue2', 'vue3'],
+    isAll: false,
+    modules: [
+      {
+        title: '前端架构',
+        intro:
+          '前端整体架构，包括技术栈选型，不同模块项目间的通信和组合，通用模块的抽取，以及快捷启动方式等'
+      }
+    ]
+  },
+  {
+    id: 'big-ics',
+    coverUrl: new URL('@/assets/projectImage/pvs/img1.png', import.meta.url).href,
+    images: [
+      new URL('@/assets/projectImage/pvs/img1.png', import.meta.url).href,
+      new URL('@/assets/projectImage/pvs/img3.png', import.meta.url).href,
+      new URL('@/assets/projectImage/pvs/img3.png', import.meta.url).href
+    ],
+    title: '全域价值流',
+    intro:
+      '应客户要求使用Sz-Admin框架，接口由客户方提供，比较奇葩的是还需要给客户代码说明文档，客户以后要将这个框架自用',
+    date: ['2025-7-30', '2025-11-05'],
+    tags: ['vue3'],
+    isAll: true,
+    modules: [
+      {
+        title: '全部前端工作',
+        intro: '全部前端工作'
+      },
+      {
+        title: '代码说明文档',
+        intro: '客户方需要根据Sz-Admin框架的使用说明，编写代码说明文档'
+      }
+    ]
+  },
+  {
+    id: 'smt',
     coverUrl: new URL('@/assets/projectImage/smt/img1.png', import.meta.url).href,
     images: [
       new URL('@/assets/projectImage/smt/img1.png', import.meta.url).href,
@@ -79,7 +161,7 @@ export default [
     ],
     modules: [
       {
-        title: 'pvs控制台',
+        title: '各种模块控制台',
         intro: 'spring boot搭配websocket实时刷新贴片机运行状态'
       },
       {
@@ -96,9 +178,8 @@ export default [
       }
     ]
   },
-
   {
-    id: 3,
+    id: 'smt-mobile',
     coverUrl: new URL('@/assets/projectImage/smt-mobile/img1.png', import.meta.url).href,
     images: [
       new URL('@/assets/projectImage/smt-mobile/img1.png', import.meta.url).href,
@@ -130,7 +211,7 @@ export default [
     ]
   },
   {
-    id: 4,
+    id: 'mow-v2',
     coverUrl: new URL('@/assets/projectImage/mow-v2/img1.png', import.meta.url).href,
     images: [
       new URL('@/assets/projectImage/mow-v2/img1.png', import.meta.url).href,
@@ -138,7 +219,7 @@ export default [
     ],
     title: 'MES系统-v2',
     intro: '多服务工厂管理系统，适配SQLServer和PG数据库，已经较为完整，偶尔处理一些bug和小需求',
-    date: ['2024-5-1', '2024-10-6'],
+    date: ['2023-6-1', '2025-3-6'],
     tags: ['Java', 'JavaScript', 'Css', 'vue2', 'Spring Boot', 'PostGreSQL', 'SQLServer'],
     isAll: false,
     modules: [
@@ -156,36 +237,9 @@ export default [
       }
     ]
   },
+
   {
-    id: 5,
-    coverUrl: new URL('@/assets/projectImage/labelCloud/img1.png', import.meta.url).href,
-    images: [
-      new URL('@/assets/projectImage/labelCloud/img1.png', import.meta.url).href,
-      new URL('@/assets/projectImage/labelCloud/img2.png', import.meta.url).href,
-      new URL('@/assets/projectImage/labelCloud/img3.png', import.meta.url).href
-    ],
-    title: '云标签打印系统',
-    intro: '配合MES系统的子工程',
-    date: ['2024-5-1', '2024-10-6'],
-    tags: ['Java', 'JavaScript', 'Css', 'vue2', 'Spring Boot', 'SQLServer'],
-    isAll: false,
-    modules: [
-      {
-        title: '与MES主工程的定时数据交互',
-        intro: '通过定时任务交换订单、标签等数据的信息'
-      },
-      {
-        title: '标签打印',
-        intro: '按设计好的标签模板，处理标签数据逻辑'
-      },
-      {
-        title: '大部分前端工作',
-        intro: ''
-      }
-    ]
-  },
-  {
-    id: 6,
+    id: 'mow-v3',
     coverUrl: new URL('@/assets/projectImage/mow-v3/img2.png', import.meta.url).href,
     images: [
       new URL('@/assets/projectImage/mow-v3/img2.png', import.meta.url).href,
@@ -224,7 +278,7 @@ export default [
     ]
   },
   {
-    id: 7,
+    id: 'lowCode',
     coverUrl: new URL('@/assets/projectImage/lowCode/img1.png', import.meta.url).href,
     images: [
       new URL('@/assets/projectImage/lowCode/img1.png', import.meta.url).href,
@@ -263,7 +317,7 @@ export default [
     ]
   },
   {
-    id: 8,
+    id: 'bigScreen',
     coverUrl: new URL('@/assets/projectImage/bigScreen/img1.png', import.meta.url).href,
     images: [
       new URL('@/assets/projectImage/bigScreen/img1.png', import.meta.url).href,
@@ -287,7 +341,7 @@ export default [
     ]
   },
   {
-    id: 9,
+    id: 'kanban',
     coverUrl: new URL('@/assets/projectImage/kanban/img1.png', import.meta.url).href,
     images: [
       new URL('@/assets/projectImage/kanban/img1.png', import.meta.url).href,
@@ -306,7 +360,7 @@ export default [
     ]
   },
   {
-    id: 10,
+    id: 'smsSparePart',
     coverUrl: new URL('@/assets/projectImage/kanban/img1.png', import.meta.url).href,
     images: [new URL('@/assets/projectImage/kanban/img1.png', import.meta.url).href],
     title: 'SMS备件管理系统',
@@ -317,7 +371,7 @@ export default [
     modules: []
   },
   {
-    id: 11,
+    id: 'cmsSparePart',
     coverUrl: new URL('@/assets/projectImage/kanban/img1.png', import.meta.url).href,
     images: [new URL('@/assets/projectImage/kanban/img1.png', import.meta.url).href],
     title: 'CMS样品管理系统',
@@ -328,7 +382,7 @@ export default [
     modules: []
   },
   {
-    id: 12,
+    id: 'problemResolve',
     coverUrl: new URL('@/assets/projectImage/problemResolve/img1.png', import.meta.url).href,
     images: [
       new URL('@/assets/projectImage/problemResolve/img1.png', import.meta.url).href,
@@ -336,9 +390,110 @@ export default [
     ],
     title: '问题解决工具',
     intro: '一个比较老的项目，后端似乎用的.net，只改了几个前端问题，略过',
-    date: ['2024-5-1', '2024-10-6'],
+    date: ['2024-3-1', '2024-4-1'],
     tags: ['JavaScript', 'Css', 'Vue2', 'Webpack', 'Spring Boot', 'Java'],
     isAll: false,
     modules: []
+  },
+  {
+    id: 'c-site',
+    coverUrl: new URL('@/assets/projectImage/c-site-v2/image1.png', import.meta.url).href,
+    images: [new URL('@/assets/projectImage/c-site-v2/image1.png', import.meta.url).href],
+    title: '个人网站',
+    intro: '初版个人网站，springboot2+vue3+jdk8+mysql+redis的单体服务',
+    date: ['2024-3-1', '2024-10-15'],
+    tags: ['JavaScript', 'Css', 'Vue3', 'vite', 'Spring Boot', 'Java'],
+    isAll: false,
+    modules: [
+      {
+        title: '请查看c-site-v2的项目介绍'
+      }
+    ]
+  },
+  {
+    id: 'c-site-micro',
+    coverUrl: new URL('@/assets/projectImage/c-site-v2/image1.png', import.meta.url).href,
+    images: [new URL('@/assets/projectImage/c-site-v2/image1.png', import.meta.url).href],
+    title: '个人网站-微服务版',
+    intro:
+      '微服务测试版本，本来是拿来测试集群和微服务，但是轻量服务器实在是在不堪大用，开了两个nacos和几个基础服务就爆了，最后只能强行限制资源占用，勉勉强强测试一下',
+    date: ['2024-3-1', '2024-10-15'],
+    tags: ['JavaScript', 'Css', 'Vue3', 'vite', 'Spring Boot', 'Java'],
+    isAll: false,
+    modules: [
+      {
+        title: '请查看c-site-v2的项目介绍'
+      }
+    ]
+  },
+  {
+    id: 'c-site-v2',
+    coverUrl: new URL('@/assets/projectImage/c-site-v2/image1.png', import.meta.url).href,
+    images: [
+      new URL('@/assets/projectImage/c-site-v2/image1.png', import.meta.url).href,
+      new URL('@/assets/projectImage/c-site-v2/image2.png', import.meta.url).href
+    ],
+    title: '个人网站-v2',
+    intro:
+      'springboot3 + vue3 + jdk21 + postgres + redis 的单体服务版本。\n' +
+      '全面升级，重构代码，接口改为符合RESTful API的格式，更换jwt鉴权库和加密库,部署方式改为docker-compose批量部署。\n' +
+      '前端首屏加载优化与打包优化，重构后台管理\n',
+    date: ['2025-7-20', '2025-10-27'],
+    tags: [
+      'TypeScript',
+      'Css',
+      'Vue3',
+      'vite',
+      'Spring Boot3',
+      'Java',
+      'Postgres',
+      'Docker',
+      'Redis'
+    ],
+    isAll: true,
+    modules: [
+      {
+        title: '都在这个网站了'
+      }
+    ]
+  },
+  {
+    id: 'c-tools',
+    coverUrl: new URL('@/assets/projectImage/c-tools/image1.png', import.meta.url).href,
+    images: [
+      new URL('@/assets/projectImage/c-tools/image1.png', import.meta.url).href,
+      new URL('@/assets/projectImage/c-tools/image2.png', import.meta.url).href,
+      new URL('@/assets/projectImage/c-tools/image3.png', import.meta.url).href,
+      new URL('@/assets/projectImage/c-tools/image4.png', import.meta.url).href,
+      new URL('@/assets/projectImage/c-tools/image5.png', import.meta.url).href
+    ],
+    title: '桌面端工具集',
+    intro:
+      'tauri+rust+vue3 桌面端工具集,包含:\n' +
+      '1. json处理\n' +
+      '2. 哈希生成\n' +
+      '3. 文件树\n' +
+      '4. 文件整理\n' +
+      '5. nginx格式化\n' +
+      '6. docker日志转化\n' +
+      '7. 系统信息\n',
+    date: ['2025-4-20', '2025-5-27'],
+    tags: [
+      'TypeScript',
+      'Css',
+      'Vue3',
+      'vite',
+      'Spring Boot3',
+      'Java',
+      'Postgres',
+      'Docker',
+      'Redis'
+    ],
+    isAll: true,
+    modules: [
+      {
+        title: '全部'
+      }
+    ]
   }
 ];

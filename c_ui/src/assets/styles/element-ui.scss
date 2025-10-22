@@ -666,51 +666,51 @@
 }
 
 //加载动画
-.el-loading-spinner {
-  // background-image: url('@/assets/svg/loading.svg'); /*设置自己想要的图片或gif*/
-  background-repeat: no-repeat;
-  background-size: 100px 100px;
-  width: 100px;
-  height: 100px;
-  display: block;
-  position: relative;
-  left: 50%;
-  top: 50%;
-  margin: -75px 0 0 -75px;
-  border-radius: 50%;
-  border: 3px solid transparent;
-  border-top-color: #9370db;
-  animation: spin 2s linear infinite;
-  opacity: 0.85;
-}
+// .el-loading-spinner {
+//   // background-image: url('@/assets/svg/loading.svg'); /*设置自己想要的图片或gif*/
+//   background-repeat: no-repeat;
+//   background-size: 100px 100px;
+//   width: 100px;
+//   height: 100px;
+//   display: block;
+//   position: relative;
+//   left: 50%;
+//   top: 50%;
+//   margin: -75px 0 0 -75px;
+//   border-radius: 50%;
+//   border: 3px solid transparent;
+//   border-top-color: #9370db;
+//   animation: spin 2s linear infinite;
+//   opacity: 0.85;
+// }
 
-.el-loading-spinner:after {
-  content: '';
-  position: absolute;
-  top: 15px;
-  left: 15px;
-  right: 15px;
-  bottom: 15px;
-  border-radius: 50%;
-  border: 3px solid transparent;
-  border-top-color: #ff00ff;
-  -webkit-animation: spin 1.5s linear infinite;
-  animation: spin 1.5s linear infinite;
-}
+// .el-loading-spinner:after {
+//   content: '';
+//   position: absolute;
+//   top: 15px;
+//   left: 15px;
+//   right: 15px;
+//   bottom: 15px;
+//   border-radius: 50%;
+//   border: 3px solid transparent;
+//   border-top-color: #ff00ff;
+//   -webkit-animation: spin 1.5s linear infinite;
+//   animation: spin 1.5s linear infinite;
+// }
 
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
+// @keyframes spin {
+//   0% {
+//     transform: rotate(0deg);
+//   }
+//   100% {
+//     transform: rotate(360deg);
+//   }
+// }
 
-.el-loading-spinner .circular {
-  /*隐藏 默认的 loading 动画*/
-  display: none;
-}
+// .el-loading-spinner .circular {
+//   /*隐藏 默认的 loading 动画*/
+//   display: none;
+// }
 
 .el-image {
   display: block;

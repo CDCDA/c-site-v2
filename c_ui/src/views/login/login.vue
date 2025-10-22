@@ -338,7 +338,7 @@ onMounted(() => {
     }
   }
   .el-button {
-    border-radius: 2rem;
+    border-radius: 2rem !important;
     border: none;
     background: linear-gradient(90deg, #ff4b2b, #ff416c) !important;
     color: white !important;

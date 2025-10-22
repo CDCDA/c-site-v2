@@ -35,10 +35,12 @@
           v-else-if="item.type === 'dateRange'"
           v-model="searchParams[item.prop]"
           type="daterange"
-          value-format="yyyy-MM-dd"
+          value-format="YYYY-MM-DD"
           :placeholder="`请选择${item.label}`"
+          start-placeholder="开始时间"
+          end-placeholder="结束时间"
           clearable
-          @keyup.enter="getList"
+          @keyup.enter="handleSearch"
         />
       </el-form-item>
     </div>
@@ -71,7 +73,7 @@ const props = defineProps({
 const emit = defineEmits(['getList', 'update:pagination']);
 const { searchColumns, searchOptions } = toRefs(props);
 
-const searchParams = ref(JSON.parse(JSON.stringify(props.initParams || {}))) as any;
+const searchParams = ref({}) as any;
 
 // 重置查询参数
 function handleReset() {
@@ -79,8 +81,7 @@ function handleReset() {
     pageNum: 1,
     pageSize: 10
   });
-  searchParams.value = props.initParams || {};
-  console.log(initParams.value);
+  searchParams.value = {};
 }
 
 // 处理查询
@@ -88,6 +89,9 @@ function handleSearch() {
   if (searchParams.value.dateRange) {
     searchParams.value.startTime = searchParams.value.dateRange[0];
     searchParams.value.endTime = searchParams.value.dateRange[1];
+  } else {
+    delete searchParams.value.startTime;
+    delete searchParams.value.endTime;
   }
   emit('getList', searchParams.value);
 }

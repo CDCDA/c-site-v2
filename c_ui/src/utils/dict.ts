@@ -18,14 +18,16 @@ export function useDict(...args: any) {
       } else {
         //如果无值，代表仓库中还未存储，调用获取字典标签的接口，参数dictType代表要查询的字典名称
         getDictDataByDictType(dictType).then((resp: any) => {
-          res.value[dictType] = resp.data.map((p: any) => ({
-            label: p.dictLabel,
-            value: p.dictValue,
-            listClass: p.listClass,
-            elTagType: p.listClass,
-            elTagClass: p.cssClass
-          }));
-          useDictStore().setDict(dictType, res.value[dictType]);
+          if (resp.code === 200) {
+            res.value[dictType] = resp.data.map((p: any) => ({
+              label: p.dictLabel,
+              value: p.dictValue,
+              listClass: p.listClass,
+              elTagType: p.listClass,
+              elTagClass: p.cssClass
+            }));
+            useDictStore().setDict(dictType, res.value[dictType]);
+          }
         });
       }
     });

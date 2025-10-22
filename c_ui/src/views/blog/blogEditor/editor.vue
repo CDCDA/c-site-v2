@@ -51,6 +51,24 @@
           ><template #default="{ data: { typeName } }"> {{ typeName }}</template>
         </el-tree-select>
       </el-form-item>
+      <el-form-item label="博客类型" prop="publishStatus">
+        <el-switch
+          v-model="blogData.isOriginal"
+          active-value="1"
+          inactive-value="0"
+          active-text="原创"
+          inactive-text="转载"
+        />
+      </el-form-item>
+      <el-form-item label="是否推荐" prop="isRecommend">
+        <el-switch
+          v-model="blogData.isRecommend"
+          active-value="1"
+          inactive-value="0"
+          active-text="推荐"
+          inactive-text="不推荐"
+        />
+      </el-form-item>
       <el-form-item label="添加封面">
         <upload v-model="blogData.coverUrl" path="blogCover"></upload>
       </el-form-item>
@@ -97,7 +115,8 @@
 import { ref, nextTick, onMounted, watch } from 'vue';
 import { pageTypes } from '@/api/type';
 import { pageTags } from '@/api/tag';
-import { saveBlog } from '@/api/blog';
+import { loadingService } from '@/components/loading/loading.ts';
+import { saveBlog, updateBlog } from '@/api/blog';
 import { MdEditor } from 'md-editor-v3';
 import 'md-editor-v3/lib/style.css';
 import { ElMessageBox, ElNotification } from 'element-plus';
@@ -164,7 +183,9 @@ function showInput() {
 async function submit() {
   formEl.value.validate(async (valid: any) => {
     if (valid) {
-      const { code, data } = (await saveBlog(blogData.value)) as any;
+      const { code, data } = blogData.value.blogId
+        ? await updateBlog(blogData.value)
+        : await saveBlog(blogData.value);
       if (code === 200) {
         //清空博客本地缓存
         window.localStorage.setItem('blogData', '');
@@ -174,11 +195,16 @@ async function submit() {
           cancelButtonText: '写新博客',
           appendTo: '.messageBox-base'
         })
-          .then(() => {
-            router.push({ name: 'blogDisplay', query: { blogId: data } });
+          .then(async () => {
+            loadingService.show({ type: 'loading', text: '正在前往博客...' });
+            await router.push({
+              name: 'blogDisplay',
+              query: { blogId: data || blogData.value.blogId }
+            });
+            loadingService.hide();
           })
           .catch(() => {
-            // emit('resetBlogData');
+            resetBlogData();
           });
       }
     }
@@ -281,7 +307,9 @@ const blogData = ref({
   content: '',
   typeId: '',
   coverUrl: '',
-  blogAbstract: ''
+  blogAbstract: '',
+  isRecommend: '0',
+  isOriginal: '1'
 }) as any;
 
 function resetBlogData() {
@@ -291,7 +319,9 @@ function resetBlogData() {
     content: '',
     typeId: '',
     coverUrl: '',
-    blogAbstract: ''
+    blogAbstract: '',
+    isRecommend: '0',
+    isOriginal: '1'
   }) as any;
 }
 
@@ -326,7 +356,6 @@ onMounted(() => {
   let { blogId } = router.currentRoute.value.query;
   let tempBlogData = window.localStorage.getItem('blogData');
   if (blogId) {
-    console.log('AAA', blogData.value);
     getBlogInfo(blogId);
   } else if (tempBlogData) {
     blogData.value = JSON.parse(tempBlogData);

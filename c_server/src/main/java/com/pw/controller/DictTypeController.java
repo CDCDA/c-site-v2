@@ -29,7 +29,6 @@ public class DictTypeController extends BaseController implements convertControl
     @GetMapping
     @Operation(summary = "查询字典类型列表")
     public Result list(DictType dictType) {
-        dictType.setStatus("0");
         return resultIPage(dictTypeService.page(setPage(dictType), convertWrap(dictType)));
     }
 

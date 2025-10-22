@@ -78,7 +78,7 @@
           <div class="back-filter">
             <div class="title">{{ item.title }}</div>
           </div>
-          <c-image class="swiper-slide-img" :src="item.coverUrl" />
+          <c-image class="swiper-slide-img" :lazy="false" :src="item.coverUrl" />
         </div>
       </swiper-slide>
     </swiper>
@@ -99,7 +99,7 @@ import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import InsideSwiper from '@/views/introduction/projectExperience/components/insideSwiper.vue';
 function getRandomType() {
-  const typeArr = ['primary', 'success', 'info', 'warning', 'danger'];
+  const typeArr = ['default', 'primary', 'success', 'info', 'warning', 'danger'];
   return typeArr[Math.floor(Math.random() * typeArr.length)];
 }
 
@@ -318,10 +318,13 @@ onMounted(() => {});
         text-align: left;
         padding: 0rem 5rem;
         height: calc(100% - 0rem);
+        flex-direction: column;
+        align-items: start;
+        justify-content: start;
         .title {
           font-size: 1.5rem;
           font-weight: bold;
-          margin: 1rem 0;
+          margin: 0.2rem 0 0.7rem 0;
         }
         .dateTime {
           font-size: 0.9rem;
@@ -375,6 +378,9 @@ onMounted(() => {});
 @include theme() {
   .film-slide {
     //box-shadow: get('box-shadow');
+  }
+  .intro {
+    white-space: pre-line;
   }
   .back-filter {
     background: rgba(0, 0, 0, 0.5);
@@ -449,7 +455,7 @@ onMounted(() => {});
     position: relative;
     transition: transform 1.6s cubic-bezier(0.16, 1, 0.3, 1);
 
-    &.active::before,
+    &.swiper-slide-thumb-active::before,
     &:hover::before {
       content: '';
       position: absolute;
@@ -460,7 +466,7 @@ onMounted(() => {});
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
     }
 
-    &.active,
+    &.swiper-slide-thumb-active,
     &:hover {
       transform: scale(1.15);
       z-index: 10;

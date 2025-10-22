@@ -3,16 +3,21 @@
 -->
 <template>
   <div class="personal-info">
-    <span class="glossary">java练习生</span>
-    <span class="glossary">学啊学啊学</span>
+    <span class="glossary">java进阶</span>
+    <span class="glossary">rust练习生</span>
     <span class="glossary">全栈开发工程师</span>
-    <span class="glossary">业余健身爱好者</span>
-    <span class="glossary">没游戏玩了</span>
+    <span class="glossary">游戏爱好者</span>
+    <span class="glossary">整点新活</span>
     <span class="glossary">日常找新歌</span>
-    <el-avatar class="avatar" :src="'http://120.48.127.181/file/cat-star.jpg'"></el-avatar>
+    <el-avatar class="avatar" :src="'http://120.48.127.181/file/avatar/cat-star.jpg'"></el-avatar>
   </div>
 </template>
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { computed } from 'vue';
+import useUserStore from '@/store/modules/user';
+const userStore = useUserStore();
+const avatarUrl = computed(() => userStore.avatar);
+</script>
 <style lang="scss" scoped>
 @include theme() {
   @keyframes up-down {

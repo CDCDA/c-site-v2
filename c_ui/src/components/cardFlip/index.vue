@@ -3,7 +3,7 @@
 -->
 <template>
   <div class="content">
-    <a class="card" href="#!">
+    <a class="card">
       <div class="front">
         <slot name="front">front</slot>
       </div>

@@ -30,7 +30,6 @@ const searchColumns = ref([
   {
     label: '分类',
     prop: 'type',
-    width: 150,
     type: 'dict',
     dictType: 'drama_type'
   }

@@ -220,6 +220,8 @@
         b.create_by,
         b.update_time,
         b.update_by,
+        b.is_recommend,
+        b.is_original,
         bt.type_id,
         bt.type_name,
         u.nick_name as author

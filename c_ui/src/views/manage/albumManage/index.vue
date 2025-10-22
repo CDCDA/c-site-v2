@@ -42,7 +42,7 @@ const tableColumns = ref([
     type: 'image',
     label: '封面',
     prop: 'coverUrl',
-    width: 180
+    width: 150
   },
   {
     label: '相册名称',

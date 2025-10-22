@@ -18,7 +18,7 @@
 </template>
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
-import projectList from './projectData';
+import projectList from './projectData.ts';
 import { useRouter } from 'vue-router';
 import bottomSwiper from './components/insideSwiper.vue';
 import projectSwiper from './components/projectSwiper.vue';

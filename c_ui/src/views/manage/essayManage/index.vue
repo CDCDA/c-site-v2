@@ -29,14 +29,9 @@ const searchColumns = ref([
     placeholder: '请输入随笔内容'
   },
   {
-    type: 'datepicker',
+    type: 'dateRange',
     label: '创建时间',
-    prop: 'dateRange',
-    dateType: 'daterange',
-    rangeSeparator: '至',
-    startPlaceholder: '开始日期',
-    endPlaceholder: '结束日期',
-    valueFormat: 'YYYY-MM-DD'
+    prop: 'dateRange'
   }
 ]) as any;
 

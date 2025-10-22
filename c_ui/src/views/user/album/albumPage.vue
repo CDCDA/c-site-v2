@@ -12,7 +12,7 @@
           :src="image.url"
           fit="cover"
         />
-        <span class="album-img-time">{{ image.createTime }}</span>
+        <span class="album-img-time">{{ getImageName(image.url) }}</span>
       </div>
       <template>
         <el-empty description="description" />
@@ -42,6 +42,10 @@ async function getAlbumData() {
   }
 }
 
+function getImageName(url: string) {
+  return url.split('/').pop()?.split('.')[0] || '';
+}
+
 onMounted(() => {
   getAlbumData();
 });
@@ -61,12 +65,12 @@ onMounted(() => {
     bottom: -40px;
   }
   100% {
-    bottom: 0;
+    bottom: 0px;
   }
 }
 @keyframes toDown {
   0% {
-    bottom: 0;
+    bottom: 0px;
   }
   100% {
     bottom: -40px;
@@ -95,12 +99,11 @@ onMounted(() => {
     .album-img-time {
       position: absolute;
       bottom: -30px;
-      right: 0;
       width: calc(100%);
       line-height: 1.8;
       position: absolute;
       left: 0;
-      font-size: 14px;
+      font-size: 1rem;
       background: rgba(0, 0, 0, 0.3);
       padding: 4px 8px;
       color: #fff;

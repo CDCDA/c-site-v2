@@ -6,7 +6,9 @@ import com.pw.common.controller.BaseController;
 import com.pw.common.controller.convertController;
 import com.pw.common.utils.Result;
 import com.pw.domain.DictData;
+import com.pw.domain.DictType;
 import com.pw.service.impl.DictDataServiceImpl;
+import com.pw.service.impl.DictTypeServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +27,9 @@ public class DictDataController extends BaseController implements convertControl
 
     @Autowired
     private DictDataServiceImpl dictDataService;
+
+    @Autowired
+    private DictTypeServiceImpl dictTypeService;
 
     @GetMapping
     @Operation(summary = "查询字典数据列表")
@@ -48,6 +53,14 @@ public class DictDataController extends BaseController implements convertControl
     @GetMapping("/by-type/{dictType}")
     @Operation(summary = "根据字典类型查询字典数据")
     public Result getByDictType(@PathVariable String dictType) {
+        DictType dictTypeEntity = dictTypeService.list(
+                        new LambdaQueryWrapper<DictType>()
+                                .eq(DictType::getDictType, dictType)
+                                .eq(DictType::getStatus, "1"))
+                .stream().findFirst().orElse(null);
+        if (ObjectUtils.isEmpty(dictTypeEntity)) {
+            return Result.error("字典类型【" + dictType + "】不存在或已被停用");
+        }
         LambdaQueryWrapper<DictData> wrapper = new LambdaQueryWrapper<>();
         wrapper.eq(DictData::getDictType, dictType)
                 .eq(DictData::getStatus, "1")

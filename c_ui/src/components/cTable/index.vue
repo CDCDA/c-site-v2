@@ -5,7 +5,7 @@
   <div class="manage-main" :class="isSearchShow ? 'is-isHidden' : ''">
     <searchForm
       :searchColumns="searchColumns"
-      :initParams="initParams"
+      :initParams="props.initParams"
       :searchOptions="searchOptions"
       :pagination="pagination"
       @update:pagination="
@@ -127,7 +127,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import { ref, onMounted, toRefs, nextTick } from 'vue';
+import { ref, onMounted, toRefs, nextTick, watch } from 'vue';
 import Pagination from '@/components/pagination/index.vue';
 import { ElMessageBox, ElNotification } from 'element-plus';
 import searchForm from './components/searchForm.vue';
@@ -176,9 +176,12 @@ const searchFormRef = ref(null) as any;
 async function getList() {
   loading.value = true;
   const params = {
-    ...(searchFormRef.value?.searchParams || initParams || {}),
-    ...pagination.value
+    ...props.initParams,
+    ...pagination.value,
+    ...searchFormRef.value?.searchParams
   };
+  delete params.dateRange;
+  console.log(props.initParams, searchFormRef.value?.searchParams);
   const { code, rows, total } = await pageApi(params);
   if (code === 200) {
     list.value = rows;

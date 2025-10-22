@@ -191,9 +191,11 @@ input {
     // }
     .el-image {
       border-radius: 4px;
-      width: 100%;
+      width: calc(100% - 4px);
       aspect-ratio: 5 / 3;
       box-shadow: get('box-shadow');
+      border-radius: 4px;
+      margin: 2px;
     }
   }
   .manage-pagination {

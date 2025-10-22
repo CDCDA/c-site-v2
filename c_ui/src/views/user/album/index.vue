@@ -17,7 +17,7 @@
           </template>
         </el-image>
         <div class="album-item-name">{{ item.name }}</div>
-        <div class="album-item-count">{{ item.images.length }}</div>
+        <div class="album-item-count">{{ item.images ? item.images.length : 0 }}</div>
         <div class="album-item-date">{{ formatDate(new Date(item.createTime), 'YY-mm-dd') }}</div>
         <div class="album-item-instoction">{{ item.intro }}</div>
       </div>

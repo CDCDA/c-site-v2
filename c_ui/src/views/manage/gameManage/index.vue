@@ -57,13 +57,13 @@ const tableColumns = ref([
     prop: 'name',
     width: 160
   },
-  {
-    label: '官网',
-    type: 'link',
-    prop: 'url',
-    width: 160,
-    showOverflowTooltip: true
-  },
+  // {
+  //   label: '官网',
+  //   type: 'link',
+  //   prop: 'url',
+  //   width: 160,
+  //   showOverflowTooltip: true
+  // },
   {
     label: '分类',
     type: 'dict',
@@ -88,7 +88,8 @@ const tableColumns = ref([
   },
   {
     label: '修改时间',
-    prop: 'updateTime'
+    prop: 'updateTime',
+    width: 220
   },
   {
     type: 'operation',

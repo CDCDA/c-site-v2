@@ -18,9 +18,7 @@
       <MoreButton />
     </div>
     <ul v-show="visible" :style="{ left: left + 'px', top: top + 'px' }" class="contextmenu">
-      <!--      <li @click="refreshSelectedTag(selectedTag)">-->
-      <!--        <i class="el-icon-refresh-right"></i> {{ '刷新页面' }}-->
-      <!--      </li>-->
+      <li @click="refreshSelectedTag(selectedTag)"><Refresh /> {{ '刷新页面' }}</li>
       <li v-if="!isAffix(selectedTag)" @click="closeSelectedTag(selectedTag)">
         <i class="el-icon-close"></i> {{ '关闭当前' }}
       </li>
@@ -63,7 +61,6 @@ onMounted(() => {
 
 const addTab = (tab: any) => {
   const existTabs = tabsViewStore.visitedViews.filter((x: any) => x.name === tab.name);
-  console.log('val', tab, existTabs);
   if (existTabs.length === 0) {
     tabsViewStore.visitedViews.push(tab);
   }

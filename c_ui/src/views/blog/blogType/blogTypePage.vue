@@ -68,6 +68,7 @@ import useUserStore from '@/store/modules/user';
 import Pagination from '@/components/pagination/index.vue';
 import { formatDate } from '@/utils/date.ts';
 import { useRouter } from 'vue-router';
+import { loadingService } from '@/components/loading/loading.ts';
 import { Calendar } from '@element-plus/icons-vue';
 const router = useRouter();
 const userStore = useUserStore();
@@ -129,8 +130,10 @@ async function getBlogList() {
 }
 
 // 博客详情
-function toDetail(item: any) {
-  router.push({ name: 'blogDisplay', query: { blogId: item.blogId } });
+async function toDetail(item: any) {
+  loadingService.show({ type: 'loading', text: '跳转中...' });
+  await router.push({ name: 'blogDisplay', query: { blogId: item.blogId } });
+  loadingService.hide();
 }
 
 onMounted(() => {

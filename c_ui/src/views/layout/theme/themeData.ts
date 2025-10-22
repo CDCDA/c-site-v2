@@ -6,24 +6,24 @@ export const themes = [
     background: 'linear-gradient(to right, rgba(55, 57, 58, 0.95), rgb(35 37 38 / 95%))',
     active: true
   },
-  {
-    key: 'theme-light',
-    label: '棕黄',
-    background: 'linear-gradient(to right, rgb(236 233 230 / 95%), rgb(255 255 255 / 95%))',
-    active: false
-  },
+  // {
+  //   key: 'theme-light',
+  //   label: '棕黄',
+  //   background: 'linear-gradient(to right, rgb(236 233 230 / 95%), rgb(255 255 255 / 95%))',
+  //   active: false
+  // },
   {
     key: 'theme-white',
     label: '白色',
     background: 'rgb(255 255 255 / 95%)',
     active: false
-  },
-  {
-    key: 'theme-green',
-    label: '青色',
-    background: 'linear-gradient(to right, rgb(61 159 169/90%), rgb(12 51 76/90%))',
-    active: false
   }
+  // {
+  //   key: 'theme-green',
+  //   label: '青色',
+  //   background: 'linear-gradient(to right, rgb(61 159 169/90%), rgb(12 51 76/90%))',
+  //   active: false
+  // }
 ];
 
 //字体

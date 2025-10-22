@@ -28,14 +28,9 @@ const searchColumns = ref([
     labelWidth: 70
   },
   {
-    type: 'datepicker',
-    label: '更新时间',
-    prop: 'dateRange',
-    dateType: 'daterange',
-    rangeSeparator: '至',
-    startPlaceholder: '开始日期',
-    endPlaceholder: '结束日期',
-    valueFormat: 'YYYY-MM-DD'
+    type: 'dateRange',
+    label: '创建时间',
+    prop: 'dateRange'
   }
 ]) as any;
 

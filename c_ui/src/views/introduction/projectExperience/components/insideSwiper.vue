@@ -22,9 +22,10 @@
       <c-image
         :src="image"
         :preview="true"
+        :lazy="false"
         :initial-index="index"
         :previewSrcList="item.images"
-      ></c-image>
+      />
     </swiper-slide>
     <template #container-end>
       <div class="autoplay-progress">

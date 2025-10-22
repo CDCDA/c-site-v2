@@ -7,8 +7,8 @@
       <template #front>
         <div class="stack-item-list">
           <div class="stack-item-col" v-for="item in techStackData">
-            <el-image class="stack-item" :src="item.upStack.url"></el-image>
-            <el-image class="stack-item" :src="item.downStack.url"></el-image>
+            <c-image class="stack-item" :src="item.upStack.url" />
+            <c-image class="stack-item" :src="item.downStack.url" />
           </div>
         </div>
       </template>
@@ -51,12 +51,15 @@ import cardFlip from '@/components/cardFlip/index.vue';
   width: 100%;
   height: 100%;
   z-index: 1;
+  padding: 0 20px;
+  pointer-events: none;
   // background: get('bk');
   .stack-tag {
     border: 1px solid #d1d1d1;
     border-radius: 12px;
-    padding: 5px 20px;
-    margin: 10px;
+    padding: 5px 10px;
+    pointer-events: none;
+    margin: 5px;
     background: white;
     @include flex;
     .el-image {

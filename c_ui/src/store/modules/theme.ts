@@ -18,6 +18,7 @@ const useThemeStore = defineStore('theme', () => {
   const backType = ref('img');
   const imgWallpaperList = ref<any[]>([]);
   const isCollapse = ref(false);
+  const language = ref('zh_cn');
   //背景url
   const backUrl = ref(new URL('@/assets/images/宇宙天际.jpg', import.meta.url).href);
   //外观设置
@@ -40,7 +41,8 @@ const useThemeStore = defineStore('theme', () => {
     options,
     backUrl,
     isCollapse,
-    imgWallpaperList
+    imgWallpaperList,
+    language
   };
 });
 

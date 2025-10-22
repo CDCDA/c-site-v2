@@ -187,14 +187,6 @@ if (userData) {
   userStore.avatar = userData.avatar;
 }
 
-async function getBackList(themeStore: any) {
-  const { code, rows } = (await pageWallpapers({ type: 'img' })) as any;
-  if (code === 200) {
-    themeStore.imgWallpaperList = rows;
-    window.localStorage.setItem('themeData', JSON.stringify(themeStore));
-  }
-}
-
 async function init() {
   let appTheme = document.querySelector('#app-theme') as any;
   // 获取缓存的主题数据
@@ -206,7 +198,6 @@ async function init() {
     themeStore.backType = themeData.backType ? themeData.backType : 'img';
     themeStore.options = themeData.options ? themeData.options : [];
   }
-  // getBackList(themeStore);
   var { theme, backUrl, options, backType } = themeStore;
   // 设置主题
   appTheme.setAttribute('data-theme', theme);
@@ -256,7 +247,7 @@ onMounted(() => {
     themeStore.isFooterShow = false;
     themeStore.isShow = false;
   }
-
+  // getBackList(themeStore);
   // setTimeout(() => {
   //   const webSocketStore = useWebSocketStore();
   //   webSocketStore.connectWebSocket({
