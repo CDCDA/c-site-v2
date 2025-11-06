@@ -17,5 +17,6 @@
         </where>
         GROUP BY
         to_char(operate_time, 'YYYY年MM月')
+        order by operate_time desc
     </select>
 </mapper>

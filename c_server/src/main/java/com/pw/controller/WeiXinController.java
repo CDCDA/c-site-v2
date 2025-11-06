@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.core.toolkit.ObjectUtils;
 import com.pw.common.controller.BaseController;
 import com.pw.common.controller.convertController;
 import com.pw.common.utils.WeixinUtils;
-import com.pw.domain.Message;
+import com.pw.domain.WeixinMessage;
 import com.pw.domain.WeixinTemplate;
 import com.pw.service.UserService;
 import com.pw.service.impl.TokenService;
@@ -25,8 +25,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import static com.pw.common.utils.WeixinUtils.*;
 
 @Component
 @RestController
@@ -90,7 +88,7 @@ public class WeiXinController extends BaseController implements convertControlle
      * @throws Exception
      */
     @PostMapping
-    public String receiveMessage(@RequestBody Message requestMessage, HttpServletResponse response) throws IOException {
+    public String receiveMessage(@RequestBody WeixinMessage requestMessage, HttpServletResponse response) throws IOException {
         String fromUserName = requestMessage.getFromUserName();
         String toUserName = requestMessage.getToUserName();
         String type = requestMessage.getMsgType();

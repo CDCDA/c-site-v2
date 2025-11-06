@@ -1,6 +1,8 @@
 package com.pw.config;
 
 import com.pw.common.handler.CustomWebSocketHandler;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.socket.WebSocketHandler;
@@ -15,17 +17,18 @@ import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry
  **/
 @Configuration
 @EnableWebSocket
+@Slf4j
 public class WebSocketConfig implements WebSocketConfigurer {
+
+    @Autowired
+    private CustomWebSocketHandler customWebSocketHandler;
 
     @Override
     public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
-        registry.addHandler(webSocketHandler(), "/websocket")
-                .setAllowedOrigins("*"); // 允许跨域访问
-    }
+        log.info("🔧 注册 WebSocket 端点: /ws");
 
-    @Bean
-    public WebSocketHandler webSocketHandler() {
-        // 使用自定义的WebSocket处理器
-        return new CustomWebSocketHandler();
+        registry.addHandler(customWebSocketHandler, "/ws")
+                .setAllowedOrigins("*")
+                .setAllowedOriginPatterns("*"); // 同时设置两者确保兼容性
     }
 }

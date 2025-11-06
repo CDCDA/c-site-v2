@@ -3,8 +3,10 @@ package com.pw.controller;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.pw.common.controller.BaseController;
 import com.pw.common.controller.convertController;
+import com.pw.common.utils.JwtTokenUtil;
 import com.pw.common.utils.Result;
 import com.pw.domain.User;
+import com.pw.dto.UserPasswordDTO;
 import com.pw.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 import static com.pw.common.utils.PassWordUtil.encodePassword;
+import static com.pw.common.utils.PassWordUtil.matches;
 import static com.pw.common.utils.ResultUtil.*;
 import static com.pw.common.utils.ConvertWrapper.convertWrap;
 import static com.pw.common.utils.pageUtil.setPage;
@@ -59,6 +62,21 @@ public class UserController extends BaseController implements convertController 
         }
         return resultExit(userService.updateById(user));
     }
+
+    @PutMapping("/update-password")
+    @Operation(summary = "修改密码")
+    public Result update(@Valid @RequestBody UserPasswordDTO userPasswordDTO) {
+        User user = userService.getUserByUserId(JwtTokenUtil.getLoginUserId());
+        if (ObjectUtils.isEmpty(user)) {
+            return Result.error("用户不存在");
+        }
+        if (!matches(userPasswordDTO.getOldPassword(), user.getPassword())) {
+            return Result.error("旧密码错误");
+        }
+        user.setPassword(encodePassword(userPasswordDTO.getNewPassword()));
+        return resultExit(userService.updateById(user));
+    }
+
 
     @DeleteMapping("/{id}")
     @Operation(summary = "删除用户")

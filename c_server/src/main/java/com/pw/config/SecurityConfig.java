@@ -28,6 +28,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         // 允许访问的接口路径
                         .requestMatchers(
+                                "/prod-api/**",
                                 "/auth/**",
                                 "/user/**",
                                 "/public/**",
@@ -44,7 +45,8 @@ public class SecurityConfig {
                                 // 其他静态资源
                                 "/css/**",
                                 "/js/**",
-                                "/images/**"
+                                "/images/**",
+                                "/ws/**"
                         ).permitAll()
                         .anyRequest().authenticated()
                 )

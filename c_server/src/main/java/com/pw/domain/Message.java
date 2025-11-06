@@ -1,68 +1,50 @@
 package com.pw.domain;
 
-import lombok.Data;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+import com.pw.common.entity.BaseEntity;
 
-import jakarta.xml.bind.annotation.XmlAccessType;
-import jakarta.xml.bind.annotation.XmlAccessorType;
-import jakarta.xml.bind.annotation.XmlElement;
-import jakarta.xml.bind.annotation.XmlRootElement;
+
+import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.io.Serializable;
 
 /***
  * @author cyd
- * @date 2024/10/11 13:32
- * @description <>
+ * @date 2023/5/17 11:35
+ * @description <消息>
  **/
 @Data
-//指定xml的根节点
-@XmlRootElement(name = "xml")
-//指定Xml映射的生效范围
-@XmlAccessorType(XmlAccessType.FIELD)
-public class Message {
-    /**
-     * 开发者微信号
-     */
-    //指定Xml映射节点名
-    @XmlElement(name = "ToUserName")
-    protected String toUserName;
-    /**
-     * 发送方账号（一个OpenID）
-     */
-    @XmlElement(name = "FromUserName")
-    protected String fromUserName;
-    /**
-     * 消息类型，文本为text
-     */
-    @XmlElement(name = "MsgType")
-    protected String msgType;
-    /**
-     * 消息id，64位整型
-     */
-    @XmlElement(name = "MsgId")
-    protected String msgId;
-    /**
-     * 消息的数据ID（消息如果来自文章时才有）
-     */
-    @XmlElement(name = "MsgDataId")
-    protected String msgDataId;
-    /**
-     * 多图文时第几篇文章，从1开始（消息如果来自文章时才有）
-     */
-    @XmlElement(name = "Idx")
-    protected Long idx;
-    /**
-     * 消息创建时间 （整型）
-     */
-    @XmlElement(name = "CreateTime")
-    protected Long createTime;
-    /**
-     * 文本消息内容
-     */
-    @XmlElement(name = "Content")
+@AllArgsConstructor
+@NoArgsConstructor
+@TableName("message")
+@Schema(name = "消息")
+public class Message extends BaseEntity implements Serializable {
+
+    @TableId
+    @JsonSerialize(using = ToStringSerializer.class)
+    @Schema(description = "消息id")
+    private Long id;
+
+    @Schema(description = "0:未读,1:已读")
+    private String isRead;
+
+    @Schema(description = "标题")
+    private String title;
+
+    @Schema(description = "内容")
     private String content;
 
-    /**
-     * 事件类型
-     */
-    @XmlElement(name = "Event")
-    private String event;
+    @JsonSerialize(using = ToStringSerializer.class)
+    @Schema(description = "发送人id")
+    private Long senderId;
+
+    @JsonSerialize(using = ToStringSerializer.class)
+    @Schema(description = "接收人id")
+    private Long receiverId;
 }
