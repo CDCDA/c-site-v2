@@ -1,3 +1,4 @@
+import i18n from '@/locales/i18n';
 import { defineAsyncComponent } from 'vue';
 
 // 动态加载脚本

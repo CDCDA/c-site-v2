@@ -16,7 +16,7 @@
       </el-carousel-item>
     </el-carousel>
     <div class="divider animated-0s5 c-left">
-      <svg-icon iconName="commonSvg-电影" /> 电影<span>没什么电影看啊</span>
+      <svg-icon iconName="commonSvg-电影" /> {{ $t('电影') }}<span>{{ $t('没什么电影看啊') }}</span>
     </div>
     <div class="drama-list">
       <div class="drama-item" v-for="item in movies">
@@ -37,7 +37,8 @@
       </div>
     </div>
     <div class="divider">
-      <svg-icon iconName="commonSvg-电视播放" />电视剧<span>没什么电视剧看啊</span>
+      <svg-icon iconName="commonSvg-电视播放" />{{ $t('电视剧')
+      }}<span>{{ $t('没什么电视剧看啊') }}</span>
     </div>
     <div class="drama-list">
       <div class="drama-item" v-for="item in teleplays">
@@ -57,7 +58,9 @@
         </div>
       </div>
     </div>
-    <div class="divider"><svg-icon iconName="commonSvg-动漫" />动漫<span>没什么动漫看啊</span></div>
+    <div class="divider">
+      <svg-icon iconName="commonSvg-动漫" />{{ $t('动漫') }}<span>{{ $t('没什么动漫看啊') }}</span>
+    </div>
     <div class="drama-list">
       <div class="drama-item" v-for="item in animations">
         <c-image :src="item.coverUrl" />
@@ -79,6 +82,8 @@
   </div>
 </template>
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+const { t: $t } = useI18n();
 import { ref, onMounted } from 'vue';
 import ParallaxWheelSeeding from './components/parallaxWheelSeeding.vue';
 import { coverImages } from './dramaData.ts';

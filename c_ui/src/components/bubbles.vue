@@ -5,6 +5,8 @@
   <canvas id="bubbles"></canvas>
 </template>
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+const { t: $t } = useI18n();
 import { ref, onMounted } from 'vue';
 import { autoClearTimer } from '@/utils/timer';
 // Canvas Init

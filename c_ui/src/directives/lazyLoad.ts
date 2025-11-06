@@ -1,3 +1,4 @@
+import i18n from '@/locales/i18n';
 // 进入可视页面再加载组件的指令
 import { DirectiveBinding } from 'vue';
 

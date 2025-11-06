@@ -15,16 +15,18 @@
 </template>
 
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+const { t: $t } = useI18n();
 import { ref, onMounted } from 'vue';
 import { pageWallpapers, deleteWallpapers } from '@/api/system/wallpaper';
 import cTable from '@/components/cTable/index.vue';
 import addOrUpdateDialog from './addOrUpdateDialog.vue';
 
 const searchColumns = ref([
-  { type: 'input', label: '壁纸名称', prop: 'name' },
+  { type: 'input', label: $t('壁纸名称'), prop: 'name' },
   {
     type: 'dict',
-    label: '分类',
+    label: $t('分类'),
     prop: 'type',
     dictType: 'wallpaper_type'
   }
@@ -40,53 +42,53 @@ const tableColumns = ref([
   },
   {
     type: 'index',
-    label: '序号',
+    label: $t('序号'),
     width: 55,
     fixed: 'left'
   },
   {
-    label: '封面',
+    label: $t('封面'),
     prop: 'coverUrl',
     type: 'image',
     replaceProp: 'url',
     width: 150
   },
   {
-    label: '壁纸名称',
+    label: $t('壁纸名称'),
     prop: 'name',
     showOverflowTooltip: true
   },
   {
-    label: '类型',
+    label: $t('类型'),
     prop: 'type',
     dictType: 'wallpaper_type',
     type: 'dict'
   },
   {
-    label: '创建时间',
+    label: $t('创建时间'),
     prop: 'createTime',
     width: 220
   },
   {
-    label: '修改时间',
+    label: $t('修改时间'),
     prop: 'updateTime',
     width: 220
   },
   {
     type: 'operation',
-    label: '操作',
+    label: $t('操作'),
     fixed: 'right',
     width: 220,
     buttons: [
       {
         type: 'primary',
-        text: '编辑',
+        text: $t('编辑'),
         operate: 'update',
         click: (row: any) => handleEdit(row)
       },
       {
         type: 'danger',
-        text: '删除',
+        text: $t('删除'),
         operate: 'delete'
       }
     ]
@@ -103,14 +105,14 @@ const addOrUpdateDialogRef = ref(null) as any;
 function handleAdd() {
   addOrUpdateDialogRef.value.init({
     operation: 'add',
-    title: '添加壁纸'
+    title: $t('添加壁纸')
   });
 }
 
 function handleEdit(row: any) {
   addOrUpdateDialogRef.value.init({
     operation: 'update',
-    title: '编辑壁纸',
+    title: $t('编辑壁纸'),
     row
   });
 }

@@ -1,3 +1,4 @@
+import i18n from '@/locales/i18n';
 import request from '@/utils/request';
 
 // 分页
@@ -35,4 +36,11 @@ export const deleteUsers = (ids: any) =>
     url: '/users/batch-delete',
     method: 'delete',
     data: ids
+  });
+
+export const updatePassword = (data: any) =>
+  request({
+    url: '/users/update-password',
+    method: 'put',
+    data
   });

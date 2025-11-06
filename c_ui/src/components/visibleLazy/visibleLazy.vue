@@ -6,6 +6,8 @@
   <SyncComponent v-if="isVisible" class="lazy-main" :calss="animateName" />
 </template>
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+const { t: $t } = useI18n();
 import { ref, onMounted, nextTick } from 'vue';
 const props = defineProps({
   component: null as any,

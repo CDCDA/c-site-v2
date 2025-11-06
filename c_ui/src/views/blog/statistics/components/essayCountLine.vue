@@ -5,6 +5,8 @@
   <baseChart :options="options" class="essay-count-line"></baseChart>
 </template>
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+const { t: $t } = useI18n();
 import { reactive, onMounted, watch, ref } from 'vue';
 import baseChart from '@/components/charts/baseChart.vue';
 import { countEssayByDate } from '@/api/essay.ts';

@@ -8,7 +8,7 @@
       <div class="rotate-menu-item" v-for="menu in menuList" @click="toManage(menu)">
         <c-image :lazy="false" class="rotate-img" :src="menu.meta.src" fit="contain" />
         <div class="rotate-menu-title">
-          {{ menu.meta.title }}
+          {{ $t(menu.meta.title) }}
         </div>
       </div>
       <p></p>
@@ -23,6 +23,8 @@
   </div>
 </template>
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+const { t: $t } = useI18n();
 import { ref, onMounted } from 'vue';
 import routerViewDialog from '@/components/routerViewDialog/index.vue';
 import { useRouter } from 'vue-router';
@@ -34,7 +36,7 @@ const activeMenu = ref({}) as any;
 const routerDialog = ref(null) as any;
 function toManage(menu: any) {
   console.log(menu);
-  title.value = menu.meta.title;
+  title.value = $t(menu.meta.title);
   routerDialog.value.open();
   destroyEvent();
   router.push({ name: menu.name });

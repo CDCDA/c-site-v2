@@ -3,7 +3,7 @@
     <button>
       <span class="spark"></span>
       <span class="backdrop"></span>
-      <span class="text">确定</span>
+      <span class="text">{{ $t('确定') }}</span>
     </button>
     <div class="bodydrop"></div>
   </div>

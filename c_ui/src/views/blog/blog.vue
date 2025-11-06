@@ -22,6 +22,8 @@
 </template>
 
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+const { t: $t } = useI18n();
 import BlogEditor from './blogEditor.vue';
 import { ref } from 'vue';
 import BlogUser from './components/blogUser.vue';

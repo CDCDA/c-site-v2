@@ -10,16 +10,16 @@
       /><span class="tag-name">welcome</span>
     </div>
     <div class="visitor-location">
-      欢迎来自
-      <span>{{ ` ${visitorInfo.location?.regionName} ${visitorInfo.location?.city} ` }}</span
-      >的小伙伴
+      {{ $t('欢迎来自')
+      }}<span>{{ ` ${visitorInfo.location?.regionName} ${visitorInfo.location?.city} ` }}</span
+      >{{ $t('的小伙伴') }}
     </div>
     <div class="visitor-distance">
-      当前位置距离博主 <span>{{ ` ${visitorInfo.location.distance} ` }}</span
-      >公里
+      {{ $t('当前位置距离博主') }}<span>{{ ` ${visitorInfo.location.distance} ` }}</span
+      >{{ $t('公里') }}
     </div>
     <div class="visitor-ip">
-      您的ip地址为<span>{{ ` ${visitorInfo.ip} ` }}</span>
+      {{ $t('您的ip地址为') }}<span>{{ ` ${visitorInfo.ip} ` }}</span>
     </div>
     <div class="visitor-greeting">{{ getGreeting() }}</div>
     <div class="visitor-salutation">{{ getSalutation() }}</div>
@@ -27,6 +27,8 @@
 </template>
 
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+const { t: $t } = useI18n();
 import { onMounted, ref, reactive } from 'vue';
 import { useLazyAppear } from '@/utils/lazy';
 import axios from 'axios';
@@ -103,21 +105,21 @@ function getSalutation() {
   if (currentHour <= 6) {
     return '现在是~夜猫子时间！';
   } else if (currentHour > 6 && currentHour <= 7) {
-    return '早起的虫子被鸟吃';
+    return $t('早起的虫子被鸟吃');
   } else if (currentHour > 7 && currentHour <= 9) {
-    return '睡醒的第一件事就是重睡';
+    return $t('睡醒的第一件事就是重睡');
   } else if (currentHour > 9 && currentHour <= 12) {
-    return '现在是超棒的晨间时间，如果你不在工作的话';
+    return $t('现在是超棒的晨间时间，如果你不在工作的话');
   } else if (currentHour > 12 && currentHour <= 15) {
-    return '我先睡了';
+    return $t('我先睡了');
   } else if (currentHour > 15 && currentHour <= 16) {
-    return '三点几了 饮茶先啦';
+    return $t('三点几了 饮茶先啦');
   } else if (currentHour > 15 && currentHour <= 18) {
-    return '上班的等下班，上课等的下课';
+    return $t('上班的等下班，上课等的下课');
   } else if (currentHour > 18 && currentHour <= 19) {
-    return '该吃饭了伙计';
+    return $t('该吃饭了伙计');
   } else if (currentHour > 19 && currentHour <= 23) {
-    return '希望别熬夜，如果熬，建议通宵';
+    return $t('希望别熬夜，如果熬，建议通宵');
   }
 }
 
@@ -125,13 +127,13 @@ function getGreeting() {
   const now = new Date();
   const currentHour = now.getHours();
   if (currentHour <= 6) {
-    return '晚上好';
+    return $t('晚上好');
   } else if (currentHour > 6 && currentHour <= 12) {
-    return '早上好';
+    return $t('早上好');
   } else if (currentHour > 12 && currentHour <= 18) {
-    return '下午好';
+    return $t('下午好');
   } else if (currentHour > 18 && currentHour <= 23) {
-    return '晚上好';
+    return $t('晚上好');
   }
 }
 

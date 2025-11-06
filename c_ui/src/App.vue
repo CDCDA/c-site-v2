@@ -1,9 +1,10 @@
 <!--suppress ALL -->
 <template>
   <div id="app-theme" data-theme="theme-white">
-    <div class="dialog-base"></div>
-    <div class="select-base"></div>
-    <div class="messageBox-base"></div>
+    <div class="dialog-base" />
+    <div class="select-base" />
+    <div class="popper-base" />
+    <div class="messageBox-base" />
     <el-container class="container">
       <el-header class="el-header">
         <common-header v-if="themeStore.isShow" />
@@ -38,6 +39,9 @@
   </div>
 </template>
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+const { t: $t, locale } = useI18n();
+
 import { ref, onMounted, watch } from 'vue';
 import sakura from '@/components/sakura/index.vue';
 import rightClickMenu from '@/components/rightClickMenu/index.vue';
@@ -152,7 +156,7 @@ const options = ref({
 //     if (newValue) {
 //       //菜单显示的时候
 //       // document.body.addEventListener，document.body.removeEventListener它们都接受3个参数
-//       // ("事件名" , "事件处理函数" , "布尔值");
+//       // ($t('事件名') , $t('事件处理函数') , $t('布尔值'));
 //       // 在body上添加事件处理程序
 //       document.body.addEventListener('click', closeMenu);
 //     } else {
@@ -174,17 +178,6 @@ function openMenu(e: any) {
 //关闭菜单
 function closeMenu() {
   visible.value = false; //关闭菜单
-}
-let userData = window.localStorage.getItem('userData') as any;
-if (userData) {
-  userData = JSON.parse(userData) as any;
-  userStore.token = userData.token;
-  userStore.userId = userData.userId;
-  userStore.userName = userData.userName;
-  userStore.permission = userData.permission;
-  userStore.nickName = userData.nickName;
-  userStore.email = userData.email;
-  userStore.avatar = userData.avatar;
 }
 
 async function init() {
@@ -222,12 +215,17 @@ async function init() {
     if (res.data.code === 200) {
       // 上次访问的路由
       const routerStr = window.localStorage.getItem('lastRouter');
-      if (routerStr) {
-        const route = JSON.parse(routerStr) as any;
-        let path = route?.path || '';
-        if (!path) path = '/home';
-        if (path === '/') path = '/home';
-        router.push({ path, query: router?.query });
+      if (routerStr && routerStr !== '{}') {
+        try {
+          const route = JSON.parse(routerStr) as any;
+          let path = route?.path || '';
+          if (!path) path = '/';
+          if (path === '/') path = '/';
+          router.push({ path, query: router?.query });
+        } catch (error) {
+          console.log(error);
+          router.push({ path: '/' });
+        }
       }
     } else {
       router.push({ path: '/login' });
@@ -238,25 +236,28 @@ async function init() {
   }
 }
 
-onMounted(() => {
-  themeStore.isShow = true;
-  // console.log(window.location.href);
-  if (!window.location.href.includes('/manage')) {
-    init();
-  } else {
-    themeStore.isFooterShow = false;
-    themeStore.isShow = false;
+function getLanguage() {
+  let language = window.localStorage.getItem('language') || 'zh_cn';
+  locale.value = language;
+  themeStore.language = language;
+}
+
+let userData = {} as any;
+
+function initUserData() {
+  userData = window.localStorage.getItem('userData') as any;
+  if (userData) {
+    userData = JSON.parse(userData) as any;
+    Object.assign(userStore, userData);
   }
-  // getBackList(themeStore);
-  // setTimeout(() => {
-  //   const webSocketStore = useWebSocketStore();
-  //   webSocketStore.connectWebSocket({
-  //     // onsend: event => {
-  //     //   console.log('订阅数据', 'AAAAAAAAA');
-  //     //   event.currentTarget.send(`{"type": "subscribe", "data": "${'AAA'}"}`);
-  //     // }
-  //   });
-  // }, 3000);
+}
+
+onMounted(() => {
+  initUserData();
+  getLanguage();
+  if (!window.location.href.includes('anage')) {
+    init();
+  }
 });
 </script>
 

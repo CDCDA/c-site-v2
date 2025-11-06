@@ -39,6 +39,8 @@
 </template>
 
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+const { t: $t } = useI18n();
 import { ref, onMounted, watch } from 'vue';
 import { useRouter } from 'vue-router';
 import useUserStore from '@/store/modules/user';
@@ -47,7 +49,7 @@ import comment from '@/components/comment/index.vue';
 const router = useRouter();
 const userStore = useUserStore();
 const open = ref(false);
-const title = ref('评论');
+const title = ref($t('评论'));
 const props = defineProps(['essayData', 'userData', 'visible']);
 const emit = defineEmits(['close']);
 function close() {

@@ -16,6 +16,8 @@
   </div>
 </template>
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+const { t: $t } = useI18n();
 import { onMounted, ref } from 'vue';
 import { pageBlogs } from '@/api/blog';
 import { ElMessage } from 'element-plus';

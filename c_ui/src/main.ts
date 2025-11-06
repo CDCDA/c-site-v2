@@ -17,7 +17,7 @@ import '@/assets/styles/mobile.scss';
 import 'md-editor-v3/lib/preview.css';
 import VueGridLayout from 'vue-grid-layout';
 import router from './router';
-import { i18n } from '../public/locales/i18n';
+import { i18n } from '@/locales/i18n';
 import * as ElementPlusIconsVue from '@element-plus/icons-vue';
 import directives from '@/directives/index';
 import pinia from './store';
@@ -35,13 +35,6 @@ for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
   app.component(key, component);
 }
 
-app.component('svg-icon', SvgIcon);
-app.component('visible-lazy', visibleLazy);
-app.component('c-dialog', dialog);
-app.component('c-image', image);
-app.component('dict-tag', dictTag);
-app.component('dict-select', dictSelect);
-app.provide('$theme', 'theme-light');
 app.use(directives);
 // app.use(VForm3);
 app.use(i18n);
@@ -52,5 +45,12 @@ app.use(router);
 app.use(VueGridLayout);
 app.use(VueLazyComponent);
 
+app.component('svg-icon', SvgIcon);
+app.component('visible-lazy', visibleLazy);
+app.component('c-dialog', dialog);
+app.component('c-image', image);
+app.component('dict-tag', dictTag);
+app.component('dict-select', dictSelect);
+app.provide('$theme', 'theme-light');
 // app.use(MdEditor);
 app.mount('#app');

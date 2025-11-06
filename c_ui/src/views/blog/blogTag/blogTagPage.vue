@@ -55,9 +55,11 @@
 </template>
 
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+const { t: $t } = useI18n();
 import { onMounted, ref } from 'vue';
 import { listWithBlogs } from '@/api/tag';
-import { countBlogsByTag } from '@/api/blog';
+import { pageBlogs, countBlogsByTag } from '@/api/blog';
 import { ElMessage } from 'element-plus';
 import useUserStore from '@/store/modules/user';
 import Pagination from '@/components/pagination/index.vue';
@@ -100,21 +102,21 @@ function getList(item: any) {
 
 async function getBlogList() {
   loading.value = 'rotate';
-  const { code, data } = await listWithBlogs(queryParams.value);
+  const { code, rows, total: totalCount } = await pageBlogs(queryParams.value);
   if (code === 200) {
-    blogList.value = data.list;
+    blogList.value = rows;
     blogList.value.forEach((e: any) => {
       e.tags.length > 5 ? (e.tags.length = 5) : '';
     });
-    total.value = data.total;
-    if (tagList.value[0].tagName !== '全部') {
+    total.value = totalCount;
+    if (tagList.value[0].tagName !== $t('全部')) {
       tagList.value.unshift({
-        tagName: '全部',
+        tagName: $t('全部'),
         isActive: false,
-        total: data.total
+        total: totalCount
       });
     }
-    tagList.value[0].total = data.total;
+    tagList.value[0].total = totalCount;
     loading.value = false;
   }
 }
@@ -195,10 +197,11 @@ onMounted(() => {
       .header-tag-item:hover,
       .header-tag-item.is-active {
         background: get('border-color');
-        color: white;
+        // color: white;
         .tag-item-count {
           color: get('font-color');
         }
+        border: 2px solid get('re-font-color');
       }
     }
     .blog-list-wrap {

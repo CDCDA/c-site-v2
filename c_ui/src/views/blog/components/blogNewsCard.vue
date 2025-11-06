@@ -11,29 +11,31 @@
         <span style="font-size: 0.8rem">{{ news.type }}</span>
       </div>
       <div class="news-title">
-        <span style="font-size: 16px; font-weight: bold">垂直水平居中方法汇总</span>
+        <span style="font-size: 16px; font-weight: bold">{{ $t('垂直水平居中方法汇总') }}</span>
       </div>
       <!-- <div class="news-introduction">
-        <span>垂直水平居中方法汇总</span>
+        <span>{{ $t('垂直水平居中方法汇总') }}</span>
       </div> -->
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+const { t: $t } = useI18n();
 import { formatDate } from '@/utils/date.ts';
 import { ref } from 'vue';
 const newsList = ref([
   {
     // url: require('http://120.48.127.181/file/app-background1.webp'),
     date: formatDate(new Date(), 'YY-MM-dd hh:mm'),
-    type: '前端',
+    type: $t('前端'),
     url: 'http://120.48.127.181/file/2cf465cf-6114-4319-ac33-67bbec0983e2.jpeg'
   },
   {
     // url: require('http://120.48.127.181/file/app-background1.webp'),
     date: formatDate(new Date(), 'YY-MM-dd hh:mm'),
-    type: '前端',
+    type: $t('前端'),
     url: 'http://120.48.127.181/file/2cf465cf-6114-4319-ac33-67bbec0983e2.jpeg'
   }
 ]) as any;

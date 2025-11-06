@@ -60,6 +60,8 @@
 </template>
 
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+const { t: $t } = useI18n();
 import { onMounted, ref } from 'vue';
 import { listTypesWithStats } from '@/api/type';
 import { pageBlogs } from '@/api/blog';
@@ -91,7 +93,7 @@ async function getTypeList() {
       total += e.total;
     });
     typeList.value.unshift({
-      typeName: '全部',
+      typeName: $t('全部'),
       isActive: false,
       total
     });
@@ -131,7 +133,7 @@ async function getBlogList() {
 
 // 博客详情
 async function toDetail(item: any) {
-  loadingService.show({ type: 'loading', text: '跳转中...' });
+  loadingService.show({ type: 'loading', text: $t('跳转中...') });
   await router.push({ name: 'blogDisplay', query: { blogId: item.blogId } });
   loadingService.hide();
 }

@@ -5,7 +5,7 @@
   <c-dialog
     class="search-dialog"
     v-model="dialogVisible"
-    title="搜索"
+    :title="$t('搜索')"
     width="30rem"
     @close="emit('close')"
     style="height: 400px"
@@ -27,7 +27,7 @@
       <div class="c-divider"></div>
       <div class="finder__outer finder-list">
         <div class="finder-list-item" v-for="item in resultRoutes" @click="routeTo(item)">
-          <span>{{ item.meta.title }}</span>
+          <span>{{ $t(item.meta.title) }}</span>
           <svg-icon iconName="commonSvg-右" />
         </div>
       </div>
@@ -35,6 +35,8 @@
   </c-dialog>
 </template>
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+const { t: $t } = useI18n();
 import { ref, nextTick, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import { autoClearTimer } from '@/utils/timer';

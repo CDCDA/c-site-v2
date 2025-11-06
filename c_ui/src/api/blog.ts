@@ -2,7 +2,7 @@
  * @Description: 博客接口
  * @Author: cyd 1205489124@qq.com
  * @Date: 2023-07-07 16:59:41
- * @LastEditTime: 2025-10-20 10:57:14
+ * @LastEditTime: 2025-10-24 18:08:42
  */
 import request from '@/utils/request';
 // 分页
@@ -19,6 +19,8 @@ export const listBlogsByType = (params: any) =>
     method: 'get',
     params
   });
+
+  
 
 // 保存
 export const saveBlog = (params: any) =>

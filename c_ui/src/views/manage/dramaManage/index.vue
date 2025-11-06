@@ -15,6 +15,8 @@
 </template>
 
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+const { t: $t } = useI18n();
 import { ref, onMounted } from 'vue';
 import { pageDramas, deleteDramas } from '@/api/dramaSeries.ts';
 import cTable from '@/components/cTable/index.vue';
@@ -23,12 +25,12 @@ import addOrUpdateDialog from './addOrUpdateDialog.vue';
 const searchColumns = ref([
   {
     type: 'input',
-    label: '影视名称',
+    label: $t('影视名称'),
     prop: 'name',
-    placeholder: '请输入影视名称'
+    placeholder: $t('请输入影视名称')
   },
   {
-    label: '分类',
+    label: $t('分类'),
     prop: 'type',
     type: 'dict',
     dictType: 'drama_type'
@@ -45,59 +47,59 @@ const tableColumns = ref([
   },
   {
     type: 'index',
-    label: '序号',
+    label: $t('序号'),
     width: 55,
     fixed: 'left'
   },
   {
     type: 'image',
-    label: '封面',
+    label: $t('封面'),
     prop: 'coverUrl',
     width: 150
   },
   {
-    label: '名称',
+    label: $t('名称'),
     prop: 'name',
     width: 220,
     showOverflowTooltip: true
   },
   {
-    label: '简介',
+    label: $t('简介'),
     prop: 'intro',
     showOverflowTooltip: true
   },
   {
-    label: '分类',
+    label: $t('分类'),
     prop: 'type',
     width: 150,
     type: 'dict',
     dictType: 'drama_type'
   },
   {
-    label: '创建时间',
+    label: $t('创建时间'),
     prop: 'createTime',
     width: 220
   },
   {
-    label: '修改时间',
+    label: $t('修改时间'),
     prop: 'updateTime',
     width: 220
   },
   {
     type: 'operation',
-    label: '操作',
+    label: $t('操作'),
     fixed: 'right',
     width: 220,
     buttons: [
       {
         type: 'primary',
-        text: '编辑',
+        text: $t('编辑'),
         operate: 'update',
         click: (row: any) => handleEdit(row)
       },
       {
         type: 'danger',
-        text: '删除',
+        text: $t('删除'),
         operate: 'delete'
       }
     ]
@@ -114,14 +116,14 @@ const addOrUpdateDialogRef = ref(null) as any;
 function handleAdd() {
   addOrUpdateDialogRef.value.init({
     operation: 'add',
-    title: '添加影视'
+    title: $t('添加影视')
   });
 }
 
 function handleEdit(row: any) {
   addOrUpdateDialogRef.value.init({
     operation: 'update',
-    title: '编辑影视',
+    title: $t('编辑影视'),
     row
   });
 }

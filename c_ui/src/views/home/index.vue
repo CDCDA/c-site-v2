@@ -79,6 +79,8 @@
   </div>
 </template>
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+const { t: $t } = useI18n();
 import { onMounted, defineAsyncComponent, ref, watch } from 'vue';
 import { pageBlogs, listBlogsByType } from '@/api/blog';
 import { ElMessage } from 'element-plus';
@@ -90,6 +92,7 @@ import { autoClearTimer } from '@/utils/timer';
 import Pagination from '@/components/pagination/index.vue';
 import { verifyToken } from '@/api/system/auth';
 import { useLazyAppear } from '@/utils/lazy';
+import { loadingService } from '@/components/loading/loading.ts';
 const BlogUserCard = defineAsyncComponent(() => import('@/views/blog/components/blogUserCard.vue'));
 const WeatherCard = defineAsyncComponent(() => import('./components/weatherCard.vue'));
 const BlogTypeCard = defineAsyncComponent(() => import('@/views/blog/components/blogTypeCard.vue'));
@@ -108,12 +111,12 @@ const theme = ref('') as any;
 const loading = ref('rotate') as any;
 
 const slogans = ref([
-  '记录',
-  '来逛逛吧',
-  '生活不只有眼前的苟且',
-  '还有远方的苟且',
-  '几年很快的',
-  '风一吹就没了'
+  $t('记录'),
+  $t('来逛逛吧'),
+  $t('生活不只有眼前的苟且'),
+  $t('还有远方的苟且'),
+  $t('几年很快的'),
+  $t('风一吹就没了')
 ]) as any;
 
 const headerList = ref([]) as any;
@@ -174,7 +177,9 @@ function formateToDay(date: any) {
 
 // 博客详情
 function toDetail(item: any) {
+  loadingService.show({ type: 'loading', text: $t('正在跳转...') });
   router.push({ name: 'blogDisplay', query: { blogId: item.blogId } });
+  loadingService.hide();
 }
 
 // 打字效果

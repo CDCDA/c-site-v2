@@ -2,44 +2,46 @@
 <template>
   <c-dialog v-model="open" :title="title" width="500" :modal="true">
     <el-form :model="form" label-width="60" ref="formRef" :rules="rules">
-      <el-form-item label="美食名" prop="name">
+      <el-form-item :label="$t('美食名')" prop="name">
         <el-input v-model="form.name" clearable />
       </el-form-item>
-      <el-form-item label="封面" prop="coverUrl">
+      <el-form-item :label="$t('封面')" prop="coverUrl">
         <div style="display: flex; align-items: center; gap: 10px">
           <el-radio-group v-model="fromNet" size="small">
-            <el-radio-button :label="true">网络图片</el-radio-button>
-            <el-radio-button :label="false">本地上传</el-radio-button>
+            <el-radio-button :label="true">{{ $t('网络图片') }}</el-radio-button>
+            <el-radio-button :label="false">{{ $t('本地上传') }}</el-radio-button>
           </el-radio-group>
           <upload v-if="!fromNet" v-model="form.coverUrl" path="gourmet" />
-          <el-input v-else v-model="form.coverUrl" clearable placeholder="请输入图片URL" />
+          <el-input v-else v-model="form.coverUrl" clearable :placeholder="$t('请输入图片URL')" />
         </div>
       </el-form-item>
-      <el-form-item label="做法" prop="url">
-        <el-input v-model="form.url" clearable placeholder="请输入做法链接或描述" />
+      <el-form-item :label="$t('做法')" prop="url">
+        <el-input v-model="form.url" clearable :placeholder="$t('请输入做法链接或描述')" />
       </el-form-item>
-      <el-form-item label="简介" prop="intro">
+      <el-form-item :label="$t('简介')" prop="intro">
         <el-input
           type="textarea"
           :rows="3"
           maxlength="100"
           show-word-limit
           v-model="form.intro"
-          placeholder="写点什么吧。。。"
+          :placeholder="$t('写点什么吧。。。')"
           clearable
         />
       </el-form-item>
     </el-form>
     <template #footer>
       <span class="dialog-footer">
-        <el-button @click="open = false">取消</el-button>
-        <el-button type="primary" @click="submit"> 确定 </el-button>
+        <el-button @click="open = false">{{ $t('取消') }}</el-button>
+        <el-button type="primary" @click="submit"> {{ $t('确定') }}</el-button>
       </span>
     </template>
   </c-dialog>
 </template>
 
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+const { t: $t } = useI18n();
 import { ref, onMounted, watch } from 'vue';
 import { saveCate, updateCate, getCateById } from '@/api/cate.ts';
 import { ElNotification } from 'element-plus';
@@ -50,8 +52,8 @@ const open = ref(false) as any;
 const fromNet = ref(true) as any;
 
 const rules = ref({
-  name: [{ required: true, message: '请输入美食名称', trigger: 'blur' }],
-  coverUrl: [{ required: true, message: '请上传封面或输入图片URL', trigger: 'blur' }]
+  name: [{ required: true, message: $t('请输入美食名称'), trigger: 'blur' }],
+  coverUrl: [{ required: true, message: $t('请上传封面或输入图片URL'), trigger: 'blur' }]
 });
 
 const title = ref('');
@@ -99,7 +101,7 @@ function submit() {
     if (!valid) return;
     const { code } = !form.value.id ? await saveCate(form.value) : await updateCate(form.value);
     if (code === 200) {
-      ElNotification.success(!form.value.id ? '新增成功' : '修改成功');
+      ElNotification.success(!form.value.id ? $t('新增成功') : $t('修改成功'));
       emit('getList');
       open.value = false;
     }

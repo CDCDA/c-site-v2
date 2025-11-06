@@ -21,14 +21,14 @@
         <div class="recommend-left">
           <div class="recommend-left-top">
             <div class="recommd-left-title">
-              <span>我的技术栈</span>
+              <span>{{ $t('我的技术栈') }}</span>
             </div>
             <TechnologyStackCard
               class="recommd-left-stack"
               :isHoverShow="false"
             ></TechnologyStackCard>
             <div class="recommend-left-top-cover" @click="toRange()">
-              <div>随便逛逛</div>
+              <div>{{ $t('随便逛逛') }}</div>
               <svg-icon iconName="commonSvg-right" style="color: white"></svg-icon>
             </div>
           </div>
@@ -37,22 +37,25 @@
               class="bottom-item"
               @click="router.push({ name: 'blogTypePage', query: { typeId: '1' } })"
             >
-              <span>前端小记</span><svg-icon iconName="commonSvg-book" />
+              <span>{{ $t('前端小记') }}</span
+              ><svg-icon iconName="commonSvg-book" />
             </div>
             <div
               class="bottom-item"
               @click="router.push({ name: 'blogTypePage', query: { typeId: '2' } })"
             >
-              <span>后端总结</span><svg-icon iconName="commonSvg-hot" />
+              <span>{{ $t('后端总结') }}</span
+              ><svg-icon iconName="commonSvg-hot" />
             </div>
             <div class="bottom-item" @click="router.push({ name: 'essay' })">
-              <span>生活随笔</span><svg-icon iconName="commonSvg-edit" />
+              <span>{{ $t('生活随笔') }}</span
+              ><svg-icon iconName="commonSvg-edit" />
             </div>
           </div>
         </div>
         <div class="recommend-right">
           <div class="right-item" v-for="item in tRecommends" @click="toDetail(item)">
-            <div class="icon-rec">荐</div>
+            <div class="icon-rec">{{ $t('荐') }}</div>
             <c-image class="item-image" :src="item.coverUrl"></c-image>
             <div class="item-title">
               <el-text truncated>
@@ -135,6 +138,8 @@
   </div>
 </template>
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+const { t: $t } = useI18n();
 import { onMounted, ref, watch } from 'vue';
 import { pageBlogs } from '@/api/blog';
 import { ElMessage } from 'element-plus';
@@ -158,19 +163,19 @@ const loading = ref('rotate') as any;
 
 const headerList = ref([
   {
-    text: '加了个滚动技术栈',
+    text: $t('加了个滚动技术栈'),
     routerName: 'main'
   },
   {
-    text: '相册已完成',
+    text: $t('相册已完成'),
     routerName: 'album'
   },
   {
-    text: '修整了一下首页',
+    text: $t('修整了一下首页'),
     routerName: 'main'
   },
   {
-    text: '放假放假放假',
+    text: $t('放假放假放假'),
     routerName: 'essay'
   }
 ]) as any;
@@ -217,7 +222,7 @@ async function getTypeTree() {
       total += e.total;
     });
     typeList.value.unshift({
-      typeName: '全部',
+      typeName: $t('全部'),
       isActive: false,
       total
     });

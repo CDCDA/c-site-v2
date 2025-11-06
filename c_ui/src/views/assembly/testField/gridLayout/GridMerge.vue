@@ -1,12 +1,12 @@
 <template>
   <div class="grid-container">
     <div class="grid-tools">
-      <el-input-number v-model="rowLength" placeholder="请输入行数" class="tool-item" />
-      <el-input-number v-model="colLength" placeholder="请输入列数" class="tool-item" />
-      <el-button @click="reset" class="tool-item">重置</el-button>
-      <el-button @click="handleMerge" class="tool-item">合并</el-button>
-      <el-button @click="handleClear" class="tool-item">清空选择</el-button>
-      <el-button @click="mode = 'designComponent'" class="tool-item">设计组件</el-button>
+      <el-input-number v-model="rowLength" :placeholder="$t('请输入行数')" class="tool-item" />
+      <el-input-number v-model="colLength" :placeholder="$t('请输入列数')" class="tool-item" />
+      <el-button @click="reset" class="tool-item">{{ $t('重置') }}</el-button>
+      <el-button @click="handleMerge" class="tool-item">{{ $t('合并') }}</el-button>
+      <el-button @click="handleClear" class="tool-item">{{ $t('清空选择') }}</el-button>
+      <el-button @click="mode = 'designComponent'" class="tool-item">{{ $t('设计组件') }}</el-button>
     </div>
     <!-- 网格内容 -->
     <div
@@ -74,14 +74,14 @@ const handleMerge = () => {
   console.log(selectedCells);
 
   if (selectedCells.length < 2) {
-    ElMessage.error('请至少选择2个单元格');
+    ElMessage.error($t('请至少选择2个单元格'));
     return;
   }
 
   // 1. 检查是否包含已合并单元格
   const hasMergedCell = selectedCells.some(cell => cell.merge);
   if (hasMergedCell) {
-    ElMessage.error('选中区域包含已合并单元格，请先取消合并');
+    ElMessage.error($t('选中区域包含已合并单元格，请先取消合并'));
     return;
   }
 
@@ -95,12 +95,12 @@ const handleMerge = () => {
     (rows[rows.length - 1] - rows[0] + 1) * (cols[cols.length - 1] - cols[0] + 1);
 
   if (selectedCells.length !== expectedCount) {
-    ElMessage.error('选中的单元格必须形成一个矩形区域');
+    ElMessage.error($t('选中的单元格必须形成一个矩形区域'));
     return;
   }
 
   // 合并逻辑实现
-  console.log('执行合并操作', selectedCells);
+  console.log($t('执行合并操作'), selectedCells);
   selectedCells.forEach((item, index) => {
     if (index !== 0) {
       item.hidden = true;

@@ -4,10 +4,10 @@
 <template>
   <div class="blog-user-card c-card" ref="blogUserCard" id="blog-user-card">
     <div class="filter-bg">
-      <div class="user-header">熬夜成仙吧</div>
+      <div class="user-header">{{ $t('熬夜成仙吧') }}</div>
       <div class="user-avatar">
         <el-avatar :src="userInfo.avatar"></el-avatar>
-        <div class="intro">我是一名全栈开发工程师</div>
+        <div class="intro">{{ $t('我是一名全栈开发工程师') }}</div>
       </div>
       <div class="user-footer">
         <div class="footer-leftSide">
@@ -34,6 +34,8 @@
 </template>
 
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+const { t: $t } = useI18n();
 import { ref, onMounted } from 'vue';
 import useUserStore from '@/store/modules/user';
 import { getUserById } from '@/api/system/user';
@@ -83,7 +85,7 @@ onMounted(() => {
     overflow: hidden;
     padding: 0 !important;
     width: calc(100%) !important;
-    background: url('http://120.48.127.181/file/avatar/Ruins.jpg') center 28% / cover no-repeat !important;
+    background: url('http://120.48.127.181/file/other/Ruins.jpg') center 28% / cover no-repeat !important;
     color: get('re-font-color') !important;
     .user-header {
       height: 24px;

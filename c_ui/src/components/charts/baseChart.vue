@@ -5,6 +5,8 @@
   <div class="base-chart" :id="id"></div>
 </template>
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+const { t: $t } = useI18n();
 import * as echarts from 'echarts';
 import { onMounted, watch, nextTick } from 'vue';
 

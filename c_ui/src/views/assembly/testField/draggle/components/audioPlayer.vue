@@ -9,12 +9,11 @@
       preload="auto"
     >
       <source :src="props.song.musicUrl" type="audio/mpeg" />
-      您的浏览器不支持音频播放
-    </audio>
+      {{ $t('您的浏览器不支持音频播放') }}</audio>
     <div class="audio-right">
       <svg-icon iconName="commonSvg-前一个" class="dialogAudioPlay" @click="preSong"></svg-icon>
       <svg-icon
-        :iconName="commonSvg - audioStatus == 'pause' ? '暂停' : '播放'"
+        :iconName="commonSvg - audioStatus == 'pause' ? $t('暂停') : $t('播放')"
         @click="playAudio"
         class="dialogAudioPlay"
       >
@@ -78,7 +77,7 @@ watch(
   }
 );
 
-const musicName = '夜曲';
+const musicName = $t('夜曲');
 const audioStatus = ref('play');
 const audioStart = ref('0:00');
 const duration = ref('0:00');

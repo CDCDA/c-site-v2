@@ -11,7 +11,7 @@
         <div class="ct-base-info">
           <span class="ct-commentator">{{ props.commentData.nickName }}</span>
           <span class="ct-isBlogger" v-if="props.data?.userId == props.commentData.userId">{{
-            '博主'
+            $t('博主')
           }}</span>
           <span class="ct-time">{{ props.commentData.createTime }}</span>
         </div>
@@ -58,6 +58,8 @@
   </div>
 </template>
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+const { t: $t } = useI18n();
 import { ref, onMounted } from 'vue';
 import commentItem from '@/components/comment/components/commentItem.vue';
 import commentEditor from './commentEditor.vue';
@@ -91,7 +93,7 @@ const props = defineProps({
 const isEditorShow = ref(false) as any;
 
 function getList() {
-  console.log('刷新');
+  console.log($t('刷新'));
   emit('getList');
 }
 

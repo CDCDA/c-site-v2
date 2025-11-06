@@ -1,3 +1,4 @@
+import i18n from '@/locales/i18n';
 import { useDictStore } from '@/store/modules/dict.ts';
 // 根据字典类型查询字典数据信息
 import { getDictDataByDictType } from '@/api/system/dict/dictData';

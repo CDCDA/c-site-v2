@@ -4,10 +4,10 @@
 <template>
   <div id="container"></div>
   <div id="menu">
-    <button id="table">表面</button>
-    <button id="sphere">球体</button>
-    <button id="helix">螺旋</button>
-    <button id="grid">网格</button>
+    <button id="table">{{ $t('表面') }}</button>
+    <button id="sphere">{{ $t('球体') }}</button>
+    <button id="helix">{{ $t('螺旋') }}</button>
+    <button id="grid">{{ $t('网格') }}</button>
   </div>
 </template>
 <script>

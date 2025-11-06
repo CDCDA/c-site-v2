@@ -24,6 +24,8 @@
 </template>
 
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+const { t: $t } = useI18n();
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 
@@ -32,26 +34,26 @@ const data = ref([
   {
     id: '1',
     path: 'personalPage',
-    label: '个人资料'
+    label: $t('个人资料')
   },
   {
     id: '2',
     path: 'blogManage',
-    label: '博客管理'
+    label: $t('博客管理')
   },
   {
     id: '3',
     path: 'typeManage',
-    label: '分类管理'
+    label: $t('分类管理')
   }
   // {
   //   id: '4',
   //   path: 'myCollection',
-  //   label: '我的收藏'
+  //   label: $t('我的收藏')
   // },
   // {
   //   id: '100',
-  //   label: '测试'
+  //   label: $t('测试')
   // }
 ]);
 

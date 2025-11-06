@@ -4,20 +4,16 @@
 <template>
   <div class="page-main slice-main">
     <div class="slice-header">
-      <svg-icon
-        iconName="commonSvg-研磨"
-        style="width: 30px; height: 30px; margin-right: 15px"
-      />一些小组件
+      <svg-icon iconName="commonSvg-研磨" style="width: 30px; height: 30px; margin-right: 15px" />{{
+        $t('一些小组件')
+      }}
     </div>
     <div class="slice-center">
       <div class="slice-item" v-for="(item, i) in sliceList" @click="toSlice(item)">
         <c-image class="slice-item-cover" :src="item.meta.url" />
-        <span class="slice-item-name">{{ item.meta.title }}</span>
+        <span class="slice-item-name">{{ $t(item.meta.title) }}</span>
         <span class="slice-item-divider"></span>
-        <span class="slice-item-instoction no-wrap">{{ item.meta.introduction }}</span>
-        <!-- <div class="instoction-cover">
-          {{ item.introduction }}
-        </div> -->
+        <span class="slice-item-instoction no-wrap">{{ $t(item.meta.introduction) }}</span>
       </div>
     </div>
   </div>
@@ -25,6 +21,8 @@
 </template>
 
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+const { t: $t } = useI18n();
 import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import routerViewDialog from '@/components/routerViewDialog/index.vue';
@@ -34,7 +32,7 @@ const title = ref(null) as any;
 const sliceList = ref([]) as any;
 
 function toSlice(item: any) {
-  title.value = item.meta.title;
+  title.value = $t(item.meta.title);
   routerDialog.value.open();
   router.push({ name: item.name });
 }

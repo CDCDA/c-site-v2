@@ -18,31 +18,33 @@
   </div>
 </template>
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+const { t: $t } = useI18n();
 import { ref } from 'vue';
 const goalList = ref([
   {
     date: '2023-8',
-    goal: '完成网站基础框架'
+    goal: $t('完成网站基础框架')
   },
   {
     date: '2023-9',
-    goal: '完成“博客”模块'
+    goal: $t('完成“博客”模块')
   },
   {
     date: '2023-10',
-    goal: '完成“其他”模块的3个页面'
+    goal: $t('完成“其他”模块的3个页面')
   },
   {
     date: '2023-11',
-    goal: '完成“我的”模块的4个页面'
+    goal: $t('完成“我的”模块的4个页面')
   },
   {
     date: '2023-12',
-    goal: '大体完成个人网站前端修改'
+    goal: $t('大体完成个人网站前端修改')
   },
   {
     date: '2024-1',
-    goal: '网站引用资源和数据都改到服务器'
+    goal: $t('网站引用资源和数据都改到服务器')
   }
 ]) as any;
 </script>

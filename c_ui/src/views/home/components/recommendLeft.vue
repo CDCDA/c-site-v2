@@ -5,31 +5,33 @@
         class="bottom-item"
         @click="router.push({ name: 'blogTypePage', query: { typeId: '1' } })"
       >
-        <span>前端小记</span><svg-icon iconName="commonSvg-书籍" />
+        <span>{{ $t('前端小记') }}</span><svg-icon iconName="commonSvg-书籍" />
       </div>
       <div
         class="bottom-item"
         @click="router.push({ name: 'blogTypePage', query: { typeId: '2' } })"
       >
-        <span>后端总结</span><svg-icon iconName="commonSvg-火焰" />
+        <span>{{ $t('后端总结') }}</span><svg-icon iconName="commonSvg-火焰" />
       </div>
       <div class="bottom-item" @click="router.push({ name: 'essay' })">
-        <span>生活随笔</span><svg-icon iconName="commonSvg-编辑" />
+        <span>{{ $t('生活随笔') }}</span><svg-icon iconName="commonSvg-编辑" />
       </div>
     </div> -->
     <div class="recommend-left-top">
       <div class="recommd-left-title">
-        <span>我的技术栈</span>
+        <span>{{ $t('我的技术栈') }}</span>
       </div>
       <TechnologyStackCard class="recommd-left-stack" :isHoverShow="false" />
       <div class="recommend-left-top-cover" @click="toRange()">
-        <div>随便逛逛</div>
+        <div>{{ $t('随便逛逛') }}</div>
         <svg-icon iconName="commonSvg-右"></svg-icon>
       </div>
     </div>
   </div>
 </template>
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+const { t: $t } = useI18n();
 import { useRouter } from 'vue-router';
 import { getRandomBlog } from '@/api/blog';
 import TechnologyStackCard from '../../introduction/personalProfile/components/technologyStackCard.vue';

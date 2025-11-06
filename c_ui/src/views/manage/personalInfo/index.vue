@@ -13,33 +13,41 @@
           <upload class="user-avatar-upload" v-model="userInfo.avatar" path="avatar" />
           <div class="user-left-detail">
             <el-form ref="formRef" class="info-form" label-width="100" :rules="rules" :model="form">
-              <el-form-item label="入站时间">
+              <el-form-item :label="$t('入站时间')">
                 <span>{{ userInfo.createTime }}</span>
               </el-form-item>
-              <el-form-item label="昵&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;称">
+              <el-form-item
+                :label="$t('昵&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;称')"
+              >
                 <el-input v-model="form.nickName"></el-input>
               </el-form-item>
-              <el-form-item label="账&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;号">
+              <el-form-item
+                :label="$t('账&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;号')"
+              >
                 <span>{{ form.userName }}</span>
               </el-form-item>
-              <el-form-item label="联系电话">
+              <el-form-item :label="$t('联系电话')">
                 <el-input v-model="form.phone"></el-input>
               </el-form-item>
-              <el-form-item label="邮&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;箱">
+              <el-form-item
+                :label="$t('邮&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;箱')"
+              >
                 <el-input v-model="form.email"></el-input>
               </el-form-item>
-              <el-form-item label="性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别">
+              <el-form-item
+                :label="$t('性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别')"
+              >
                 <el-radio-group v-model="form.sex" style="margin-left: 15px">
-                  <el-radio label="0" size="small">男</el-radio>
-                  <el-radio label="1" size="small">女</el-radio>
+                  <el-radio label="0" size="small">{{ $t('男') }}</el-radio>
+                  <el-radio label="1" size="small">{{ $t('女') }}</el-radio>
                 </el-radio-group>
               </el-form-item>
-              <el-form-item label="个人简介">
+              <el-form-item :label="$t('个人简介')">
                 <el-input type="textarea" v-model="form.introduction"></el-input>
               </el-form-item>
               <div class="user-footer">
-                <el-button @click="submit" v-permission="'operate'">保存</el-button>
-                <el-button @click="cancel">取消</el-button>
+                <el-button @click="submit" v-permission="'operate'">{{ $t('保存') }}</el-button>
+                <el-button @click="cancel">{{ $t('取消') }}</el-button>
               </div>
             </el-form>
           </div>
@@ -51,6 +59,8 @@
 </template>
 
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+const { t: $t } = useI18n();
 import { onMounted, ref, reactive } from 'vue';
 import { formatDate } from '@/utils/date';
 import useUserStore from '@/store/modules/user';
@@ -83,7 +93,7 @@ async function submit() {
       if (code === 200) {
         ElNotification({
           title: 'Success',
-          message: '修改成功',
+          message: $t('修改成功'),
           type: 'success'
         });
         getUserInfo(userStore.userId);

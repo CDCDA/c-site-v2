@@ -5,6 +5,8 @@
   <baseChart :options="options" class="game-drama-pie"></baseChart>
 </template>
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+const { t: $t } = useI18n();
 import { reactive, onMounted, watch, ref } from 'vue';
 import baseChart from '@/components/charts/baseChart.vue';
 import { countGamesByType } from '@/api/game.ts';
@@ -114,9 +116,9 @@ async function getGameList() {
     data.forEach((item: any) => {
       let typeName = '';
       if (item.type == '0') {
-        typeName = '单机';
+        typeName = $t('单机');
       } else if (item.type == '1') {
-        typeName = '手游';
+        typeName = $t('手游');
       }
       options.series[0].data.push({
         value: item.total,
@@ -133,11 +135,11 @@ async function getDramaList() {
     data.forEach((item: any) => {
       let typeName = '';
       if (item.type == '0') {
-        typeName = '电影';
+        typeName = $t('电影');
       } else if (item.type == '1') {
-        typeName = '电视剧';
+        typeName = $t('电视剧');
       } else if (item.type == '2') {
-        typeName = '动漫';
+        typeName = $t('动漫');
       }
       options.series[1].data.push({
         value: item.total,

@@ -5,7 +5,7 @@
   <c-dialog
     class="blog-search-dialog"
     v-model="dialogVisible"
-    title="搜索"
+    :title="$t('搜索')"
     width="30rem"
     @close="emit('close')"
     style="height: 460px"
@@ -33,12 +33,14 @@
       </div>
       <div class="c-divider"></div>
       <div class="footer">
-        {{ `找到${blogList.length}条结果` }}
+        {{ `${$t('找到')}${blogList.length}${$t('条结果')}` }}
       </div>
     </div>
   </c-dialog>
 </template>
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+const { t: $t } = useI18n();
 import { ref, nextTick, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import { autoClearTimer } from '@/utils/timer';

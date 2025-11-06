@@ -1,3 +1,4 @@
+import i18n from '@/locales/i18n';
 import { autoClearTimer } from './timer';
 export const useTableResize = () => {
   autoClearTimer(() => {

@@ -4,7 +4,6 @@
       <li
         :class="{ disabled: page <= 1 }"
         :aria-disabled="page <= 1"
-        :arial-label="arialLabel(-1)"
         tabindex="0"
         class="pn prev"
         data-page="-1"
@@ -15,28 +14,27 @@
 
       <div class="pagi-number" style="display: flex; align-items: center; margin-right: 30px">
         <div style="display: flex; align-items: center">
-          <svg-icon iconName="commonSvg-总共" style="height: 25px; width: 25px" /><span
-            >{{ total }}条</span
-          >
+          <svg-icon iconName="commonSvg-总共" style="height: 25px; width: 25px" /><span>{{
+            `${total}${$t('条')}`
+          }}</span>
         </div>
-        <template v-for="(group, index) in slices">
+        <template v-for="(group, index) in slices" :key="'g' + index">
           <li
             v-if="group[0] === -1"
-            :key="'g' + index"
             :data-page="group[1]"
             :data-jumper="index"
-            :arial-label="arialLabel(group[1])"
+            :aria-label="arialLabel(group[1])"
             class="pn jumper"
           >
             <span class="dots">...</span>
           </li>
           <li
-            v-for="i in group"
             v-else
+            v-for="i in group"
             :key="'l' + i"
             :class="{ active: page === i }"
             :data-page="i"
-            :arial-label="arialLabel(i)"
+            :aria-label="arialLabel(i)"
             class="pn"
             role="button"
           >
@@ -45,7 +43,7 @@
         </template>
         <div v-if="showSizes" class="page-size">
           <div class="page-select" @click="showPageList = !showPageList">
-            {{ pageSize }}条/页
+            {{ `${pageSize}${$t('条/页')}` }}
             <div v-if="showPageList" class="select-box">
               <div
                 v-for="(item, index) in pageSizeList"
@@ -63,7 +61,7 @@
       <li
         :class="{ disabled: page >= pages }"
         :aria-disabled="page >= pages"
-        :arial-label="arialLabel(0)"
+        :aria-label="arialLabel(0)"
         tabindex="0"
         class="pn next"
         data-page="0"
@@ -75,163 +73,161 @@
   </div>
 </template>
 
-<script>
+<script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+const { t: $t } = useI18n();
+import { ref, computed, watch, onMounted } from 'vue';
 import { autoClearTimer } from '@/utils/timer';
-export default {
-  name: 'Pagination',
-  props: {
-    page: {
-      type: Number,
-      default: 1
-    },
-    total: {
-      type: Number,
-      default: 0
-    },
-    pageSize: {
-      type: Number,
-      default: 10
-    },
-    onPageChange: {
-      type: Function,
-      default: () => {}
-    },
-    onPageSizeChange: {
-      type: Function,
-      default: () => {}
-    },
-    // 选择分页size
-    showSizes: {
-      type: Boolean,
-      default: true
-    },
-    // 页码list
-    pageSizeList: {
-      type: Array,
-      default: [10, 20, 50]
-    }
-  },
-  data() {
-    return {
-      pages: 0,
-      slices: [[1]],
-      showPageList: false
-    };
-  },
-  watch: {
-    page() {
-      this.updateSlices();
-    },
-    total() {
-      this.updateSlices();
-    },
-    pageSize() {
-      this.updateSlices();
-    }
-  },
-  mounted() {
-    this.updateSlices();
-  },
-  methods: {
-    arialLabel(i) {
-      if (i === -1) {
-        return '上一页';
-      }
-      if (i === 0) {
-        return '下一页';
-      }
-      return `第${i}页`;
-    },
-    updateSlices() {
-      const pages = (this.pages = Math.ceil(this.total / this.pageSize));
-      if (pages < 5) {
-        this.slices = [
-          Array(pages)
-            .fill(1)
-            .map((o, i) => i + 1)
-        ];
-      } else if (this.page < 4) {
-        this.slices = [[1, 2, 3], [-1, 4], [pages]];
-      } else if (pages - this.page < 3) {
-        this.slices = [[1], [-1, 2], [pages - 2, pages - 1, pages]];
-      } else {
-        this.slices = [
-          [1],
-          [-1, 2],
-          [this.page - 1, this.page, this.page + 1],
-          [-1, this.page + 2],
-          [pages]
-        ];
-      }
-    },
-    // 选择size
-    onSize(e) {
-      this.$emit('update:pageSize', e);
-      this.$emit('update:page', 1);
-      this.onPageChange();
-      this.showPageList = false;
-      // this.onPageSizeChange(e);
-      // //const page = Math.ceil(this.total / e);
-      // this.onPageChange(1);
-    },
-    onPage(e) {
-      let target = e.target;
-      if (target.tagName === 'SPAN') {
-        target = target.parentElement;
-      }
-      if (target.className.indexOf('disabled') !== -1 || target.tagName !== 'LI') {
-        return;
-      }
 
-      const page = +target.getAttribute('data-page');
-      const jumper = target.getAttribute('data-jumper');
-      if (jumper) {
-        // this.showJumper(+jumper, target);
-        this.$emit('update:page', page);
-        this.onPageChange(page);
-      } else {
-        this.$emit('update:page', this.calcNextPage(page));
-        this.onPageChange(this.calcNextPage(page));
-      }
-    },
-    calcNextPage(page) {
-      return !page ? this.page + 1 : page < 0 ? this.page - 1 : page;
-    },
-    showJumper(num, target) {
-      if (num && num > 0 && num <= this.pages) {
-        const slices = [...this.slices];
-        slices[num][2] = 1;
-        this.slices = slices;
-        autoClearTimer(() => {
-          target.children[1].focus();
-        }, 100);
-      }
-    },
-    onJump(e) {
-      const val = +e.target.value;
-      if (val && val > 0 && val <= this.pages) {
-        this.onPageChange(val);
-      }
-    },
-    onBlur(e) {
-      const num = +e.target.parentNode.getAttribute('data-jumper');
-      const slices = [...this.slices];
-      slices[num][2] = 0;
-      this.slices = slices;
-    }
+const props = defineProps({
+  page: {
+    type: Number,
+    default: 1
+  },
+  total: {
+    type: Number,
+    default: 0
+  },
+  pageSize: {
+    type: Number,
+    default: 10
+  },
+  onPageChange: {
+    type: Function,
+    default: () => {}
+  },
+  onPageSizeChange: {
+    type: Function,
+    default: () => {}
+  },
+  showSizes: {
+    type: Boolean,
+    default: true
+  },
+  pageSizeList: {
+    type: Array,
+    default: () => [10, 20, 50]
+  }
+});
+
+const emit = defineEmits(['update:page', 'update:pageSize']);
+
+const pages = ref(0);
+const slices = ref([[1]]);
+const showPageList = ref(false);
+
+const updateSlices = () => {
+  pages.value = Math.ceil(props.total / props.pageSize);
+  if (pages.value < 5) {
+    slices.value = [
+      Array(pages.value)
+        .fill(1)
+        .map((o: any, i: number) => {
+          o;
+          return i + 1;
+        })
+    ];
+  } else if (props.page < 4) {
+    slices.value = [[1, 2, 3], [-1, 4], [pages.value]];
+  } else if (pages.value - props.page < 3) {
+    slices.value = [[1], [-1, 2], [pages.value - 2, pages.value - 1, pages.value]];
+  } else {
+    slices.value = [
+      [1],
+      [-1, 2],
+      [props.page - 1, props.page, props.page + 1],
+      [-1, props.page + 2],
+      [pages.value]
+    ];
   }
 };
+
+const arialLabel = (i: any) => {
+  if (i === -1) {
+    return '上一页';
+  }
+  if (i === 0) {
+    return `${$t('下一页')}`;
+  }
+  return `${$t('第')}${i}${$t('页')}`;
+};
+
+const onSize = (e: any) => {
+  emit('update:pageSize', e);
+  emit('update:page', 1);
+  props.onPageChange();
+  showPageList.value = false;
+};
+
+const onPage = (e: any) => {
+  let target = e.target;
+  if (target.tagName === 'SPAN') {
+    target = target.parentElement;
+  }
+  if (target.className.indexOf('disabled') !== -1 || target.tagName !== 'LI') {
+    return;
+  }
+
+  const page = +target.getAttribute('data-page');
+  const jumper = target.getAttribute('data-jumper');
+  if (jumper) {
+    emit('update:page', page);
+    props.onPageChange(page);
+  } else {
+    emit('update:page', calcNextPage(page));
+    props.onPageChange(calcNextPage(page));
+  }
+};
+
+const calcNextPage = (page: any) => {
+  return !page ? props.page + 1 : page < 0 ? props.page - 1 : page;
+};
+
+const showJumper = (num: any, target: any) => {
+  if (num && num > 0 && num <= pages.value) {
+    const newSlices = [...slices.value];
+    newSlices[num][2] = 1;
+    slices.value = newSlices;
+    autoClearTimer(() => {
+      target.children[1].focus();
+    }, 100);
+  }
+};
+
+const onJump = (e: any) => {
+  const val = +e.target.value;
+  if (val && val > 0 && val <= pages.value) {
+    props.onPageChange(val);
+  }
+};
+
+const onBlur = (e: any) => {
+  const num = +e.target.parentNode.getAttribute('data-jumper');
+  const newSlices = [...slices.value];
+  newSlices[num][2] = 0;
+  slices.value = newSlices;
+};
+
+// 监听器
+watch(() => props.page, updateSlices);
+watch(() => props.total, updateSlices);
+watch(() => props.pageSize, updateSlices);
+
+onMounted(() => {
+  updateSlices();
+});
 </script>
+
 <style lang="scss" scoped>
 @include theme() {
   .c-pagination {
-    // font-size: $font-size-second;
     color: get('font-color');
     width: 100%;
     font-weight: 400;
     line-height: 30px;
     display: flex;
     text-align: center;
+
     .pn:active {
       transform: translateY(1px);
     }
@@ -245,6 +241,7 @@ export default {
       padding: 0;
       margin: 0;
     }
+
     .pn {
       float: left;
       list-style: none;
@@ -253,7 +250,6 @@ export default {
       margin-left: 15px;
       text-align: center;
       background: get('re-font-color');
-      // box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.5);
       border: 1px solid get('border-color');
       border-radius: 2px;
       font-size: 0.9rem;
@@ -267,20 +263,24 @@ export default {
       &:first-child {
         margin-left: 0;
       }
+
       &:hover:not(.disabled) {
         background: get('bk');
         color: #fff;
       }
+
       &.active.active {
         background: get('bk');
         color: #fff;
       }
+
       & > .dots {
         display: block;
         font-weight: bold;
         line-height: 30px;
         padding-bottom: 6px;
       }
+
       & > input {
         color: #666;
         border: 0;
@@ -288,6 +288,7 @@ export default {
         max-width: 40px;
         padding: 2px 1px;
       }
+
       &.prev,
       &.next {
         color: get('font-color');
@@ -295,21 +296,20 @@ export default {
         align-items: center;
         justify-content: center;
       }
-      &.prev {
-      }
-      &.next {
-      }
+
       &.next,
       &.prev {
         color: #fff !important;
         background: get('bk');
       }
+
       &.disabled {
         cursor: not-allowed;
         background: get('re-font-color');
         color: get('font-color') !important;
       }
     }
+
     & > .elevator {
       display: inline-block;
       color: #888f9c;
@@ -345,6 +345,7 @@ export default {
         left: 142px;
       }
     }
+
     .page-size {
       display: flex;
       align-items: center;
@@ -352,10 +353,10 @@ export default {
       height: 35px;
       padding: 10px 15px;
       margin: 0;
+
       .page-select {
         white-space: nowrap;
         height: 100%;
-        // box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.5);
         border: 1px solid get('border-color');
         background: get('back');
         min-width: 55px;
@@ -369,31 +370,22 @@ export default {
         cursor: pointer;
         width: auto;
         border-radius: 4px;
-        // &::after {
-        //   content: '';
-        //   width:0;
-        //   display: block;
-        //   height:0;
-        //   line-height:0;
-        //   margin-left: 6px;
-        //   border-top: 6px solid #d8d8d8;
-        //   border-left: 6px solid get('back');
-        //   border-right: 6px solid get('back');
-        // }
+
         .select-box {
           position: absolute;
           left: -2px;
           width: 100%;
           bottom: 40px;
           background: get('back');
-          // box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.5);
           border: 1px solid get('border-color');
           border-radius: 4px;
           z-index: 11;
           overflow: hidden;
+
           .seleclt-opotion {
             padding: 0 10px;
             transition: 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
+
             &:hover {
               background: get('border-color');
               color: white;

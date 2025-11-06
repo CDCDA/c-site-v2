@@ -14,8 +14,8 @@
     </div>
     <div class="game-center">
       <div class="divider c-left animated-0s5">
-        <svg-icon iconName="commonSvg-手柄" /> 单机游戏
-        <span> 我不知道我是谁，不知道我在哪，我只知道我要大开杀戒了</span>
+        <svg-icon iconName="commonSvg-手柄" /> {{ $t('单机游戏')
+        }}<span> {{ $t('我不知道我是谁，不知道我在哪，我只知道我要大开杀戒了') }}</span>
       </div>
       <div class="game-list">
         <virtual-scroller :items="singlePlayerGames" item-height="340" content-tag="table">
@@ -45,7 +45,7 @@
       </div>
       <div class="divider c-left animated-0s5">
         <svg-icon iconName="commonSvg-手机" />
-        手机游戏<span>打发时间，不过现在已经不玩了</span>
+        {{ $t('手机游戏') }}<span>{{ $t('打发时间，不过现在已经不玩了') }}</span>
       </div>
       <div class="game-list">
         <div class="game-item" @click="toOfficial(item)" v-for="item in MobileGames">
@@ -71,6 +71,8 @@
   </div>
 </template>
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+const { t: $t } = useI18n();
 import { ref, onMounted } from 'vue';
 
 import { VirtualScroller } from 'vue-virtual-scroller-classic';

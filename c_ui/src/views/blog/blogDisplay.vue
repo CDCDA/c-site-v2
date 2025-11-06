@@ -29,7 +29,7 @@
         <VisitorCard />
         <div class="affix c-card">
           <div class="card-header">
-            <el-icon><Memo /></el-icon><span class="tag-name">文章目录</span>
+            <el-icon><Memo /></el-icon><span class="tag-name">{{ $t('文章目录') }}</span>
           </div>
           <MdCatalog :editorId="'preview-only'" :scrollElement="scrollElement" />
         </div>
@@ -39,6 +39,8 @@
 </template>
 
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+const { t: $t } = useI18n();
 import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import wave from './components/wave/index.vue';

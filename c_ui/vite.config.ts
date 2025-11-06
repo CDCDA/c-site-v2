@@ -4,12 +4,6 @@ import path from 'path';
 import viteCompression from 'vite-plugin-compression';
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons';
 // import { visualizer } from 'rollup-plugin-visualizer';
-const vendorLibs = [
-  { match: ['vue', 'vue-router', 'pinia'], output: 'vue-vendor' },
-  { match: ['element-plus'], output: 'element-plus-vendor' },
-  { match: ['echarts'], output: 'echarts-vendor' },
-  { match: ['three'], output: 'three-vendor' }
-];
 
 export default defineConfig({
   base: './',
@@ -44,20 +38,24 @@ export default defineConfig({
   css: {
     preprocessorOptions: {
       scss: {
-        additionalData: '@import "./src/assets/theme/theme.scss";' // 加载全局样式，使用scss特性
+        additionalData: '@import "./src/assets/theme/theme.scss";', // 加载全局样式，使用scss特性
+        api: 'legacy',
+        silenceDeprecations: ['import', 'global-builtin', 'legacy-js-api']
       }
     }
   },
   resolve: {
     alias: {
       // 这里就是需要配置resolve里的别名
-      '@': path.join(__dirname, './src') // path记得引
+      '@': path.join(__dirname, './src'),
+      '~': path.join(__dirname, './public')
     }
   },
   optimizeDeps: {
     include: ['@/../lib/vform/designer.umd.js', 'swiper'] //此处路径必须跟main.js中import路径完全一致！
   },
   build: {
+    outDir: 'c-site', // 指定打包目录为c-site
     commonjsOptions: {
       include: /node_modules|lib/ //这里记得把lib目录加进来，否则生产打包会报错！！
     },
@@ -77,14 +75,14 @@ export default defineConfig({
         // }
       }
     },
-    minify: 'terser',
-    terserOptions: {
-      // 清除console和debugger
-      compress: {
-        drop_console: true,
-        drop_debugger: true
-      }
-    }
+    minify: 'terser'
+    // terserOptions: {
+    //   // 清除console和debugger
+    //   compress: {
+    //     drop_console: true,
+    //     drop_debugger: true
+    //   }
+    // }
   },
   server: {
     port: 8000,
@@ -94,8 +92,8 @@ export default defineConfig({
     },
     proxy: {
       '/dev-api': {
-        target: 'http://localhost:7000',
-        // target: 'http://120.48.127.181:5008',
+        // target: 'http://localhost:7000',
+        target: 'http://120.48.127.181:7000',
         changeOrigin: true,
         rewrite: p => p.replace(/^\/dev-api/, '')
       },

@@ -1,8 +1,12 @@
 <template>
   <div class="blog-editor">
     <el-form :model="blogData" :rules="rules" ref="formEl">
-      <el-form-item label="标题" prop="blogTitle" label-width="70px">
-        <el-input class="blog-title-editor" placeholder="请输入标题" v-model="blogData.blogTitle" />
+      <el-form-item :label="$t('标题')" prop="blogTitle" label-width="70px">
+        <el-input
+          class="blog-title-editor"
+          :placeholder="$t('请输入标题')"
+          v-model="blogData.blogTitle"
+        />
       </el-form-item>
       <MdEditor
         ref="editorRef"
@@ -10,7 +14,7 @@
         @onSave="blogSave"
         @onUploadImg="onUploadImg"
       />
-      <el-form-item label="博客标签">
+      <el-form-item :label="$t('博客标签')">
         <el-tag
           v-for="tag in blogData.tags"
           :key="tag"
@@ -40,7 +44,7 @@
           ><Grid
         /></el-icon>
       </el-form-item>
-      <el-form-item label="博客分类" prop="typeId">
+      <el-form-item :label="$t('博客分类')" prop="typeId">
         <el-tree-select
           v-model="blogData.typeId"
           :data="typeList"
@@ -51,42 +55,48 @@
           ><template #default="{ data: { typeName } }"> {{ typeName }}</template>
         </el-tree-select>
       </el-form-item>
-      <el-form-item label="博客类型" prop="publishStatus">
+      <el-form-item :label="$t('博客类型')" prop="publishStatus">
         <el-switch
           v-model="blogData.isOriginal"
           active-value="1"
           inactive-value="0"
-          active-text="原创"
-          inactive-text="转载"
+          :active-text="$t('原创')"
+          :inactive-text="$t('转载')"
         />
       </el-form-item>
-      <el-form-item label="是否推荐" prop="isRecommend">
+      <el-form-item :label="$t('是否推荐')" prop="isRecommend">
         <el-switch
           v-model="blogData.isRecommend"
           active-value="1"
           inactive-value="0"
-          active-text="推荐"
-          inactive-text="不推荐"
+          :active-text="$t('推荐')"
+          :inactive-text="$t('不推荐')"
         />
       </el-form-item>
-      <el-form-item label="添加封面">
+      <el-form-item :label="$t('添加封面')">
         <upload v-model="blogData.coverUrl" path="blogCover"></upload>
       </el-form-item>
-      <el-form-item label="博客摘要">
+      <el-form-item :label="$t('博客摘要')">
         <el-input
           v-model="blogData.blogAbstract"
           type="textarea"
           :rows="2"
-          placeholder="请输入..."
+          :placeholder="$t('请输入...')"
         ></el-input>
       </el-form-item>
     </el-form>
     <div class="blog-editor-header">
-      <el-button type="success" @click="blogSave" class="bt-save">保存</el-button>
-      <el-button type="primary" @click="submit" class="bt-release">发布</el-button>
+      <el-button type="success" @click="blogSave" class="bt-save">{{ $t('保存') }}</el-button>
+      <el-button type="primary" @click="submit" class="bt-release">{{ $t('发布') }}</el-button>
     </div>
   </div>
-  <c-dialog class="tag-dialog" v-model="tagVisible" title="标签选择" width="500px" :modal="true">
+  <c-dialog
+    class="tag-dialog"
+    v-model="tagVisible"
+    :title="$t('标签选择')"
+    width="500px"
+    :modal="true"
+  >
     <div class="tag-list">
       <el-tag
         v-for="tag in tagList"
@@ -104,14 +114,18 @@
     </div>
     <template #footer>
       <span class="dialog-footer">
-        <el-button type="danger" @click="tagVisible = false">取消</el-button>
-        <el-button type="primary" @click="setTags()" v-permission="['operate']">确定</el-button>
+        <el-button type="danger" @click="tagVisible = false">{{ $t('取消') }}</el-button>
+        <el-button type="primary" @click="setTags()" v-permission="['operate']">{{
+          $t('确定')
+        }}</el-button>
       </span>
     </template>
   </c-dialog>
 </template>
 
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+const { t: $t } = useI18n();
 import { ref, nextTick, onMounted, watch } from 'vue';
 import { pageTypes } from '@/api/type';
 import { pageTags } from '@/api/tag';
@@ -127,8 +141,8 @@ import upload from '@/components/upload/index.vue';
 const tagVisible = ref(false);
 
 const rules = ref({
-  blogTitle: [{ required: true, message: '请输入博客标题', trigger: 'blur' }],
-  typeId: [{ required: true, message: '请选择博客分类', trigger: 'blur' }]
+  blogTitle: [{ required: true, message: $t('请输入博客标题'), trigger: 'blur' }],
+  typeId: [{ required: true, message: $t('请选择博客分类'), trigger: 'blur' }]
 });
 const formEl = ref(null) as any;
 const defaultProps = {
@@ -189,14 +203,14 @@ async function submit() {
       if (code === 200) {
         //清空博客本地缓存
         window.localStorage.setItem('blogData', '');
-        ElMessageBox.confirm('博客发布成功', 'success', {
+        ElMessageBox.confirm($t('博客发布成功'), 'success', {
           distinguishCancelAndClose: true,
-          confirmButtonText: '前往博客',
-          cancelButtonText: '写新博客',
+          confirmButtonText: $t('前往博客'),
+          cancelButtonText: $t('写新博客'),
           appendTo: '.messageBox-base'
         })
           .then(async () => {
-            loadingService.show({ type: 'loading', text: '正在前往博客...' });
+            loadingService.show({ type: 'loading', text: $t('正在前往博客...') });
             await router.push({
               name: 'blogDisplay',
               query: { blogId: data || blogData.value.blogId }
@@ -328,7 +342,7 @@ function resetBlogData() {
 //保存博客数据到本地
 function blogSave() {
   window.localStorage.setItem('blogData', JSON.stringify(blogData.value));
-  ElNotification.success('保存成功');
+  ElNotification.success($t('保存成功'));
 }
 
 async function getBlogInfo(id: string) {

@@ -6,11 +6,13 @@
     <div class="menu-back"></div>
     <div v-for="item in menuList" class="menu-item" @click="menuClick(item)">
       <svg-icon class="menu-icon" :iconName="`commonSvg-${item.meta.svgIcon}`"></svg-icon>
-      <span class="menu-title">{{ item.meta.title.replace('管理', '') }}</span>
+      <span class="menu-title">{{ item.meta.title.replace($t('管理'), '') }}</span>
     </div>
   </div>
 </template>
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+const { t: $t } = useI18n();
 import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 const router = useRouter();

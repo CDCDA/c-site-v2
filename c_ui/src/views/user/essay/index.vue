@@ -12,9 +12,9 @@
         muted
       ></video>
       <span class="essay-header-center"
-        >喝一壶清茶，写几行小篆，<br />看一剪流云，梦一回江南。愿与草木，随遇而安</span
+        >{{ $t('喝一壶清茶，写几行小篆，') }}<br />看一剪流云，梦一回江南。愿与草木，随遇而安</span
       >
-      <span class="essay-header-bottom">闲情逸致</span>
+      <span class="essay-header-bottom">{{ $t('闲情逸致') }}</span>
       <!-- <div class="essay-header-add">新增+</div> -->
     </div>
     <!-- <div class="essay-center"> -->
@@ -66,7 +66,7 @@
         </div>
       </grid-item>
     </grid-layout>
-    <div class="tip">仅展示最近20条</div>
+    <div class="tip">{{ $t('仅展示最近20条') }}</div>
     <essayComment
       :visible="commentOpen"
       @close="close"
@@ -177,7 +177,7 @@ async function getEssayList() {
 const userData = ref({}) as any;
 
 function toComment(item: any) {
-  // ElNotification.info('施工中...');
+  // ElNotification.info($t('施工中...'));
   selectEssay.value = item;
   commentOpen.value = true;
 }

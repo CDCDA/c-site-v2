@@ -15,7 +15,7 @@
     </div>
     <div class="blog-pre" v-else>
       <c-image class="image" :src="startImg" />
-      <span class="title">已经到第一篇了</span>
+      <span class="title">{{ $t('已经到第一篇了') }}</span>
     </div>
     <div class="blog-next" @click="toDetail(nextBlogData)" v-if="nextBlogData">
       <c-image class="image" :src="nextBlogData.coverUrl" />
@@ -29,12 +29,14 @@
     </div>
     <div class="blog-next" v-else>
       <c-image class="image" :src="endImg" />
-      <span class="title">已经到最后一篇了</span>
+      <span class="title">{{ $t('已经到最后一篇了') }}</span>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+const { t: $t } = useI18n();
 import { onMounted, ref, watch } from 'vue';
 import { useRouter } from 'vue-router';
 import { getNeighborBlogs } from '@/api/blog';

@@ -7,6 +7,8 @@
   </div>
 </template>
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+const { t:$t } = useI18n();
 import { onMounted } from 'vue';
 import { autoClearTimer } from '@/utils/timer';
 const props = defineProps({

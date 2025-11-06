@@ -1,7 +1,8 @@
+import i18n from '@/locales/i18n';
 /*
  * @Author: chenyd
  * @Date: 2023-01-12 14:03:57
- * @LastEditTime: 2024-10-22 14:39:55
+ * @LastEditTime: 2025-10-23 15:26:07
  * @Description:日期处理方法合集
  */
 
@@ -21,8 +22,8 @@ export const formatDate = (date: Date, type?: String) => {
   let minutes = date.getMinutes().toString().padStart(2, '0');
   let seconds = date.getSeconds().toString().padStart(2, '0');
 
-  return `${type.includes('YY') ? year : ''}${type.includes('MM') ? '-' + month : ''}${
-    type.includes('dd') ? '-' + day : ''
+  return `${type.includes('YY') ? year + '-' : ''}${type.includes('MM') ? month + '-' : ''}${
+    type.includes('dd') ? day : ''
   }${type.includes('hh') ? ' ' + hours : ''}${type.includes('mm') ? ':' + minutes : ''}${
     type.includes('ss') ? ':' + seconds : ''
   }`;
@@ -201,5 +202,7 @@ export const secondDayDiff = (startTime: any, endTime: any) => {
 
   // 计算秒数差
   var seconds = Math.floor(timeDiff / 1000);
-  return ` ${years} 年 ${months} 月 ${days} 天 ${hours} 小时 ${minutes} 分钟 ${seconds} 秒`;
+  return ` ${years} 年 ${months} 月 ${days} 天 ${hours} 小时 ${minutes} 分钟 ${seconds}${i18n.global.t(
+    ' 秒'
+  )}`;
 };

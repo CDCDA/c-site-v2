@@ -7,6 +7,8 @@
 </template>
 
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+const { t: $t } = useI18n();
 import { reactive, onMounted, ref } from 'vue';
 import baseChart from '@/components/charts/baseChart.vue';
 import { useRouter } from 'vue-router';
@@ -35,8 +37,8 @@ const options = reactive({
     {
       indicator: [
         { text: 'svg', max: 150 },
-        { text: '切片', max: 150 },
-        { text: '大模块', max: 150 }
+        { text: $t('切片'), max: 150 },
+        { text: $t('大模块'), max: 150 }
       ],
       center: ['25%', '50%'],
       radius: 60,
@@ -69,8 +71,8 @@ const options = reactive({
     {
       indicator: [
         { text: 'svg', max: 150 },
-        { text: '切片', max: 150 },
-        { text: '大模块', max: 150 }
+        { text: $t('切片'), max: 150 },
+        { text: $t('大模块'), max: 150 }
       ],
       center: ['75%', '60%'],
       radius: 75,

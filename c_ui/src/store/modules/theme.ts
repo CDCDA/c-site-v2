@@ -31,7 +31,7 @@ const useThemeStore = defineStore('theme', () => {
     mhFontColor: '#fff',
     //字体
     fontFamily: 'Shark',
-    dialogType: 'filter'
+    dialogType: 'normal'
   }) as any;
   return {
     isShow,

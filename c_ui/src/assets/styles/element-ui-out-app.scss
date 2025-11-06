@@ -24,6 +24,10 @@
   width: 8px !important; /* 修改宽度 */
 }
 
+.el-notification__content p {
+  white-space: break-spaces;
+}
+
 //菜单下拉框
 //.el-menu--horizontal .el-menu-item:not(.is-disabled):hover,
 //.el-menu--horizontal > .el-sub-menu .el-sub-menu__title:hover,

@@ -26,7 +26,9 @@
               </template>
             </el-image>
             <div class="card-bg-cover"></div>
-            <span class="card-label-count">{{ item.total }}<span>篇</span></span>
+            <span class="card-label-count"
+              >{{ item.total }}<span>{{ $t('篇') }}</span></span
+            >
             <span class="card-label-text">{{ item.tagName }}</span>
           </div>
         </div>
@@ -36,6 +38,8 @@
 </template>
 
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+const { t: $t } = useI18n();
 import { onMounted, ref } from 'vue';
 import useUserStore from '@/store/modules/user';
 import { useRouter } from 'vue-router';

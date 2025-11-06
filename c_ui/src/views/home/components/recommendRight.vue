@@ -1,19 +1,19 @@
 <template>
   <div class="recommend-right" @click="toSlice()">
     <neonRain class="neon-rain" />
-    <span class="slice-name">雨</span>
-    <span class="more-slice">更多切片<svg-icon iconName="commonSvg-去哪儿" /></span>
+    <span class="slice-name">{{ $t('雨') }}</span>
+    <span class="more-slice">{{ $t('更多切片') }}<svg-icon iconName="commonSvg-去哪儿" /></span>
     <!-- <div class="front" v-if="frontShow">
       <c-image class="front-img" :src="recommends[1]?.coverUrl" @click="toDetail(recommends[1])" />
-      <span class="reBlog">推荐文章</span>
+      <span class="reBlog">{{ $t('推荐文章') }}</span>
       <span class="reBlogTitle">{{ recommends[1]?.blogTitle }}</span>
       <span class="more-re" @click="showMore()"
-        ><el-icon><Top /></el-icon>更多推荐</span
+        ><el-icon><Top /></el-icon>{{ $t('更多推荐') }}</span
       >
     </div>
     <div class="back" v-else>
       <div class="right-item" v-for="item in recommends" @click="toDetail(item)">
-        <div class="icon-rec">荐</div>
+        <div class="icon-rec">{{ $t('荐') }}</div>
         <c-image class="item-image" :src="item.coverUrl"></c-image>
         <div class="item-title">
           <el-text truncated>
@@ -25,6 +25,8 @@
   </div>
 </template>
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+const { t: $t } = useI18n();
 import { onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { pageBlogs } from '@/api/blog';

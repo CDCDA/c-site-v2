@@ -11,6 +11,8 @@
   </div>
 </template>
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+const { t: $t } = useI18n();
 import { ref } from 'vue';
 import useThemeStore from '@/store/modules/theme.ts';
 import { themes } from '../themeData.ts';

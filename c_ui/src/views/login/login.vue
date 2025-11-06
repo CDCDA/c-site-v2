@@ -2,57 +2,73 @@
   <div class="login-container">
     <div class="login-main">
       <div class="login" :class="pageType === 'register' ? 'login-hidden' : ''">
-        <h3 class="login-title">登录</h3>
+        <h3 class="login-title">{{ $t('登录') }}</h3>
         <div class="login-input">
           <input
             type="text"
-            placeholder="用户名/邮箱"
+            :placeholder="$t('用户名/邮箱')"
             class="userName"
             v-model="loginForm.userName"
           />
-          <input type="password" placeholder="密码" class="password" v-model="loginForm.password" />
+          <input
+            type="password"
+            :placeholder="$t('密码')"
+            class="password"
+            v-model="loginForm.password"
+          />
         </div>
         <div class="login-edit">
-          <span class="edit-pw">修改密码?</span>
+          <span class="edit-pw">{{ $t('修改密码?') }}</span>
         </div>
         <div class="login-btn">
-          <el-button @click="handleLogin" :loading="loading" :disabled="loading">登录</el-button>
+          <el-button @click="handleLogin" :loading="loading" :disabled="loading">{{
+            $t('登录')
+          }}</el-button>
         </div>
       </div>
       <div class="register" :class="pageType === 'register' ? 'register-show' : ''">
-        <h3 class="register-title">注册</h3>
+        <h3 class="register-title">{{ $t('注册') }}</h3>
         <div class="register-input">
-          <input type="text" placeholder="昵称" class="nickName" v-model="registerForm.nickName" />
+          <input
+            type="text"
+            :placeholder="$t('昵称')"
+            class="nickName"
+            v-model="registerForm.nickName"
+          />
           <input
             type="password"
-            placeholder="密码"
+            :placeholder="$t('密码')"
             class="password"
             v-model="registerForm.password"
           />
-          <input type="text" placeholder="邮箱" class="email" v-model="registerForm.email" />
-          <input type="text" placeholder="验证码" class="code" v-model="registerForm.code" />
+          <input type="text" :placeholder="$t('邮箱')" class="email" v-model="registerForm.email" />
+          <input type="text" :placeholder="$t('验证码')" class="code" v-model="registerForm.code" />
         </div>
         <div class="register-edit">
-          <span class="edit-pw" @click="getRegisterCode">获取验证码</span>
+          <span class="edit-pw" @click="getRegisterCode">{{ $t('获取验证码') }}</span>
         </div>
         <div class="register-btn">
-          <el-button @click="handleRegister" :loading="loading" :disabled="loading">注册</el-button>
+          <el-button @click="handleRegister" :loading="loading" :disabled="loading">{{
+            $t('注册')
+          }}</el-button>
         </div>
       </div>
       <div class="register-pre" :class="pageType === 'register' ? 'login-pre' : ''">
-        <h3 class="register-title">{{ `${pageType === 'login' ? '没有账号' : '已有账号'}?` }}</h3>
+        <h3 class="register-title">
+          {{ `${pageType === 'login' ? $t('没有账号') : $t('已有账号')}?` }}
+        </h3>
         <div class="register-tip">
-          {{ `${pageType === 'login' ? '立即注册' : '请登录🚀'}` }}
+          {{ `${pageType === 'login' ? $t('立即注册') : '请登录🚀'}` }}
         </div>
         <div class="register-btn">
           <el-button
             @click="openRegister"
             :class="pageType === 'register' ? 'login-btn' : 'register-btn'"
-            >{{ `${pageType === 'login' ? '注册' : '登录'}` }}</el-button
+            >{{ `${pageType === 'login' ? $t('注册') : $t('登录')}` }}</el-button
           >
-          <el-button @click="handleTouristLogin" :loading="touristLoading" :disabled="loading"
-            >游客登录</el-button
-          >
+          <el-button @click="handleTouristLogin" :loading="touristLoading" :disabled="loading">{{
+            $t('游客登录')
+          }}</el-button>
         </div>
       </div>
     </div>
@@ -60,6 +76,8 @@
 </template>
 
 <script setup lang="ts" name="login">
+import { useI18n } from 'vue-i18n';
+const { t: $t } = useI18n();
 import { ref, onMounted } from 'vue';
 import jwtDecode from 'jwt-decode';
 import { autoClearTimer } from '@/utils/timer';
@@ -129,7 +147,7 @@ async function handleTouristLogin() {
     userStore.userName = token.username;
     userStore.permission = ['show'];
     window.localStorage.setItem('userData', JSON.stringify(userStore));
-    router.push('/home');
+    router.push('/');
   }
   touristLoading.value = false;
 }
@@ -137,54 +155,64 @@ async function handleTouristLogin() {
 // 登录
 async function handleLogin() {
   if (!loginForm.value.userName) {
-    ElNotification.warning('请输入账号/邮箱');
+    ElNotification.warning($t('请输入账号/邮箱'));
     return;
   }
   if (!loginForm.value.userName) {
-    ElNotification.warning('请输入密码');
+    ElNotification.warning($t('请输入密码'));
     return;
   }
   loading.value = true;
   const { code, data } = await login(loginForm.value);
+  console.log('登录结果', code, data);
   if (code === 200) {
     //缓存用户数据
     const { token, user } = data;
-    userStore.token = token;
-    userStore.userId = user.userId;
-    userStore.userName = user.username;
-    userStore.email = user.email;
-    userStore.nickName = user.nickName;
-    userStore.avatar = user.avatar;
-    userStore.permission = ['add', 'delete', 'show', 'operate'];
-    window.localStorage.setItem('userData', JSON.stringify(userStore));
-    router.push('/home');
+    const userData = {
+      token,
+      userId: user.userId,
+      userName: user.username,
+      email: user.email,
+      nickName: user.nickName,
+      avatar: user.avatar,
+      permission: ['add', 'delete', 'show', 'operate']
+    };
+    Object.assign(userStore, userData);
+    console.log('用户信息', userData);
+    try {
+      window.localStorage.setItem('userData', JSON.stringify(userData));
+    } catch (error) {
+      console.log(error);
+    }
+    console.log('跳转到首页');
+    router.push('/');
   }
   loading.value = false;
 }
 
 //注册
 async function handleRegister() {
-  // ElNotification.warning('暂不开放注册');
+  // ElNotification.warning($t('暂不开放注册'));
   if (!registerForm.value.nickName) {
-    ElNotification.warning('请输入昵称');
+    ElNotification.warning($t('请输入昵称'));
     return;
   }
   if (!registerForm.value.password) {
-    ElNotification.warning('请输入密码');
+    ElNotification.warning($t('请输入密码'));
     return;
   }
   if (!registerForm.value.email) {
-    ElNotification.warning('请输入邮箱');
+    ElNotification.warning($t('请输入邮箱'));
     return;
   }
   if (!registerForm.value.code) {
-    ElNotification.warning('请输入验证码');
+    ElNotification.warning($t('请输入验证码'));
     return;
   }
   loading.value = true;
   const { code } = (await register(registerForm.value)) as any;
   if (code === 200) {
-    ElNotification.success('注册成功');
+    ElNotification.success($t('注册成功'));
     loginForm.value.userName = registerForm.value.email;
     loginForm.value.password = registerForm.value.password;
     resetRegisterForm();
@@ -198,7 +226,7 @@ async function getRegisterCode() {
   let params = { email: registerForm.value.email };
   const { code } = (await getCode(params)) as any;
   if (code === 200) {
-    ElNotification.success('验证码发送成功,请注意查收');
+    ElNotification.success($t('验证码发送成功,请注意查收'));
   }
 }
 async function handleTouristLogIn() {
@@ -219,7 +247,7 @@ async function handleTouristLogIn() {
       })
     );
 
-    router.push('/home');
+    router.push('/');
   }
 }
 onMounted(() => {

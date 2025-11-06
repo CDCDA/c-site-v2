@@ -2,30 +2,30 @@
   <div class="other-main">
     <div class="setting-line">
       <div class="setting-item">
-        <div class="setting-item-label">粒子效果(仅静态壁纸)</div>
+        <div class="setting-item-label">{{ $t('粒子效果(仅静态壁纸)') }}</div>
         <el-switch v-model="themeStore.options.isParticles" @change="setParticles()" />
       </div>
       <div class="setting-item">
-        <div class="setting-item-label">樱花特效</div>
+        <div class="setting-item-label">{{ $t('樱花特效') }}</div>
         <el-switch v-model="themeStore.options.isSakura" @change="setIsSakura()" />
       </div>
     </div>
     <div class="setting-line">
       <div class="setting-item">
         <div class="setting-item-label">
-          <el-tooltip content="每次切换路由页面壁纸跟着切换" placement="top">
+          <el-tooltip :content="$t('每次切换路由页面壁纸跟着切换')" placement="top">
             <el-icon><QuestionFilled /></el-icon>
           </el-tooltip>
-          随机壁纸
+          {{ $t('随机壁纸') }}
         </div>
         <el-switch v-model="themeStore.options.isRandom" @change="setIsRandom()" />
       </div>
       <div class="setting-item">
         <div class="setting-item-label">
-          <el-tooltip content="包含首页顶栏和首页打字机字体颜色" placement="top">
+          <el-tooltip :content="$t('包含首页顶栏和首页打字机字体颜色')" placement="top">
             <el-icon><QuestionFilled /></el-icon>
           </el-tooltip>
-          首页字体颜色
+          {{ $t('首页字体颜色') }}
         </div>
         <el-color-picker v-model="themeStore.options.mhFontColor" @change="setFontColor()" />
       </div>
@@ -34,20 +34,24 @@
       <div class="setting-item">
         <div class="setting-item-label">
           <el-tooltip
-            content="每个弹窗都有两种风格--常规颜色背景和透明磨砂背景，弹窗右上角的旋转按钮可以当次切换"
+            :content="
+              $t(
+                '每个弹窗都有两种风格--常规颜色背景和透明磨砂背景，弹窗右上角的旋转按钮可以当次切换'
+              )
+            "
             placement="top"
           >
             <el-icon><QuestionFilled /></el-icon>
           </el-tooltip>
-          弹窗风格
+          {{ $t('弹窗风格') }}
         </div>
         <el-radio-group v-model="themeStore.options.dialogType" @change="setDialogType()">
-          <el-radio value="normal">常规</el-radio>
-          <el-radio value="filter">磨砂</el-radio>
+          <el-radio value="normal">{{ $t('常规') }}</el-radio>
+          <el-radio value="filter">{{ $t('磨砂') }}</el-radio>
         </el-radio-group>
       </div>
       <div class="setting-item">
-        <div class="setting-item-label">字体</div>
+        <div class="setting-item-label">{{ $t('字体') }}</div>
         <el-select
           v-model="themeStore.options.fontFamily"
           @change="setFontFamily()"
@@ -60,6 +64,8 @@
   </div>
 </template>
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+const { t: $t } = useI18n();
 import { onMounted, ref } from 'vue';
 import { QuestionFilled } from '@element-plus/icons-vue';
 

@@ -82,6 +82,42 @@ input {
   -webkit-line-clamp: 1;
 }
 
+.svg-icon-wrap {
+  position: relative;
+  margin: 10px 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: inherit !important;
+  .header-icon {
+    color: inherit !important;
+  }
+  &:active {
+    transform: translateY(1px);
+  }
+}
+.svg-icon-wrap::before {
+  width: 1.5rem;
+  height: 1.5rem;
+  content: '';
+  border-radius: 4px;
+  background: get('bk');
+  position: absolute;
+  opacity: 0;
+}
+.svg-icon-wrap:hover {
+  &::before {
+    opacity: 1;
+  }
+}
+.header-icon {
+  font-size: 1.3rem;
+  @include flex;
+  cursor: pointer;
+  position: relative;
+  outline: unset;
+}
+
 /* 旋转边框 -- 开始 */
 @keyframes rotate {
   from {

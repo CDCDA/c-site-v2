@@ -4,7 +4,7 @@
 <template>
   <div class="blog-tag-card c-card">
     <div class="card-header">
-      <el-icon><PriceTag /></el-icon><span class="tag-name">标签云</span>
+      <el-icon><PriceTag /></el-icon><span class="tag-name">{{ $t('标签云') }}</span>
     </div>
     <div class="tag-list">
       <div
@@ -21,6 +21,8 @@
 </template>
 
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+const { t: $t } = useI18n();
 import { onMounted, ref } from 'vue';
 import { pageTags } from '@/api/tag';
 import useUserStore from '@/store/modules/user';

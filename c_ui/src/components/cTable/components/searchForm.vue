@@ -5,14 +5,14 @@
         <el-input
           v-if="item.type === 'input' || !item.type"
           v-model="searchParams[item.prop]"
-          :placeholder="`请输入${item.label}`"
+          :placeholder="`${$t('请输入')}${item.label}`"
           clearable
           @keyup.enter="handleSearch"
         />
         <el-select
           v-else-if="item.type === 'select'"
           v-model="searchParams[item.prop]"
-          :placeholder="`请选择${item.label}`"
+          :placeholder="`${$t('请选择')}${item.label}`"
           clearable
           filterable
           @keyup.enter="handleSearch"
@@ -28,7 +28,7 @@
           v-else-if="item.type === 'dict'"
           v-model="searchParams[item.prop]"
           :dict-type="item.dictType"
-          :placeholder="`请选择${item.label}`"
+          :placeholder="`${$t('请选择')}${item.label}`"
           @keyup.enter="handleSearch"
         />
         <el-date-picker
@@ -36,9 +36,9 @@
           v-model="searchParams[item.prop]"
           type="daterange"
           value-format="YYYY-MM-DD"
-          :placeholder="`请选择${item.label}`"
-          start-placeholder="开始时间"
-          end-placeholder="结束时间"
+          :placeholder="`${$t('请选择')}${item.label}`"
+          :start-placeholder="$t('开始时间')"
+          :end-placeholder="$t('结束时间')"
           clearable
           @keyup.enter="handleSearch"
         />
@@ -46,13 +46,15 @@
     </div>
     <div class="search-form-right">
       <el-form-item style="margin-right: 0">
-        <el-button type="primary" icon="Search" @click="handleSearch">查询</el-button>
-        <el-button type="info" icon="Refresh" @click="handleReset">重置</el-button>
+        <el-button type="primary" icon="Search" @click="handleSearch">{{ $t('查询') }}</el-button>
+        <el-button type="info" icon="Refresh" @click="handleReset">{{ $t('重置') }}</el-button>
       </el-form-item>
     </div>
   </el-form>
 </template>
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+const { t: $t } = useI18n();
 import { ref, toRefs } from 'vue';
 
 const props = defineProps({

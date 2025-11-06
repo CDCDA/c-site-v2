@@ -14,7 +14,7 @@
 import { ref } from 'vue';
 import GridMerge from './GridMerge.vue';
 
-const headers = ['列1', '列2', '列3', '列4', '列5'];
+const headers = [$t('列1'), $t('列2'), $t('列3'), $t('列4'), $t('列5')];
 const rowLength = ref(5);
 const colLength = ref(5);
 // 初始化网格数据

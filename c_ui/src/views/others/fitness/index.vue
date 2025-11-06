@@ -22,31 +22,41 @@
       </div>
       <div class="fitness-stage-goal animated bounceInUp">
         <div class="goal-header">
-          <el-icon><HelpFilled /><span class="tag-name">目标</span></el-icon>
+          <el-icon
+            ><HelpFilled /><span class="tag-name">{{ $t('目标') }}</span></el-icon
+          >
         </div>
         <div class="goal-content">
           <div class="goal-text">
-            <span>体重</span><span>59kg</span><el-icon><Right /></el-icon><span>57.5kg</span>
+            <span>{{ $t('体重') }}</span
+            ><span>59kg</span><el-icon><Right /></el-icon><span>57.5kg</span>
           </div>
           <div class="goal-text">
-            <span>体脂</span><span>15%-16%</span><el-icon><Right /></el-icon><span>13%-14%</span>
+            <span>{{ $t('体脂') }}</span
+            ><span>15%-16%</span><el-icon><Right /></el-icon><span>13%-14%</span>
           </div>
           <div class="goal-text">
-            <span>单次不间断跑步距离</span><span>4km</span><el-icon><Right /></el-icon
-            ><span>5km</span>
+            <span>{{ $t('单次不间断跑步距离') }}</span
+            ><span>4km</span><el-icon><Right /></el-icon><span>5km</span>
           </div>
         </div>
       </div>
     </div>
     <div class="fitness-right animated-1s5 bounceInDown">
       <img class="fitness-right-img" :src="'http://120.48.127.181/file/fitness.jpg'" />
-      <div class="fitness-title">健身</div>
-      <div class="fitness-motto">还是先锻炼起来再说吧 <br />不管怎么说，再小的力量也是力量</div>
-      <div class="fitness-grievance">好难减啊<img :src="'@/assets/svg/emote/cry.svg'" /></div>
+      <div class="fitness-title">{{ $t('健身') }}</div>
+      <div class="fitness-motto">
+        {{ $t('还是先锻炼起来再说吧') }}<br />{{ $t('不管怎么说，再小的力量也是力量') }}
+      </div>
+      <div class="fitness-grievance">
+        {{ $t('好难减啊') }}<img :src="'@/assets/svg/emote/cry.svg'" />
+      </div>
     </div>
   </div>
 </template>
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+const { t: $t } = useI18n();
 import { ref, onMounted } from 'vue';
 import WeekNavication from './components/weekNavigation.vue';
 import bubbles from '@/components/bubbles.vue';
@@ -55,40 +65,40 @@ const trainingPlan = ref([
     title: '胸+燃脂',
     plan: [
       {
-        movement: '跪姿俯卧撑',
-        quantity: '12个',
+        movement: $t('跪姿俯卧撑'),
+        quantity: $t('12个'),
         time: '1min',
-        turn: '1轮'
+        turn: $t('1轮')
       },
       {
-        movement: '标准俯卧撑',
-        quantity: '12个',
+        movement: $t('标准俯卧撑'),
+        quantity: $t('12个'),
         time: '1min',
-        turn: '1轮'
+        turn: $t('1轮')
       },
       {
-        movement: '哑铃卧推(4个动作)',
-        quantity: '12个',
+        movement: $t('哑铃卧推(4个动作)'),
+        quantity: $t('12个'),
         time: '25min',
-        turn: '3轮'
+        turn: $t('3轮')
       },
       {
-        movement: '跪姿俯卧撑',
-        quantity: '12个',
+        movement: $t('跪姿俯卧撑'),
+        quantity: $t('12个'),
         time: '1min',
-        turn: '1轮'
+        turn: $t('1轮')
       },
       {
-        movement: '标准俯卧撑',
-        quantity: '12个',
+        movement: $t('标准俯卧撑'),
+        quantity: $t('12个'),
         time: '3min',
-        turn: '3轮'
+        turn: $t('3轮')
       },
       {
         movement: 'hit+搏击操/跑步/爬楼',
         quantity: '',
         time: '40min+',
-        turn: '1轮'
+        turn: $t('1轮')
       }
     ]
   },
@@ -96,28 +106,28 @@ const trainingPlan = ref([
     title: '腹+燃脂',
     plan: [
       {
-        movement: '跪姿俯卧撑',
-        quantity: '12个',
+        movement: $t('跪姿俯卧撑'),
+        quantity: $t('12个'),
         time: '1min',
-        turn: '1轮'
+        turn: $t('1轮')
       },
       {
-        movement: '标准俯卧撑',
-        quantity: '12个',
+        movement: $t('标准俯卧撑'),
+        quantity: $t('12个'),
         time: '1min',
-        turn: '1轮'
+        turn: $t('1轮')
       },
       {
-        movement: '腹肌撕裂者',
+        movement: $t('腹肌撕裂者'),
         quantity: '',
         time: '15min',
-        turn: '1轮'
+        turn: $t('1轮')
       },
       {
         movement: 'hit+搏击操/跑步/爬楼',
         quantity: '',
         time: '40min+',
-        turn: '1轮'
+        turn: $t('1轮')
       }
     ]
   },
@@ -125,40 +135,40 @@ const trainingPlan = ref([
     title: '胸+燃脂',
     plan: [
       {
-        movement: '跪姿俯卧撑',
-        quantity: '12个',
+        movement: $t('跪姿俯卧撑'),
+        quantity: $t('12个'),
         time: '1min',
-        turn: '1轮'
+        turn: $t('1轮')
       },
       {
-        movement: '标准俯卧撑',
-        quantity: '12个',
+        movement: $t('标准俯卧撑'),
+        quantity: $t('12个'),
         time: '1min',
-        turn: '1轮'
+        turn: $t('1轮')
       },
       {
-        movement: '哑铃卧推(4个动作)',
-        quantity: '12个',
+        movement: $t('哑铃卧推(4个动作)'),
+        quantity: $t('12个'),
         time: '25min',
-        turn: '3轮'
+        turn: $t('3轮')
       },
       {
-        movement: '跪姿俯卧撑',
-        quantity: '12个',
+        movement: $t('跪姿俯卧撑'),
+        quantity: $t('12个'),
         time: '1min',
-        turn: '1轮'
+        turn: $t('1轮')
       },
       {
-        movement: '标准俯卧撑',
-        quantity: '12个',
+        movement: $t('标准俯卧撑'),
+        quantity: $t('12个'),
         time: '3min',
-        turn: '3轮'
+        turn: $t('3轮')
       },
       {
         movement: 'hit+搏击操/跑步/爬楼',
         quantity: '',
         time: '40min+',
-        turn: '1轮'
+        turn: $t('1轮')
       }
     ]
   },
@@ -166,28 +176,28 @@ const trainingPlan = ref([
     title: '腹+燃脂',
     plan: [
       {
-        movement: '跪姿俯卧撑',
-        quantity: '12个',
+        movement: $t('跪姿俯卧撑'),
+        quantity: $t('12个'),
         time: '1min',
-        turn: '1轮'
+        turn: $t('1轮')
       },
       {
-        movement: '标准俯卧撑',
-        quantity: '12个',
+        movement: $t('标准俯卧撑'),
+        quantity: $t('12个'),
         time: '1min',
-        turn: '1轮'
+        turn: $t('1轮')
       },
       {
-        movement: '腹肌撕裂者',
+        movement: $t('腹肌撕裂者'),
         quantity: '',
         time: '15min',
-        turn: '1轮'
+        turn: $t('1轮')
       },
       {
         movement: 'hit+搏击操/跑步/爬楼',
         quantity: '',
         time: '40min+',
-        turn: '1轮'
+        turn: $t('1轮')
       }
     ]
   },
@@ -195,40 +205,40 @@ const trainingPlan = ref([
     title: '胸+燃脂',
     plan: [
       {
-        movement: '跪姿俯卧撑',
-        quantity: '12个',
+        movement: $t('跪姿俯卧撑'),
+        quantity: $t('12个'),
         time: '1min',
-        turn: '1轮'
+        turn: $t('1轮')
       },
       {
-        movement: '标准俯卧撑',
-        quantity: '12个',
+        movement: $t('标准俯卧撑'),
+        quantity: $t('12个'),
         time: '1min',
-        turn: '1轮'
+        turn: $t('1轮')
       },
       {
-        movement: '哑铃卧推(4个动作)',
-        quantity: '12个',
+        movement: $t('哑铃卧推(4个动作)'),
+        quantity: $t('12个'),
         time: '25min',
-        turn: '3轮'
+        turn: $t('3轮')
       },
       {
-        movement: '跪姿俯卧撑',
-        quantity: '12个',
+        movement: $t('跪姿俯卧撑'),
+        quantity: $t('12个'),
         time: '1min',
-        turn: '1轮'
+        turn: $t('1轮')
       },
       {
-        movement: '标准俯卧撑',
-        quantity: '12个',
+        movement: $t('标准俯卧撑'),
+        quantity: $t('12个'),
         time: '3min',
-        turn: '3轮'
+        turn: $t('3轮')
       },
       {
         movement: 'hit+搏击操/跑步/爬楼',
         quantity: '',
         time: '40min+',
-        turn: '1轮'
+        turn: $t('1轮')
       }
     ]
   },
@@ -236,37 +246,37 @@ const trainingPlan = ref([
     title: '腹+燃脂',
     plan: [
       {
-        movement: '跪姿俯卧撑',
-        quantity: '12个',
+        movement: $t('跪姿俯卧撑'),
+        quantity: $t('12个'),
         time: '1min',
-        turn: '1轮'
+        turn: $t('1轮')
       },
       {
-        movement: '标准俯卧撑',
-        quantity: '12个',
+        movement: $t('标准俯卧撑'),
+        quantity: $t('12个'),
         time: '1min',
-        turn: '1轮'
+        turn: $t('1轮')
       },
       {
-        movement: '腹肌撕裂者',
+        movement: $t('腹肌撕裂者'),
         quantity: '',
         time: '15min',
-        turn: '1轮'
+        turn: $t('1轮')
       },
       {
         movement: 'hit+搏击操/跑步/爬楼',
         quantity: '',
         time: '40min+',
-        turn: '1轮'
+        turn: $t('1轮')
       }
     ]
   },
   {
-    title: '躺平',
+    title: $t('躺平'),
     plan: [
       {
-        movement: '放纵餐',
-        quantity: '1顿',
+        movement: $t('放纵餐'),
+        quantity: $t('1顿'),
         time: '',
         turn: ''
       }

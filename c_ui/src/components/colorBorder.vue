@@ -14,7 +14,10 @@
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+const { t: $t } = useI18n();
+</script>
 <style lang="scss">
 @import url('https://fonts.googleapis.com/css?family=Raleway:400');
 

@@ -11,7 +11,7 @@
       <TagsView></TagsView>
     </div>
     <div class="right-toolbar">
-      <el-tooltip content="首页" placement="top">
+      <el-tooltip :content="$t('首页')" placement="top">
         <i class="svg-icon-wrap">
           <svg-icon
             iconName="commonSvg-主页1"
@@ -21,7 +21,7 @@
           />
         </i>
       </el-tooltip>
-      <el-tooltip content="皮肤" placement="top">
+      <el-tooltip :content="$t('皮肤')" placement="top">
         <i class="svg-icon-wrap">
           <svg-icon
             iconName="commonSvg-皮肤1"
@@ -30,17 +30,20 @@
           />
         </i>
       </el-tooltip>
-      <el-tooltip content="登出" placement="top">
-        <i class="svg-icon-wrap">
-          <svg-icon iconName="commonSvg-登出" class="header-icon logout" @click="logout" />
-        </i>
+      <el-tooltip :content="$t('语言切换')" placement="top">
+        <language class="header-icon language"></language>
       </el-tooltip>
-      <c-image class="avatar" :src="userStore.avatar"></c-image>
+      <el-tooltip :content="$t('消息')" placement="top">
+        <message class="header-icon bell"></message>
+      </el-tooltip>
+      <avatar class="avatar"></avatar>
     </div>
     <theme-dialog @closeThemeDialog="closeThemeDialog" v-if="isThemeDialogShow" ref="themeDialog" />
   </div>
 </template>
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+const { t: $t } = useI18n();
 import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import useUserStore from '@/store/modules/user';
@@ -48,6 +51,9 @@ import useThemeStore from '@/store/modules/theme.ts';
 import { ElMessageBox } from 'element-plus';
 import ThemeDialog from '@/views/layout/theme/themeDialog.vue';
 import TagsView from '@/views/manage/components/layout/tabsView.vue';
+import Language from '@/views/layout/commonHeader/components/language.vue';
+import Message from '@/views/layout/commonHeader/components/message.vue';
+import Avatar from '@/views/layout/commonHeader/components/avatar.vue';
 const router = useRouter();
 const userStore = useUserStore() as any;
 const themeStore = useThemeStore() as any;
@@ -56,9 +62,7 @@ const isThemeDialogShow = ref(false) as any;
 function closeThemeDialog() {
   isThemeDialogShow.value = false;
 }
-function toPersonal() {
-  router.push({ path: '/personalInfo' });
-}
+
 function changeCollapse() {
   themeStore.isCollapse = !themeStore.isCollapse;
 }
@@ -75,9 +79,9 @@ function toMain() {
 }
 
 function logout() {
-  ElMessageBox.confirm('确定注销并退出系统吗？', '提示', {
-    confirmButtonText: '确定',
-    cancelButtonText: '取消',
+  ElMessageBox.confirm($t('确定注销并退出系统吗？'), $t('提示'), {
+    confirmButtonText: $t('确定'),
+    cancelButtonText: $t('取消'),
     type: 'warning'
   })
     .then(() => {
@@ -94,25 +98,13 @@ function logout() {
 onMounted(() => {});
 </script>
 <style lang="scss" scoped>
-@include theme() {
-  .headerBar {
-    box-shadow: get('box-shadow');
-  }
-}
 .headerBar {
   height: 2.8rem;
   background: white;
   padding: 0 15px;
   z-index: 10;
   position: relative;
-  .avatar {
-    height: 2rem;
-    width: 2rem;
-    border-radius: 2rem;
-    margin-left: 0.5rem;
-    border: 3px solid white;
-    cursor: pointer;
-  }
+
   .icon {
     font-size: 1.2rem;
     cursor: pointer;
@@ -133,6 +125,16 @@ onMounted(() => {});
       cursor: pointer;
       font-size: 1.2rem;
       margin-right: 10px;
+    }
+  }
+}
+</style>
+<style lang="scss" scoped>
+@include theme() {
+  .headerBar {
+    box-shadow: get('box-shadow');
+    :deep(.svg-icon-wrap:hover) {
+      color: get('re-font-color') !important;
     }
   }
 }

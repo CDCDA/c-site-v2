@@ -7,14 +7,14 @@
       <svg-icon
         iconName="commonSvg-实验数据"
         style="width: 30px; height: 30px; margin-right: 15px"
-      />大模块测试
+      />{{ $t('大模块测试') }}
     </div>
     <div class="testField-center">
       <div class="testField-item" v-for="(item, i) in testFieldList" @click="totestField(item)">
         <c-image class="testField-item-cover" :src="item.meta.url" />
-        <span class="testField-item-name">{{ item.meta.title }}</span>
+        <span class="testField-item-name">{{ $t(item.meta.title) }}</span>
         <span class="testField-item-divider"></span>
-        <span class="testField-item-instoction no-wrap">{{ item.meta.introduction }}</span>
+        <span class="testField-item-instoction no-wrap">{{ $t(item.meta.introduction) }}</span>
         <!-- <div class="instoction-cover">
           {{ item.introduction }}
         </div> -->
@@ -25,6 +25,8 @@
 </template>
 
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+const { t: $t } = useI18n();
 import { onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import routerViewDialog from '@/components/routerViewDialog/index.vue';
@@ -34,7 +36,7 @@ const title = ref(null) as any;
 const testFieldList = ref([]) as any;
 
 function totestField(item: any) {
-  title.value = item.meta.title;
+  title.value = $t(item.meta.title);
   routerDialog.value.open();
   router.push({ name: item.name });
 }

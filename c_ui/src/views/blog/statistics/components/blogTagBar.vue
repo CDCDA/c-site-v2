@@ -5,6 +5,8 @@
   <baseChart ref="blogTagBar" :options="options" class="blog-tag-bar"></baseChart>
 </template>
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+const { t: $t } = useI18n();
 import { reactive, onMounted, watch, ref } from 'vue';
 import baseChart from '@/components/charts/baseChart.vue';
 import { countBlogsByTag } from '@/api/blog';

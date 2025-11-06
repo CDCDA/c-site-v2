@@ -1,12 +1,5 @@
 <template>
-  <el-drawer
-    v-model="drawer"
-    size="60%"
-    @close="close"
-    :title="title"
-    direction="rtl"
-    :show-close="false"
-  >
+  <el-drawer v-model="drawer" size="60%" :title="title" direction="rtl" :show-close="false">
     <cTable
       :pageApi="pageDicts"
       :deleteApi="deleteDictDatas"
@@ -21,6 +14,8 @@
 </template>
 
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+const { t: $t } = useI18n();
 import { ref, watch } from 'vue';
 import { pageDicts, deleteDictDatas } from '@/api/system/dict/dictData.ts';
 import cTable from '@/components/cTable/index.vue';
@@ -28,16 +23,15 @@ import addOrUpdateDialog from './addOrUpdateDialog.vue';
 const searchColumns = ref([
   {
     type: 'input',
-    label: '字典标签',
+    label: $t('字典标签'),
     prop: 'dictLabel',
-    placeholder: '请输入字典标签'
+    placeholder: $t('请输入字典标签')
   },
   {
     type: 'dict',
-    label: '状态',
+    label: $t('状态'),
     prop: 'status',
-    dictType: 'status',
-    type: 'dict'
+    dictType: 'status'
   }
 ]) as any;
 
@@ -51,55 +45,55 @@ const tableColumns = ref([
   },
   {
     type: 'index',
-    label: '序号',
+    label: $t('序号'),
     width: 55,
     fixed: 'left'
   },
   {
     type: 'tag',
-    label: '字典标签',
+    label: $t('字典标签'),
     prop: 'dictLabel',
     tagTypeProp: 'listClass'
   },
   {
-    label: '字典键值',
+    label: $t('字典键值'),
     prop: 'dictValue'
   },
   {
-    label: '状态',
+    label: $t('状态'),
     prop: 'status',
     type: 'dict',
     dictType: 'status'
   },
   {
-    label: '修改时间',
+    label: $t('修改时间'),
     prop: 'updateTime',
     width: 220
   },
   {
-    label: '备注',
+    label: $t('备注'),
     prop: 'remark'
   },
   {
-    label: '排序',
+    label: $t('排序'),
     prop: 'dictSort',
     showOverflowTooltip: true
   },
   {
     type: 'operation',
-    label: '操作',
+    label: $t('操作'),
     width: 220,
     fixed: 'right',
     buttons: [
       {
         type: 'primary',
-        text: '编辑',
+        text: $t('编辑'),
         operate: 'update',
         click: (row: any) => handleEdit(row)
       },
       {
         type: 'danger',
-        text: '删除',
+        text: $t('删除'),
         operate: 'delete'
       }
     ]
@@ -119,7 +113,7 @@ function handleAdd() {
   addOrUpdateDialogRef.value.init({
     operation: 'add',
     dictType: initParams.value.dictType,
-    title: '新增字典数据'
+    title: $t('新增字典数据')
   });
 }
 
@@ -127,7 +121,7 @@ function handleEdit(row: any) {
   addOrUpdateDialogRef.value.init({
     operation: 'update',
 
-    title: '编辑字典数据',
+    title: $t('编辑字典数据'),
     row
   });
 }

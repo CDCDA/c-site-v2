@@ -16,6 +16,8 @@
 </template>
 
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+const { t: $t } = useI18n();
 import { onMounted, ref } from 'vue';
 import { useDict } from '@/utils/dict.ts';
 const dict = ref({}) as any;

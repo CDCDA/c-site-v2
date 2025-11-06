@@ -34,6 +34,8 @@
   </el-dialog>
 </template>
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+const { t: $t } = useI18n();
 import { ref, onMounted, watch } from 'vue';
 import { autoClearTimer } from '@/utils/timer';
 import { generateRandomId } from '@/utils/common';

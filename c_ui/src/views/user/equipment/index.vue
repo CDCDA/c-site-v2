@@ -11,9 +11,9 @@
         loop
         muted
       ></video>
-      <span class="equipment-header-top">装备</span>
-      <span class="equipment-header-center">科技是第一生产力</span>
-      <span class="equipment-header-bottom">但是穷</span>
+      <span class="equipment-header-top">{{ $t('装备') }}</span>
+      <span class="equipment-header-center">{{ $t('科技是第一生产力') }}</span>
+      <span class="equipment-header-bottom">{{ $t('但是穷') }}</span>
     </div>
 
     <div class="equipment-center">
@@ -30,6 +30,8 @@
 </template>
 
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+const { t: $t } = useI18n();
 import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import { pageEquips } from '@/api/equip.ts';

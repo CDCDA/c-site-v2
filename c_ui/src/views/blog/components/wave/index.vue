@@ -31,9 +31,9 @@
       <div class="blog-info">
         <div class="blog-info-header">
           <span class="post-meta-original">{{
-            props.blogData.isOriginal == 0 ? '转载' : '原创'
+            props.blogData.isOriginal == 0 ? $t('转载') : $t('原创')
           }}</span>
-          <span class="post-meta-categories">博客</span>
+          <span class="post-meta-categories">{{ $t('博客') }}</span>
           <div class="tag-item" v-for="tag in props.blogData.tags">
             <span class="tag-item-pretend">#</span>
             <span class="tag-item-text">{{ tag.tagName }}</span>
@@ -56,6 +56,8 @@
   </div>
 </template>
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+const { t: $t } = useI18n();
 import { ref, onMounted, watch } from 'vue';
 const props = defineProps({
   blogData: {
@@ -80,6 +82,10 @@ watch(
         // (document.querySelector('.blog-display-main') as any).style.animation =
         //   'display-in 1.5s backwards';
         loading.value = false;
+      };
+      img.onerror = function () {
+        background.value = `url('@/assets/images/404.png') left/cover  no-repeat`;
+        (waveHeader as any)._value.style.background = background.value;
       };
     }
     // else background.value = `url('http://120.48.127.181/file/dragon-maiden.jpg') left/cover  no-repeat`;

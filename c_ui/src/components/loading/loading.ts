@@ -1,3 +1,4 @@
+import i18n from '@/locales/i18n';
 // loading.ts
 import { createApp, App } from 'vue';
 import Loading from './loadingFullscreen.vue';

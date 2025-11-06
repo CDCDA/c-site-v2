@@ -1,3 +1,4 @@
+import i18n from '@/locales/i18n';
 import { Directive } from 'vue';
 import { autoClearTimer } from '@/utils/timer';
 // 拖拽的指令

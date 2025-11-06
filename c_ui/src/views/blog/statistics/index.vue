@@ -7,19 +7,19 @@
     <div class="statistic-main-content">
       <div class="left-side">
         <div class="statistic-item">
-          <div class="item-header">博客数量</div>
+          <div class="item-header">{{ $t('博客数量') }}</div>
           <div class="item-body">
             <blogCountChart />
           </div>
         </div>
         <div class="statistic-item">
-          <div class="item-header">博客分类</div>
+          <div class="item-header">{{ $t('博客分类') }}</div>
           <div class="item-body">
             <blogTypePie />
           </div>
         </div>
         <div class="statistic-item">
-          <div class="item-header">博客标签</div>
+          <div class="item-header">{{ $t('博客标签') }}</div>
           <div class="item-body">
             <blogTagBar />
           </div>
@@ -32,33 +32,33 @@
         <div class="statistic-item" style="height: calc(30%)">
           <div class="count-list">
             <div class="count-item">
-              <el-statistic title="博客数" :value="blogNumValue" />
+              <el-statistic :title="$t('博客数')" :value="blogNumValue" />
             </div>
             <div class="count-item">
-              <el-statistic title="随笔数" :value="essayNumValue" />
+              <el-statistic :title="$t('随笔数')" :value="essayNumValue" />
             </div>
             <div class="count-item">
-              <el-statistic title="相册数" :value="albumNumValue" />
+              <el-statistic :title="$t('相册数')" :value="albumNumValue" />
             </div>
             <div class="count-item">
-              <el-statistic title="分类数" :value="typeNumValue" />
+              <el-statistic :title="$t('分类数')" :value="typeNumValue" />
             </div>
             <div class="count-item">
-              <el-statistic title="标签数" :value="tagNumValue" />
+              <el-statistic :title="$t('标签数')" :value="tagNumValue" />
             </div>
             <div class="count-item">
-              <el-statistic title="切片数" :value="sliceNumValue" />
+              <el-statistic :title="$t('切片数')" :value="sliceNumValue" />
             </div>
             <div class="count-item">
-              <el-statistic title="大模块数" :value="moduleNumValue" />
+              <el-statistic :title="$t('大模块数')" :value="moduleNumValue" />
             </div>
             <div class="count-item">
-              <el-statistic title="网站更新数" :value="updateLogNumValue" />
+              <el-statistic :title="$t('网站更新数')" :value="updateLogNumValue" />
             </div>
           </div>
         </div>
         <div class="statistic-item" style="height: calc(70% - 134px)">
-          <div class="item-header">网站更新日志</div>
+          <div class="item-header">{{ $t('网站更新日志') }}</div>
           <div class="item-body">
             <updateCountLineBar />
           </div>
@@ -66,19 +66,19 @@
       </div>
       <div class="right-side">
         <div class="statistic-item">
-          <div class="item-header">随笔数量</div>
+          <div class="item-header">{{ $t('随笔数量') }}</div>
           <div class="item-body">
             <essayCountLine />
           </div>
         </div>
         <div class="statistic-item">
-          <div class="item-header">组件统计</div>
+          <div class="item-header">{{ $t('组件统计') }}</div>
           <div class="item-body">
             <assemblyCountRadar />
           </div>
         </div>
         <div class="statistic-item">
-          <div class="item-header">游戏影视统计</div>
+          <div class="item-header">{{ $t('游戏影视统计') }}</div>
           <div class="item-body">
             <gameDramaPie />
           </div>
@@ -88,6 +88,8 @@
   </div>
 </template>
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+const { t: $t } = useI18n();
 import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import statisticBack from './components/statisticBack.vue';

@@ -10,6 +10,8 @@
   </div>
 </template>
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+const { t: $t } = useI18n();
 import { ref, onMounted } from 'vue';
 import BubbleCollision from './components/bubbleCollision.vue';
 import RotatingBorder from '@/components/rotatingBorder.vue';

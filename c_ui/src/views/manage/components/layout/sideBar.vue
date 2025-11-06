@@ -13,7 +13,7 @@
     >
       <div class="logo flex-center">
         <svg-icon iconName="commonSvg-控制台" style="font-size: 1.2rem; margin-right: 5px" />
-        <span v-if="!themeStore.isCollapse">控制台</span>
+        <span v-if="!themeStore.isCollapse">{{ $t('控制台') }}</span>
       </div>
       <el-menu-item v-for="(item, i) in menuList" @click="menuClick(item)" :index="item.path">
         <svg-icon
@@ -22,13 +22,15 @@
           style="font-size: 1.1rem; margin-right: 8px"
         />
         <template #title>
-          <span>{{ item.meta.title }}</span>
+          <span>{{ $t(item.meta.title) }}</span>
         </template>
       </el-menu-item>
     </el-menu>
   </div>
 </template>
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+const { t: $t } = useI18n();
 import { ref, onMounted, watch } from 'vue';
 import { useRouter } from 'vue-router';
 import useThemeStore from '@/store/modules/theme.ts';
@@ -58,7 +60,8 @@ onMounted(() => {
   menuList.value = menuList.value.filter(
     (x: any) => x.name !== 'blogManageEditor' && x.name !== 'essayManageEditor'
   );
-  defaultActive.value = window.localStorage.getItem('lastRouter').path || menuList.value[0].path;
+  const lastRouter = window.localStorage.getItem('lastRouter') as any;
+  defaultActive.value = lastRouter ? lastRouter.path : menuList.value[0].path;
 });
 </script>
 <style lang="scss" scoped>

@@ -12,37 +12,46 @@
     @close="emit('close')"
   >
     <el-form class="log-form" :model="form" ref="formEl" :rules="rules">
-      <el-form-item label="日志内容" prop="operation">
+      <el-form-item :label="$t('日志内容')" prop="operation">
         <el-input
           v-model="form.operation"
           type="textarea"
           maxlength="100"
           show-word-limit
           :rows="3"
-          placeholder="写点什么吧。。。"
+          :placeholder="$t('写点什么吧。。。')"
         ></el-input>
       </el-form-item>
-      <el-form-item label="更新时间" prop="operateTime">
-        <el-date-picker v-model="form.operateTime" type="date" placeholder="请选择" size="small" />
+      <el-form-item :label="$t('更新时间')" prop="operateTime">
+        <el-date-picker
+          v-model="form.operateTime"
+          type="date"
+          :placeholder="$t('请选择')"
+          size="small"
+        />
       </el-form-item>
     </el-form>
     <template #footer>
       <span class="dialog-footer">
-        <el-button @click="emit('close')">取消</el-button>
-        <el-button type="primary" @click="submit()" v-permission="['operate']">确定</el-button>
+        <el-button @click="emit('close')">{{ $t('取消') }}</el-button>
+        <el-button type="primary" @click="submit()" v-permission="['operate']">{{
+          $t('确定')
+        }}</el-button>
       </span>
     </template>
   </c-dialog>
 </template>
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+const { t: $t } = useI18n();
 import { ref, nextTick, onMounted, watch } from 'vue';
 import { saveLog } from '@/api/system/updateLog';
 import { ElNotification } from 'element-plus';
-const title = ref('新增更新日志');
+const title = ref($t('新增更新日志'));
 const formEl = ref(null) as any;
 const rules = ref({
-  operation: [{ required: true, message: '请输入更新日志', trigger: 'blur' }],
-  operateTime: [{ required: true, message: '请选择更新时间', trigger: 'blur' }]
+  operation: [{ required: true, message: $t('请输入更新日志'), trigger: 'blur' }],
+  operateTime: [{ required: true, message: $t('请选择更新时间'), trigger: 'blur' }]
 }) as any;
 const dialogVisible = ref(true);
 const emit = defineEmits(['close', 'getList']);
@@ -80,7 +89,7 @@ async function submit() {
     if (valid) {
       const { code } = (await saveLog(form.value)) as any;
       if (code === 200) {
-        ElNotification.success('保存成功');
+        ElNotification.success($t('保存成功'));
         emit('getList');
         emit('close');
       }

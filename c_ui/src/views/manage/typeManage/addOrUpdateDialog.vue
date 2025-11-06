@@ -2,40 +2,42 @@
 <template>
   <c-dialog v-model="open" :title="title" width="500" :modal="true">
     <el-form :model="form" label-width="90px" ref="formRef" :rules="rules">
-      <el-form-item label="分类名称" prop="typeName">
+      <el-form-item :label="$t('分类名称')" prop="typeName">
         <el-input
           v-model="form.typeName"
-          placeholder="请输入分类名称"
+          :placeholder="$t('请输入分类名称')"
           clearable
           maxlength="50"
           show-word-limit
         />
       </el-form-item>
-      <el-form-item label="分类简介" prop="intro">
+      <el-form-item :label="$t('分类简介')" prop="intro">
         <el-input
           v-model="form.intro"
           type="textarea"
           :rows="3"
-          placeholder="请输入分类简介"
+          :placeholder="$t('请输入分类简介')"
           maxlength="100"
           show-word-limit
           clearable
         />
       </el-form-item>
-      <el-form-item label="封面图片">
+      <el-form-item :label="$t('封面图片')">
         <upload v-model="form.coverUrl" path="blogType"></upload>
       </el-form-item>
     </el-form>
     <template #footer>
       <span class="dialog-footer">
-        <el-button @click="open = false">取消</el-button>
-        <el-button type="primary" @click="submit">确定</el-button>
+        <el-button @click="open = false">{{ $t('取消') }}</el-button>
+        <el-button type="primary" @click="submit">{{ $t('确定') }}</el-button>
       </span>
     </template>
   </c-dialog>
 </template>
 
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+const { t: $t } = useI18n();
 import { ref } from 'vue';
 import { saveType, updateType } from '@/api/type.ts';
 import { ElNotification } from 'element-plus';
@@ -46,12 +48,12 @@ const open = ref(false) as any;
 
 const rules = ref({
   typeName: [
-    { required: true, message: '请输入分类名称', trigger: 'blur' },
-    { min: 1, max: 50, message: '长度在 1 到 50 个字符', trigger: 'blur' }
+    { required: true, message: $t('请输入分类名称'), trigger: 'blur' },
+    { min: 1, max: 50, message: $t('长度在 1 到 50 个字符'), trigger: 'blur' }
   ],
   intro: [
-    { required: true, message: '请输入分类简介', trigger: 'blur' },
-    { min: 1, max: 100, message: '长度在 1 到 100 个字符', trigger: 'blur' }
+    { required: true, message: $t('请输入分类简介'), trigger: 'blur' },
+    { min: 1, max: 100, message: $t('长度在 1 到 100 个字符'), trigger: 'blur' }
   ]
 });
 
@@ -91,7 +93,7 @@ function submit() {
     const { code } = form.value.typeId ? await updateType(form.value) : await saveType(form.value);
 
     if (code === 200) {
-      ElNotification.success(form.value.typeId ? '修改成功' : '新增成功');
+      ElNotification.success(form.value.typeId ? $t('修改成功') : $t('新增成功'));
       emit('getList');
       open.value = false;
     }

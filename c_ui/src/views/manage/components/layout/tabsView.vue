@@ -5,40 +5,43 @@
         <el-tab-pane
           v-for="item in menuList"
           :key="item.name"
-          :label="item.meta.title"
+          :label="$t(item.meta.title)"
           :name="item.name"
           :closable="!item.meta.affix"
         >
           <template #label>
             <svg-icon class="tab-icon" :iconName="item.meta.svgIcon" />
-            <span @contextmenu.prevent.native="openMenu(item, $event)">{{ item.meta.title }}</span>
+            <span @contextmenu.prevent.native="openMenu(item, $event)">{{
+              $t(item.meta.title)
+            }}</span>
           </template>
         </el-tab-pane>
       </el-tabs>
       <MoreButton />
     </div>
     <ul v-show="visible" :style="{ left: left + 'px', top: top + 'px' }" class="contextmenu">
-      <li @click="refreshSelectedTag(selectedTag)"><Refresh /> {{ '刷新页面' }}</li>
+      <li @click="refreshSelectedTag(selectedTag)"><Refresh /> {{ $t('刷新页面') }}</li>
       <li v-if="!isAffix(selectedTag)" @click="closeSelectedTag(selectedTag)">
-        <i class="el-icon-close"></i> {{ '关闭当前' }}
+        <i class="el-icon-close"></i> {{ $t('关闭当前') }}
       </li>
-      <li @click="closeOthersTags"><i class="el-icon-circle-close"></i> {{ '关闭其他' }}</li>
+      <li @click="closeOthersTags"><i class="el-icon-circle-close"></i> {{ $t('关闭其他') }}</li>
       <li v-if="!isFirstView()" @click="closeLeftTags">
-        <i class="el-icon-back"></i> {{ '关闭左侧' }}
+        <i class="el-icon-back"></i> {{ $t('关闭左侧') }}
       </li>
       <li v-if="!isLastView()" @click="closeRightTags">
-        <i class="el-icon-right"></i> {{ '关闭右侧' }}
+        <i class="el-icon-right"></i> {{ $t('关闭右侧') }}
       </li>
-      <li @click="closeAllTags"><i class="el-icon-circle-close"></i> {{ '全部关闭' }}</li>
+      <li @click="closeAllTags"><i class="el-icon-circle-close"></i> {{ $t('全部关闭') }}</li>
     </ul>
   </div>
 </template>
 
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+const { t: $t } = useI18n();
 import Sortable from 'sortablejs';
 import { ref, computed, watch, onMounted } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
-import SvgIcon from '@/components/SvgIcon/index.vue';
 import { useTabsViewStore } from '@/store/modules/tabsView.ts';
 
 const tabsViewStore = useTabsViewStore();
@@ -51,12 +54,14 @@ const selectedTag = ref({}) as any;
 const route = useRoute();
 const router = useRouter();
 
-const tabsMenuValue = ref(route.fullPath);
+const tabsMenuValue = ref(route.fullPath) as any;
 const menuList = computed(() => tabsViewStore.visitedViews);
 
 onMounted(() => {
-  tabsDrop();
   initTabs();
+  setTimeout(() => {
+    tabsDrop();
+  }, 1000);
 });
 
 const addTab = (tab: any) => {
@@ -92,11 +97,12 @@ const tabsDrop = () => {
   Sortable.create(document.querySelector('.el-tabs__nav') as any, {
     draggable: '.el-tabs__item',
     animation: 300,
-    onEnd({ newIndex, oldIndex }) {
+    onEnd(evt: any) {
+      const { newIndex, oldIndex } = evt;
       const tabsList = [...tabsViewStore.visitedViews];
-      const currRow = tabsList.splice(oldIndex as number, 1)[0];
-      tabsList.splice(newIndex as number, 0, currRow);
-      tabStore.setTabs(tabsList);
+      const currRow = tabsList.splice(oldIndex, 1)[0];
+      tabsList.splice(newIndex, 0, currRow);
+      tabsViewStore.visitedViews = tabsList;
     }
   });
 };
@@ -108,12 +114,6 @@ const filterAffixTabs = (routers: any) => {
     if (route.meta && route.meta.affix) {
       tabs.push(route);
     }
-    // if (route.children && route.children.length != 0) {
-    //   const tempTabs = filterAffixTabs(route.children);
-    //   if (tempTabs.length >= 1) {
-    //     tabs = [...tabs, ...tempTabs];
-    //   }
-    // }
   });
   return tabs;
 };
@@ -156,20 +156,13 @@ const tabRemove = (tabName: any) => {
 
 function isFirstView() {
   try {
-    return (
-      selectedTag.value.fullPath === visitedViews[1].fullPath ||
-      selectedTag.value.fullPath === '/index'
-    );
+    return selectedTag.value.name === menuList.value[1].name || selectedTag.value.name === '/index';
   } catch (err) {
     return false;
   }
 }
 function isLastView() {
-  try {
-    return selectedTag.value.fullPath === visitedViews[visitedViews.length - 1].fullPath;
-  } catch (err) {
-    return false;
-  }
+  return selectedTag.value.name === menuList.value[menuList.value.length - 1]?.name;
 }
 
 function closeSelectedTag(view: any) {

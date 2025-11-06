@@ -3,7 +3,9 @@
 -->
 <template>
   <div class="comment">
-    <div class="comment-title"><svg-icon iconName="commonSvg-评论1"></svg-icon>评论</div>
+    <div class="comment-title">
+      <svg-icon iconName="commonSvg-评论1"></svg-icon>{{ $t('评论') }}
+    </div>
     <commentEditor :type="props.type" @getList="getList" :relevanceId="props.relevanceId" />
     <div v-if="commentList.length != 0" v-cLoading="loading">
       <div class="comment-header">
@@ -25,6 +27,8 @@
   </div>
 </template>
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+const { t: $t } = useI18n();
 import commentEditor from './components/commentEditor.vue';
 import commentItem from './components/commentItem.vue';
 import { ref, onMounted, watch } from 'vue';

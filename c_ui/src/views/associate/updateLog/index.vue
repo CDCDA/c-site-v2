@@ -10,10 +10,10 @@
       />
     </div>
     <div class="update-log-preface">
-      <h2>前言</h2>
-      <p>许多样式来源于网络，只不过是用我自己的方法区实现类似效果</p>
-      <p>随缘更新，随缘记录</p>
-      <h2>更新日志</h2>
+      <h2>{{ $t('前言') }}</h2>
+      <p>{{ $t('许多样式来源于网络，只不过是用我自己的方法区实现类似效果') }}</p>
+      <p>{{ $t('随缘更新，随缘记录') }}</p>
+      <h2>{{ $t('更新日志') }}</h2>
     </div>
     <section class="timeline">
       <ul>
@@ -34,6 +34,8 @@
 </template>
 
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+const { t: $t } = useI18n();
 import { ref, onMounted } from 'vue';
 import { pageLogs } from '@/api/system/updateLog';
 import { autoClearTimer } from '@/utils/timer';

@@ -12,7 +12,9 @@
                 <c-image :src="scope.row.coverUrl" />
               </template>
             </el-image>
-            <div class="type-count">{{ item.total }}<span>篇</span></div>
+            <div class="type-count">
+              {{ item.total }}<span>{{ $t('篇') }}</span>
+            </div>
             <div class="type-info">
               <h1>{{ item.typeName }}</h1>
               <p>{{ item.intro }}</p>
@@ -25,6 +27,8 @@
 </template>
 
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+const { t: $t } = useI18n();
 import HoverTilt from '@/components/hoverTilt/index.vue';
 import { onMounted, ref } from 'vue';
 import { listTypesWithStats } from '@/api/type';

@@ -1,16 +1,16 @@
 <template>
   <div class="drag-main">
-    <!-- <el-button class="bt" @click="changeLayout()">切换</el-button> -->
+    <!-- <el-button class="bt" @click="changeLayout()">{{ $t('切换') }}</el-button> -->
     <div class="drag-tools">
       <el-tooltip
-        :content="draggableOptions.lineVisible ? '关闭对齐线' : '开启对齐线'"
+        :content="draggableOptions.lineVisible ? $t('关闭对齐线') : $t('开启对齐线')"
         placement="top"
       >
         <el-icon @click="draggableOptions.lineVisible = !draggableOptions.lineVisible"
           ><Grid
         /></el-icon>
       </el-tooltip>
-      <!-- <el-tooltip content="恢复初始位置" placement="top">
+      <!-- <el-tooltip :content="$t('恢复初始位置')" placement="top">
         <el-icon @click="refresh(item)"><RefreshRight></RefreshRight></el-icon>
       </el-tooltip> -->
     </div>
@@ -46,26 +46,26 @@
         </div>
         <div class="vdr-tools" v-if="item.toolsShow">
           <div class="vdr-tools-left">
-            <el-tooltip :content="item.isLock ? '解锁' : '锁定'" placement="top">
+            <el-tooltip :content="item.isLock ? $t('解锁') : $t('锁定')" placement="top">
               <el-icon v-if="item.isLock" @click="unLock(item)"><Lock></Lock></el-icon>
               <el-icon v-else @click="lock(item)"><Unlock></Unlock></el-icon>
             </el-tooltip>
-            <el-tooltip content="恢复初始位置" placement="top">
+            <el-tooltip :content="$t('恢复初始位置')" placement="top">
               <el-icon @click="refresh(item)"><RefreshRight></RefreshRight></el-icon>
             </el-tooltip>
           </div>
           <div class="vdr-tools-right">
             <el-divider direction="vertical" />
-            <el-tooltip content="上移1px" placement="top">
+            <el-tooltip :content="$t('上移1px')" placement="top">
               <el-icon @click="move(item, 'top')"><CaretTop></CaretTop></el-icon>
             </el-tooltip>
-            <el-tooltip content="下移1px" placement="top">
+            <el-tooltip :content="$t('下移1px')" placement="top">
               <el-icon @click="move(item, 'bottom')"><CaretBottom></CaretBottom></el-icon>
             </el-tooltip>
-            <el-tooltip content="左移1px" placement="top">
+            <el-tooltip :content="$t('左移1px')" placement="top">
               <el-icon @click="move(item, 'left')"><CaretLeft></CaretLeft></el-icon>
             </el-tooltip>
-            <el-tooltip content="右移1px" placement="top">
+            <el-tooltip :content="$t('右移1px')" placement="top">
               <el-icon @click="move(item, 'right')"><CaretRight></CaretRight></el-icon>
             </el-tooltip>
           </div>
@@ -104,6 +104,8 @@
   </div>
 </template>
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+const { t: $t } = useI18n();
 import { ref, reactive } from 'vue';
 import weather from './components/weather.vue';
 import BlogTagCard from '@/views/blog/components/blogTagCard.vue';
@@ -120,7 +122,7 @@ import 'vue3-draggable-resizable/dist/Vue3DraggableResizable.css';
 const isGrid = ref(true);
 const draggableList = reactive([
   {
-    name: '天气预报',
+    name: $t('天气预报'),
     i: '1',
     isLock: false,
     type: weather,
@@ -140,7 +142,7 @@ const draggableList = reactive([
     toolsShow: false
   },
   {
-    name: '标签云',
+    name: $t('标签云'),
     i: '2',
     active: false,
     isLock: false,
@@ -160,7 +162,7 @@ const draggableList = reactive([
     toolsShow: false
   },
   {
-    name: '分类',
+    name: $t('分类'),
     i: '3',
     active: false,
     isLock: false,
@@ -180,7 +182,7 @@ const draggableList = reactive([
     toolsShow: false
   },
   {
-    name: '用户信息',
+    name: $t('用户信息'),
     i: '4',
     type: BlogUserCard,
     active: false,
@@ -200,7 +202,7 @@ const draggableList = reactive([
     toolsShow: false
   }
   // {
-  //   name: '3d地球',
+  //   name: $t('3d地球'),
   //   i: '5',
   //   type: earth3d,
   //   active: false,
@@ -221,7 +223,7 @@ const draggableList = reactive([
   //   toolsShow: true
   // },
   // {
-  //   name: '音乐播放器',
+  //   name: $t('音乐播放器'),
   //   i: '6',
   //   type: audioPlayer,
   //   active: false,
@@ -246,7 +248,7 @@ const draggableOptions = reactive({
 });
 // const layout = reactive([
 //   {
-//     name: '天气预报',
+//     name: $t('天气预报'),
 //     i: '1',
 //     isLock: false,
 //     type: weather,
@@ -266,7 +268,7 @@ const draggableOptions = reactive({
 //     toolsShow: false
 //   },
 //   {
-//     name: '标签云',
+//     name: $t('标签云'),
 //     i: '2',
 //     active: false,
 //     isLock: false,
@@ -286,7 +288,7 @@ const draggableOptions = reactive({
 //     toolsShow: false
 //   },
 //   {
-//     name: '分类',
+//     name: $t('分类'),
 //     i: '3',
 //     active: false,
 //     isLock: false,
@@ -306,7 +308,7 @@ const draggableOptions = reactive({
 //     toolsShow: false
 //   },
 //   {
-//     name: '用户信息',
+//     name: $t('用户信息'),
 //     i: '4',
 //     type: BlogUser,
 //     active: false,
@@ -326,7 +328,7 @@ const draggableOptions = reactive({
 //     toolsShow: false
 //   },
 //   {
-//     name: '3d地球',
+//     name: $t('3d地球'),
 //     i: '5',
 //     type: earth3d,
 //     active: false,
@@ -347,7 +349,7 @@ const draggableOptions = reactive({
 //     toolsShow: true
 //   },
 //   {
-//     name: '音乐播放器',
+//     name: $t('音乐播放器'),
 //     i: '6',
 //     type: audioPlayer,
 //     active: false,

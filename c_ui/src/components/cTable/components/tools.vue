@@ -10,8 +10,8 @@
         icon="Plus"
         @click="emit('handleAdd')"
         v-permission="['operate']"
-        >新增
-      </el-button>
+        >{{ $t('新增') }}</el-button
+      >
     </el-col>
     <el-col :span="1.5">
       <el-button
@@ -21,17 +21,17 @@
         @click="emit('handleDelete')"
         v-permission="['operate']"
         :disabled="props.selection.length == 0"
-        >删除
-      </el-button>
+        >{{ $t('删除') }}</el-button
+      >
     </el-col>
     <div class="manage-tools">
-      <el-tooltip content="刷新" placement="top">
+      <el-tooltip :content="$t('刷新')" placement="top">
         <svg-icon iconName="commonSvg-刷新" @click="emit('refresh')" />
       </el-tooltip>
-      <el-tooltip :content="isShowSearch.value ? '隐藏搜索' : '显示搜索'" placement="top">
+      <el-tooltip :content="isShowSearch ? $t('隐藏搜索') : $t('显示搜索')" placement="top">
         <svg-icon iconName="commonSvg-搜索" @click="showSearch" />
       </el-tooltip>
-      <el-tooltip content="列控制" placement="top">
+      <el-tooltip :content="$t('列控制')" placement="top">
         <svg-icon iconName="commonSvg-菜单" @click="showColumnSetting" />
       </el-tooltip>
     </div>
@@ -44,6 +44,8 @@
   />
 </template>
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+const { t: $t } = useI18n();
 import { ref, onMounted } from 'vue';
 import columnSetting from '../components/columnSetting.vue';
 const isShowSearch = ref(true);
@@ -78,8 +80,8 @@ function showSearch() {
 const columnSettingRef = ref(null) as any;
 
 // 处理列设置改变
-function handleColumnChange(val: any) {
-  emit('change', val);
+function handleColumnChange() {
+  // emit('change', val);
 }
 
 onMounted(() => {});

@@ -3,16 +3,18 @@
 -->
 <template>
   <div class="personal-info">
-    <span class="glossary">java进阶</span>
-    <span class="glossary">rust练习生</span>
-    <span class="glossary">全栈开发工程师</span>
-    <span class="glossary">游戏爱好者</span>
-    <span class="glossary">整点新活</span>
-    <span class="glossary">日常找新歌</span>
+    <span class="glossary">{{ $t('java进阶') }}</span>
+    <span class="glossary">{{ $t('rust练习生') }}</span>
+    <span class="glossary">{{ $t('全栈开发工程师') }}</span>
+    <span class="glossary">{{ $t('游戏爱好者') }}</span>
+    <span class="glossary">{{ $t('整点新活') }}</span>
+    <span class="glossary">{{ $t('日常找新歌') }}</span>
     <el-avatar class="avatar" :src="'http://120.48.127.181/file/avatar/cat-star.jpg'"></el-avatar>
   </div>
 </template>
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+const { t: $t } = useI18n();
 import { computed } from 'vue';
 import useUserStore from '@/store/modules/user';
 const userStore = useUserStore();

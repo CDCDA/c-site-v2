@@ -15,6 +15,8 @@
 </template>
 
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+const { t: $t } = useI18n();
 import { ref, onMounted } from 'vue';
 import { pageCates, deleteCates } from '@/api/cate.ts';
 import cTable from '@/components/cTable/index.vue';
@@ -23,7 +25,7 @@ import addOrUpdateDialog from './addOrUpdateDialog.vue';
 const searchColumns = ref([
   {
     type: 'input',
-    label: '名称',
+    label: $t('名称'),
     prop: 'cateName',
     labelWidth: 40
   }
@@ -39,47 +41,47 @@ const tableColumns = ref([
   },
   {
     type: 'image',
-    label: '封面',
+    label: $t('封面'),
     prop: 'coverUrl',
     width: 150
   },
   {
-    label: '美食名',
+    label: $t('美食名'),
     prop: 'name',
     showOverflowTooltip: true
   },
   {
-    label: '简介',
+    label: $t('简介'),
     prop: 'intro',
     showOverflowTooltip: true
   },
   {
-    label: '创建时间',
+    label: $t('创建时间'),
     prop: 'createTime'
   },
   {
-    label: '修改时间',
+    label: $t('修改时间'),
     prop: 'updateTime'
   },
   {
-    label: '备注',
+    label: $t('备注'),
     prop: 'remark'
   },
   {
     type: 'operation',
-    label: '操作',
+    label: $t('操作'),
     fixed: 'right',
     width: 220,
     buttons: [
       {
         type: 'primary',
-        text: '编辑',
+        text: $t('编辑'),
         operate: 'update',
         click: (row: any) => handleEdit(row)
       },
       {
         type: 'danger',
-        text: '删除',
+        text: $t('删除'),
         operate: 'delete'
       }
     ]
@@ -95,14 +97,14 @@ const addOrUpdateDialogRef = ref(null) as any;
 function handleAdd() {
   addOrUpdateDialogRef.value.init({
     operation: 'add',
-    title: '添加美食'
+    title: $t('添加美食')
   });
 }
 
 function handleEdit(row: any) {
   addOrUpdateDialogRef.value.init({
     operation: 'update',
-    title: '编辑美食',
+    title: $t('编辑美食'),
     row
   });
 }

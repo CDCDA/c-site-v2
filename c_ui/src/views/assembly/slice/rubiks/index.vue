@@ -19,7 +19,7 @@
           ><i style="opacity: 1; transform: rotate3d(0, 1, 0, 0deg)">E</i></span
         >
       </h1>
-      <div class="text text--note" style="opacity: 0.999789">双击魔方即可开始</div>
+      <div class="text text--note" style="opacity: 0.999789">{{ $t('双击魔方即可开始') }}</div>
       <div class="text text--timer">0:00</div>
       <div class="text text--complete">
         <span>Complete!</span>
@@ -150,6 +150,8 @@
   </div>
 </template>
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+const { t: $t } = useI18n();
 import { onMounted } from 'vue';
 import { autoClearTimer } from '@/utils/timer';
 onMounted(async () => {

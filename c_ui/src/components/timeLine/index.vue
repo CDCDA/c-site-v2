@@ -18,11 +18,13 @@
   </div>
 </template>
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+const { t: $t } = useI18n();
 import { ref } from 'vue';
 const goalList = ref([
   {
     date: '2023-8',
-    goal: '目标1'
+    goal: $t('目标1')
   },
   {
     date: '2023-9',
@@ -34,15 +36,15 @@ const goalList = ref([
   },
   {
     date: '2023-11',
-    goal: '目标2'
+    goal: $t('目标2')
   },
   {
     date: '2023-12',
-    goal: '目标3'
+    goal: $t('目标3')
   },
   {
     date: '2024-1',
-    goal: '目标4'
+    goal: $t('目标4')
   }
 ]) as any;
 </script>

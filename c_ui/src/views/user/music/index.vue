@@ -5,7 +5,8 @@
   <div class="page-main music-main">
     <div class="music-song animated c-left">
       <div class="music-header">
-        <span>歌单</span><svg-icon iconName="commonSvg-切换" @click="changeSearch"> </svg-icon>
+        <span>{{ $t('歌单') }}</span
+        ><svg-icon iconName="commonSvg-切换" @click="changeSearch"> </svg-icon>
       </div>
       <div class="music-search" v-if="isSearch">
         <el-input v-model="searchText"></el-input>
@@ -56,6 +57,8 @@
 </template>
 
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+const { t: $t } = useI18n();
 import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import { formatDate } from '@/utils/date.ts';
@@ -68,9 +71,9 @@ const isSearch = ref(false) as any;
 const searchText = ref('') as any;
 const selectSong = ref({
   id: 1,
-  name: '师父',
-  author: '王朝1982,卦者灵风,朱旭BooBoo',
-  intro: '有意思的歌',
+  name: $t('师父'),
+  author: $t('王朝1982,卦者灵风,朱旭BooBoo'),
+  intro: $t('有意思的歌'),
   userId: 1,
   releaseTime: '2023-03-30 16:00:00'
 }) as any;
@@ -112,7 +115,7 @@ function getNextSong() {
   songs.value.some((song: any, i: any) => {
     if (song.id == selectSong.value.id) {
       if (songs.value[i + 1]) selectSong.value = songs.value[i + 1];
-      else ElMessage.info('已经到最后一首了');
+      else ElMessage.info($t('已经到最后一首了'));
       return true;
     }
   });
@@ -123,7 +126,7 @@ function getPreSong() {
   songs.value.some((song: any, i: any) => {
     if (song.id == selectSong.value.id) {
       if (songs.value[i - 1]) selectSong.value = songs.value[i - 1];
-      else ElMessage.info('已经到第一首了');
+      else ElMessage.info($t('已经到第一首了'));
       return true;
     }
   });

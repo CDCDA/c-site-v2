@@ -87,6 +87,8 @@
 </template>
 
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+const { t: $t } = useI18n();
 import { ref, onMounted, nextTick } from 'vue';
 import { Service, UserFilled } from '@element-plus/icons-vue';
 import { sendMessage } from '@/api/chat.ts';
@@ -98,7 +100,6 @@ const page = ref(null) as any;
 const options = ref({ scroll: true }) as any;
 const themeStore = useThemeStore();
 themeStore.isFooterShow = false;
-import { debounce } from 'lodash';
 
 themeStore.isFooterShow = false;
 const userInput = ref('');

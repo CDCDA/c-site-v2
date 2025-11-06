@@ -27,7 +27,7 @@ export default {
     },
     init() {
       var canvas = document.getElementById(this.id);
-      console.log('加载', canvas);
+      console.log($t('加载'), canvas);
       // canvas.width = canvas.offsetWidth;
       // canvas.height = canvas.offsetHeight;
       canvas.width = canvas.offsetWidth;

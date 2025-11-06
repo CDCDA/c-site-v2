@@ -8,7 +8,7 @@
         <svg-icon iconName="commonSvg-刷新" style="cursor: pointer" @click="getAbstract" />
       </div>
       <div class="blog-ai-header-right">
-        <div class="loading-dots" v-if="loading">总结中</div>
+        <div class="loading-dots" v-if="loading">{{ $t('总结中') }}</div>
       </div>
     </div>
     <div class="blog-ai-abstract" v-cLoading="loading">
@@ -17,6 +17,8 @@
   </div>
 </template>
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+const { t: $t } = useI18n();
 import SvgIcon from '@/components/icon-component.vue';
 import { sendMessage } from '@/api/chat.ts';
 import { ElMessage, ElNotification } from 'element-plus';
@@ -36,7 +38,7 @@ async function getAbstract() {
   let messages = [
     {
       role: 'user',
-      content: `用一段尽量简短的话概括一下博客内容： ${props.blogContent}`
+      content: `${$t('用一段尽量简短的话概括一下博客内容： ')}${props.blogContent}`
     }
   ];
   loading.value = true;
@@ -81,7 +83,7 @@ async function getAbstract() {
     }
     loading.value = false;
   } catch (error) {
-    ElMessage.error('获取博客摘要失败，请重试');
+    ElMessage.error($t('获取博客摘要失败，请重试'));
     loading.value = false;
   }
 }

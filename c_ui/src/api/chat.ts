@@ -1,10 +1,11 @@
+import i18n from '@/locales/i18n';
 import request from '@/utils/request.ts';
 
 const url = '/chatApi/v1/chat/completions';
 const headers = {
   'Content-Type': 'application/json',
   Accept: 'application/x-ndjson',
-  Authorization: 'Bearer sk-tusvogeebpwumnkeofzzozovkwcndsfaaovakgjjvbzwyfnn'
+  Authorization: 'Bearer xxxxxxxxxxxxxxx'
 };
 export const sendMessage = async (messages: any) => {
   const body = {

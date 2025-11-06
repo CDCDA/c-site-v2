@@ -4,10 +4,9 @@
 <template>
   <div class="page-main svg-main">
     <div class="svg-header">
-      <svg-icon
-        iconName="commonSvg-物质"
-        style="width: 30px; height: 30px; margin-right: 15px"
-      />svg列表
+      <svg-icon iconName="commonSvg-物质" style="width: 30px; height: 30px; margin-right: 15px" />{{
+        $t('svg列表')
+      }}
       <!-- <div><el-input v-model="searchText" :suffix-icon="Search"></el-input></div> -->
     </div>
     <div class="svg-center">
@@ -31,6 +30,8 @@
 </template>
 
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+const { t: $t } = useI18n();
 import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import { ElNotification } from 'element-plus';
@@ -40,39 +41,39 @@ const router = useRouter();
 const searchText = ref('') as any;
 const svgData = ref([
   {
-    label: '关联网站svg',
+    label: $t('关联网站svg'),
     value: 'linkSvg',
     list: []
   },
   {
-    label: '技术栈svg',
+    label: $t('技术栈svg'),
     value: 'techStackSvg',
     list: []
   },
   {
-    label: '社交svg',
+    label: $t('社交svg'),
     value: 'socialSvg',
     list: []
   },
   {
-    label: '音频svg',
+    label: $t('音频svg'),
     value: 'audioSvg',
     list: []
   },
   {
-    label: '像素svg',
+    label: $t('像素svg'),
     value: 'pixelSvg',
     list: []
   },
   {
-    label: '通用svg',
+    label: $t('通用svg'),
     value: 'commonSvg',
     list: []
   }
 ]) as any;
 function getSvgCode(item: any, type: any) {
   copyText(`<svg-icon iconName="${type}-${item.fileName}" />`);
-  ElNotification.success('svg代码复制成功');
+  ElNotification.success($t('svg代码复制成功'));
 }
 
 function initSvgData() {

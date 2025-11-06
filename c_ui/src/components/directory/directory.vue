@@ -3,7 +3,7 @@
     <div class="directory-header">
       <div>
         <span></span>
-        <span>目录</span>
+        <span>{{ $t('目录') }}</span>
       </div>
       <span class="progress">{{ progress }}</span>
     </div>

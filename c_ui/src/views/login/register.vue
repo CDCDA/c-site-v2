@@ -3,18 +3,18 @@
     <div class="box">
       <h2>Login</h2>
       <div class="input-box">
-        <label>账号</label>
+        <label>{{ $t('账号') }}</label>
         <input type="text" v-model="userName" />
       </div>
       <div class="input-box">
-        <label>密码</label>
+        <label>{{ $t('密码') }}</label>
         <input type="password" v-model="password" />
       </div>
       <div class="btn-box">
-        <a href="#">忘记密码?</a>
+        <a href="#">{{ $t('忘记密码?') }}</a>
         <div>
-          <button @click="logIn">登录</button>
-          <button @click="register">注册</button>
+          <button @click="logIn">{{ $t('登录') }}</button>
+          <button @click="register">{{ $t('注册') }}</button>
         </div>
       </div>
     </div>
@@ -23,6 +23,8 @@
 </template>
 
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+const { t: $t } = useI18n();
 import { ref } from 'vue';
 import { ElMessage } from 'element-plus';
 import { login } from '@/api/system/auth.ts';
@@ -37,7 +39,7 @@ async function logIn() {
     if (code === 200) {
       router.push('/Main');
     } else {
-      ElMessage.error('请输入账号密码');
+      ElMessage.error($t('请输入账号密码'));
     }
   }
 }

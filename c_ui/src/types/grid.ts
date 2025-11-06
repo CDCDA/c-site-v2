@@ -1,3 +1,4 @@
+import i18n from '@/locales/i18n';
 // types/grid.ts
 export interface GridCell {
   id: string; // 唯一标识 (如 "r1-c2")

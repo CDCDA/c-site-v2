@@ -26,9 +26,9 @@
                 <el-icon style="margin-right: 0.5rem"><Calendar /></el-icon>
                 {{ `${item.date[0]} ~ ${item.date[1]}` }}
               </div>
-              <div class="subTitle">项目简介</div>
+              <div class="subTitle">{{ $t('项目简介') }}</div>
               <div class="intro">{{ item.intro }}</div>
-              <div class="subTitle" style="margin-bottom: 0.5rem">关联技术栈</div>
+              <div class="subTitle" style="margin-bottom: 0.5rem">{{ $t('关联技术栈') }}</div>
               <div class="tech">
                 <el-tag
                   class="tech-tag"
@@ -38,7 +38,7 @@
                   >{{ tag }}</el-tag
                 >
               </div>
-              <div class="subTitle" style="margin-top: 0.5rem">{{ `负责模块` }}</div>
+              <div class="subTitle" style="margin-top: 0.5rem">{{ $t('负责模块') }}</div>
               <ul class="module">
                 <li class="module-item" v-for="module in item.modules">
                   <div class="module-title">{{ module.title }}</div>

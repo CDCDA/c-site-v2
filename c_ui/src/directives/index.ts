@@ -1,3 +1,4 @@
+import i18n from '@/locales/i18n';
 import { cDrag } from './drag';
 import { permission } from './permission';
 import { cLoading } from './cLoading';

@@ -43,9 +43,9 @@ export const saveLog = (data: any) =>
   });
 
 // 更新
-export const updateLog = (id: string, data: any) =>
+export const updateLog = (data: any) =>
   request({
-    url: '/update-logs/' + id,
+    url: '/update-logs/' + data.id,
     method: 'put',
     data
   });

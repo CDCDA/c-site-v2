@@ -4,13 +4,15 @@
     :style="{ left: props.left + 'px', top: props.top + 'px' }"
     class="contextmenu"
   >
-    <li><svg-icon iconName="commonSvg-列车" />随便逛逛</li>
-    <li><svg-icon iconName="commonSvg-复制" />复制地址</li>
-    <li><svg-icon iconName="commonSvg-刷新" />重新加载</li>
-    <li><svg-icon iconName="commonSvg-关于" />关于网站</li>
+    <li><svg-icon iconName="commonSvg-列车" />{{ $t('随便逛逛') }}</li>
+    <li><svg-icon iconName="commonSvg-复制" />{{ $t('复制地址') }}</li>
+    <li><svg-icon iconName="commonSvg-刷新" />{{ $t('重新加载') }}</li>
+    <li><svg-icon iconName="commonSvg-关于" />{{ $t('关于网站') }}</li>
   </ul>
 </template>
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+const { t: $t } = useI18n();
 const props = defineProps({
   left: null,
   top: null,

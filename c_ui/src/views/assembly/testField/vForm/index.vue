@@ -15,6 +15,8 @@
 </template>
 
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+const { t: $t } = useI18n();
 import { ref } from 'vue';
 const tableFeildData = ref([]) as any;
 const config = ref([]) as any;

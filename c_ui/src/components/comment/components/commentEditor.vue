@@ -5,13 +5,13 @@
   <div class="comment-editor">
     <el-form class="comment-editor-header" :inline="true">
       <c-image class="comment-editor-avatar" :src="commentData.avatar"></c-image>
-      <el-form-item label="昵称">
+      <el-form-item :label="$t('昵称')">
         <el-input v-model="commentData.nickName"></el-input>
       </el-form-item>
-      <el-form-item label="邮箱">
+      <el-form-item :label="$t('邮箱')">
         <el-input v-model="commentData.email"></el-input>
       </el-form-item>
-      <el-form-item label="网址">
+      <el-form-item :label="$t('网址')">
         <el-input v-model="commentData.webUrl"></el-input>
       </el-form-item>
     </el-form>
@@ -58,12 +58,14 @@
         </el-popover>
       </div>
       <div class="footer-right flex-end">
-        <el-button class="sent" @click="submit">发送</el-button>
+        <el-button class="sent" @click="submit">{{ $t('发送') }}</el-button>
       </div>
     </div>
   </div>
 </template>
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+const { t: $t } = useI18n();
 import { ref, onMounted } from 'vue';
 import editor from '@/components/editor/index.vue';
 import { getOSAndBrowser } from '@/utils/common.ts';
@@ -90,13 +92,13 @@ const commentData = ref({
   userId: userStore.userId,
   parentId: props.parentId
 });
-const expressionIcon = ref('表情-魔鬼怒');
+const expressionIcon = ref($t('表情-魔鬼怒'));
 const rotate = ref(false);
 function beforeEnter() {
   rotate.value = true;
   setTimeout(() => {
     rotate.value = false;
-    expressionIcon.value = '表情-魔鬼笑';
+    expressionIcon.value = $t('表情-魔鬼笑');
   }, 200);
 }
 
@@ -104,7 +106,7 @@ function beforeLeave() {
   rotate.value = true;
   setTimeout(() => {
     rotate.value = false;
-    expressionIcon.value = '表情-魔鬼怒';
+    expressionIcon.value = $t('表情-魔鬼怒');
   }, 200);
 }
 
@@ -134,7 +136,7 @@ async function submit() {
   commentData.value.parentId = props.parentId;
   const { code, data } = (await saveComment(commentData.value)) as any;
   if (code === 200) {
-    ElNotification.success('评论发布成功');
+    ElNotification.success($t('评论发布成功'));
     commentData.value.comment = '';
     emit('getList');
     emit('closeEditor');

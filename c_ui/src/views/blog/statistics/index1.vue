@@ -5,36 +5,38 @@
   <div class="page-main statistic-main">
     <div class="total">
       <div class="total-col">
-        <el-statistic title="文章数" :value="blogNumValue" />
+        <el-statistic :title="$t('文章数')" :value="blogNumValue" />
       </div>
       <div class="total-col">
-        <el-statistic title="相册数" :value="albumNumValue" />
+        <el-statistic :title="$t('相册数')" :value="albumNumValue" />
       </div>
       <div class="total-col">
-        <el-statistic title="分类数" :value="typeNumValue" />
+        <el-statistic :title="$t('分类数')" :value="typeNumValue" />
       </div>
       <div class="total-col">
-        <el-statistic title="随笔数" :value="essayNumValue" />
+        <el-statistic :title="$t('随笔数')" :value="essayNumValue" />
       </div>
       <div class="total-col">
-        <el-statistic title="网站更新数" :value="updateLogNumValue" />
+        <el-statistic :title="$t('网站更新数')" :value="updateLogNumValue" />
       </div>
     </div>
     <div class="chart">
-      <h3>博客统计图</h3>
+      <h3>{{ $t('博客统计图') }}</h3>
       <blogCountChart style="width: 100%; height: 100%" />
     </div>
     <div class="chart">
-      <h3>博客统计图</h3>
+      <h3>{{ $t('博客统计图') }}</h3>
       <blogTypeRadar style="width: 100%; height: 100%" />
     </div>
     <div class="chart" style="height: 300px">
-      <h3>博客统计图</h3>
+      <h3>{{ $t('博客统计图') }}</h3>
       <blogTypeChart style="width: 100%; height: 100%" />
     </div>
   </div>
 </template>
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+const { t: $t } = useI18n();
 import { ref, onMounted } from 'vue';
 import blogCountChart from './components/blogCountLine.vue';
 import blogTypeRadar from './components/assemblyCountRadar.vue';

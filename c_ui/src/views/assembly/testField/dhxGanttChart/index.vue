@@ -17,7 +17,7 @@ export default {
         data: [
           {
             id: 1,
-            text: '合同签订',
+            text: $t('合同签订'),
             start_date: '2021-01-01',
             duration: 45,
             order: 10,
@@ -26,7 +26,7 @@ export default {
           },
           {
             id: 11,
-            text: '第一次付款',
+            text: $t('第一次付款'),
             start_date: '2021-03-01',
             duration: 45,
             order: 10,
@@ -35,7 +35,7 @@ export default {
           },
           {
             id: 12,
-            text: '第二次付款',
+            text: $t('第二次付款'),
             start_date: '2021-12-01',
             duration: 45,
             order: 20,
@@ -44,7 +44,7 @@ export default {
           },
           {
             id: 13,
-            text: '第三次付款',
+            text: $t('第三次付款'),
             start_date: '2022-01-01',
             duration: 45,
             order: 20,
@@ -53,7 +53,7 @@ export default {
           },
           {
             id: 2,
-            text: '项目实施',
+            text: $t('项目实施'),
             start_date: '2021-01-01',
             duration: 45,
             order: 20,
@@ -62,7 +62,7 @@ export default {
           },
           {
             id: 21,
-            text: '准备阶段',
+            text: $t('准备阶段'),
             start_date: '2021-03-01',
             duration: 78,
             order: 10,
@@ -71,7 +71,7 @@ export default {
           },
           {
             id: 22,
-            text: '设计阶段',
+            text: $t('设计阶段'),
             start_date: '2021-04-01',
             duration: 100,
             order: 20,
@@ -80,7 +80,7 @@ export default {
           },
           {
             id: 24,
-            text: '系统开发',
+            text: $t('系统开发'),
             start_date: '2021-06-01',
             duration: 80,
             order: 40,
@@ -89,7 +89,7 @@ export default {
           },
           {
             id: 25,
-            text: '系统测试',
+            text: $t('系统测试'),
             start_date: '2021-10-01',
             duration: 40,
             order: 50,
@@ -98,7 +98,7 @@ export default {
           },
           {
             id: 26,
-            text: '上线准备',
+            text: $t('上线准备'),
             start_date: '2021-12-01',
             duration: 45,
             order: 60,

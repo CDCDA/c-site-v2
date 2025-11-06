@@ -8,6 +8,8 @@
   </div>
 </template>
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+const { t: $t } = useI18n();
 import cornerButton from '@/components/buttons/cornerButton.vue';
 import lightButton from '@/components/buttons/lightButton.vue';
 </script>

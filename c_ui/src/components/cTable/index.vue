@@ -2,7 +2,7 @@
  * @Description: 基础表格
 -->
 <template>
-  <div class="manage-main" :class="isSearchShow ? 'is-isHidden' : ''">
+  <div class="manage-main" :class="isSearchShow ? 'is-hidden' : ''">
     <searchForm
       :searchColumns="searchColumns"
       :initParams="props.initParams"
@@ -39,13 +39,13 @@
       >
         <template v-for="column in tableColumns">
           <el-table-column
-            v-if="column.type === 'selection' && !column.isHidden"
+            v-if="column.type === 'selection' && !column.hidden"
             type="selection"
             :width="column.width || 'auto'"
             align="center"
           />
           <el-table-column
-            v-else-if="column.type === 'index' && !column.isHidden"
+            v-else-if="column.type === 'index' && !column.hidden"
             type="index"
             align="center"
             :fixed="column.fixed"
@@ -73,7 +73,7 @@
             </template>
           </el-table-column>
           <el-table-column
-            v-else-if="!column.isHidden"
+            v-else-if="!column.hidden"
             :show-overflow-tooltip="column.showOverflowTooltip"
             :label="column.label"
             :prop="column.prop"
@@ -127,6 +127,8 @@
   </div>
 </template>
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+const { t: $t } = useI18n();
 import { ref, onMounted, toRefs, nextTick, watch } from 'vue';
 import Pagination from '@/components/pagination/index.vue';
 import { ElMessageBox, ElNotification } from 'element-plus';
@@ -231,21 +233,21 @@ function handleOperationClick(button: any, row: any) {
     if (button.click) {
       button.click(row);
     } else {
-      ElNotification.error('请为操作按钮添加点击事件');
+      ElNotification.error($t('请为操作按钮添加点击事件'));
     }
   }
 }
 
 async function handleDelete(id?: String) {
-  ElMessageBox.confirm('是否确认删除选中数据?', 'Warning', {
-    confirmButtonText: '确定',
-    cancelButtonText: '取消',
+  ElMessageBox.confirm($t('是否确认删除选中数据?'), 'Warning', {
+    confirmButtonText: $t('确定'),
+    cancelButtonText: $t('取消'),
     type: 'warning'
   }).then(async () => {
     let ids = id ? [id] : selectIds.value;
     const { code } = await deleteApi(ids);
     if (code === 200) {
-      ElNotification.success('删除成功');
+      ElNotification.success($t('删除成功'));
       getList();
     }
   });

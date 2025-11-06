@@ -72,6 +72,8 @@
   </div>
 </template>
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+const { t: $t } = useI18n();
 import { onMounted, ref } from 'vue';
 import { useLazyAppear } from '@/utils/lazy';
 import { autoClearTimer } from '@/utils/timer';
@@ -86,15 +88,15 @@ onMounted(() => {
     let weather = (localStorage as any).getItem('weather');
     if (weather) {
       weatherData.value = JSON.parse(weather);
-      if (weatherData.value.weather == '晴') {
+      if (weatherData.value.weather == $t('晴')) {
         document.getElementById('button-sun')?.click();
-      } else if (weatherData.value.weather == '雨') {
+      } else if (weatherData.value.weather == $t('雨')) {
         document.getElementById('button-rain')?.click();
-      } else if (weatherData.value.weather == '阴') {
+      } else if (weatherData.value.weather == $t('阴')) {
         document.getElementById('button-wind')?.click();
-      } else if (weatherData.value.weather == '雪') {
+      } else if (weatherData.value.weather == $t('雪')) {
         document.getElementById('button-snow')?.click();
-      } else if (weatherData.value.weather == '雷') {
+      } else if (weatherData.value.weather == $t('雷')) {
         document.getElementById('button-thunder')?.click();
       }
     }

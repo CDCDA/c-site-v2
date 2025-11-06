@@ -5,9 +5,9 @@
   <div class="page-main album-main">
     <div class="album-header animated bounceInDown">
       <video :src="'/video/video_1783824280.mp4'" class="album-header-video" autoplay loop muted />
-      <div class="album-header-top">相册集</div>
-      <div class="album-header-center">唯有记忆，才是最完美的影像。</div>
-      <div class="album-header-bottom">历历在目</div>
+      <div class="album-header-top">{{ $t('相册集') }}</div>
+      <div class="album-header-center">{{ $t('唯有记忆，才是最完美的影像。') }}</div>
+      <div class="album-header-bottom">{{ $t('历历在目') }}</div>
     </div>
     <div class="album-center">
       <div class="album-item" @click="routeTo(item)" v-for="(item, i) in list" :key="i">

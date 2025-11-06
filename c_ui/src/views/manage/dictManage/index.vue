@@ -16,6 +16,8 @@
 </template>
 
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+const { t: $t } = useI18n();
 import { ref, onMounted } from 'vue';
 import { pageDictTypes, deleteDictTypes } from '@/api/system/dict/dictType.ts';
 import DictDataDrawer from '@/views/manage/dictManage/components/dictDataDrawer.vue';
@@ -25,14 +27,14 @@ import addOrUpdateDialog from './addOrUpdateDialog.vue';
 const searchColumns = ref([
   {
     type: 'input',
-    label: '字典名称',
+    label: $t('字典名称'),
     prop: 'dictName',
-    placeholder: '请输入字典名称',
+    placeholder: $t('请输入字典名称'),
     labelWidth: 40
   },
   {
     type: 'dict',
-    label: '状态',
+    label: $t('状态'),
     prop: 'status',
     dictType: 'status'
   }
@@ -48,54 +50,54 @@ const tableColumns = ref([
   },
   {
     type: 'index',
-    label: '序号',
+    label: $t('序号'),
     width: 55,
     fixed: 'left'
   },
   {
-    label: '字典名称',
+    label: $t('字典名称'),
     prop: 'dictName'
   },
   {
-    label: '状态',
+    label: $t('状态'),
     prop: 'status',
     type: 'dict',
     dictType: 'status'
   },
   {
-    label: '字典类型',
+    label: $t('字典类型'),
     prop: 'dictType',
     type: 'link',
     linkType: 'primary',
     click: (row: any) => manageDictData(row)
   },
   {
-    label: '创建时间',
+    label: $t('创建时间'),
     prop: 'createTime'
   },
   {
-    label: '修改时间',
+    label: $t('修改时间'),
     prop: 'updateTime'
   },
   {
-    label: '备注',
+    label: $t('备注'),
     prop: 'remark'
   },
   {
     type: 'operation',
-    label: '操作',
+    label: $t('操作'),
     fixed: 'right',
     width: 220,
     buttons: [
       {
         type: 'primary',
-        text: '编辑',
+        text: $t('编辑'),
         operate: 'update',
         click: (row: any) => handleEdit(row)
       },
       {
         type: 'danger',
-        text: '删除',
+        text: $t('删除'),
         operate: 'delete'
       }
     ]
@@ -113,14 +115,14 @@ const dictDataDrawer = ref(null) as any;
 function handleAdd() {
   addOrUpdateDialogRef.value.init({
     operation: 'add',
-    title: '新增字典'
+    title: $t('新增字典')
   });
 }
 
 function handleEdit(row: any) {
   addOrUpdateDialogRef.value.init({
     operation: 'update',
-    title: '编辑字典',
+    title: $t('编辑字典'),
     row
   });
 }

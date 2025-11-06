@@ -8,19 +8,19 @@
       <template #dropdown>
         <el-dropdown-menu slot="dropdown">
           <el-dropdown-item @click.native="routerTo('blogEditor')">
-            <span>发布博客</span>
+            <span>{{ $t('发布博客') }}</span>
           </el-dropdown-item>
           <el-dropdown-item
             @click.native="routerTo('blogEditor')"
             :disabled="disabled ? true : false"
           >
-            <span>编辑博客</span>
+            <span>{{ $t('编辑博客') }}</span>
           </el-dropdown-item>
           <el-dropdown-item @click.native="routerTo('blogEditor')">
-            <span>我的博客</span>
+            <span>{{ $t('我的博客') }}</span>
           </el-dropdown-item>
           <el-dropdown-item @click.native="routerTo('blogEditor')">
-            <span>修改记录</span>
+            <span>{{ $t('修改记录') }}</span>
           </el-dropdown-item>
         </el-dropdown-menu>
       </template>
@@ -28,6 +28,8 @@
   </div>
 </template>
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+const { t: $t } = useI18n();
 import { onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
 // import { createWebRecord } from '@/api/web';

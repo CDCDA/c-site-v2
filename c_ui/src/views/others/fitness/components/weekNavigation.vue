@@ -18,41 +18,43 @@
   </nav>
 </template>
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+const { t: $t } = useI18n();
 import { ref, onMounted } from 'vue';
 const menu = ref([
   {
-    week: '星期一',
-    tip: '胸',
+    week: $t('星期一'),
+    tip: $t('胸'),
     isActive: true
   },
   {
-    week: '星期二',
-    tip: '腹',
+    week: $t('星期二'),
+    tip: $t('腹'),
     isActive: false
   },
   {
-    week: '星期三',
-    tip: '胸',
+    week: $t('星期三'),
+    tip: $t('胸'),
     isActive: false
   },
   {
-    week: '星期四',
-    tip: '腹',
+    week: $t('星期四'),
+    tip: $t('腹'),
     isActive: false
   },
   {
-    week: '星期五',
-    tip: '胸',
+    week: $t('星期五'),
+    tip: $t('胸'),
     isActive: false
   },
   {
-    week: '星期六',
-    tip: '腹',
+    week: $t('星期六'),
+    tip: $t('腹'),
     isActive: false
   },
   {
-    week: '星期天',
-    tip: '躺',
+    week: $t('星期天'),
+    tip: $t('躺'),
     isActive: false
   }
 ]) as any;

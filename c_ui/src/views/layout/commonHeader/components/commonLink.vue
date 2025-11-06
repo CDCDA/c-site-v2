@@ -7,7 +7,7 @@
     <el-icon class="header-name-icon"><Menu /></el-icon>
     <!-- 下拉菜单内容 -->
     <div class="link-content">
-      <div class="link-title">常用网站</div>
+      <div class="link-title">{{ $t('常用网站') }}</div>
       <div class="link-list">
         <div class="link-item" @click="clickLink(item)" v-for="item in linkList">
           <el-image class="link-icon" :src="item.iconUrl"></el-image>
@@ -18,16 +18,18 @@
   </div>
 </template>
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+const { t: $t } = useI18n();
 import { ref } from 'vue';
 
 const linkList = ref([
   {
-    label: '渐变色',
+    label: $t('渐变色'),
     url: 'https://uigradients.com/#Timber',
     iconUrl: new URL('@/assets/svg/linkSvg/gredient.svg', import.meta.url).href
   },
   {
-    label: '阿里图标库',
+    label: $t('阿里图标库'),
     url: 'https://www.iconfont.cn/',
     iconUrl: new URL('@/assets/svg/linkSvg/alibabaIcon.svg', import.meta.url).href
   },
@@ -37,12 +39,12 @@ const linkList = ref([
     iconUrl: new URL('@/assets/svg/linkSvg/elementUi.svg', import.meta.url).href
   },
   {
-    label: 'AI百晓生',
+    label: $t('AI百晓生'),
     url: 'https://ai.hxkj.vip/',
     iconUrl: new URL('@/assets/svg/linkSvg/ai.ico', import.meta.url).href
   },
   {
-    label: '据意查句',
+    label: $t('据意查句'),
     url: 'https://wantquotes.net/',
     iconUrl: 'https://wantquotes.net/favicon.ico'
   }

@@ -1,14 +1,14 @@
 <template>
   <div class="await-to-be-done">
-    <div class="title">待处理项</div>
+    <div class="title">{{ $t('待处理项') }}</div>
     <div class="content">
       <div class="item">
-        <div class="label">待处理项1</div>
-        <div class="value">待处理项1的值</div>
+        <div class="label">{{ $t('待处理项1') }}</div>
+        <div class="value">{{ $t('待处理项1的值') }}</div>
       </div>
       <div class="item">
-        <div class="label">待处理项2</div>
-        <div class="value">待处理项2的值</div>
+        <div class="label">{{ $t('待处理项2') }}</div>
+        <div class="value">{{ $t('待处理项2的值') }}</div>
       </div>
     </div>
   </div>

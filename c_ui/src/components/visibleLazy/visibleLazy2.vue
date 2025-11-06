@@ -9,6 +9,8 @@
   </div>
 </template>
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+const { t: $t } = useI18n();
 import { ref } from 'vue';
 const isVisible = ref(false);
 import { autoClearTimer } from '@/utils/timer.ts';
@@ -19,7 +21,7 @@ function generateRandomId() {
 }
 const io = new IntersectionObserver(entries => {
   if (entries[0].isIntersecting) {
-    console.log('元素进入视野');
+    console.log($t('元素进入视野'));
     io.disconnect();
     autoClearTimer(() => {
       isVisible.value = true;

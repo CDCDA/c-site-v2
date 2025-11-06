@@ -20,6 +20,9 @@
   </div>
 </template>
 <script lang="ts" setup>
+// import { useI18n } from 'vue-i18n';
+// const { t: $t } = useI18n();
+
 import { reactive, ref, onMounted, watch } from 'vue';
 const isClose = ref(false as boolean);
 import { autoClearTimer } from '@/utils/timer';
@@ -34,7 +37,7 @@ const state = reactive({
 function updateInfo(options: any) {
   state.loading = {
     type: options.type || 'rotate',
-    text: options.text || '加载中...'
+    text: options.text
   };
 }
 

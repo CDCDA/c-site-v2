@@ -1,3 +1,4 @@
+import i18n from '@/locales/i18n';
 export const techStackData = [
   {
     upStack: {
@@ -95,7 +96,7 @@ export const techStackData = [
       url: new URL('@/assets/svg/techStackSvg/tauri.svg', import.meta.url).href
     },
     downStack: {
-      label: '微信公众号',
+      label: i18n.global.t('微信公众号'),
       url: new URL('@/assets/svg/techStackSvg/weixin.svg', import.meta.url).href
     }
   },
@@ -119,7 +120,7 @@ export const techStackList = [
   { label: 'Docker', url: new URL('@/assets/svg/techStackSvg/docker.svg', import.meta.url).href },
   { label: 'Tauri', url: new URL('@/assets/svg/techStackSvg/tauri.svg', import.meta.url).href },
   {
-    label: '微信公众号',
+    label: i18n.global.t('微信公众号'),
     url: new URL('@/assets/svg/techStackSvg/weixin.svg', import.meta.url).href
   },
   { label: 'TypeScript', url: new URL('@/assets/svg/techStackSvg/ts.svg', import.meta.url).href },

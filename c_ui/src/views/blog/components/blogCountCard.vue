@@ -4,7 +4,7 @@
 <template>
   <div class="blog-count-card c-card">
     <div class="card-header">
-      <el-icon><Histogram /></el-icon><span class="count-nmae">统计</span>
+      <el-icon><Histogram /></el-icon><span class="count-nmae">{{ $t('统计') }}</span>
     </div>
     <div class="count-list">
       <div class="count-item" v-for="item in countList">
@@ -14,7 +14,7 @@
         </div>
         <div class="count-down">
           <span class="count-count">{{ item.total }}</span>
-          <span class="count-unit">篇</span>
+          <span class="count-unit">{{ $t('篇') }}</span>
         </div>
       </div>
     </div>
@@ -22,19 +22,21 @@
     <div class="count-total">
       <div class="blog-count">
         <span
-          ><el-icon><Memo /></el-icon>文章数：</span
+          ><el-icon><Memo /></el-icon>{{ $t('文章数：') }}</span
         ><span>{{ total }}</span>
       </div>
       <div class="station-count">
         <span
-          ><el-icon><Timer /></el-icon>建站天数：</span
-        ><span>{{ '118天' }}</span>
+          ><el-icon><Timer /></el-icon>{{ $t('建站天数：') }}</span
+        ><span>{{ $t('118天') }}</span>
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+const { t: $t } = useI18n();
 import { onMounted, ref } from 'vue';
 import { countBlogsByDate, countBlogs } from '@/api/blog.ts';
 import useUserStore from '@/store/modules/user';

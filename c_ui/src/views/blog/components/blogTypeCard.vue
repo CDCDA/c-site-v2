@@ -4,7 +4,7 @@
 <template>
   <div class="blog-type-card c-card">
     <div class="card-header">
-      <el-icon><FolderOpened /></el-icon><span class="type-nmae">分类</span>
+      <el-icon><FolderOpened /></el-icon><span class="type-nmae">{{ $t('分类') }}</span>
     </div>
     <div class="type-list">
       <div class="type-item" v-for="item in typeList" @click="toBlogType(item)">
@@ -16,6 +16,8 @@
 </template>
 
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+const { t: $t } = useI18n();
 import { onMounted, ref } from 'vue';
 import { listTypesWithStats } from '@/api/type';
 import useUserStore from '@/store/modules/user';

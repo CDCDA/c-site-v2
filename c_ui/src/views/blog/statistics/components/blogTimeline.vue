@@ -9,7 +9,7 @@
           <el-card>
             <div class="card-line">
               <p style="margin: 0 5px 10px 0">
-                {{ item.updateTime ? '更新' : '发布博客' }}
+                {{ item.updateTime ? $t('更新') : $t('发布博客') }}
               </p>
               <el-link type="primary" style="margin-top: 0" @click="viewBlog(item.blogId)"
                 >《{{ item.blogTitle }}》</el-link
@@ -23,6 +23,8 @@
   </div>
 </template>
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+const { t: $t } = useI18n();
 import { ref, onMounted } from 'vue';
 import { pageBlogs, getBlogById } from '@/api/blog.ts';
 import useUserStore from '@/store/modules/user';

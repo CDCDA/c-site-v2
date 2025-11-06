@@ -2,9 +2,15 @@
  * @Description: 博客发布弹窗
 -->
 <template>
-  <c-dialog class="blog-release" v-model="dialogVisible" title="发布" width="700px" :modal="true">
+  <c-dialog
+    class="blog-release"
+    v-model="dialogVisible"
+    :title="$t('发布')"
+    width="700px"
+    :modal="true"
+  >
     <el-form class="blog-release-settings" :model="blogData" label-width="80px">
-      <el-form-item label="博客标签">
+      <el-form-item :label="$t('博客标签')">
         <el-tag
           v-for="tag in blogData.tags"
           :key="tag"
@@ -34,7 +40,7 @@
           ><Grid
         /></el-icon>
       </el-form-item>
-      <el-form-item label="博客分类">
+      <el-form-item :label="$t('博客分类')">
         <el-tree-select
           v-model="blogData.typeId"
           :data="typeList"
@@ -45,27 +51,33 @@
           ><template #default="{ data: { typeName } }"> {{ typeName }}</template>
         </el-tree-select>
       </el-form-item>
-      <el-form-item label="添加封面">
+      <el-form-item :label="$t('添加封面')">
         <upload v-model="blogData.coverUrl" path="blogCover"></upload>
       </el-form-item>
-      <el-form-item label="博客摘要">
+      <el-form-item :label="$t('博客摘要')">
         <el-input
           v-model="blogData.blogAbstract"
           type="textarea"
           :rows="2"
-          placeholder="请输入..."
+          :placeholder="$t('请输入...')"
         ></el-input>
       </el-form-item>
     </el-form>
     <template #footer>
       <span class="dialog-footer">
-        <el-button @click="dialogVisible = false">取消</el-button>
-        <!-- <el-button @click="dialogVisible = false">保存为草稿 </el-button>
-        <el-button @click="dialogVisible = false">定时发布 </el-button> -->
-        <el-button @click="submit">发布 </el-button>
+        <el-button @click="dialogVisible = false">{{ $t('取消') }}</el-button>
+        <!-- <el-button @click="dialogVisible = false">{{ $t('保存为草稿') }}</el-button>
+        <el-button @click="dialogVisible = false">{{ $t('定时发布') }}</el-button> -->
+        <el-button @click="submit">{{ $t('发布') }}</el-button>
       </span>
     </template>
-    <c-dialog class="tag-dialog" v-model="tagVisible" title="标签选择" width="500px" :modal="true">
+    <c-dialog
+      class="tag-dialog"
+      v-model="tagVisible"
+      :title="$t('标签选择')"
+      width="500px"
+      :modal="true"
+    >
       <div class="tag-list">
         <el-tag
           v-for="tag in tagList"
@@ -81,14 +93,16 @@
       </div>
       <template #footer>
         <span class="dialog-footer">
-          <el-button @click="tagVisible = false">取消</el-button>
-          <el-button @click="setTags()">确定</el-button>
+          <el-button @click="tagVisible = false">{{ $t('取消') }}</el-button>
+          <el-button @click="setTags()">{{ $t('确定') }}</el-button>
         </span>
       </template>
     </c-dialog>
   </c-dialog>
 </template>
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+const { t: $t } = useI18n();
 import { ref, nextTick, onMounted } from 'vue';
 import { saveBlog, updateBlog } from '@/api/blog';
 import upload from '@/components/upload/index.vue';
@@ -156,10 +170,10 @@ async function submit() {
   if (code === 200) {
     // 清空博客本地缓存
     window.localStorage.setItem('blogData', '');
-    ElMessageBox.confirm('博客发布成功', 'success', {
+    ElMessageBox.confirm($t('博客发布成功'), 'success', {
       distinguishCancelAndClose: true,
-      confirmButtonText: '前往博客',
-      cancelButtonText: '写新博客'
+      confirmButtonText: $t('前往博客'),
+      cancelButtonText: $t('写新博客')
     })
       .then(() => {
         router.push({ name: 'blogDisplay', query: { blogId: data } });

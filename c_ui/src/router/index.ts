@@ -1,10 +1,8 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router';
 import useThemeStore from '@/store/modules/theme.ts';
-import { pageWallpapers } from '@/api/system/wallpaper.ts';
 
 import { random } from 'lodash';
 import { autoClearTimer } from '@/utils/timer.ts';
-import { imageEmits } from 'element-plus';
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -14,7 +12,7 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import('/src/views/login/login.vue')
   },
   {
-    path: '/home',
+    path: '/',
     name: 'home',
     meta: { title: '首页', preload: true },
     component: () => import(/* webpackChunkName: "about" */ '/src/views/home/index.vue')
@@ -90,7 +88,7 @@ const routes: Array<RouteRecordRaw> = [
       {
         path: '/essayManageEditor',
         name: 'essayManageEditor',
-        meta: { title: '随笔编辑' },
+        meta: { title: '博客编辑' },
         component: () => import('/src/views/user/essay/components/editor.vue')
       },
       {
@@ -446,16 +444,6 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import('/src/views/assembly/testField/editor/index.vue')
       },
       {
-        path: '/jsplumb',
-        name: 'jsplumb',
-        meta: {
-          title: '连线绘图',
-          introduction: '连线绘图',
-          url: 'http://120.48.127.181/file/testField/连线绘图.png'
-        },
-        component: () => import('/src/views/assembly/testField/jsplumb/index.vue')
-      },
-      {
         path: '/gridLayout',
         name: 'gridLayout',
         meta: {
@@ -555,14 +543,6 @@ router.afterEach(() => {
   scrollToView();
 });
 
-async function getWallpaperList(themeStore: any) {
-  const { code, rows } = await pageWallpapers({ type: 'img' });
-  if (code === 200) {
-    themeStore.imgWallpaperList = rows;
-    window.localStorage.setItem('themeData', JSON.stringify(themeStore));
-  }
-}
-
 router.beforeEach(async (to: any) => {
   // 记录路由
   window.localStorage.setItem('lastRouter', JSON.stringify(to));
@@ -570,10 +550,6 @@ router.beforeEach(async (to: any) => {
   let themeStore = useThemeStore();
   if (!themeStore) return;
   if (themeStore.options && themeStore.options.isRandom) {
-    console.log(themeStore.imgWallpaperList);
-    if (!themeStore.imgWallpaperList) {
-      await getWallpaperList(themeStore);
-    }
     let backUrl =
       themeStore.imgWallpaperList[random(0, themeStore.imgWallpaperList.length - 1)]?.url;
     if (backUrl) {
@@ -585,7 +561,9 @@ router.beforeEach(async (to: any) => {
     themeStore.isFooterShow = false;
     themeStore.isShow = false;
   } else {
-    themeStore.isFooterShow = true;
+    autoClearTimer(() => {
+      themeStore.isFooterShow = true;
+    }, 2000);
     themeStore.isShow = true;
   }
 });

@@ -6,12 +6,14 @@
     <div class="link" v-for="item in menuList">
       <div class="text">
         <svg-icon :iconName="`commonSvg-${item.meta.svgIcon}`"></svg-icon>
-        <span>{{ item.meta.title }}</span>
+        <span>{{ $t(item.meta.title) }}</span>
       </div>
     </div>
   </div>
 </template>
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+const { t: $t } = useI18n();
 import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 const router = useRouter();

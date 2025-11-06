@@ -6,14 +6,19 @@
     <div class="overlay"></div>
     <div class="terminal">
       <h1>Error <span class="errorcode">404</span></h1>
-      <p class="output">您正在寻找的页面可能已被删除或暂时不可用</p>
-      <p class="output">请尝试 <a href="/home">主页</a></p>
+      <p class="output">{{ $t('您正在寻找的页面可能已被删除或暂时不可用') }}</p>
+      <p class="output">
+        {{ $t('请尝试') }}<a href="/">{{ $t('主页') }}</a>
+      </p>
       <p class="output">Good luck</p>
     </div>
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+const { t: $t } = useI18n();
+</script>
 
 <style lang="scss" scoped>
 @import 'https://fonts.googleapis.com/css?family=Inconsolata';

@@ -3,7 +3,9 @@
   <div class="common-header" :class="isHideen ? 'is-hidden' : 'is-show'">
     <div class="header-name">
       <common-link></common-link>
-      <a class="title" href="/home" title="返回主页"><span>记录</span></a>
+      <a class="title" href="/" :title="$t('返回主页')">
+        <span>{{ $t('记录') }}</span>
+      </a>
       <!-- <v-mini-weather class="weather">
         <template #default="{ weather, icon }">
           <v-mini-weather-icon :icon="icon"></v-mini-weather-icon>
@@ -40,23 +42,23 @@
     </div>
 
     <div class="header-right">
-      <el-tooltip content="随机文章" placement="top">
+      <el-tooltip :content="$t('随机文章')" placement="top">
         <i class="svg-icon-wrap">
           <svg-icon iconName="commonSvg-列车1" class="header-icon train" @click="toRandom" />
         </i>
       </el-tooltip>
-      <el-tooltip content="搜索" placement="top">
+      <el-tooltip :content="$t('搜索')" placement="top">
         <i class="svg-icon-wrap">
           <svg-icon iconName="commonSvg-搜索" class="header-icon search" @click="searchClick" />
         </i>
       </el-tooltip>
-      <el-tooltip content="语言切换" placement="top">
-        <language class="header-icon language"></language>
+      <el-tooltip :content="$t('语言切换')" placement="top">
+        <language></language>
       </el-tooltip>
-      <el-tooltip content="消息" placement="top">
-        <message class="header-icon bell"></message>
+      <el-tooltip :content="$t('消息')" placement="top">
+        <message></message>
       </el-tooltip>
-      <el-tooltip content="控制台" placement="top">
+      <el-tooltip :content="$t('控制台')" placement="top">
         <i class="svg-icon-wrap">
           <svg-icon
             iconName="commonSvg-控制台"
@@ -66,12 +68,7 @@
           />
         </i>
       </el-tooltip>
-      <el-tooltip content="登出" placement="top">
-        <i class="svg-icon-wrap">
-          <svg-icon iconName="commonSvg-登出" class="header-icon logout" @click="logout" />
-        </i>
-      </el-tooltip>
-      <c-image class="avatar" :src="userStore.avatar" @click="toPersonal"></c-image>
+      <Avatar />
     </div>
   </div>
 
@@ -79,6 +76,8 @@
 </template>
 
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+const { t: $t } = useI18n();
 import { ElMessageBox } from 'element-plus';
 import { ref, onMounted, watch } from 'vue';
 import { getRandomBlog } from '@/api/blog';
@@ -91,7 +90,7 @@ import { debounce } from 'lodash';
 import { autoClearTimer } from '@/utils/timer';
 import { useRouter, onBeforeRouteUpdate } from 'vue-router';
 import { loadingService } from '@/components/loading/loading.ts';
-
+import Avatar from './components/avatar.vue';
 import useUserStore from '@/store/modules/user';
 import useThemeStore from '@/store/modules/theme.ts';
 const themeStore = useThemeStore();
@@ -103,43 +102,43 @@ const progress = ref('0') as any;
 const isHideen = ref(false);
 const searchVisible = ref(false) as any;
 const weatherData = ref({});
-const pageName = ref('首页');
+const pageName = ref($t('首页'));
 const pageChange = ref(true);
 const menuData = ref([]) as any;
 
 const menuHeader = [
   {
-    label: '博客',
+    label: $t('博客'),
     value: 'blog',
     iconName: 'pixelSvg-刨冰',
     children: []
   },
   {
-    label: '简介',
+    label: $t('简介'),
     children: [],
     iconName: 'pixelSvg-米饭',
     value: 'intro'
   },
   {
-    label: '我的',
+    label: $t('我的'),
     children: [],
     iconName: 'pixelSvg-西瓜',
     value: 'user'
   },
   {
-    label: '组件',
+    label: $t('组件'),
     children: [],
     iconName: 'pixelSvg-电池',
     value: 'assembly'
   },
   {
-    label: '其他',
+    label: $t('其他'),
     children: [],
     iconName: 'pixelSvg-游戏机',
     value: 'other'
   },
   {
-    label: '关于',
+    label: $t('关于'),
     children: [],
     iconName: 'pixelSvg-蜂蜜',
     value: 'associate'
@@ -209,7 +208,7 @@ function searchClick() {
 
 //随机博客
 async function toRandom() {
-  loadingService.show({ type: 'loading', text: '正在获取随机博客...' });
+  loadingService.show({ type: 'loading', text: $t('正在获取随机博客...') });
   const { data, code } = await getRandomBlog();
   if (code === 200) {
     router.push({
@@ -225,31 +224,11 @@ async function toRandom() {
   loadingService.hide();
 }
 
-function toPersonal() {
-  router.push({ path: '/personalInfo' });
-}
-
-function logout() {
-  ElMessageBox.confirm('确定注销并退出系统吗？', '提示', {
-    confirmButtonText: '确定',
-    cancelButtonText: '取消',
-    type: 'warning'
-  })
-    .then(() => {
-      userStore.userId = '';
-      userStore.userName = '';
-      userStore.token = '';
-      userStore.permission = [];
-      window.localStorage.setItem('userData', '');
-      router.push({ name: 'login' });
-    })
-    .catch(() => {});
-}
-
-function clickMenu(item: any) {
+async function clickMenu(item: any) {
   pageName.value = item.label;
-  if (item.name === 'logOut') {
-  } else router.push({ name: item.name });
+  loadingService.show({ type: 'loading', text: $t('正在跳转...') });
+  await router.push({ name: item.name });
+  loadingService.hide();
 }
 
 router.options.routes.forEach((route: any) => {
@@ -617,7 +596,7 @@ onMounted(() => {
         position: relative;
         // cursor: pointer;
         // &:after {
-        //   content: '回到顶部';
+        //   content: $t('回到顶部');
         //   opacity: 1;
         //   z-index: 11;
         //   transition: all 0.2s linear;
@@ -643,42 +622,6 @@ onMounted(() => {
       display: flex;
       justify-content: end;
       align-items: center;
-      .svg-icon-wrap {
-        position: relative;
-        margin: 10px 6px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        &:active {
-          transform: translateY(1px);
-        }
-      }
-      .svg-icon-wrap::before {
-        width: 1.5rem;
-        height: 1.5rem;
-        content: '';
-        border-radius: 4px;
-        background: get('bk');
-        position: absolute;
-        opacity: 0;
-      }
-      .svg-icon-wrap:hover {
-        &::before {
-          opacity: 1;
-        }
-        .header-icon {
-          :deep(.theme-icon) {
-            fill: white !important;
-          }
-        }
-      }
-      .header-icon {
-        font-size: 1.3rem;
-        @include flex;
-        cursor: pointer;
-        position: relative;
-        outline: unset;
-      }
     }
     .progress {
       margin: 0 10px;

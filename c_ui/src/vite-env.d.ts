@@ -18,6 +18,10 @@ declare module '/expression/data.js';
 declare module 'vue-virtual-scroller-classic';
 declare module 'vue-waterfall-easy';
 declare module '@wangeditor/editor-for-vue';
+declare module '@/locales/i18n';
+declare module 'element-plus/dist/locale/zh-cn.mjs';
+declare module 'element-plus/dist/locale/zh-tw.mjs';
+declare module 'element-plus/dist/locale/en.mjs';
 // declare module 'vite-plugin-require-transform';
 declare module 'md-editor-v3';
 

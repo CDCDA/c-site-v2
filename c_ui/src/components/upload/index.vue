@@ -56,6 +56,8 @@
   </c-dialog>
 </template>
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+const { t: $t } = useI18n();
 import { ref, nextTick, onMounted, watch } from 'vue';
 import type { UploadProps } from 'element-plus';
 import { ElMessage } from 'element-plus';
@@ -75,7 +77,7 @@ const props = defineProps({
 
 const handleAvatarSuccess: UploadProps['onSuccess'] = (response: any) => {
   if (response.data) emit('update:modelValue', response.data);
-  else ElMessage.error('上传失败');
+  else ElMessage.error($t('上传失败'));
 };
 
 const beforeAvatarUpload: UploadProps['beforeUpload'] = () => {
@@ -117,7 +119,7 @@ function handleSuccess(response: any) {
       url: response.data
     });
   } else {
-    ElMessage.error('图片上传失败');
+    ElMessage.error($t('图片上传失败'));
   }
   emit('update:modelValue', imageRelations);
 }

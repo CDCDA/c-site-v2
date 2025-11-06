@@ -26,6 +26,8 @@
   <AddLog v-if="isAddLogShow" @close="closeLog" :form="{}" />
 </template>
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+const { t: $t } = useI18n();
 import { ref } from 'vue';
 import ThemeDialog from '@/views/layout/theme/themeDialog.vue';
 import AddLog from '@/views/layout/sideSetting/components/addLog.vue';
@@ -40,43 +42,43 @@ const isFull = ref(false) as any;
 const menuData = ref([
   {
     iconName: 'commonSvg-博客',
-    tip: '发布博客',
+    tip: $t('发布博客'),
     value: 'blog',
     isShow: false
   },
   {
     iconName: 'commonSvg-编辑',
-    tip: '发布随笔',
+    tip: $t('发布随笔'),
     value: 'edit',
     isShow: false
   },
   {
     iconName: 'commonSvg-皮肤',
-    tip: '皮肤选择',
+    tip: $t('皮肤选择'),
     value: 'skin',
     isShow: true
   },
   {
     iconName: 'commonSvg-设置',
-    tip: '更多设置',
+    tip: $t('更多设置'),
     value: 'setting',
     isShow: true
   },
   {
     iconName: 'commonSvg-上-实心三角',
-    tip: '回到顶部',
+    tip: $t('回到顶部'),
     value: 'up',
     isShow: true
   },
   {
     iconName: 'commonSvg-下-实心三角',
-    tip: '直达底部',
+    tip: $t('直达底部'),
     value: 'down',
     isShow: true
   },
   {
     iconName: 'commonSvg-日志',
-    tip: '新增日志',
+    tip: $t('新增日志'),
     value: 'log',
     isShow: false
   }

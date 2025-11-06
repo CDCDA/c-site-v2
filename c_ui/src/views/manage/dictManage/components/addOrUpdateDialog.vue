@@ -3,55 +3,55 @@
     <el-form :model="form" label-width="85" ref="formRef" :rules="rules">
       <el-row>
         <el-col :span="12">
-          <el-form-item label="字典类型" prop="dictType">
+          <el-form-item :label="$t('字典类型')" prop="dictType">
             <el-input v-model="form.dictType" clearable disabled></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="12">
-          <el-form-item label="回显样式" prop="listClass">
+          <el-form-item :label="$t('回显样式')" prop="listClass">
             <dict-select v-model="form.listClass" dict-type="tag_css_type" />
           </el-form-item>
         </el-col>
       </el-row>
       <el-row>
         <el-col :span="12">
-          <el-form-item label="字典键值" prop="dictValue">
+          <el-form-item :label="$t('字典键值')" prop="dictValue">
             <el-input v-model="form.dictValue" clearable></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="12">
-          <el-form-item label="字典标签" prop="dictLabel">
+          <el-form-item :label="$t('字典标签')" prop="dictLabel">
             <el-input v-model="form.dictLabel" clearable></el-input>
           </el-form-item>
         </el-col>
       </el-row>
       <el-row>
         <el-col :span="12">
-          <el-form-item label="状态" prop="status">
+          <el-form-item :label="$t('状态')" prop="status">
             <el-switch
               v-model="form.status"
-              active-text="正常"
-              inactive-text="停用"
+              :active-text="$t('正常')"
+              :inactive-text="$t('停用')"
               active-value="1"
               inactive-value="0"
             ></el-switch>
           </el-form-item>
         </el-col>
         <el-col :span="12">
-          <el-form-item label="显示顺序" prop="dictSort">
+          <el-form-item :label="$t('显示顺序')" prop="dictSort">
             <el-input-number v-model="form.dictSort" :min="0"></el-input-number>
           </el-form-item>
         </el-col>
       </el-row>
       <el-row>
-        <el-form-item label="备注" prop="remark" style="width: 100%">
+        <el-form-item :label="$t('备注')" prop="remark" style="width: 100%">
           <el-input
             type="textarea"
             :rows="3"
             maxlength="100"
             show-word-limit
             v-model="form.remark"
-            placeholder="写点什么吧。。。"
+            :placeholder="$t('写点什么吧。。。')"
             clearable
           />
         </el-form-item>
@@ -59,14 +59,16 @@
     </el-form>
     <template #footer>
       <span class="dialog-footer">
-        <el-button @click="open = false">取消</el-button>
-        <el-button type="primary" @click="submit"> 确定 </el-button>
+        <el-button @click="open = false">{{ $t('取消') }}</el-button>
+        <el-button type="primary" @click="submit"> {{ $t('确定') }}</el-button>
       </span>
     </template>
   </c-dialog>
 </template>
 
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+const { t: $t } = useI18n();
 import { ref, onMounted } from 'vue';
 import { saveDictData, updateDictData, getDictDataById } from '@/api/system/dict/dictData.ts';
 import { ElNotification } from 'element-plus';
@@ -75,12 +77,12 @@ const formRef = ref(null) as any;
 const open = ref(false) as any;
 
 const rules = ref({
-  listClass: [{ required: true, message: '请选择回显样式', trigger: 'change' }],
-  dictType: [{ required: true, message: '请输入字典类型', trigger: 'blur' }],
-  dictValue: [{ required: true, message: '请输入字典键值', trigger: 'blur' }],
-  dictLabel: [{ required: true, message: '请输入字典标签', trigger: 'blur' }],
-  status: [{ required: true, message: '请选择状态', trigger: 'change' }],
-  dictSort: [{ required: true, message: '请输入字典排序', trigger: 'blur' }]
+  listClass: [{ required: true, message: $t('请选择回显样式'), trigger: 'change' }],
+  dictType: [{ required: true, message: $t('请输入字典类型'), trigger: 'blur' }],
+  dictValue: [{ required: true, message: $t('请输入字典键值'), trigger: 'blur' }],
+  dictLabel: [{ required: true, message: $t('请输入字典标签'), trigger: 'blur' }],
+  status: [{ required: true, message: $t('请选择状态'), trigger: 'change' }],
+  dictSort: [{ required: true, message: $t('请输入字典排序'), trigger: 'blur' }]
 });
 
 const title = ref('');
@@ -132,7 +134,7 @@ function submit() {
       ? await updateDictData(form.value)
       : await saveDictData(form.value);
     if (code === 200) {
-      ElNotification.success(!form.value.id ? '新增成功' : '修改成功');
+      ElNotification.success(!form.value.id ? $t('新增成功') : $t('修改成功'));
       emit('getList');
       open.value = false;
     }

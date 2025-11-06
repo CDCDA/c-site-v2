@@ -24,6 +24,8 @@
 </template>
 
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+const { t: $t } = useI18n();
 import { ref, onMounted } from 'vue';
 import { secondDayDiff, monthDayDiff } from '@/utils/date';
 import { menuData } from '../menuData.ts';

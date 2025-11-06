@@ -12,23 +12,23 @@
       @submit.native.prevent
       :rules="rules"
     >
-      <el-form-item label="随笔内容" prop="content">
+      <el-form-item :label="$t('随笔内容')" prop="content">
         <el-input
           v-model="essayData.content"
           type="textarea"
           maxlength="300"
           show-word-limit
           :rows="5"
-          placeholder="写点什么吧。。。"
+          :placeholder="$t('写点什么吧。。。')"
         ></el-input>
       </el-form-item>
-      <el-form-item label="随笔图片">
+      <el-form-item :label="$t('随笔图片')">
         <upload v-model="essayData.imageRelations" path="essay"></upload>
         <c-dialog v-model="dialogVisible">
           <img :src="dialogImageUrl" alt="Preview Image" />
         </c-dialog>
       </el-form-item>
-      <el-form-item label="常用标签">
+      <el-form-item :label="$t('常用标签')">
         <el-tag
           v-for="tag in commonUseTags"
           class="tag-item"
@@ -39,7 +39,7 @@
           {{ tag.tagName }}
         </el-tag>
       </el-form-item>
-      <el-form-item label="博客标签">
+      <el-form-item :label="$t('博客标签')">
         <el-tag
           v-for="tag in essayData.tags"
           :key="tag.tagName"
@@ -65,19 +65,23 @@
           + Tag
         </el-button>
       </el-form-item>
-      <el-form-item label="发布时间">
+      <el-form-item :label="$t('发布时间')">
         <el-date-picker v-model="essayData.createTime"></el-date-picker>
       </el-form-item>
     </el-form>
 
     <div class="essay-editor-footer">
-      <el-button type="success" @click="save()">保存</el-button>
-      <el-button type="primary" @click="submit()" v-permission="['operate']">发布</el-button>
+      <el-button type="success" @click="save()">{{ $t('保存') }}</el-button>
+      <el-button type="primary" @click="submit()" v-permission="['operate']">{{
+        $t('发布')
+      }}</el-button>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+const { t: $t } = useI18n();
 import { ref, onMounted, nextTick } from 'vue';
 import { useRouter } from 'vue-router';
 import { saveEssay, updateEssay, getEssayById } from '@/api/essay.ts';
@@ -89,16 +93,16 @@ const router = useRouter();
 const formEl = ref(null) as any;
 const userStore = useUserStore();
 const commonUseTags = ref([
-  { tagName: '游戏', tagType: 'primary', effect: 'dark' },
-  { tagName: '吐槽', tagType: 'success', effect: 'dark' },
-  { tagName: '分享', tagType: 'info', effect: 'dark' },
-  { tagName: '生活', tagType: 'warning', effect: 'dark' },
-  { tagName: '音乐', tagType: 'danger', effect: 'dark' },
-  { tagName: '电影', tagType: 'primary', effect: 'dark' },
-  { tagName: '开发', tagType: 'success', effect: 'dark' }
+  { tagName: $t('游戏'), tagType: 'primary', effect: 'dark' },
+  { tagName: $t('吐槽'), tagType: 'success', effect: 'dark' },
+  { tagName: $t('分享'), tagType: 'info', effect: 'dark' },
+  { tagName: $t('生活'), tagType: 'warning', effect: 'dark' },
+  { tagName: $t('音乐'), tagType: 'danger', effect: 'dark' },
+  { tagName: $t('电影'), tagType: 'primary', effect: 'dark' },
+  { tagName: $t('开发'), tagType: 'success', effect: 'dark' }
 ]) as any;
 const rules = ref({
-  content: [{ required: true, message: '请输入随笔内容', trigger: 'blur' }]
+  content: [{ required: true, message: $t('请输入随笔内容'), trigger: 'blur' }]
 }) as any;
 const essayData = ref({
   name: '',
@@ -162,7 +166,7 @@ async function submit() {
   form.createTime = formatDate(new Date(form.createTime));
   form.tags = JSON.stringify(essayData.value.tags);
   if (!form.content) {
-    ElNotification.warning('别发个空随笔');
+    ElNotification.warning($t('别发个空随笔'));
   }
   await formEl.value.validate(async (valid: any) => {
     if (valid) {
@@ -170,8 +174,8 @@ async function submit() {
       if (code === 200) {
         resetEssay();
         ElNotification.success({
-          title: '随笔发布成功',
-          message: '点击前往随笔',
+          title: $t('随笔发布成功'),
+          message: $t('点击前往随笔'),
           offset: 100,
           onClick: () => {
             router.push('essay');
@@ -201,7 +205,7 @@ async function getEssayData(id: any) {
 function save() {
   window.localStorage.setItem('essayData', JSON.stringify(essayData.value));
   ElNotification.success({
-    title: '保存成功',
+    title: $t('保存成功'),
     offset: 100
   });
 }

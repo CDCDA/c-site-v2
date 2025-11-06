@@ -5,6 +5,8 @@
   <baseChart :options="options" class="updateLog-count-line-bar"></baseChart>
 </template>
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+const { t: $t } = useI18n();
 import { reactive, onMounted } from 'vue';
 import baseChart from '@/components/charts/baseChart.vue';
 import { countLogsByDate } from '@/api/system/updateLog.ts';
@@ -72,6 +74,9 @@ const options = reactive({
 }) as any;
 
 function init(list: any) {
+  list = list.sort((a: any, b: any) => {
+    return new Date(a.operateTime).getTime() - new Date(b.operateTime).getTime();
+  });
   options.xAxis.data = [];
   options.series[0].data = [];
   options.series[1].data = [];

@@ -37,6 +37,9 @@ const props = defineProps({
   preview: {
     default: false
   },
+  lazy: {
+    default: true
+  },
   fit: {
     default: 'cover'
   },

@@ -5,15 +5,15 @@
   <c-dialog
     class="skin-change"
     v-model="dialogVisible"
-    title="换肤"
+    :title="$t('换肤')"
     style="height: 75%"
     width="60%"
     :modal="true"
     align-center
     @close="emit('closeThemeDialog')"
   >
-    <el-tabs v-model="activeName" class="skin-tabs" v-loading.fullscreen.lock="loading">
-      <el-tab-pane label="主题" name="theme">
+    <el-tabs v-model="activeName" class="skin-tabs">
+      <el-tab-pane :label="$t('主题')" name="theme">
         <ThemeTab
           v-if="activeName === 'theme'"
           :themes="themes"
@@ -21,31 +21,33 @@
           @changeTheme="changeTheme"
         />
       </el-tab-pane>
-      <el-tab-pane label="静态壁纸" name="static">
+      <el-tab-pane :label="$t('静态壁纸')" name="static">
         <StaticWallpaperTab
           v-if="activeName === 'static'"
           :activeUrl="activeUrl"
           @changeWallpaper="changeWallpaper"
         />
       </el-tab-pane>
-      <el-tab-pane label="动态壁纸" name="dynamic">
+      <el-tab-pane :label="$t('动态壁纸')" name="dynamic">
         <DynamicWallpaperTab
           v-if="activeName === 'dynamic'"
           :activeUrl="activeUrl"
           @changeWallpaper="changeWallpaper"
         />
       </el-tab-pane>
-      <el-tab-pane label="其他" name="other">
+      <el-tab-pane :label="$t('其他')" name="other">
         <OtherSettingTab v-if="activeName === 'other'" />
       </el-tab-pane>
     </el-tabs>
     <!-- <div class="dialog-footer">
-      <div>动态壁纸因为本身文件较大和服务器带宽的限制，所以可能会导致加载缓慢。</div>
+      <div>{{ $t('动态壁纸因为本身文件较大和服务器带宽的限制，所以可能会导致加载缓慢。') }}</div>
     </div> -->
   </c-dialog>
 </template>
 
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+const { t: $t } = useI18n();
 import { reactive, ref, onMounted } from 'vue';
 import useThemeStore from '@/store/modules/theme.ts';
 import { pageWallpapers } from '@/api/system/wallpaper.ts';
