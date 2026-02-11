@@ -10,7 +10,7 @@ export default [
     ],
     title: i18n.global.t('贴片机文件采集驱动'),
     intro: i18n.global.t('贴片机信息采集程序，支持驱动在线上传和在线安装，打包成exe文件运行'),
-    date: ['2024-5-1', '2025-10-6'],
+    date: ['2024-5', '2026-2'],
     tags: ['Java', 'Spring Boot', 'PostGreSQL', 'SFTP', 'FTP'],
     isAll: false,
     modules: [
@@ -29,12 +29,12 @@ export default [
       {
         title: i18n.global.t('嵌套线程处理'),
         intro:
-          '系统整体是一个主线程带多个子线程的嵌套方式,其实有很多冗余，但是积重难返。添加心跳包监测机制预防线程假死'
+          '系统整体是一个主线程带多个子线程的嵌套方式,其实有很多冗余，但是积重难返。添加心跳包监测机制预防线程假活'
       },
       {
         title: i18n.global.t('现场问题的长期支持'),
         intro: i18n.global.t(
-          '处理实施人员在使用过程中遇到的各种问题,包括但不限于：系统崩溃、数据丢失、性能问题等'
+          '处理实施人员在使用过程中遇到的各种问题,包括但不限于：配置出错、数据丢失、性能问题等'
         )
       }
     ]
@@ -49,10 +49,10 @@ export default [
     ],
     title: i18n.global.t('utps工时管理'),
     intro: i18n.global.t(
-      'utps工时管理系统，产线工作人员配置，效率计算等，亏到姥姥家的一个项目，钱少事多，要重构他们的jsp老系统，甚至附赠一个飞书版本，无法理解为什么会接这么一个项目'
+      'utps工时管理系统，产线工作人员配置，效率计算等，顶级折磨，钱少事多，要重构他们的jsp老系统，甚至附赠一个飞书小程序，外加一个死扣细节的对接人'
     ),
-    date: ['2024-5-1', '2024-10-6'],
-    tags: ['Java', 'JavaScript', 'Css', 'vue3', 'Spring Boot', 'SQLServer'],
+    date: ['2025-7', '2026-2'],
+    tags: ['Java', 'TypeScript', 'Css', 'vue3', 'Spring Boot', 'SQLServer'],
     isAll: false,
     modules: [
       {
@@ -61,7 +61,29 @@ export default [
       },
       {
         title: i18n.global.t('部分前端'),
-        intro: i18n.global.t('有个挺恶心的互联tab，需要处理好数据交互')
+        intro: i18n.global.t('难点是一个多tab互联同步的功能模块')
+      }
+    ]
+  },
+  {
+    id: 'utps-feishu',
+    coverUrl: new URL('@/assets/projectImage/utps-feishu/image1.png', import.meta.url).href,
+    images: [
+      new URL('@/assets/projectImage/utps-feishu/image1.png', import.meta.url).href,
+      new URL('@/assets/projectImage/utps-feishu/image2.png', import.meta.url).href,
+      new URL('@/assets/projectImage/utps-feishu/image3.png', import.meta.url).href
+    ],
+    title: i18n.global.t('utps工时管理飞书小程序'),
+    intro: i18n.global.t(
+      'utps工时管理飞书小程序，后端复用web端的接口，要求在飞书达到类似网页的表格效果，得完全手写组件。唉，表格就去web端看啊，小程序放那么多东西用起来又不方便，而且小程序都被官方自己放弃了'
+    ),
+    date: ['2025-11', '2026-2'],
+    tags: ['JavaScript', 'Css', '飞书小程序'],
+    isAll: false,
+    modules: [
+      {
+        title: i18n.global.t('全部'),
+        intro: i18n.global.t('手搓各种组件，心累')
       }
     ]
   },
@@ -75,7 +97,7 @@ export default [
     ],
     title: i18n.global.t('云标签打印系统'),
     intro: i18n.global.t('配合MES系统的子工程'),
-    date: ['2024-5-1', '2024-10-6'],
+    date: ['2024-5', '2024-10'],
     tags: ['Java', 'JavaScript', 'Css', 'vue2', 'Spring Boot', 'SQLServer'],
     isAll: false,
     modules: [
@@ -101,7 +123,7 @@ export default [
     intro: i18n.global.t(
       '贴片机文件采集驱动的升级版本，流程可视化，日志可视化，动态导入，网关监控'
     ),
-    date: ['2024-10-1', '2025-12-6'],
+    date: ['2024-10', '2025-12'],
     tags: ['Javascript', 'Jquery', 'Html', 'Css', 'Node'],
     isAll: false,
     modules: [
@@ -137,7 +159,7 @@ export default [
     intro: i18n.global.t(
       '需求是像微服务一样，每个模块都可以独立部署，采用无界框架实现，完成框架后移交给其他部门开发'
     ),
-    date: ['2025-8-30', '2025-9-15'],
+    date: ['2025-8', '2025-9'],
     tags: ['vue2', 'vue3'],
     isAll: false,
     modules: [
@@ -159,9 +181,9 @@ export default [
     ],
     title: i18n.global.t('全域价值流'),
     intro: i18n.global.t(
-      '应客户要求使用Sz-Admin框架，接口由客户方提供，比较奇葩的是还需要给客户代码说明文档，客户以后要将这个框架自用'
+      '应客户要求使用Sz-Admin框架，接口由客户方提供，比较搞的是还需要给客户源代码说明文档，客户以后要将这个框架自用。ps:md文档看起来就是比word舒服'
     ),
-    date: ['2025-7-30', '2025-11-05'],
+    date: ['2025-7', '2025-11'],
     tags: ['vue3'],
     isAll: true,
     modules: [
@@ -172,6 +194,10 @@ export default [
       {
         title: i18n.global.t('代码说明文档'),
         intro: i18n.global.t('客户方需要根据Sz-Admin框架的使用说明，编写代码说明文档')
+      },
+      {
+        title: i18n.global.t('后续新增的需求:适配平板'),
+        intro: i18n.global.t('取消了一个需求，换成了适配平板')
       }
     ]
   },
@@ -187,7 +213,7 @@ export default [
     intro: i18n.global.t(
       '集成到小主机的单体服务项目，用于工厂管理，其实是mes微服务项目的单体精简版'
     ),
-    date: ['2024-5-1', '2024-10-6'],
+    date: ['2025-4', '2024-6'],
     isAll: false,
     tags: [
       'java',
@@ -230,7 +256,7 @@ export default [
     ],
     title: 'SMT精灵-手机端',
     intro: i18n.global.t('使用uni-app开发，配合smt精灵使用的手机端'),
-    date: ['2024-5-1', '2024-10-6'],
+    date: ['2025-6', '2025-7'],
     tags: ['Java', 'JavaScript', 'Css', 'Uni-App', 'Spring Boot', 'PostGreSQL', 'sse'],
     isAll: false,
     modules: [
@@ -261,7 +287,7 @@ export default [
     ],
     title: 'MES系统-v2',
     intro: i18n.global.t('多服务工厂管理系统，适配SQLServer和PG数据库，偶尔处理一些bug和需求'),
-    date: ['2023-6-1', '2025-3-6'],
+    date: ['2023-6', '2025-3'],
     tags: ['Java', 'JavaScript', 'Css', 'vue2', 'Spring Boot', 'PostGreSQL', 'SQLServer'],
     isAll: false,
     modules: [
@@ -289,7 +315,7 @@ export default [
     ],
     title: 'MES系统-v3',
     intro: i18n.global.t('通过qiankun微前端框架整合多个不同技术栈项目，包含vue2和vue3项目'),
-    date: ['2024-5-1', '2024-10-6'],
+    date: ['2023-5', '2025-8'],
     tags: [
       'Java',
       'JavaScript',
@@ -330,7 +356,7 @@ export default [
     ],
     title: i18n.global.t('低代码'),
     intro: 'MES系统-V3的子系统之一，以v-form表单为基础开发',
-    date: ['2024-5-1', '2024-10-6'],
+    date: ['2024-9', '2024-10'],
     tags: [
       'Java',
       'TypeScript',
@@ -369,7 +395,7 @@ export default [
     ],
     title: i18n.global.t('大屏报表'),
     intro: 'MES系统-V3的子系统之一，以一个较为完整的大屏设计器为基础进行开发',
-    date: ['2024-5-1', '2024-10-6'],
+    date: ['2024-10', '2024-11'],
     tags: ['JavaScript', 'Css', 'Vue2', 'Webpack'],
     isAll: false,
     modules: [
@@ -393,7 +419,7 @@ export default [
     ],
     title: i18n.global.t('看板'),
     intro: i18n.global.t('专门的看板项目，我只负责前端'),
-    date: ['2024-5-1', '2024-10-6'],
+    date: ['2024-11', '2024-12'],
     tags: ['JavaScript', 'Css', 'Vue2', 'Webpack', 'Spring Boot', 'Java'],
     isAll: false,
     modules: [
@@ -408,7 +434,7 @@ export default [
     images: [new URL('@/assets/images/404.png', import.meta.url).href],
     title: i18n.global.t('SMS备件管理系统'),
     intro: i18n.global.t('工厂管理的一个特殊模块，稍微改了几个接口，略过'),
-    date: ['2024-5-1', '2024-10-6'],
+    date: ['2024-7', '2024-8'],
     tags: ['JavaScript', 'Css', 'Vue3', 'Vite', 'Spring Boot', 'Java'],
     isAll: false,
     modules: []
@@ -419,7 +445,7 @@ export default [
     images: [new URL('@/assets/images/404.png', import.meta.url).href],
     title: i18n.global.t('CMS样品管理系统'),
     intro: i18n.global.t('工厂管理的一个特殊模块，同样只是稍微改了几个接口，略过'),
-    date: ['2024-5-1', '2024-10-6'],
+    date: ['2024-8', '2024-9'],
     tags: ['JavaScript', 'Css', 'Vue3', 'Vite', 'Spring Boot', 'Java'],
     isAll: false,
     modules: []
@@ -433,7 +459,7 @@ export default [
     ],
     title: i18n.global.t('问题解决工具'),
     intro: i18n.global.t('一个比较老的项目，后端似乎用的.net，只改了几个前端问题，略过'),
-    date: ['2024-3-1', '2024-4-1'],
+    date: ['2025-3', '2025-4'],
     tags: ['JavaScript', 'Css', 'Vue2', 'Webpack', 'Spring Boot', 'Java'],
     isAll: false,
     modules: []
@@ -444,7 +470,7 @@ export default [
     images: [new URL('@/assets/projectImage/c-site-v2/image1.png', import.meta.url).href],
     title: i18n.global.t('个人网站'),
     intro: '初版个人网站，springboot2+vue3+jdk8+mysql+redis的单体服务',
-    date: ['2024-3-1', '2024-10-15'],
+    date: ['2024-3', '2024-10'],
     tags: ['JavaScript', 'Css', 'Vue3', 'vite', 'Spring Boot', 'Java'],
     isAll: false,
     modules: [
@@ -461,7 +487,7 @@ export default [
     intro: i18n.global.t(
       '微服务测试版本，本来是拿来测试集群和微服务，但是轻量服务器实在是在不堪大用，开了两个nacos和几个基础服务就爆了，最后只能强行限制资源占用，勉勉强强测试一下'
     ),
-    date: ['2024-3-1', '2024-10-15'],
+    date: ['2025-6', '2025-7'],
     tags: ['JavaScript', 'Css', 'Vue3', 'vite', 'Spring Boot', 'Java'],
     isAll: false,
     modules: [
@@ -485,7 +511,7 @@ export default [
       'springboot3 + vue3 + jdk21 + postgres + redis 的单体服务版本。\n' +
       '全面升级，重构代码，接口改为符合RESTful API的格式，更换jwt鉴权库和加密库,部署方式改为docker-compose批量部署。\n' +
       '前端首屏加载优化与打包优化，重构后台管理\n',
-    date: ['2025-7-20', '2025-10-27'],
+    date: ['2025-70', '2026-2'],
     tags: [
       'TypeScript',
       'Css',
@@ -515,7 +541,7 @@ export default [
       new URL('@/assets/projectImage/c-tools/image5.png', import.meta.url).href,
       new URL('@/assets/projectImage/c-tools/image6.png', import.meta.url).href
     ],
-    title: i18n.global.t('桌面端工具集'),
+    title: i18n.global.t('rust桌面端工具集'),
     intro:
       'tauri+rust+vue3 桌面端工具集,包含:\n' +
       '1. json处理\n' +
@@ -527,7 +553,7 @@ export default [
       '7. 系统信息\n' +
       '8. 批量正则\n' +
       'rust速度快，但难写，tauri跨平台能力强，但权限问题比较麻烦',
-    date: ['2025-4-20', '2025-5-27'],
+    date: ['2025-6', '2025-12'],
     tags: [
       'TypeScript',
       'Css',

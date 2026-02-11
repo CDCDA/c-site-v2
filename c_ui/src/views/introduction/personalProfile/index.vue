@@ -6,11 +6,10 @@
     <PersonalInfo class="bounceInDown animated"></PersonalInfo>
     <div class="ps-welcome c-left animated">
       <video class="welcome-video" :src="'/video/video_1800042575.mp4'" autoplay loop muted />
-      <span class="welcome-title"
-        >{{ $t('欢迎来到我的网站') }}<svg-icon iconName="commonSvg-礼花"
-      /></span>
-      <span class="welcome-name">{{ $t('我叫CCCC') }}</span>
-      <span class="welcome-profession">{{ $t('是一名全栈开发工程师') }}</span>
+      <span class="welcome-title">{{ $t('CCCC的记录站点') }}</span>
+      <!-- <svg-icon iconName="commonSvg-礼花" /> -->
+      <span class="welcome-name">{{ $t('CCCC') }}</span>
+      <span class="welcome-profession">{{ $t('全栈开发工程师') }}</span>
     </div>
     <!-- <div class="ps-timeline c-right animated">
       <GoalTimeLine></GoalTimeLine>
@@ -45,11 +44,8 @@
         <p class="character-comment">{{ $t('感觉不太准，但又有很多人喜欢玩这个') }}</p>
         <p class="character-associate">
           {{ $t('感兴趣的可以去玩玩')
-          }}<a
-            target="_blank"
-            href="https://www.16personalities.com/ch/%E4%BA%BA%E6%A0%BC%E6%B5%8B%E8%AF%95"
-            >{{ $t('性格测试') }}</a
-          >
+          }}<a target="_blank" href="https://www.16personalities.com/ch/%E4%BA%BA%E6%A0%BC%E6%B5%8B%E8%AF%95">{{
+            $t('性格测试') }}</a>
         </p>
       </div>
       <div class="ps-strong-point">
@@ -74,6 +70,7 @@ import GoalTimeLine from './components/goalTimeLine.vue';
     justify-content: start;
     background: transparent !important;
     backdrop-filter: none !important;
+
     .ps-welcome {
       width: 100%;
       height: 300px;
@@ -86,6 +83,7 @@ import GoalTimeLine from './components/goalTimeLine.vue';
       overflow: hidden;
       border-radius: 12px;
       font-weight: bold;
+
       .welcome-video {
         height: 100%;
         width: 100%;
@@ -100,6 +98,7 @@ import GoalTimeLine from './components/goalTimeLine.vue';
         font-size: 30px;
         // background-image: linear-gradient(to right, #f0c27b, #4b1248);
         -webkit-background-clip: text;
+
         // -webkit-text-fill-color: transparent;
         .svg-icon {
           width: 40px;
@@ -107,18 +106,22 @@ import GoalTimeLine from './components/goalTimeLine.vue';
           margin-left: 10px;
         }
       }
+
       .welcome-name {
         font-size: 30px;
         // color: get('font-color');
       }
+
       .welcome-profession {
         font-size: 35px;
       }
+
       span {
         z-index: 10;
         color: white;
       }
     }
+
     .ps-timeline {
       width: 100%;
       height: 450px;
@@ -130,11 +133,13 @@ import GoalTimeLine from './components/goalTimeLine.vue';
       justify-content: center;
       align-items: center;
     }
+
     .ps-info {
       width: 100%;
       height: 450px;
       margin-bottom: 20px;
       @include flex;
+
       .ps-info-left {
         width: 50%;
         height: calc(100% - 40px);
@@ -145,20 +150,23 @@ import GoalTimeLine from './components/goalTimeLine.vue';
         overflow: hidden;
         padding: 20px 0;
         position: relative;
+
         .title {
           text-align: left;
           margin-left: 33px;
           margin-bottom: 15px;
         }
+
         .text {
           text-align: left;
           margin-left: 26px;
           font-size: 37px;
           margin-top: 2px;
           font-weight: bold;
-          margin-bottom: 37px;
+          margin-bottom: 18px;
         }
       }
+
       .ps-info-right {
         width: calc(50% - 20px);
         height: 100%;
@@ -174,10 +182,12 @@ import GoalTimeLine from './components/goalTimeLine.vue';
           margin-bottom: 20px;
           position: relative;
           overflow: hidden;
+
           .map-img {
             height: 100%;
             width: 100%;
           }
+
           .map-tip {
             height: 50px;
             width: 100%;
@@ -192,40 +202,49 @@ import GoalTimeLine from './components/goalTimeLine.vue';
             font-size: 22px;
           }
         }
+
         @keyframes tip-up {
           0% {
             bottom: -70px;
           }
+
           100% {
             bottom: 0;
           }
         }
+
         @keyframes tip-down {
           0% {
             bottom: 0;
           }
+
           100% {
             bottom: -70px;
           }
         }
+
         .ps-info-map:hover {
           .map-tip {
             animation: tip-down 0.4s forwards linear;
           }
+
           .map-img {
             transform: scale(1.2);
             transition: 1s ease-in-out;
           }
         }
+
         .ps-info-map:not(:hover) {
           .map-tip {
             animation: tip-up 0.4s forwards linear;
           }
+
           .map-img {
             transform: scale(1);
             transition: 1s ease-in-out;
           }
         }
+
         .ps-info-life {
           height: 150px;
           width: 100%;
@@ -234,11 +253,13 @@ import GoalTimeLine from './components/goalTimeLine.vue';
           background: get('back');
           box-shadow: get('box-shadow');
           border-radius: 12px;
+
           .life-college,
           .life-profession,
           .life-education {
             height: 100%;
             @include flex-column;
+
             span {
               font-size: 30px;
               font-weight: bold;
@@ -249,6 +270,7 @@ import GoalTimeLine from './components/goalTimeLine.vue';
         }
       }
     }
+
     .ps-character {
       width: calc(60% - 40px);
       height: calc(100% - 40px);
@@ -264,13 +286,16 @@ import GoalTimeLine from './components/goalTimeLine.vue';
       object-fit: cover;
       background-size: 22% auto;
       background-position: 96% 46%;
+
       p,
       div {
         text-align: left;
       }
+
       p {
         margin: 10px 0;
       }
+
       // <p class="character-name">{{ $t('执政官') }}</p>
       //   <p class="character-abbreviation">ESFJ-A</p>
       //   <p class="character-comment">{{ $t('感觉不太准，但又有很多人喜欢玩这个') }}</p>
@@ -280,15 +305,18 @@ import GoalTimeLine from './components/goalTimeLine.vue';
         font-size: 35px;
         font-weight: bold;
       }
+
       .character-comment {
         position: absolute;
         bottom: 40px;
       }
+
       .character-associate {
         position: absolute;
         bottom: 10px;
       }
     }
+
     .ps-strong-point {
       width: calc(40% - 60px);
       height: calc(100% - 40px);
@@ -298,12 +326,14 @@ import GoalTimeLine from './components/goalTimeLine.vue';
       border-radius: 12px;
       overflow: hidden;
       padding: 20px 20px;
+
       p,
       div {
         text-align: left;
         z-index: 10;
         color: white;
       }
+
       p {
         font-size: 1.2rem;
       }

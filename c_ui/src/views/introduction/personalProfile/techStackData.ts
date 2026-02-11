@@ -109,6 +109,16 @@ export const techStackData = [
       label: 'Rust',
       url: new URL('@/assets/svg/techStackSvg/rust.svg', import.meta.url).href
     }
+  },
+  {
+    upStack: {
+      label: '飞书小程序',
+      url: new URL('@/assets/svg/techStackSvg/feishu.svg', import.meta.url).href
+    },
+    downStack: {
+      label: 'node-red',
+      url: new URL('@/assets/svg/techStackSvg/nodered.svg', import.meta.url).href
+    }
   }
 ];
 
@@ -124,7 +134,15 @@ export const techStackList = [
     url: new URL('@/assets/svg/techStackSvg/weixin.svg', import.meta.url).href
   },
   { label: 'TypeScript', url: new URL('@/assets/svg/techStackSvg/ts.svg', import.meta.url).href },
+  {
+    label: 'Node-Red',
+    url: new URL('@/assets/svg/techStackSvg/node-red.svg', import.meta.url).href
+  },
   { label: 'Uniapp', url: new URL('@/assets/svg/techStackSvg/uniapp.svg', import.meta.url).href },
+  {
+    label: '飞书小程序',
+    url: new URL('@/assets/svg/techStackSvg/feishu.svg', import.meta.url).href
+  },
   { label: 'Vite', url: new URL('@/assets/svg/techStackSvg/vite.svg', import.meta.url).href },
   { label: 'Css', url: new URL('@/assets/svg/techStackSvg/css.svg', import.meta.url).href },
   { label: 'Git', url: new URL('@/assets/svg/techStackSvg/git.svg', import.meta.url).href },

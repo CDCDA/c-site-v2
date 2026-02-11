@@ -23,7 +23,7 @@ import java.io.Serializable;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@TableName("\"user\"")
+@TableName("user")
 @Schema(name = "用户")
 @JsonInclude(JsonInclude.Include.NON_ABSENT)
 public class User extends BaseEntity implements Serializable {

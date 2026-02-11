@@ -3,10 +3,10 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.pw.mapper.UpdateLogMapper">
 
-    <!--按月份查询-->
+    <!--按月份查询更新日志统计-->
     <select id="countUpdateLogByDateRange" resultType="com.pw.vo.UpdateLogCountVO">
         SELECT
-        to_char(operate_time, 'YYYY年MM月') as operate_time,
+        DATE_FORMAT(operate_time, '%Y年%m月') as operate_time,
         count(*) as total
         FROM
         update_log
@@ -16,7 +16,29 @@
             </if>
         </where>
         GROUP BY
-        to_char(operate_time, 'YYYY年MM月')
-        order by operate_time desc
+        DATE_FORMAT(operate_time, '%Y年%m月')
+        ORDER BY DATE_FORMAT(operate_time, '%Y年%m月') DESC
     </select>
 </mapper>
+<!--<?xml version="1.0" encoding="UTF-8" ?>-->
+<!--<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"-->
+<!--        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">-->
+<!--<mapper namespace="com.pw.mapper.UpdateLogMapper">-->
+
+<!--    &lt;!&ndash;按月份查询&ndash;&gt;-->
+<!--    <select id="countUpdateLogByDateRange" resultType="com.pw.vo.UpdateLogCountVO">-->
+<!--        SELECT-->
+<!--        to_char(operate_time, 'YYYY年MM月') as operate_time,-->
+<!--        count(*) as total-->
+<!--        FROM-->
+<!--        update_log-->
+<!--        <where>-->
+<!--            <if test="startTime != null and endTime != null">-->
+<!--                and operate_time between #{startTime} and #{endTime}-->
+<!--            </if>-->
+<!--        </where>-->
+<!--        GROUP BY-->
+<!--        to_char(operate_time, 'YYYY年MM月')-->
+<!--        order by operate_time desc-->
+<!--    </select>-->
+<!--</mapper>-->

@@ -1,5 +1,5 @@
 <template>
-  <div class="message">
+  <div class="message" style="height: 26px; display: flex">
     <el-popover
       placement="bottom"
       append-to=".popper-base"
@@ -57,7 +57,7 @@ import { formatDate } from '@/utils/date';
 import { ElNotification, ElMessageBox } from 'element-plus';
 import { listUserMessages, batchReadMessages } from '@/api/system/message';
 import { useRouter } from 'vue-router';
-import { useWebSocketStore } from '@/store/modules/webSocket';
+import { useWebSocketStore } from '@/store/modules/webSocket.ts';
 import ChannelManager from '@/utils/channelManage';
 const currentMessage = ref({}) as any;
 const router = useRouter();

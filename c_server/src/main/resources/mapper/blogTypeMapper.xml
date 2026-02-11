@@ -10,7 +10,7 @@
         <result property="coverUrl" column="cover_url"/>
         <result property="intro" column="intro"/>
         <collection property="total" javaType="Integer" ofType="Integer" select="getCountByTypeId"
-                    column="typeId=type_id">
+                    column="{typeId=type_id}">
             <result column="total"/>
         </collection>
     </resultMap>
@@ -48,3 +48,53 @@
     </select>
 
 </mapper>
+<!--<?xml version="1.0" encoding="UTF-8" ?>-->
+<!--<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"-->
+<!--        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">-->
+<!--<mapper namespace="com.pw.mapper.BlogTypeMapper">-->
+
+<!--    <resultMap type="com.pw.vo.BlogTypeVO" id="blogTypeMap">-->
+<!--        <id property="typeId" column="type_id"/>-->
+<!--        <result property="typeName" column="type_name"/>-->
+<!--        <result property="userId" column="user_id"/>-->
+<!--        <result property="coverUrl" column="cover_url"/>-->
+<!--        <result property="intro" column="intro"/>-->
+<!--        <collection property="total" javaType="Integer" ofType="Integer" select="getCountByTypeId"-->
+<!--                    column="typeId=type_id">-->
+<!--            <result column="total"/>-->
+<!--        </collection>-->
+<!--    </resultMap>-->
+
+<!--    <select id="getCountByTypeId" resultType="Integer">-->
+<!--        SELECT COUNT(blog_id) AS total-->
+<!--        FROM blog-->
+<!--        WHERE type_id = #{typeId}-->
+<!--    </select>-->
+
+<!--    <select id="listBlogType" resultMap="blogTypeMap">-->
+<!--        SELECT DISTINCT type_id, type_name, user_id, cover_url, intro-->
+<!--        FROM blog_type-->
+<!--        <where>-->
+<!--            <if test="userId != null and userId != ''">-->
+<!--                AND user_id = #{userId}-->
+<!--            </if>-->
+<!--            <if test="typeName != null and typeName != ''">-->
+<!--                AND type_name = #{typeName}-->
+<!--            </if>-->
+<!--            <if test="intro != null and intro != ''">-->
+<!--                AND intro = #{intro}-->
+<!--            </if>-->
+<!--        </where>-->
+<!--    </select>-->
+
+<!--    <select id="countBlogType" resultType="integer">-->
+<!--        SELECT COUNT(*)-->
+<!--        FROM blog_type-->
+<!--        <where>-->
+<!--            <if test="userId != null and userId != ''">-->
+<!--                AND user_id = #{userId}-->
+<!--            </if>-->
+<!--        </where>-->
+<!--    </select>-->
+
+<!--</mapper>-->

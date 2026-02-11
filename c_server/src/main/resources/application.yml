@@ -28,14 +28,14 @@ spring:
     serialization:
       fail-on-empty-beans: false # 修正：属性名使用kebab-case
   datasource:
-    driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://120.48.127.181:5432/C_PW?useUnicode=true&characterEncoding=utf8&useSSL=true&autoReconnect=true&reWriteBatchedInserts=true
-    username: postgres
-    password: 123456
-  #      driver-class-name: com.mysql.jdbc.Driver
-  #      url: jdbc:mysql://120.48.127.181:3306/pw?useUnicode=true&characterEncoding=utf-8&useSSL=false
-  #      username: cyd
-  #      password: cyd
+#    driver-class-name: org.postgresql.Driver
+#    url: jdbc:postgresql://120.48.127.181:5432/C_PW?useUnicode=true&characterEncoding=utf8&useSSL=true&autoReconnect=true&reWriteBatchedInserts=true
+#    username: postgres
+#    password: 123456
+      driver-class-name: com.mysql.jdbc.Driver
+      url: jdbc:mysql://120.48.127.181:3306/C_PW?useUnicode=true&characterEncoding=utf-8&useSSL=false
+      username: root
+      password: 123456
   # 邮箱 SMTP 配置 (移到与data同级)
   mail:
     host: smtp.qq.com

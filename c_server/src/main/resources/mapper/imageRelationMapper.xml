@@ -2,33 +2,67 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.pw.mapper.ImageRelationMapper">
-    <select id="insertEssayImageRelations" resultType="Integer">
-        insert into image_relation
-        (essay_id,url)
-        values
-        <foreach collection="urls" item="url" index="index" separator=",">
-            (#{essayId},#{url})
-        </foreach>
-    </select>
 
-    <select id="insertAlbumImageRelations" resultType="Integer">
+    <!-- 返回值类型应为Integer，但INSERT语句应该使用<insert>标签 -->
+    <insert id="insertEssayImageRelations">
         insert into image_relation
-        (album_id,url)
+        (essay_id, url)
         values
         <foreach collection="urls" item="url" index="index" separator=",">
-            (#{albumId},#{url})
+            (#{essayId}, #{url})
         </foreach>
-    </select>
+    </insert>
+
+    <insert id="insertAlbumImageRelations">
+        insert into image_relation
+        (album_id, url)
+        values
+        <foreach collection="urls" item="url" index="index" separator=",">
+            (#{albumId}, #{url})
+        </foreach>
+    </insert>
 
     <select id="countByIds" resultType="Integer">
         select count(DISTINCT tag_name)
-        from "blog_tag" bt
-        join "blog_tag_relation" btr
-        on bt.tag_id = btr.tag_id
+        from blog_tag bt
+        join blog_tag_relation btr on bt.tag_id = btr.tag_id
         where btr.blog_id in
-        <foreach collection="ids" item="id" index="index" separator="," close=")" open="(">
+        <foreach collection="ids" item="id" open="(" close=")" separator=",">
             #{id}
         </foreach>
     </select>
 </mapper>
+<!--<?xml version="1.0" encoding="UTF-8" ?>-->
+<!--<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"-->
+<!--        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">-->
+<!--<mapper namespace="com.pw.mapper.ImageRelationMapper">-->
+<!--    <select id="insertEssayImageRelations" resultType="Integer">-->
+<!--        insert into image_relation-->
+<!--        (essay_id,url)-->
+<!--        values-->
+<!--        <foreach collection="urls" item="url" index="index" separator=",">-->
+<!--            (#{essayId},#{url})-->
+<!--        </foreach>-->
+<!--    </select>-->
+
+<!--    <select id="insertAlbumImageRelations" resultType="Integer">-->
+<!--        insert into image_relation-->
+<!--        (album_id,url)-->
+<!--        values-->
+<!--        <foreach collection="urls" item="url" index="index" separator=",">-->
+<!--            (#{albumId},#{url})-->
+<!--        </foreach>-->
+<!--    </select>-->
+
+<!--    <select id="countByIds" resultType="Integer">-->
+<!--        select count(DISTINCT tag_name)-->
+<!--        from "blog_tag" bt-->
+<!--        join "blog_tag_relation" btr-->
+<!--        on bt.tag_id = btr.tag_id-->
+<!--        where btr.blog_id in-->
+<!--        <foreach collection="ids" item="id" index="index" separator="," close=")" open="(">-->
+<!--            #{id}-->
+<!--        </foreach>-->
+<!--    </select>-->
+<!--</mapper>-->
 

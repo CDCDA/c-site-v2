@@ -34,37 +34,37 @@ public class DiskMonitorService {
     private boolean lastWarningState = false;
 
     // 每5分钟检查一次
-    @Scheduled(fixedRate = 30 * 60 * 1000)
-    public void monitorDiskSpace() {
-        String diskPath = "/"; // 监控根目录，可根据需要修改
-
-        boolean isLowSpace = diskSpaceMonitor.isDiskSpaceLow(diskPath);
-        DiskInfo diskInfo = diskSpaceMonitor.getDiskInfo(diskPath);
-
-        log.info("磁盘监控 - 总量: {}, 可用: {}, 使用率: {}",
-                diskInfo.getTotalSpace(), diskInfo.getFreeSpace(), diskInfo.getUsageRate());
-
-        // 只在状态变化时发送警告
-        if (isLowSpace) {
-            String warningMessage = String.format(
-                    "⚠️ 磁盘空间警告！\n" +
-                            "磁盘空间不足，请及时清理！\n" +
-                            "总量: %s\n" +
-                            "可用: %s\n" +
-                            "使用率: %s",
-                    diskInfo.getTotalSpace(), diskInfo.getFreeSpace(), diskInfo.getUsageRate()
-            );
-            Notification notification = new Notification();
-            notification.setTitle("磁盘信息");
-            notification.setStatus("primary");
-            notification.setChannels("disk_info");
-            notification.setContent(warningMessage);
-            webSocketHandler.sendDiskInfo(notification);
-            log.warn("磁盘空间不足警告已发送: {}", warningMessage);
-        }
-
-        lastWarningState = isLowSpace;
-    }
+//    @Scheduled(fixedRate = 30 * 60 * 1000)
+//    public void monitorDiskSpace() {
+//        String diskPath = "/"; // 监控根目录，可根据需要修改
+//
+//        boolean isLowSpace = diskSpaceMonitor.isDiskSpaceLow(diskPath);
+//        DiskInfo diskInfo = diskSpaceMonitor.getDiskInfo(diskPath);
+//
+//        log.info("磁盘监控 - 总量: {}, 可用: {}, 使用率: {}",
+//                diskInfo.getTotalSpace(), diskInfo.getFreeSpace(), diskInfo.getUsageRate());
+//
+//        // 只在状态变化时发送警告
+//        if (isLowSpace) {
+//            String warningMessage = String.format(
+//                    "⚠️ 磁盘空间警告！\n" +
+//                            "磁盘空间不足，请及时清理！\n" +
+//                            "总量: %s\n" +
+//                            "可用: %s\n" +
+//                            "使用率: %s",
+//                    diskInfo.getTotalSpace(), diskInfo.getFreeSpace(), diskInfo.getUsageRate()
+//            );
+//            Notification notification = new Notification();
+//            notification.setTitle("磁盘信息");
+//            notification.setStatus("primary");
+//            notification.setChannels("disk_info");
+//            notification.setContent(warningMessage);
+//            webSocketHandler.sendDiskInfo(notification);
+//            log.warn("磁盘空间不足警告已发送: {}", warningMessage);
+//        }
+//
+//        lastWarningState = isLowSpace;
+//    }
 
 
     // 新增方法：获取当前磁盘信息并发送

@@ -8,7 +8,7 @@
         <result property="tagName" column="tag_name"/>
         <result property="coverUrl" column="cover_url"/>
         <collection property="total" javaType="Integer" ofType="Integer" select="getCountByTagId"
-                    column="tagId=tag_id">
+                    column="{tagId=tag_id}">
             <result column="total"/>
         </collection>
     </resultMap>
@@ -48,7 +48,7 @@
                 AND b.user_id = #{userId}
             </if>
             <if test="tagName != null and tagName != ''">
-                AND bt.tag_name LIKE '%' || #{tagName} || '%'
+                AND bt.tag_name LIKE CONCAT('%', #{tagName}, '%')
             </if>
         </where>
         <if test="pageNum != null and pageSize != null">
@@ -66,7 +66,7 @@
                 AND b.user_id = #{userId}
             </if>
             <if test="tagName != null and tagName != ''">
-                AND bt.tag_name LIKE '%' || #{tagName} || '%'
+                AND bt.tag_name LIKE CONCAT('%', #{tagName}, '%')
             </if>
         </where>
     </select>
@@ -74,7 +74,87 @@
     <select id="isTagExit" resultType="Long">
         SELECT tag_id
         FROM blog_tag
-        WHERE tag_name = #{tag_name}
+        WHERE tag_name = #{tagName}
     </select>
 
 </mapper>
+<!--<?xml version="1.0" encoding="UTF-8" ?>-->
+<!--<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"-->
+<!--        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">-->
+<!--<mapper namespace="com.pw.mapper.BlogTagRelationMapper">-->
+
+<!--    <resultMap type="com.pw.vo.BlogTagVO" id="blogTagMap">-->
+<!--        <id property="tagId" column="tag_id"/>-->
+<!--        <result property="tagName" column="tag_name"/>-->
+<!--        <result property="coverUrl" column="cover_url"/>-->
+<!--        <collection property="total" javaType="Integer" ofType="Integer" select="getCountByTagId"-->
+<!--                    column="tagId=tag_id">-->
+<!--            <result column="total"/>-->
+<!--        </collection>-->
+<!--    </resultMap>-->
+
+<!--    <insert id="insertTags">-->
+<!--        INSERT INTO blog_tag_relation-->
+<!--        (blog_id, tag_id)-->
+<!--        VALUES-->
+<!--        <foreach collection="tags" item="tag" index="index" separator=",">-->
+<!--            (#{blogId}, #{tag})-->
+<!--        </foreach>-->
+<!--    </insert>-->
+
+<!--    <select id="countByIds" resultType="Integer">-->
+<!--        SELECT COUNT(DISTINCT tag_name)-->
+<!--        FROM blog_tag bt-->
+<!--        JOIN blog_tag_relation btr ON bt.tag_id = btr.tag_id-->
+<!--        WHERE btr.blog_id IN-->
+<!--        <foreach collection="ids" item="id" open="(" close=")" separator=",">-->
+<!--            #{id}-->
+<!--        </foreach>-->
+<!--    </select>-->
+
+<!--    <select id="getCountByTagId" resultType="Integer">-->
+<!--        SELECT COUNT(tag_id) AS total-->
+<!--        FROM blog_tag_relation-->
+<!--        WHERE tag_id = #{tagId}-->
+<!--    </select>-->
+
+<!--    <select id="listBlogTag" resultMap="blogTagMap">-->
+<!--        SELECT DISTINCT bt.tag_id, bt.tag_name, bt.cover_url, bt.tag_type, bt.effect, bt.color-->
+<!--        FROM blog b-->
+<!--        JOIN blog_tag_relation btr ON b.blog_id = btr.blog_id-->
+<!--        JOIN blog_tag bt ON bt.tag_id = btr.tag_id-->
+<!--        <where>-->
+<!--            <if test="userId != null and userId != ''">-->
+<!--                AND b.user_id = #{userId}-->
+<!--            </if>-->
+<!--            <if test="tagName != null and tagName != ''">-->
+<!--                AND bt.tag_name LIKE '%' || #{tagName} || '%'-->
+<!--            </if>-->
+<!--        </where>-->
+<!--        <if test="pageNum != null and pageSize != null">-->
+<!--            LIMIT #{pageSize} OFFSET #{pageSize} * (#{pageNum} - 1)-->
+<!--        </if>-->
+<!--    </select>-->
+
+<!--    <select id="countBlogTag" resultType="integer">-->
+<!--        SELECT COUNT(DISTINCT bt.tag_id)-->
+<!--        FROM blog b-->
+<!--        JOIN blog_tag_relation btr ON b.blog_id = btr.blog_id-->
+<!--        RIGHT JOIN blog_tag bt ON bt.tag_id = btr.tag_id-->
+<!--        <where>-->
+<!--            <if test="userId != null and userId != ''">-->
+<!--                AND b.user_id = #{userId}-->
+<!--            </if>-->
+<!--            <if test="tagName != null and tagName != ''">-->
+<!--                AND bt.tag_name LIKE '%' || #{tagName} || '%'-->
+<!--            </if>-->
+<!--        </where>-->
+<!--    </select>-->
+
+<!--    <select id="isTagExit" resultType="Long">-->
+<!--        SELECT tag_id-->
+<!--        FROM blog_tag-->
+<!--        WHERE tag_name = #{tag_name}-->
+<!--    </select>-->
+
+<!--</mapper>-->
