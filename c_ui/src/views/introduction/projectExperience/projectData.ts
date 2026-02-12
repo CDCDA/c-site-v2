@@ -548,10 +548,17 @@ export default [
       '2. 哈希生成\n' +
       '3. 文件树\n' +
       '4. 文件整理\n' +
-      '5. nginx格式化\n' +
+      '5. 代码格式化\n' +
       '6. docker日志转化\n' +
       '7. 系统信息\n' +
       '8. 批量正则\n' +
+       '9. 代码生成\n' +
+        '10. shell命令脚本\n' +
+         '11. 变量翻译\n' +
+         '12. 取色\n' +
+         '13. 截图\n' +
+         '14. 截图并悬浮\n' +
+         '15. markdown编辑器\n' +
       'rust速度快，但难写，tauri跨平台能力强，但权限问题比较麻烦',
     date: ['2025-6', '2025-12'],
     tags: [
@@ -559,11 +566,8 @@ export default [
       'Css',
       'Vue3',
       'vite',
-      'Spring Boot3',
-      'Java',
-      'Postgres',
-      'Docker',
-      'Redis'
+      'rust',
+      'tauri'
     ],
     isAll: true,
     modules: [
