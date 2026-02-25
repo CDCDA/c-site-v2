@@ -9,6 +9,10 @@ spring:
     name: c-server
   profiles:
     active: dev
+  servlet:
+    multipart:
+      max-file-size: 10MB       # 单个文件最大10MB
+      max-request-size: 10MB    # 整个请求最大10MB（可略大于max-file-size）
   data:
     redis:
       host: 120.48.127.181

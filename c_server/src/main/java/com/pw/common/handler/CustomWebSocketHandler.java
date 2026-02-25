@@ -162,7 +162,7 @@ public class CustomWebSocketHandler extends TextWebSocketHandler {
         ));
 
         // 可选：订阅后立即发送该频道的最新信息
-        sendChannelWelcomeMessage(userId, channel);
+//        sendChannelWelcomeMessage(userId, channel);
     }
 
     /**

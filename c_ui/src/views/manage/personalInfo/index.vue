@@ -79,6 +79,7 @@ const rules = ref({
   nickName: [{ required: true, message: 'Please input Activity name', trigger: 'blur' }]
 });
 async function getUserInfo(userId: any) {
+  if (!userId) userId = '1';
   const { code, data } = (await getUserById(userId)) as any;
   if (code === 200) {
     Object.assign(userInfo.value, data);

@@ -13,7 +13,8 @@
 <script setup>
 import { ref } from 'vue';
 import GridMerge from './GridMerge.vue';
-
+import { useI18n } from 'vue-i18n';
+const { t: $t } = useI18n();
 const headers = [$t('列1'), $t('列2'), $t('列3'), $t('列4'), $t('列5')];
 const rowLength = ref(5);
 const colLength = ref(5);

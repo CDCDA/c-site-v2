@@ -3,7 +3,7 @@
     :title="$t('列控制')"
     v-model="visible"
     @close="handleClose"
-    size="33%"
+    size="45%"
     :show-close="false"
   >
     <el-alert

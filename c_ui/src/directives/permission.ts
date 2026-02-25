@@ -2,7 +2,7 @@
  * @Description:权限控制
  */
 import useUserStore from '@/store/modules/user';
-import { ElMessage } from 'element-plus';
+import { ElNotification } from 'element-plus';
 
 export const permission = {
   mounted(el: any, bindling: any) {
@@ -27,7 +27,7 @@ export const permission = {
       } else if (perVal == 'operate') {
         if (!hasPer) {
           el.setAttribute('disabled', true);
-          el.style.pointerEvents = 'none'; // 增加这行，完全禁止点击事件
+          // el.style.pointerEvents = 'none'; // 增加这行，完全禁止点击事件
           el.style.cursor = 'not-allowed'; // 增加这行，改变鼠标样式
         }
       }

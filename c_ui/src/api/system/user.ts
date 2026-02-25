@@ -10,7 +10,7 @@ export const pageUsers = (params: any) =>
   });
 
 //用户详情
-export const getUserById = (id: string) =>
+export const getUserById = (id = '1') =>
   request({
     url: '/users/' + id,
     method: 'get'

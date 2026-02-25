@@ -28,6 +28,7 @@
         v-if="!isArr"
         class="c-uploader"
         :action="uploadAction"
+        :headers="uploadHeaders"
         :show-file-list="false"
         :data="{ path: props.path }"
         :on-success="handleAvatarSuccess"
@@ -41,6 +42,7 @@
         v-else
         v-model:file-list="imageValue"
         :action="uploadAction"
+        :headers="uploadHeaders"
         :data="{ path: props.path }"
         list-type="picture-card"
         :on-preview="handlePictureCardPreview"
@@ -62,6 +64,8 @@ import { ref, nextTick, onMounted, watch } from 'vue';
 import type { UploadProps } from 'element-plus';
 import { ElMessage } from 'element-plus';
 import { Select, Switch } from '@element-plus/icons-vue';
+import useUserStore from '@/store/modules/user';
+const userStore = useUserStore();
 const imageValue = ref([] as any[]);
 const isArr = ref(false);
 const isUrl = ref(false);
@@ -73,6 +77,10 @@ const props = defineProps({
   modelValue: null as any,
   isUrl: false as any,
   path: '' as any
+});
+
+const uploadHeaders = ref({
+  Authorization: userStore.token ? `Bearer ${userStore.token}` : ''
 });
 
 const handleAvatarSuccess: UploadProps['onSuccess'] = (response: any) => {

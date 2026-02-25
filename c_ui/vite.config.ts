@@ -122,7 +122,7 @@ export default defineConfig({
         rewrite: p => p.replace(/^\/wyy/, '')
       },
       '/chatApi': {
-        target: 'https://api.siliconflow.cn',
+        target: 'https://api.moonshot.cn',
         changeOrigin: true,
         rewrite: p => p.replace(/^\/chatApi/, '')
       }

@@ -50,12 +50,12 @@ defineExpose({
 </script>
 <style lang="scss">
 .project-main {
-  height: calc(100% - 5.5rem);
+  height: calc(100% - 4.5rem);
   width: 100%;
   position: absolute;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 3rem 0 0 0;
+  padding: 3.5rem 0 0 0;
 }
 </style>

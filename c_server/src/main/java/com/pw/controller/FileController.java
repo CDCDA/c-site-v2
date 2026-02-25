@@ -34,7 +34,7 @@ public class FileController extends BaseController implements convertController 
             path = "/" + path;
         }
 
-        String dirPath = "/www/wwwroot/files" + path;
+        String dirPath = "/home/docker/nginx/static-files" + path;
         File dirFile = new File(dirPath);
         if (!dirFile.exists()) {
             dirFile.mkdirs();
@@ -45,6 +45,6 @@ public class FileController extends BaseController implements convertController 
 
         InetAddress address = InetAddress.getLocalHost();
         String host = address.getHostAddress();
-        return resultData("http://120.48.127.181/file/" + path + "/" + fileName);
+        return resultData("http://120.48.127.181/file" + path + "/" + fileName);
     }
 }

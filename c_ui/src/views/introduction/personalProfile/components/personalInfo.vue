@@ -7,7 +7,7 @@
     <span class="glossary">{{ $t('rust练习生') }}</span>
     <span class="glossary">{{ $t('全栈开发工程师') }}</span>
     <span class="glossary">{{ $t('游戏爱好者') }}</span>
-    <span class="glossary">{{ $t('整点新活') }}</span>
+    <span class="glossary">{{ $t('AI好强') }}</span>
     <span class="glossary">{{ $t('日常找新歌') }}</span>
     <el-avatar class="avatar" :src="'http://120.48.127.181/file/avatar/cat-star.jpg'"></el-avatar>
   </div>

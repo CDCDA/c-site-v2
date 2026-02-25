@@ -1,5 +1,5 @@
 <template>
-  <div class="message" style="height: 26px; display: flex">
+  <div class="message" style="height: 18px; display: flex">
     <el-popover
       placement="bottom"
       append-to=".popper-base"

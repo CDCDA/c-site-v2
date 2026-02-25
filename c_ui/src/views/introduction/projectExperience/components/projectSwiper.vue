@@ -2,6 +2,12 @@
   <div class="tv-frame">
     <div class="tv-screen">
       <div class="overlay"></div>
+      <div class="back-button" @click="router.push({ name: 'personalProfile' })">
+        ← {{ $t('关于我') }}
+      </div>
+      <a href="https://github.com/CDCDA" target="_blank" class="github-button">
+        <svg-icon iconName="techStackSvg-git-white" />
+      </a>
       <swiper
         :loop="true"
         :spaceBetween="20"
@@ -60,7 +66,7 @@
       :grab-cursor="true"
       :modules="modules"
       :loop="true"
-      :slides-per-view="9"
+      :slides-per-view="slidesPerView"
       :space-between="5"
       class="top-swiper"
       :centered-slides="true"
@@ -75,6 +81,9 @@
         @click="handleSlideClick()"
       >
         <div class="film-frame">
+          <div v-if="item.type === 'primary'" class="primary-badge">
+            {{ $t('重点') }}
+          </div>
           <div class="back-filter">
             <div class="title">{{ item.title }}</div>
           </div>
@@ -92,6 +101,8 @@ import 'swiper/css/thumbs';
 import 'swiper/css';
 import { Pagination, Navigation, Thumbs, Mousewheel, Autoplay } from 'swiper/modules';
 import { onMounted, ref, watch, computed } from 'vue';
+import { useRouter } from 'vue-router';
+const router = useRouter();
 const modules = [Navigation, Thumbs, Pagination, Mousewheel, Autoplay];
 import 'swiper/css';
 
@@ -110,10 +121,17 @@ const props = defineProps({
     default: [] as any
   }
 });
-// 新增胶片效果参数
+
+const slidesPerView = computed(() => {
+  const count = props.itemList.length || 10;
+  const maxSlides = Math.floor(count / 2);
+  return Math.min(maxSlides, 9);
+});
+
 const swiperStyle = computed(() => ({
   '--perforation-size': '12px',
-  '--film-gutter': '8px'
+  '--film-gutter': '8px',
+  '--slides-per-view': slidesPerView.value
 }));
 const emit = defineEmits(['itemClick']);
 
@@ -168,7 +186,7 @@ onMounted(() => {});
       right: -10px;
       bottom: -10px;
       background: linear-gradient(145deg, #3a3a3a, #1a1a1a);
-      border-radius: 25px;
+      border-radius: 15px;
       z-index: -1;
     }
 
@@ -194,14 +212,54 @@ onMounted(() => {});
         position: absolute;
         width: 100%;
         height: 100%;
-        //background: repeating-linear-gradient(
-        //  180deg,
-        //  rgba(0, 0, 0, 0) 0,
-        //  rgba(0, 0, 0, 0.3) 50%,
-        //  rgba(0, 0, 0, 0) 100%
-        //);
         background-size: auto 4px;
         z-index: 99;
+      }
+      .back-button {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        z-index: 100;
+        padding: 8px 16px;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(8px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 20px;
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 13px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+      .back-button:hover {
+        background: rgba(255, 255, 255, 0.2);
+        color: #fff;
+      }
+      .github-button {
+        position: absolute;
+        bottom: 1.6rem;
+        left: 2rem;
+        z-index: 100;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 36px;
+        height: 36px;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(8px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 50%;
+        color: rgba(255, 255, 255, 0.8);
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+      .github-button:hover {
+        background: rgba(255, 255, 255, 0.2);
+        color: #fff;
+        transform: scale(1.1);
+      }
+      .github-button .svg-icon {
+        width: 100%;
+        height: 100%;
       }
       .overlay::before {
         content: '';
@@ -296,7 +354,7 @@ onMounted(() => {});
           height: 100%;
         }
         border: 2px solid rgba(255, 255, 255, 0.1);
-        width: 40%;
+        flex: 1;
         margin: 1rem;
         border-radius: 12px;
         overflow: hidden;
@@ -314,9 +372,9 @@ onMounted(() => {});
         color: #fff;
         overflow: auto;
         text-shadow: 0 0 5px rgba(0, 255, 0, 0.3);
-        width: calc(60% - 10rem);
+        width: 46%;
         text-align: left;
-        padding: 0rem 5rem;
+        padding: 0rem 2rem 0 1rem;
         height: calc(100% - 0rem);
         flex-direction: column;
         align-items: start;
@@ -482,7 +540,9 @@ onMounted(() => {});
   border-radius: 4px;
   overflow: hidden;
   transition: all 0.3s ease;
-
+  display: flex;
+  justify-content: center;
+  align-items: center;
   &::after {
     content: '';
     position: absolute;
@@ -491,13 +551,27 @@ onMounted(() => {});
     opacity: 0.4;
     transition: opacity 0.3s;
   }
+
+  .primary-badge {
+    position: absolute;
+    top: 6px;
+    right: 10px;
+    z-index: 20;
+    padding: 2px 6px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #fff;
+    font-size: 10px;
+    font-weight: 600;
+    border-radius: 3px;
+    box-shadow: 0 2px 6px rgba(102, 126, 234, 0.4);
+  }
 }
 
 .swiper-slide-img {
-  aspect-ratio: 16/9;
-  width: calc((100vw / 9) - 10px);
+  width: 100%;
+  height: 90px;
+  max-width: 220px;
   display: block;
-  //border-radius: 2px;
 }
 
 .perforations {

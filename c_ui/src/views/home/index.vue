@@ -7,6 +7,14 @@
       <div class="main-top-title">
         <div data-text></div>
       </div>
+      <div class="home-top-buttons">
+        <div class="glass-button" @click="router.push({ name: 'personalProfile' })">
+          {{ $t('关于我') }}
+        </div>
+        <div class="glass-button" @click="router.push({ name: 'projectExperience' })">
+          {{ $t('项目经历') }}
+        </div>
+      </div>
       <svg-icon iconName="commonSvg-下" class="CycleUpDown" @click="toMainPage" />
     </div>
     <div class="home-main page-main">
@@ -111,12 +119,10 @@ const theme = ref('') as any;
 const loading = ref('rotate') as any;
 
 const slogans = ref([
-  $t('记录'),
+  $t('CCCC的记录站点'),
   $t('来逛逛吧'),
   $t('生活不只有眼前的苟且'),
-  $t('还有远方的苟且'),
-  $t('几年很快的'),
-  $t('风一吹就没了')
+  $t('还有远方的苟且')
 ]) as any;
 
 const headerList = ref([]) as any;
@@ -275,6 +281,36 @@ onMounted(() => {
     .main-top-title {
       font-weight: bold;
       font-size: 40px;
+    }
+    .home-top-buttons {
+      display: flex;
+      position: absolute;
+      bottom: 150px;
+    }
+    .glass-button {
+      padding: 12px 30px;
+      border-radius: 50px;
+      width: 4rem;
+      /* 核心：毛玻璃效果 */
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(5px);
+      cursor: pointer;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      color: #fff;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s;
+    }
+    .glass-button:first-child {
+      border-radius: 50px 0px 0 50px;
+    }
+    .glass-button:last-child {
+      border-radius: 0px 50px 50px 0px;
+    }
+    .glass-button:hover {
+      background: rgba(255, 255, 255, 0.25);
+      border-color: rgba(255, 255, 255, 0.5);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     }
     .main-top-vice-title {
       margin-top: 10px;
@@ -493,7 +529,8 @@ onMounted(() => {
                       height: 1rem;
                       width: calc(100% - 105px);
                       text-align: left;
-                      display: -webkit-box;
+                      display: flex;
+                      align-items: center;
                       overflow: hidden;
                       text-overflow: ellipsis;
                       -webkit-line-clamp: 1;

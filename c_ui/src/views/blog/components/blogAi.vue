@@ -42,50 +42,51 @@ async function getAbstract() {
     }
   ];
   loading.value = true;
-  try {
-    abstract.value = '';
-    const response = (await sendMessage(messages)) as any;
-    if (response.status !== 200) {
-      ElNotification.error('API returned an error');
+
+  abstract.value = '';
+  const response = (await sendMessage(messages)) as any;
+  console.log(response);
+
+  if (response.status !== 200) {
+    // ElNotification.error('API returned an error');
+    abstract.value = response.error || 'api请求失败,请联系管理员';
+    loading.value = false;
+
+    return;
+  }
+  //接收数据流
+  const decoder = new TextDecoder('utf-8');
+  const reader = response.body.getReader();
+  let index = 0;
+  while (true) {
+    const { done, value } = await reader.read();
+    if (done) {
+      break;
     }
-    if (!response.body) return;
-    //接收数据流
-    const decoder = new TextDecoder('utf-8');
-    const reader = response.body.getReader();
-    let index = 0;
-    while (true) {
-      const { done, value } = await reader.read();
-      if (done) {
-        break;
-      }
-      const chunk = decoder.decode(value);
-      const lines = chunk.split('data: ').slice(1); // 分组并处理掉返回中的data:
-      const parsedLines = lines
-        .map(line => line.trim()) // 去空格
-        .filter(line => line !== ''); // 去掉空行
-      for (const parsedLine of parsedLines) {
-        index++;
-        //循环返回的字段
-        if (parsedLine.includes('choices')) {
-          // 返回数据为合理数据判断
-          const { choices } = JSON.parse(parsedLine);
-          const { delta } = choices[0];
-          const { content } = delta;
-          if (content && index > 4) {
-            // 文本 处理
-            abstract.value += content;
-          }
+    const chunk = decoder.decode(value);
+    const lines = chunk.split('data: ').slice(1); // 分组并处理掉返回中的data:
+    const parsedLines = lines
+      .map(line => line.trim()) // 去空格
+      .filter(line => line !== ''); // 去掉空行
+    for (const parsedLine of parsedLines) {
+      index++;
+      //循环返回的字段
+      if (parsedLine.includes('choices')) {
+        // 返回数据为合理数据判断
+        const { choices } = JSON.parse(parsedLine);
+        const { delta } = choices[0];
+        const { content } = delta;
+        if (content && index > 4) {
+          // 文本 处理
+          abstract.value += content;
         }
       }
     }
-    if (!abstract.value) {
-      abstract.value = 'api请求失败,请联系管理员';
-    }
-    loading.value = false;
-  } catch (error) {
-    ElMessage.error($t('获取博客摘要失败，请重试'));
-    loading.value = false;
   }
+  if (!abstract.value) {
+    abstract.value = 'api请求失败,请联系管理员';
+  }
+  loading.value = false;
 }
 
 onMounted(() => {

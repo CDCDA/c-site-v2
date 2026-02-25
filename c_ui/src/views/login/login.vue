@@ -86,7 +86,6 @@ import { login, touristLogin, register, getCode } from '@/api/system/auth.ts';
 import { useRouter } from 'vue-router';
 import useUserStore from '@/store/modules/user';
 import Cookies from 'js-cookie';
-import { getUserById } from '@/api/system/user';
 import useThemeStore from '@/store/modules/theme.ts';
 const themeStore = useThemeStore();
 themeStore.isShow = false;

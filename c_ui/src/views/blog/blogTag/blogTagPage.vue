@@ -235,7 +235,7 @@ onMounted(() => {
       .blog-item {
         background: get('back');
         cursor: pointer;
-        width: calc(50% - 1rem);
+        width: calc(50% - 1rem - 4px);
         position: relative;
         height: 6rem;
         margin: 0.5rem;

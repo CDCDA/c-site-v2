@@ -59,7 +59,7 @@ const router = useRouter();
 const footerData = ref({}) as any;
 const blogData = ref({ coverUrl: '', tags: [], content: '' }) as any;
 const loading = ref('gear') as any;
-const scrollElement = document.querySelector('.el-main');
+const scrollElement = ref() as any;
 function footerClick() {}
 
 async function getBlog(id: any) {
@@ -80,6 +80,7 @@ onMounted(() => {
   }
   autoClearTimer(() => {
     preNextShow.value = true;
+    scrollElement.value = document.querySelector('.el-main') as any;
   }, 1000);
 });
 </script>

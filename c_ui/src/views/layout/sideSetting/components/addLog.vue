@@ -11,7 +11,7 @@
     @keyup.enter.native="submit()"
     @close="emit('close')"
   >
-    <el-form class="log-form" :model="form" ref="formEl" :rules="rules">
+    <el-form class="log-form" label-width="5rem" :model="form" ref="formEl" :rules="rules">
       <el-form-item :label="$t('日志内容')" prop="operation">
         <el-input
           v-model="form.operation"

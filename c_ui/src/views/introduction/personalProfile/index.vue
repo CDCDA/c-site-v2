@@ -5,11 +5,17 @@
   <div class="page-main personal-profile-main">
     <PersonalInfo class="bounceInDown animated"></PersonalInfo>
     <div class="ps-welcome c-left animated">
+      <a href="https://github.com/cccc0213" target="_blank" class="github-button">
+        <svg-icon iconName="techStackSvg-git-white" />
+      </a>
       <video class="welcome-video" :src="'/video/video_1800042575.mp4'" autoplay loop muted />
       <span class="welcome-title">{{ $t('CCCC的记录站点') }}</span>
       <!-- <svg-icon iconName="commonSvg-礼花" /> -->
       <span class="welcome-name">{{ $t('CCCC') }}</span>
       <span class="welcome-profession">{{ $t('全栈开发工程师') }}</span>
+      <div class="welcome-button" @click="router.push({ name: 'projectExperience' })">
+        {{ $t('查看项目') }} →
+      </div>
     </div>
     <!-- <div class="ps-timeline c-right animated">
       <GoalTimeLine></GoalTimeLine>
@@ -44,8 +50,11 @@
         <p class="character-comment">{{ $t('感觉不太准，但又有很多人喜欢玩这个') }}</p>
         <p class="character-associate">
           {{ $t('感兴趣的可以去玩玩')
-          }}<a target="_blank" href="https://www.16personalities.com/ch/%E4%BA%BA%E6%A0%BC%E6%B5%8B%E8%AF%95">{{
-            $t('性格测试') }}</a>
+          }}<a
+            target="_blank"
+            href="https://www.16personalities.com/ch/%E4%BA%BA%E6%A0%BC%E6%B5%8B%E8%AF%95"
+            >{{ $t('性格测试') }}</a
+          >
         </p>
       </div>
       <div class="ps-strong-point">
@@ -59,6 +68,8 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n';
 const { t: $t } = useI18n();
+import { useRouter } from 'vue-router';
+const router = useRouter();
 import PersonalInfo from './components/personalInfo.vue';
 import TechnologyStackCard from './components/technologyStackCard.vue';
 import GoalTimeLine from './components/goalTimeLine.vue';
@@ -114,6 +125,55 @@ import GoalTimeLine from './components/goalTimeLine.vue';
 
       .welcome-profession {
         font-size: 35px;
+      }
+
+      .welcome-button {
+        position: absolute;
+        bottom: 20px;
+        right: 20px;
+        padding: 7px 20px 10px 20px;
+        background: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        border-radius: 25px;
+        color: white;
+        font-size: 14px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .welcome-button:hover {
+        background: rgba(255, 255, 255, 0.25);
+        transform: translateX(5px);
+      }
+
+      .github-button {
+        position: absolute;
+        bottom: 20px;
+        right: 150px;
+        z-index: 100;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 36px;
+        height: 36px;
+        background: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        border-radius: 50%;
+        color: white;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .github-button:hover {
+        background: rgba(255, 255, 255, 0.25);
+        transform: scale(1.1);
+      }
+
+      .github-button .svg-icon {
+        width: 100%;
+        height: 100%;
       }
 
       span {

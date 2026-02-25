@@ -39,12 +39,12 @@ const searchColumns = ref([
     prop: 'typeId',
     options: [] // 动态加载
   },
-  {
-    type: 'select',
-    label: $t('标签'),
-    prop: 'tagId',
-    options: [] // 动态加载
-  },
+  // {
+  //   type: 'select',
+  //   label: $t('标签'),
+  //   prop: 'tagId',
+  //   options: [] // 动态加载
+  // },
   {
     type: 'dateRange',
     label: $t('创建时间'),

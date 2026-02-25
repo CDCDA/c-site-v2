@@ -260,7 +260,7 @@ onMounted(() => {
         background: get('back');
         cursor: pointer;
         color: get('font-color');
-        width: calc(50% - 1rem);
+        width: calc(50% - 1rem - 4px);
         position: relative;
         height: 6rem;
         margin: 7px;

@@ -82,6 +82,7 @@ onMounted(() => {
     background: get('back');
     box-shadow: get('box-shadow');
     border-radius: 8px;
+    padding-top: 100px;
     min-height: calc(100vh - 75px) !important;
   }
   .cards {

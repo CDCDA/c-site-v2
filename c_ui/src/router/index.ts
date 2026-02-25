@@ -513,6 +513,12 @@ const routes: Array<RouteRecordRaw> = [
     meta: { title: '更新日志', svgIcon: '日志', parent: 'associate' },
     component: () => import('/src/views/associate/updateLog/index.vue')
   },
+  // {
+  //   path: '/architecture',
+  //   name: 'architecture',
+  //   meta: { title: '架构设计', svgIcon: '架构', parent: 'associate' },
+  //   component: () => import('/src/views/associate/architecture/index.vue')
+  // },
   {
     path: '/refresh',
     name: 'refresh',

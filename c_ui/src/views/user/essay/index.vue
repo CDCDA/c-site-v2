@@ -183,6 +183,7 @@ function toComment(item: any) {
 }
 
 async function getUserData() {
+  if (!userStore.userId) userStore.userId = '1';
   const { code, data } = (await getUserById(userStore.userId)) as any;
   if (code === 200) {
     userData.value = data;
