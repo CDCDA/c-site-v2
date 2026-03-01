@@ -2,11 +2,18 @@
   <div class="tv-frame">
     <div class="tv-screen">
       <div class="overlay"></div>
-      <div class="back-button" @click="router.push({ name: 'personalProfile' })">
-        ← {{ $t('关于我') }}
+      <contact-dialog v-model="showContact" />
+
+      <div class="person-fixed-button" @click="router.push({ name: 'personalProfile' })">
+        <el-icon><Right /></el-icon>{{ $t('关于我') }}
       </div>
-      <a href="https://github.com/CDCDA" target="_blank" class="github-button">
-        <svg-icon iconName="techStackSvg-git-white" />
+      <div class="person-fixed-button contact-button" @click="showContact = true">
+        <el-icon><Message /></el-icon>
+        <span>{{ $t('联系我') }}</span>
+      </div>
+      <a href="https://github.com/CDCDA" target="_blank" class="person-fixed-button github-button">
+        <svg-icon class="github-svg" iconName="techStackSvg-git-white" />
+        <span>{{ $t('git') }}</span>
       </a>
       <swiper
         :loop="true"
@@ -105,7 +112,9 @@ import { useRouter } from 'vue-router';
 const router = useRouter();
 const modules = [Navigation, Thumbs, Pagination, Mousewheel, Autoplay];
 import 'swiper/css';
+import ContactDialog from '@/components/contactDialog/index.vue';
 
+const showContact = ref(false);
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import InsideSwiper from '@/views/introduction/projectExperience/components/insideSwiper.vue';
@@ -161,10 +170,62 @@ const onProjectSwiper = (swiper: any) => {
   });
 };
 
-onMounted(() => {});
+onMounted(() => {
+  // 确保swiper正确计算尺寸并居中显示第一个slide
+  setTimeout(() => {
+    if (thumbsSwiper.value) {
+      thumbsSwiper.value.update();
+      thumbsSwiper.value.slideToLoop(0, 0);
+    }
+  }, 500);
+});
 </script>
 <style lang="scss" scoped>
 @include theme() {
+  .person-fixed-button {
+    position: absolute;
+    bottom: 30px;
+    left: 32px;
+    z-index: 99;
+
+    background: #404040;
+
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 25px;
+
+    color: white;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 6rem;
+    height: 2rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    .el-icon {
+      font-size: 18px;
+      margin-right: 5px;
+    }
+  }
+
+  .person-fixed-button:hover {
+    transform: translateY(-2px);
+  }
+
+  .github-button {
+    left: 263px;
+
+    .github-svg {
+      width: 18px;
+      height: 18px;
+      margin-right: 8px;
+      margin-bottom: -3px;
+    }
+  }
+
+  .contact-button {
+    left: 147px;
+  }
   /* 新增电视外壳样式 */
   .tv-frame {
     position: relative;
@@ -215,52 +276,7 @@ onMounted(() => {});
         background-size: auto 4px;
         z-index: 99;
       }
-      .back-button {
-        position: absolute;
-        top: 15px;
-        right: 15px;
-        z-index: 100;
-        padding: 8px 16px;
-        background: rgba(255, 255, 255, 0.1);
-        backdrop-filter: blur(8px);
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        border-radius: 20px;
-        color: rgba(255, 255, 255, 0.8);
-        font-size: 13px;
-        cursor: pointer;
-        transition: all 0.3s ease;
-      }
-      .back-button:hover {
-        background: rgba(255, 255, 255, 0.2);
-        color: #fff;
-      }
-      .github-button {
-        position: absolute;
-        bottom: 1.6rem;
-        left: 2rem;
-        z-index: 100;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 36px;
-        height: 36px;
-        background: rgba(255, 255, 255, 0.1);
-        backdrop-filter: blur(8px);
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        border-radius: 50%;
-        color: rgba(255, 255, 255, 0.8);
-        cursor: pointer;
-        transition: all 0.3s ease;
-      }
-      .github-button:hover {
-        background: rgba(255, 255, 255, 0.2);
-        color: #fff;
-        transform: scale(1.1);
-      }
-      .github-button .svg-icon {
-        width: 100%;
-        height: 100%;
-      }
+
       .overlay::before {
         content: '';
         pointer-events: none;
@@ -508,33 +524,111 @@ onMounted(() => {});
 .top-swiper {
   width: 100vw;
   overflow: visible;
+  // padding: 20px 0; // 增加上下内边距，防止放大时被遮挡
 
   .film-slide {
     position: relative;
-    transition: transform 1.6s cubic-bezier(0.16, 1, 0.3, 1);
+    // 默认状态：去色、变暗、透明度降低
+    filter: grayscale(1) brightness(0.5);
+    opacity: 0.6;
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    cursor: pointer;
 
-    &.swiper-slide-thumb-active::before,
-    &:hover::before {
-      content: '';
-      position: absolute;
-      inset: -8px;
-      background: #1a1a1a;
-      z-index: -1;
-      border-radius: 4px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-    }
-
+    // --- 选中态样式 (Swiper自带类名或你的active类) ---
     &.swiper-slide-thumb-active,
-    &:hover {
-      transform: scale(1.15);
-      z-index: 10;
-    }
-    &:hover {
+    &.active {
+      filter: grayscale(0) brightness(1.2); // 恢复彩色并加亮
+      opacity: 1;
+      transform: scale(1.2); // 放大比例稍微加大
       z-index: 20;
+
+      // 选中时的发光边框
+      .film-frame {
+        outline: 2px solid #fff; // 亮白色边框
+        box-shadow: 0 0 20px rgba(255, 255, 255, 0.4), 0 0 40px rgba(255, 255, 255, 0.2);
+
+        // 选中时文字层变亮
+        .back-filter {
+          background: rgba(0, 0, 0, 0.2); // 遮罩变浅，让图片更清晰
+          .title {
+            color: black;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+            font-weight: bold;
+          }
+        }
+      }
+
+      // --- 新增：选中项上方的倒三角指示器 ---
+      &::before {
+        content: '';
+        position: absolute;
+        top: -15px; // 位于slide上方
+        left: 50%;
+        transform: translateX(-50%);
+        border-left: 8px solid transparent;
+        border-right: 8px solid transparent;
+        border-top: 10px solid #fff; // 白色三角指向下方
+        z-index: 30;
+        animation: bounce 2s infinite; // 增加一个微弱的跳动动画
+      }
+    }
+
+    // 悬停在非选中的上面时，稍微亮一点
+    &:hover:not(.swiper-slide-thumb-active) {
+      filter: grayscale(0.5) brightness(0.8);
+      opacity: 0.8;
     }
   }
 }
 
+// 修正 film-frame 的样式，确保 border-radius 生效
+.film-frame {
+  position: relative;
+  border-radius: 4px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #000; // 底色设为黑
+
+  .back-filter {
+    background: rgba(0, 0, 0, 0.6); // 默认遮罩深一点
+    transition: all 0.3s ease;
+    .title {
+      font-size: 12px; // 胶卷上的文字不宜过大
+      text-align: center;
+      padding: 0 5px;
+    }
+  }
+}
+
+// 动画效果
+@keyframes bounce {
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateX(-50%) translateY(0);
+  }
+  40% {
+    transform: translateX(-50%) translateY(-5px);
+  }
+  60% {
+    transform: translateX(-50%) translateY(-3px);
+  }
+}
+
+// 重点标签在选中时才更亮
+.primary-badge {
+  opacity: 0.7;
+  transition: opacity 0.3s;
+}
+.swiper-slide-thumb-active .primary-badge {
+  opacity: 1;
+  transform: scale(1.1);
+}
 .film-frame {
   position: relative;
   border-radius: 4px;

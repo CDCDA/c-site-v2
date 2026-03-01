@@ -31,7 +31,7 @@ export const getCode = (params: any) =>
 export const register = (params: Object) =>
   request({
     url: '/auth/register',
-    method: 'get',
+    method: 'post',
     params
   });
 

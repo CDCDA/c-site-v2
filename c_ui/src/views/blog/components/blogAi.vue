@@ -12,7 +12,7 @@
       </div>
     </div>
     <div class="blog-ai-abstract" v-cLoading="loading">
-      <md-preview :editorId="'preview-only'" :modelValue="abstract" />
+      <el-input type="textarea" v-model="abstract" />
     </div>
   </div>
 </template>

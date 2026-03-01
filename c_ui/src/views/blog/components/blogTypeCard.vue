@@ -20,8 +20,6 @@ import { useI18n } from 'vue-i18n';
 const { t: $t } = useI18n();
 import { onMounted, ref } from 'vue';
 import { listTypesWithStats } from '@/api/type';
-import useUserStore from '@/store/modules/user';
-import { useLazyAppear } from '@/utils/lazy';
 import { useRouter } from 'vue-router';
 const typeList = ref([]) as any;
 const router = useRouter();
@@ -38,10 +36,6 @@ async function getTypeTree() {
 
 onMounted(() => {
   getTypeTree();
-  const element = document.querySelector('.blog-type-card') as any;
-  if (element) {
-    useLazyAppear(element) as any;
-  }
 });
 </script>
 <style lang="scss" scoped>

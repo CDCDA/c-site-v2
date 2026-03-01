@@ -49,7 +49,7 @@
         </div>
         <div class="register-btn">
           <el-button @click="handleRegister" :loading="loading" :disabled="loading">{{
-            $t('注册')
+            $t('暂不开放注册')
           }}</el-button>
         </div>
       </div>
@@ -132,20 +132,31 @@ const touristLoading = ref(false);
 // 游客登录
 async function handleTouristLogin() {
   touristLoading.value = true;
-  loginForm.value = {
+  let form = {
     userName: 'CCCC',
     password: '1'
   };
-  const { code } = (await login(loginForm.value)) as any;
+  const { code, data } = (await login(form)) as any;
   if (code === 200) {
     //缓存用户数据
-    const token = jwtDecode(Cookies.get('token')) as any;
-    console.log(token);
-    userStore.token = Cookies.get('token');
-    userStore.userId = token.aud;
-    userStore.userName = token.username;
-    userStore.permission = ['show'];
-    window.localStorage.setItem('userData', JSON.stringify(userStore));
+    const { token, user } = data;
+    const userData = {
+      token,
+      userId: user.userId,
+      userName: user.username,
+      email: user.email,
+      nickName: user.nickName,
+      avatar: user.avatar,
+      permission: ['add', 'delete', 'show', 'operate']
+    };
+    Object.assign(userStore, userData);
+    console.log('用户信息', userData);
+    try {
+      window.localStorage.setItem('userData', JSON.stringify(userData));
+    } catch (error) {
+      console.log(error);
+    }
+    console.log('跳转到首页');
     router.push('/');
   }
   touristLoading.value = false;
@@ -191,7 +202,8 @@ async function handleLogin() {
 
 //注册
 async function handleRegister() {
-  // ElNotification.warning($t('暂不开放注册'));
+  ElNotification.warning($t('暂不开放注册'));
+  return;
   if (!registerForm.value.nickName) {
     ElNotification.warning($t('请输入昵称'));
     return;
@@ -250,8 +262,8 @@ async function handleTouristLogIn() {
   }
 }
 onMounted(() => {
-  loginForm.value.userName = 'CCCC';
-  loginForm.value.password = '1';
+  // loginForm.value.userName = 'CCCC';
+  // loginForm.value.password = '1';
 });
 </script>
 <style lang="scss" scoped>

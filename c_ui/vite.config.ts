@@ -3,12 +3,89 @@ import vue from '@vitejs/plugin-vue';
 import path from 'path';
 import viteCompression from 'vite-plugin-compression';
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons';
-// import { visualizer } from 'rollup-plugin-visualizer';
+import { visualizer } from 'rollup-plugin-visualizer';
+import { ViteImageOptimizer } from 'vite-plugin-image-optimizer';
+import importToCDN from 'vite-plugin-cdn-import';
 
 export default defineConfig({
   base: './',
   plugins: [
     vue(),
+    importToCDN({
+      modules: [
+        // 1. 核心框架 (最优先)
+        {
+          name: 'vue',
+          var: 'Vue',
+          path: 'https://registry.npmmirror.com/vue/3.5.13/files/dist/vue.global.prod.js'
+        },
+        // vue-demi 是 pinia 和 @vueuse 的桥梁
+        {
+          name: 'vue-demi',
+          var: 'VueDemi',
+          path: 'https://registry.npmmirror.com/vue-demi/0.14.10/files/lib/index.iife.js'
+        },
+        {
+          name: 'vue-router',
+          var: 'VueRouter',
+          path: 'https://registry.npmmirror.com/vue-router/4.0.3/files/dist/vue-router.global.prod.js'
+        },
+        {
+          name: 'pinia',
+          var: 'Pinia',
+          path: 'https://registry.npmmirror.com/pinia/2.1.4/files/dist/pinia.iife.prod.js'
+        },
+
+        // 2. UI 库及样式
+        {
+          name: 'element-plus',
+          var: 'ElementPlus',
+          path: 'https://registry.npmmirror.com/element-plus/2.8.8/files/dist/index.full.js',
+          css: 'https://registry.npmmirror.com/element-plus/2.8.8/files/dist/index.css'
+        },
+
+        // 3. 巨无霸级三维与图表 (如果不走 CDN，这些会占 3MB 以上)
+        {
+          name: 'three',
+          var: 'THREE',
+          path: 'https://registry.npmmirror.com/three/0.126.1/files/build/three.min.js'
+        },
+        {
+          name: 'echarts',
+          var: 'echarts',
+          path: 'https://registry.npmmirror.com/echarts/5.4.1/files/dist/echarts.min.js'
+        },
+        // 注意：echarts-gl 比较特殊，如果 CDN 不好使，可以保留在本地，但 echarts 必须 CDN
+        {
+          name: 'echarts-gl',
+          var: 'echartsGL',
+          path: 'https://registry.npmmirror.com/echarts-gl/2.0.9/files/dist/echarts-gl.min.js'
+        },
+
+        // 4. 大型工具库
+        {
+          name: 'axios',
+          var: 'axios',
+          path: 'https://registry.npmmirror.com/axios/1.2.1/files/dist/axios.min.js'
+        },
+        {
+          name: 'lodash',
+          var: '_',
+          path: 'https://registry.npmmirror.com/lodash/4.17.21/files/lodash.min.js'
+        },
+        {
+          name: 'moment',
+          var: 'moment',
+          path: 'https://registry.npmmirror.com/moment/2.30.1/files/moment.js'
+        },
+        {
+          name: 'swiper',
+          var: 'Swiper',
+          path: 'https://registry.npmmirror.com/swiper/11.2.6/files/swiper-bundle.min.js',
+          css: 'https://registry.npmmirror.com/swiper/11.2.6/files/swiper-bundle.min.css'
+        }
+      ]
+    }),
     createSvgIconsPlugin({
       iconDirs: [
         path.resolve(process.cwd(), 'src/assets/svg'),
@@ -27,6 +104,11 @@ export default defineConfig({
       threshold: 10240,
       algorithm: 'gzip',
       ext: '.gz'
+    }),
+    ViteImageOptimizer({
+      png: { quality: 70 },
+      jpeg: { quality: 70 },
+      webp: { quality: 70 }
     })
     // visualizer({
     //   open: true,
@@ -55,11 +137,14 @@ export default defineConfig({
     include: ['@/../lib/vform/designer.umd.js', 'swiper'] //此处路径必须跟main.js中import路径完全一致！
   },
   build: {
-    outDir: 'c-site', // 指定打包目录为c-site
+    outDir: 'c-site',
+    reportCompressedSize: false, // 禁用，提高构建速度
+    sourcemap: false, // 生产环境关闭 sourcemap
     commonjsOptions: {
-      include: /node_modules|lib/ //这里记得把lib目录加进来，否则生产打包会报错！！
+      include: /node_modules|lib/
     },
     cssCodeSplit: true,
+    assetsInlineLimit: 4096, // 小于 4kb 的转 base64
     rollupOptions: {
       input: 'index.html',
       output: {
@@ -68,6 +153,13 @@ export default defineConfig({
         entryFileNames: 'static/js/[name]-[hash].js',
         assetFileNames: 'static/[ext]/[name]-[hash].[ext]'
         // manualChunks(id) {
+        //   if (id.includes('node_modules')) {
+        //     // 把所有 node_modules 打成一个 vendor.js
+        //     // 这样首屏只需要下载 index.js 和 vendor.js，对 1Mbps 带宽最友好
+        //     return 'vendor';
+        //   }
+        // }
+        // manualChunks(id) {
         //   // 处理第三方库
         //   if (id.includes('node_modules')) {
         //     return id.toString().split('node_modules/')[1].split('/')[0].toString();
@@ -75,14 +167,14 @@ export default defineConfig({
         // }
       }
     },
-    minify: 'terser'
-    // terserOptions: {
-    //   // 清除console和debugger
-    //   compress: {
-    //     drop_console: true,
-    //     drop_debugger: true
-    //   }
-    // }
+    minify: 'terser',
+    terserOptions: {
+      // 清除console和debugger
+      compress: {
+        drop_console: true,
+        drop_debugger: true
+      }
+    }
   },
   server: {
     port: 8000,

@@ -32,12 +32,12 @@
         </div>
         <div class="display-page">
           <div class="display-left">
-            <BlogUserCard />
-            <WeatherCard />
-            <VisitorCard />
-            <BlogTypeCard />
-            <BlogTagCard />
-            <BlogCountCard />
+            <BlogUserCard data-sal="zoom-in" />
+            <!-- <WeatherCard /> -->
+            <VisitorCard data-sal="zoom-in" />
+            <BlogTypeCard data-sal="zoom-in" />
+            <BlogTagCard data-sal="zoom-in" />
+            <BlogCountCard data-sal="zoom-in" />
           </div>
           <div class="display-right">
             <div v-for="typeBlog in typeBlogList">
@@ -53,6 +53,7 @@
                 <div
                   @click="toDetail(item)"
                   class="list-item"
+                  data-sal="zoom-in"
                   :class="`list-item-${item.blogId}`"
                   v-for="(item, i) in typeBlog.blogList"
                 >
@@ -90,16 +91,13 @@
 import { useI18n } from 'vue-i18n';
 const { t: $t } = useI18n();
 import { onMounted, defineAsyncComponent, ref, watch } from 'vue';
-import { pageBlogs, listBlogsByType } from '@/api/blog';
-import { ElMessage } from 'element-plus';
-import { listTypesWithStats } from '@/api/type';
-import useUserStore from '@/store/modules/user';
+import { listBlogsByType } from '@/api/blog';
+import sal from 'sal.js';
+
 import { useRouter } from 'vue-router';
 import { pageLogs } from '@/api/system/updateLog';
 import { autoClearTimer } from '@/utils/timer';
-import Pagination from '@/components/pagination/index.vue';
 import { verifyToken } from '@/api/system/auth';
-import { useLazyAppear } from '@/utils/lazy';
 import { loadingService } from '@/components/loading/loading.ts';
 const BlogUserCard = defineAsyncComponent(() => import('@/views/blog/components/blogUserCard.vue'));
 const WeatherCard = defineAsyncComponent(() => import('./components/weatherCard.vue'));
@@ -165,14 +163,7 @@ async function getTypeBlogList() {
   if (code === 200) {
     typeBlogList.value = data;
     autoClearTimer(() => {
-      for (const typeBlog of typeBlogList.value) {
-        typeBlog.blogList.forEach((item: any) => {
-          const element = document.querySelector(`.list-item-${item.blogId}`) as HTMLElement;
-          if (element) {
-            useLazyAppear(element);
-          }
-        });
-      }
+      sal().update();
     }, 500);
   }
 }

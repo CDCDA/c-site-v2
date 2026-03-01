@@ -79,9 +79,8 @@ import { updatePassword } from '@/api/system/user.ts';
 import useUserStore from '@/store/modules/user.ts';
 import { ElMessageBox, ElNotification } from 'element-plus';
 const userStore = useUserStore();
-import { loadingService } from '@/components/loading/loading.ts';
 const loading = ref(false);
-
+console.log(userStore);
 function change(params: string) {
   if (params === 'profile') {
     toProfile();
@@ -135,9 +134,7 @@ function handleEditPasswordSubmit() {
 }
 
 function toProfile() {
-  loadingService.show({ type: 'loading', text: '加载中...' });
   router.push({ path: '/personalInfo' });
-  loadingService.hide();
 }
 
 function handleLogout() {

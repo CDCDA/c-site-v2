@@ -6,7 +6,7 @@ import { defineStore } from 'pinia';
 import { ref } from 'vue';
 const useUserStore = defineStore('user', () => {
   const userName = ref('');
-  const avatar = ref('');
+  const avatar = ref('@/assets/images/avatar.gif');
   const userId = ref('');
   const token = ref('');
   const nickName = ref('');

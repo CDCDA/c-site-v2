@@ -27,7 +27,6 @@ import { onMounted, ref } from 'vue';
 import { pageTags } from '@/api/tag';
 import useUserStore from '@/store/modules/user';
 import { useRouter } from 'vue-router';
-import { useLazyAppear } from '@/utils/lazy';
 const router = useRouter();
 function toBlogTag(item: any) {
   router.push({ name: 'blogTagPage', query: { tagId: item.tagId } });
@@ -61,10 +60,7 @@ function generateRandomColor() {
 
 onMounted(() => {
   getList();
-  const element = document.querySelector('.blog-tag-card') as any;
-  if (element) {
-    useLazyAppear(element) as any;
-  }
+
 });
 </script>
 <style lang="scss" scoped>

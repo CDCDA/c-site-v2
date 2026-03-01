@@ -29,8 +29,7 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n';
 const { t: $t } = useI18n();
-import { onMounted, ref, reactive } from 'vue';
-import { useLazyAppear } from '@/utils/lazy';
+import { onMounted, reactive } from 'vue';
 import axios from 'axios';
 const visitorInfo = reactive({
   location: {
@@ -39,38 +38,65 @@ const visitorInfo = reactive({
   ip: ''
 }) as any;
 
+// 从 localStorage 读取缓存数据
+function getCachedData() {
+  const cached = localStorage.getItem('visitorInfo');
+  if (cached) {
+    try {
+      return JSON.parse(cached);
+    } catch (e) {
+      return null;
+    }
+  }
+  return null;
+}
+
+// 保存数据到 localStorage
+function setCachedData(data: any) {
+  localStorage.setItem('visitorInfo', JSON.stringify(data));
+}
+
 // 获取ip
 async function getIp() {
-  // axios
-  //   .get('https://api.ipify.org?format=json')
-  //   .then(response => {
-  //     visitorInfo.ip = response.data.ip; // 输出客户端IP地址
-  //     getLocationByIp();
-  //   })
-  //   .catch(error => {
-  //     console.log(error);
-  //   });
+  axios
+    .get('https://api.ipify.org?format=json')
+    .then(response => {
+      const currentIp = response.data.ip;
+      visitorInfo.ip = currentIp;
+
+      // 检查缓存
+      const cached = getCachedData();
+      if (cached && cached.ip === currentIp) {
+        // IP 未变化，使用缓存数据
+        visitorInfo.location = cached.location;
+      } else {
+        // IP 变化或没有缓存，重新获取地理位置
+        getLocationByIp(currentIp);
+      }
+    })
+    .catch(error => {
+      console.log(error);
+    });
 }
 
 // 获取地理位置
-async function getLocationByIp() {
-  const ip = visitorInfo.ip; // 替换为你要查询的IP地址
-
+async function getLocationByIp(ip: string) {
   axios
     .get(`http://ip-api.com/json/${ip}?lang=zh-CN`)
     .then(response => {
-      visitorInfo.location = response.data;
-      visitorInfo.location.distance = getDistance(
-        39.9042,
-        116.4074,
-        visitorInfo.location.lat,
-        visitorInfo.location.lon
-      );
-      // 在这里处理地理位置信息
+      const locationData = response.data;
+      locationData.distance = getDistance(39.9042, 116.4074, locationData.lat, locationData.lon);
+      visitorInfo.location = locationData;
+
+      // 缓存到 localStorage
+      setCachedData({
+        ip: ip,
+        location: locationData,
+        timestamp: Date.now()
+      });
     })
     .catch(error => {
       console.error(error);
-      // 处理错误
     });
 }
 
@@ -151,10 +177,6 @@ function range(value: any, percent: any) {
 
 onMounted(() => {
   getIp();
-  const element = document.querySelector('.visitor-card') as any;
-  if (element) {
-    useLazyAppear(element) as any;
-  }
 });
 </script>
 <style lang="scss" scoped>

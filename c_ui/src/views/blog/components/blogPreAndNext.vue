@@ -37,14 +37,13 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n';
 const { t: $t } = useI18n();
-import { onMounted, ref, watch } from 'vue';
+import { ref, watch } from 'vue';
 import { useRouter } from 'vue-router';
 import { getNeighborBlogs } from '@/api/blog';
 import { formatDate } from '@/utils/date.ts';
 import { autoClearTimer } from '@/utils/timer';
 const props = defineProps(['blogId']);
 const router = useRouter();
-const blogPreNext = ref(null) as any;
 const startImg = new URL('@/assets/images/snow-rail.jpg', import.meta.url).href;
 const endImg = new URL('@/assets/images/feitu-bridge.jpg', import.meta.url).href;
 const preBlogData = ref({}) as any;
@@ -80,10 +79,6 @@ watch(
     deep: true
   }
 );
-
-onMounted(() => {
-  // useLazyAppear(blogPreNext.value);
-});
 </script>
 <style lang="scss" scoped>
 @include theme() {

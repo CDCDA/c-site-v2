@@ -11,10 +11,13 @@
         loop
         muted
       ></video>
-      <span class="essay-header-center"
+      <!-- <span class="essay-header-center"
         >{{ $t('喝一壶清茶，写几行小篆，') }}<br />看一剪流云，梦一回江南。愿与草木，随遇而安</span
-      >
-      <span class="essay-header-bottom">{{ $t('闲情逸致') }}</span>
+      > -->
+      <span class="essay-header-center">{{ $t('随便写点') }}<br /></span>
+      <span class="essay-header-bottom">{{ $t('分享你的思考') }}</span>
+
+      <!-- <span class="essay-header-bottom">{{ $t('闲情逸致') }}</span> -->
       <!-- <div class="essay-header-add">新增+</div> -->
     </div>
     <!-- <div class="essay-center"> -->

@@ -11,8 +11,8 @@
       autoplay
       interval="5000"
     >
-      <el-carousel-item v-for="item in coverImages" class="drama-carousel-item">
-        <img class="carousel-item-img" :src="item" />
+      <el-carousel-item v-for="item in showDataList" class="drama-carousel-item">
+        <img class="carousel-item-img" :src="item.coverUrl" />
       </el-carousel-item>
     </el-carousel>
     <div class="divider animated-0s5 c-left">
@@ -85,8 +85,6 @@
 import { useI18n } from 'vue-i18n';
 const { t: $t } = useI18n();
 import { ref, onMounted } from 'vue';
-import ParallaxWheelSeeding from './components/parallaxWheelSeeding.vue';
-import { coverImages } from './dramaData.ts';
 import { pageDramas } from '@/api/dramaSeries.ts';
 
 const movies = ref([]) as any;
@@ -101,9 +99,13 @@ function getAnimateTime() {
   return `animated-${animateTimeList[Math.floor(Math.random() * 9) + 1]}`;
 }
 
+const showDataList = ref([]) as any;
+
 async function getList() {
   const { code, rows, total } = (await pageDramas({})) as any;
   if (code === 200) {
+    showDataList.value = rows.slice(0, 3);
+
     movies.value = rows.filter((e: any) => {
       return e.type == 0;
     });

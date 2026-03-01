@@ -39,7 +39,6 @@ const { t: $t } = useI18n();
 import { ref, onMounted } from 'vue';
 import useUserStore from '@/store/modules/user';
 import { getUserById } from '@/api/system/user';
-import { useLazyAppear } from '@/utils/lazy';
 const userStore = useUserStore();
 const userInfo = ref({}) as any;
 const blogUserCard = ref(null) as any;
@@ -70,7 +69,6 @@ function toQrCode() {
 
 onMounted(() => {
   getUserInfo(userStore.userId);
-  props.visibleLazy ? useLazyAppear(blogUserCard.value) : '';
 });
 </script>
 <style lang="scss" scoped>

@@ -27,7 +27,7 @@
         <BlogUserCard :visibleLazy="false" />
 
         <VisitorCard />
-        <div class="affix c-card">
+        <div class="affix c-card" data-sal="zoom-in">
           <div class="card-header">
             <el-icon><Memo /></el-icon><span class="tag-name">{{ $t('文章目录') }}</span>
           </div>
@@ -48,12 +48,13 @@ import { getBlogById } from '@/api/blog';
 import { MdPreview, MdCatalog } from 'md-editor-v3';
 import comment from '@/components/comment/index.vue';
 import 'md-editor-v3/lib/preview.css';
+import sal from 'sal.js';
+
 import blogAi from './components/blogAi.vue';
 import BlogUserCard from '@/views/blog/components/blogUserCard.vue';
 import VisitorCard from '@/views/home/components/visitorCard.vue';
 import blogPreAndNext from './components/blogPreAndNext.vue';
 import { autoClearTimer } from '@/utils/timer';
-import { useLazyAppear } from '@/utils/lazy';
 const preNextShow = ref(false);
 const router = useRouter();
 const footerData = ref({}) as any;
@@ -74,10 +75,7 @@ async function getBlog(id: any) {
 onMounted(() => {
   const { blogId } = router.currentRoute.value.query;
   getBlog(blogId);
-  const affixElement = document.querySelector('.affix') as any;
-  if (affixElement) {
-    useLazyAppear(affixElement);
-  }
+  sal().update();
   autoClearTimer(() => {
     preNextShow.value = true;
     scrollElement.value = document.querySelector('.el-main') as any;

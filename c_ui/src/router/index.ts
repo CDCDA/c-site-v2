@@ -1,5 +1,7 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router';
 import useThemeStore from '@/store/modules/theme.ts';
+import { loadingService } from '@/components/loading/loading.ts';
+import i18n from '@/locales/i18n';
 
 import { random } from 'lodash';
 import { autoClearTimer } from '@/utils/timer.ts';
@@ -547,9 +549,14 @@ const footerNotShowRoute = ['manage', 'statistics', 'personalInfo', 'blogEditor'
 //切换路由后回到顶部
 router.afterEach(() => {
   scrollToView();
+  loadingService.hide();
 });
 
 router.beforeEach(async (to: any) => {
+  if (to.path !== '/') {
+    loadingService.show({ type: 'loading', text: i18n.global.t('正在跳转...') });
+  }
+
   // 记录路由
   window.localStorage.setItem('lastRouter', JSON.stringify(to));
   // 随机壁纸

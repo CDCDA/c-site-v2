@@ -226,9 +226,9 @@ async function toRandom() {
 
 async function clickMenu(item: any) {
   pageName.value = item.label;
-  loadingService.show({ type: 'loading', text: $t('正在跳转...') });
+  // loadingService.show({ type: 'loading', text: $t('正在跳转...') });
   await router.push({ name: item.name });
-  loadingService.hide();
+  // loadingService.hide();
 }
 
 router.options.routes.forEach((route: any) => {

@@ -12,7 +12,6 @@ declare module 'js-cookie';
 declare module '@/utils/techStackData.js';
 declare module 'vue-mini-weather';
 declare module 'vuepress-plugin-sakura';
-declare module '@xunlei/vue-lazy-component';
 declare module '/weatherCard/script.js';
 declare module '/expression/data.js';
 declare module 'vue-virtual-scroller-classic';

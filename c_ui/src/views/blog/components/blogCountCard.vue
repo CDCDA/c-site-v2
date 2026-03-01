@@ -40,7 +40,6 @@ const { t: $t } = useI18n();
 import { onMounted, ref } from 'vue';
 import { countBlogsByDate, countBlogs } from '@/api/blog.ts';
 import useUserStore from '@/store/modules/user';
-import { useLazyAppear } from '@/utils/lazy';
 const total = ref(0) as any;
 const userStore = useUserStore();
 const countList = ref([]) as any;
@@ -70,10 +69,6 @@ async function getBlogDateRangeCount() {
 onMounted(() => {
   getBlogCount();
   getBlogDateRangeCount();
-  const element = document.querySelector('.blog-count-card') as any;
-  if (element) {
-    useLazyAppear(element) as any;
-  }
 });
 </script>
 <style lang="scss" scoped>

@@ -4,7 +4,7 @@
 import { createApp } from 'vue';
 import App from './App.vue';
 //粒子特效
-import Particles from 'particles.vue3';
+
 import ElementPlus from 'element-plus';
 import 'element-plus/dist/index.css';
 import image from './components/image/image.vue';
@@ -21,9 +21,18 @@ import { i18n } from '@/locales/i18n';
 import * as ElementPlusIconsVue from '@element-plus/icons-vue';
 import directives from '@/directives/index';
 import pinia from './store';
-import VueLazyComponent from '@xunlei/vue-lazy-component';
 import SvgIcon from './components/icon-component.vue';
 import 'virtual:svg-icons-register';
+import sal from 'sal.js';
+import 'sal.js/dist/sal.css';
+sal({
+  threshold: 0.1, // 触发阈值
+  once: true, // 是否只触发一次
+  rootMargin: '20px', // 预加载区域
+  // 其他配置
+  root: document.documentElement
+});
+
 import visibleLazy from '@/components/visibleLazy/visibleLazy.vue';
 /* vForm 表单构建器 */
 import VForm3 from '@/../lib/vform/designer.umd.js';
@@ -40,10 +49,9 @@ app.use(directives);
 app.use(i18n);
 app.use(pinia);
 app.use(ElementPlus, { zIndex: 3000 });
-app.use(Particles);
+
 app.use(router);
 app.use(VueGridLayout);
-app.use(VueLazyComponent);
 
 app.component('svg-icon', SvgIcon);
 app.component('visible-lazy', visibleLazy);

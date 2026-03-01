@@ -14,7 +14,7 @@
         <a href="#">{{ $t('忘记密码?') }}</a>
         <div>
           <button @click="logIn">{{ $t('登录') }}</button>
-          <button @click="register">{{ $t('注册') }}</button>
+          <button @click="register">{{ $t('暂不开放注册') }}</button>
         </div>
       </div>
     </div>

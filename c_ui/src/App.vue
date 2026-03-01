@@ -44,6 +44,7 @@ const { t: $t, locale } = useI18n();
 
 import { ref, onMounted, watch } from 'vue';
 import sakura from '@/components/sakura/index.vue';
+import Particles from 'vue3-particles';
 import rightClickMenu from '@/components/rightClickMenu/index.vue';
 import { useRouter } from 'vue-router';
 import useThemeStore from '@/store/modules/theme.ts';
@@ -270,6 +271,7 @@ onMounted(() => {
   --el-color-success: #63c339 !important;
   --el-color-primary-light-3: #4db6ac !important;
 }
+
 @font-face {
   font-family: 'DaoLiTi';
   src: url(/AlimamaDaoLoTi/AlimamaDaoLiTi.ttf);
@@ -288,7 +290,7 @@ onMounted(() => {
 }
 @font-face {
   font-family: 'Shark';
-  src: url(/font-family/Shark/shark.woff2);
+  src: url(/font-family/Shark/shark-subset.woff2);
 }
 #app-theme,
 #app {
