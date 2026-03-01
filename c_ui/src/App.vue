@@ -297,7 +297,18 @@ onMounted(() => {
   @include full();
 }
 #app-theme {
-  animation: blur-to-clear 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  /* 初始状态：向下偏移 20px，透明度 0 */
+  // opacity: 0.5;
+  transform: translateY(20px);
+  animation: settle-in 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+  will-change: transform, opacity;
+}
+
+@keyframes settle-in {
+  to {
+    // opacity: 1;
+    transform: translateY(0);
+  }
 }
 body,
 html {
