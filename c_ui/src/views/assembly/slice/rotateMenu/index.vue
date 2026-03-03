@@ -13,13 +13,8 @@
       </div>
       <p></p>
     </div>
-    <router-view-dialog
-      ref="routerDialog"
-      type="filter"
-      :modal="true"
-      :title="title"
-      @close="close"
-    ></router-view-dialog>
+    <router-view-dialog ref="routerDialog" type="filter" :modal="true" :title="title"
+      @close="close"></router-view-dialog>
   </div>
 </template>
 <script setup lang="ts">
@@ -154,29 +149,30 @@ onMounted(() => {
     perspective: 800px;
     margin: 0 auto;
     width: 100%;
-    height: 100%;
+    height: 100% !important;
     position: absolute;
     background: transparent;
   }
+
   #wrap {
-    width: 120px; /*133:200  4:6  */
+    width: 120px;
+    /*133:200  4:6  */
     height: 180px;
     margin: 0 auto;
     position: relative;
     /*搭建3D效果必须的两个属性：一个变换风格变3d，一个场景景深800px*/
     transform-style: preserve-3d;
     transform: rotateX(-10deg) rotateY(0deg) rotateZ(100px);
+    margin-top: 200px !important;
   }
 
   #wrap p {
     width: 1200px;
     height: 1200px;
-    background: -webkit-radial-gradient(
-      center center,
-      600px 600px,
-      rgba(244, 23, 234, 0.2),
-      rgba(0, 0, 0, 0)
-    );
+    background: -webkit-radial-gradient(center center,
+        600px 600px,
+        rgba(244, 23, 234, 0.2),
+        rgba(0, 0, 0, 0));
     border-radius: 100%;
     position: absolute;
     left: 50%;
@@ -185,6 +181,7 @@ onMounted(() => {
     margin-top: -600px;
     transform: rotateX(90deg);
   }
+
   #wrap .rotate-menu-item {
     width: 100%;
     height: 100%;
@@ -196,23 +193,24 @@ onMounted(() => {
     overflow: hidden;
     left: calc(50% - 60px);
     transform: rotateY(0deg) translateZ(0px);
-    /*倒影：朝向 偏移 遮盖*/ /*线性渐变(从哪里开始,开始时候的颜色,结束时候的颜色)*/
-    -webkit-box-reflect: below 5px -webkit-linear-gradient(top, rgba(0, 0, 0, 0) 40%, rgba(
-            0,
-            0,
-            0,
-            0.5
-          )
-          100%);
+    /*倒影：朝向 偏移 遮盖*/
+    /*线性渐变(从哪里开始,开始时候的颜色,结束时候的颜色)*/
+    -webkit-box-reflect: below 5px -webkit-linear-gradient(top, rgba(0, 0, 0, 0) 40%, rgba(0,
+          0,
+          0,
+          0.5) 100%);
+
     .rotate-img {
       width: 90px;
       height: 90px;
       backdrop-filter: blur(20px);
       padding: 30px 15px 0 15px;
+
       :deep(img) {
         filter: invert(100%);
       }
     }
+
     .rotate-menu-title {
       display: flex;
       align-items: center;

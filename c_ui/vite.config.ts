@@ -5,87 +5,78 @@ import viteCompression from 'vite-plugin-compression';
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons';
 import { visualizer } from 'rollup-plugin-visualizer';
 import { ViteImageOptimizer } from 'vite-plugin-image-optimizer';
-import importToCDN from 'vite-plugin-cdn-import';
+// import importToCDN from 'vite-plugin-cdn-import';
 
 export default defineConfig({
   base: './',
   plugins: [
     vue(),
-    importToCDN({
-      modules: [
-        // 1. 核心框架 (最优先)
-        {
-          name: 'vue',
-          var: 'Vue',
-          path: 'https://registry.npmmirror.com/vue/3.5.13/files/dist/vue.global.prod.js'
-        },
-        // vue-demi 是 pinia 和 @vueuse 的桥梁
-        {
-          name: 'vue-demi',
-          var: 'VueDemi',
-          path: 'https://registry.npmmirror.com/vue-demi/0.14.10/files/lib/index.iife.js'
-        },
-        {
-          name: 'vue-router',
-          var: 'VueRouter',
-          path: 'https://registry.npmmirror.com/vue-router/4.0.3/files/dist/vue-router.global.prod.js'
-        },
-        {
-          name: 'pinia',
-          var: 'Pinia',
-          path: 'https://registry.npmmirror.com/pinia/2.1.4/files/dist/pinia.iife.prod.js'
-        },
-
-        // 2. UI 库及样式
-        {
-          name: 'element-plus',
-          var: 'ElementPlus',
-          path: 'https://registry.npmmirror.com/element-plus/2.8.8/files/dist/index.full.js',
-          css: 'https://registry.npmmirror.com/element-plus/2.8.8/files/dist/index.css'
-        },
-
-        // 3. 巨无霸级三维与图表 (如果不走 CDN，这些会占 3MB 以上)
-        {
-          name: 'three',
-          var: 'THREE',
-          path: 'https://registry.npmmirror.com/three/0.126.1/files/build/three.min.js'
-        },
-        {
-          name: 'echarts',
-          var: 'echarts',
-          path: 'https://registry.npmmirror.com/echarts/5.4.1/files/dist/echarts.min.js'
-        },
-        // 注意：echarts-gl 比较特殊，如果 CDN 不好使，可以保留在本地，但 echarts 必须 CDN
-        {
-          name: 'echarts-gl',
-          var: 'echartsGL',
-          path: 'https://registry.npmmirror.com/echarts-gl/2.0.9/files/dist/echarts-gl.min.js'
-        },
-
-        // 4. 大型工具库
-        {
-          name: 'axios',
-          var: 'axios',
-          path: 'https://registry.npmmirror.com/axios/1.2.1/files/dist/axios.min.js'
-        },
-        {
-          name: 'lodash',
-          var: '_',
-          path: 'https://registry.npmmirror.com/lodash/4.17.21/files/lodash.min.js'
-        },
-        {
-          name: 'moment',
-          var: 'moment',
-          path: 'https://registry.npmmirror.com/moment/2.30.1/files/moment.js'
-        },
-        {
-          name: 'swiper',
-          var: 'Swiper',
-          path: 'https://registry.npmmirror.com/swiper/11.2.6/files/swiper-bundle.min.js',
-          css: 'https://registry.npmmirror.com/swiper/11.2.6/files/swiper-bundle.min.css'
-        }
-      ]
-    }),
+    // importToCDN({
+    //   modules: [
+    //     {
+    //       name: 'vue',
+    //       var: 'Vue',
+    //       path: 'https://registry.npmmirror.com/vue/3.5.13/files/dist/vue.global.prod.js'
+    //     },
+    //     {
+    //       name: 'vue-demi',
+    //       var: 'VueDemi',
+    //       path: 'https://registry.npmmirror.com/vue-demi/0.14.10/files/lib/index.iife.js'
+    //     },
+    //     {
+    //       name: 'vue-router',
+    //       var: 'VueRouter',
+    //       path: 'https://registry.npmmirror.com/vue-router/4.0.3/files/dist/vue-router.global.prod.js'
+    //     },
+    //     {
+    //       name: 'pinia',
+    //       var: 'Pinia',
+    //       path: 'https://registry.npmmirror.com/pinia/2.1.4/files/dist/pinia.iife.prod.js'
+    //     },
+    //     {
+    //       name: 'element-plus',
+    //       var: 'ElementPlus',
+    //       path: 'https://registry.npmmirror.com/element-plus/2.8.8/files/dist/index.full.js',
+    //       css: 'https://registry.npmmirror.com/element-plus/2.8.8/files/dist/index.css'
+    //     },
+    //     {
+    //       name: 'three',
+    //       var: 'THREE',
+    //       path: 'https://registry.npmmirror.com/three/0.126.1/files/build/three.min.js'
+    //     },
+    //     {
+    //       name: 'echarts',
+    //       var: 'echarts',
+    //       path: 'https://registry.npmmirror.com/echarts/5.4.1/files/dist/echarts.min.js'
+    //     },
+    //     {
+    //       name: 'echarts-gl',
+    //       var: 'echartsGL',
+    //       path: 'https://registry.npmmirror.com/echarts-gl/2.0.9/files/dist/echarts-gl.min.js'
+    //     },
+    //     {
+    //       name: 'axios',
+    //       var: 'axios',
+    //       path: 'https://registry.npmmirror.com/axios/1.2.1/files/dist/axios.min.js'
+    //     },
+    //     {
+    //       name: 'lodash',
+    //       var: '_',
+    //       path: 'https://registry.npmmirror.com/lodash/4.17.21/files/lodash.min.js'
+    //     },
+    //     {
+    //       name: 'moment',
+    //       var: 'moment',
+    //       path: 'https://registry.npmmirror.com/moment/2.30.1/files/moment.js'
+    //     },
+    //     {
+    //       name: 'swiper',
+    //       var: 'Swiper',
+    //       path: 'https://registry.npmmirror.com/swiper/11.2.6/files/swiper-bundle.min.js',
+    //       css: 'https://registry.npmmirror.com/swiper/11.2.6/files/swiper-bundle.min.css'
+    //     }
+    //   ]
+    // }),
     createSvgIconsPlugin({
       iconDirs: [
         path.resolve(process.cwd(), 'src/assets/svg'),
@@ -109,13 +100,13 @@ export default defineConfig({
       png: { quality: 70 },
       jpeg: { quality: 70 },
       webp: { quality: 70 }
+    }),
+    visualizer({
+      open: true,
+      gzipSize: true,
+      brotliSize: true,
+      filename: 'visualizer/stats.html'
     })
-    // visualizer({
-    //   open: true,
-    //   gzipSize: true,
-    //   brotliSize: true,
-    //   filename: 'visualizer/stats.html'
-    // })
   ],
   css: {
     preprocessorOptions: {

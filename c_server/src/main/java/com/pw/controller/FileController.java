@@ -5,6 +5,7 @@ import com.pw.common.controller.convertController;
 import com.pw.common.utils.Result;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -17,6 +18,7 @@ import java.util.UUID;
 import static com.pw.common.utils.ResultUtil.*;
 
 @RestController
+@Slf4j
 @Tag(name = "文件")
 @RequestMapping("/files")
 public class FileController extends BaseController implements convertController {
@@ -41,6 +43,7 @@ public class FileController extends BaseController implements convertController 
         }
 
         String filePath = dirPath + "/" + fileName;
+        log.info("上传文件：{}，路径：{}", fileName, filePath);
         file.transferTo(new File(filePath));
 
         InetAddress address = InetAddress.getLocalHost();

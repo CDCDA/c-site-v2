@@ -23,7 +23,7 @@ declare module 'element-plus/dist/locale/zh-tw.mjs';
 declare module 'element-plus/dist/locale/en.mjs';
 // declare module 'vite-plugin-require-transform';
 declare module 'md-editor-v3';
-
+declare module 'sal.js';
 declare module '*.vue' {
   import { ComponentOptions } from 'vue';
   const componentOptions: ComponentOptions;
