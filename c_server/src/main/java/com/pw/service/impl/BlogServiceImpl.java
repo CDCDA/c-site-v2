@@ -1,19 +1,30 @@
 package com.pw.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.pw.domain.Blog;
+import com.pw.domain.BlogTag;
+import com.pw.domain.BlogTagRealation;
 import com.pw.dto.BlogPageDTO;
 import com.pw.mapper.BlogMapper;
 import com.pw.service.BlogService;
+import com.pw.service.BlogTagRelationSerivce;
+import com.pw.service.BlogTagService;
 import com.pw.vo.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.pw.common.utils.SnowFlake;
+import org.apache.commons.lang3.ObjectUtils;
+
+import java.util.ArrayList;
 import java.util.List;
+
+import static org.apache.commons.lang3.ObjectUtils.isEmpty;
 
 /***
  * @author cyd
@@ -27,6 +38,12 @@ public class BlogServiceImpl extends ServiceImpl<BlogMapper, Blog> implements Bl
 
     @Autowired
     BlogMapper blogMapper;
+
+    @Autowired
+    private BlogTagService blogTagService;
+
+    @Autowired
+    private BlogTagRelationSerivce blogTagRelationSerivce;
 
     @Override
     @Transactional
@@ -97,5 +114,56 @@ public class BlogServiceImpl extends ServiceImpl<BlogMapper, Blog> implements Bl
     @Override
     public Long getNextBlog(Long blogId) {
         return blogMapper.getNextBlog(blogId);
+    }
+
+    @Override
+    @Transactional
+    public Long createBlog(Blog blog) {
+        blog.setBlogId(new SnowFlake(1, 0).nextId());
+        this.save(blog);
+
+        if (ObjectUtils.isNotEmpty(blog.getTags())) {
+            List<Long> tagIds = new ArrayList<>();
+            for (BlogTag blogTag : blog.getTags()) {
+                if (!isEmpty(blogTag.getTagId())) {
+                    tagIds.add(blogTag.getTagId());
+                } else {
+                    blogTag.setTagId(new SnowFlake(1, 0).nextId());
+                    blogTagService.save(blogTag);
+                    tagIds.add(blogTag.getTagId());
+                }
+            }
+            blogTagRelationSerivce.insertTags(tagIds, blog.getBlogId());
+        }
+
+        return blog.getBlogId();
+    }
+
+    @Override
+    @Transactional
+    public Long updateBlog(Blog blog) {
+        this.updateById(blog);
+
+        if (ObjectUtils.isNotEmpty(blog.getTags())) {
+            // 删除原有标签关联
+            QueryWrapper<BlogTagRealation> wrapper = new QueryWrapper<>();
+            wrapper.eq("blog_id", blog.getBlogId());
+            blogTagRelationSerivce.remove(wrapper);
+
+            // 重新插入标签关联
+            List<Long> tagIds = new ArrayList<>();
+            for (BlogTag blogTag : blog.getTags()) {
+                if (!isEmpty(blogTag.getTagId())) {
+                    tagIds.add(blogTag.getTagId());
+                } else {
+                    blogTag.setTagId(new SnowFlake(1, 0).nextId());
+                    blogTagService.save(blogTag);
+                    tagIds.add(blogTag.getTagId());
+                }
+            }
+            blogTagRelationSerivce.insertTags(tagIds, blog.getBlogId());
+        }
+
+        return blog.getBlogId();
     }
 }

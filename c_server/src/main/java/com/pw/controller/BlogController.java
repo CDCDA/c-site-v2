@@ -1,34 +1,27 @@
 package com.pw.controller;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.pw.common.utils.JwtTokenUtil;
 import com.pw.common.utils.Result;
-import com.pw.common.utils.SnowFlake;
 import com.pw.common.controller.BaseController;
 import com.pw.common.controller.convertController;
 import com.pw.domain.Blog;
-import com.pw.domain.BlogTag;
-import com.pw.domain.BlogTagRealation;
 import com.pw.dto.BlogPageDTO;
 import com.pw.service.BlogService;
-import com.pw.service.BlogTagRelationSerivce;
-import com.pw.service.BlogTagService;
 import com.pw.vo.BlogVO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import static com.pw.common.utils.ResultUtil.*;
 import static com.pw.common.utils.pageUtil.setPage;
-import static org.apache.commons.lang3.ObjectUtils.isEmpty;
 
 @RestController
 @Tag(name = "博客")
@@ -37,12 +30,6 @@ public class BlogController extends BaseController implements convertController 
 
     @Autowired
     private BlogService blogService;
-
-    @Autowired
-    private BlogTagService blogTagService;
-
-    @Autowired
-    private BlogTagRelationSerivce blogTagRelationSerivce;
 
     @GetMapping
     @Operation(summary = "查询博客列表")
@@ -113,54 +100,17 @@ public class BlogController extends BaseController implements convertController 
     @PostMapping
     @Operation(summary = "新增博客")
     public Result create(@RequestBody Blog blog) {
-        blog.setBlogId(new SnowFlake(1, 0).nextId());
         blog.setUserId(JwtTokenUtil.getLoginUser().getUserId());
-
-        blogService.save(blog);
-
-        if (ObjectUtils.isNotEmpty(blog.getTags())) {
-            List<Long> tagIds = new ArrayList<>();
-            for (BlogTag blogTag : blog.getTags()) {
-                if (!isEmpty(blogTag.getTagId())) {
-                    tagIds.add(blogTag.getTagId());
-                } else {
-                    blogTag.setTagId(new SnowFlake(1, 0).nextId());
-                    blogTagService.save(blogTag);
-                    tagIds.add(blogTag.getTagId());
-                }
-            }
-            blogTagRelationSerivce.insertTags(tagIds, blog.getBlogId());
-        }
-
-        return Result.ok().data(blog.getBlogId().toString());
+        Long blogId = blogService.createBlog(blog);
+        return Result.ok().data(blogId.toString());
     }
 
     @PutMapping("/{id}")
     @Operation(summary = "修改博客")
     public Result update(@PathVariable Long id, @RequestBody Blog blog) {
         blog.setBlogId(id);
-
-        blogService.updateById(blog);
-
-        if (ObjectUtils.isNotEmpty(blog.getTags())) {
-            QueryWrapper<BlogTagRealation> wrapper = new QueryWrapper<>();
-            wrapper.eq("blog_id", blog.getBlogId());
-            blogTagRelationSerivce.remove(wrapper);
-
-            List<Long> ids = new ArrayList();
-            for (BlogTag blogTag : blog.getTags()) {
-                if (!isEmpty(blogTag.getTagId())) {
-                    ids.add(blogTag.getTagId());
-                } else {
-                    blogTag.setTagId(new SnowFlake(1, 0).nextId());
-                    blogTagService.save(blogTag);
-                    ids.add(blogTag.getTagId());
-                }
-            }
-            blogTagRelationSerivce.insertTags(ids, blog.getBlogId());
-        }
-
-        return Result.ok().data(blog.getBlogId().toString());
+        Long blogId = blogService.updateBlog(blog);
+        return Result.ok().data(blogId.toString());
     }
 
     @DeleteMapping("/{id}")

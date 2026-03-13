@@ -40,4 +40,14 @@ public interface BlogService extends IService<Blog> {
 
     Long getNextBlog(Long blogId);
 
+    /**
+     * 新增博客（包含标签）
+     */
+    Long createBlog(Blog blog);
+
+    /**
+     * 修改博客（包含标签）
+     */
+    Long updateBlog(Blog blog);
+
 }

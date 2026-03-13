@@ -175,8 +175,8 @@ export default defineConfig({
     },
     proxy: {
       '/dev-api': {
-        target: 'http://localhost:7000',
-        // target: 'http://120.48.127.181:7000',
+        // target: 'http://localhost:7000',
+        target: 'http://120.48.127.181:7000',
         changeOrigin: true,
         rewrite: p => p.replace(/^\/dev-api/, '')
       },
