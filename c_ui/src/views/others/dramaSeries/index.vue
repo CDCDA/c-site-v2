@@ -3,14 +3,7 @@
 -->
 <template>
   <div class="page-main drama-main">
-    <el-carousel
-      trigger="click"
-      type="card"
-      class="drama-carousel animated bounceInDown"
-      loop
-      autoplay
-      interval="5000"
-    >
+    <el-carousel trigger="click" type="card" class="drama-carousel animated bounceInDown" loop autoplay interval="5000">
       <el-carousel-item v-for="item in showDataList" class="drama-carousel-item">
         <img class="carousel-item-img" :src="item.coverUrl" />
       </el-carousel-item>
@@ -23,15 +16,8 @@
         <c-image :src="item.coverUrl" />
         <div class="drama-info">
           <h3>{{ item.name }}</h3>
-          <el-rate
-            class="drama-rate"
-            v-model="item.rate"
-            disabled
-            show-score
-            allow-half
-            text-color="#ff9900"
-            :score-template="`${item.rate * 2}`"
-          />
+          <el-rate class="drama-rate" v-model="item.rate" disabled show-score allow-half text-color="#ff9900"
+            :score-template="`${item.rate * 2}`" />
           <span class="no-wrap drama-intro">{{ item.intro }}</span>
         </div>
       </div>
@@ -45,15 +31,8 @@
         <c-image :src="item.coverUrl" />
         <div class="drama-info">
           <h3>{{ item.name }}</h3>
-          <el-rate
-            class="drama-rate"
-            v-model="item.rate"
-            disabled
-            show-score
-            allow-half
-            text-color="#ff9900"
-            :score-template="`${item.rate * 2}`"
-          />
+          <el-rate class="drama-rate" v-model="item.rate" disabled show-score allow-half text-color="#ff9900"
+            :score-template="`${item.rate * 2}`" />
           <span class="drama-intro no-wrap">{{ item.intro }}</span>
         </div>
       </div>
@@ -66,15 +45,8 @@
         <c-image :src="item.coverUrl" />
         <div class="drama-info">
           <h3>{{ item.name }}</h3>
-          <el-rate
-            class="drama-rate"
-            v-model="item.rate"
-            disabled
-            show-score
-            allow-half
-            text-color="#ff9900"
-            :score-template="`${item.rate * 2}`"
-          />
+          <el-rate class="drama-rate" v-model="item.rate" disabled show-score allow-half text-color="#ff9900"
+            :score-template="`${item.rate * 2}`" />
           <span class="drama-intro no-wrap">{{ item.intro }}</span>
         </div>
       </div>
@@ -130,20 +102,24 @@ onMounted(() => {
     background: transparent !important;
     backdrop-filter: none !important;
   }
+
   .drama-carousel {
     margin-top: 10px;
     margin-bottom: 10px;
     width: 100%;
     height: 45vh !important;
+
     :deep(.el-carousel__container) {
       height: 100%;
     }
+
     .drama-carousel-item {
       height: calc(100%);
       box-shadow: get('box-shadow');
       // opacity: 0.9;
       border-radius: 8px;
     }
+
     .carousel-item-img {
       width: 100%;
       height: 100%;
@@ -153,6 +129,7 @@ onMounted(() => {
       border-radius: 8px;
     }
   }
+
   .drama-list {
     display: flex;
     justify-content: start;
@@ -160,6 +137,7 @@ onMounted(() => {
     flex-wrap: wrap;
     width: calc(100% + 25px);
   }
+
   .drama-item {
     box-shadow: get('box-shadow');
     background: get('back');
@@ -172,17 +150,20 @@ onMounted(() => {
     @include flex-column;
     justify-content: start;
     overflow: hidden;
+
     .c-image {
       width: 100%;
       border-radius: 8px;
       height: 100%;
     }
   }
+
   .c-image {
     :deep(img) {
       filter: brightness(90%);
     }
   }
+
   .drama-info {
     @include flex-column;
     justify-content: start;
@@ -195,31 +176,38 @@ onMounted(() => {
     background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(0, 0, 0, 0.5) 25%);
     height: 100%;
     color: white;
+
     h3 {
       margin: 30px 3px 10px 3px;
     }
+
     .drama-rate {
       margin-bottom: 10px;
       // width: calc(100% - 20px);
     }
+
     .drama-intro {
       text-align: left;
       margin-left: 3px;
     }
   }
+
   .drama-item:hover {
     .drama-info {
       bottom: 0%;
     }
+
     .drama-intro {
       -webkit-line-clamp: 20 !important;
     }
+
     // .item-cover {
     //   opacity: 1;
     //   top: 30%;
     //   filter: brightness(100%);
     // }
   }
+
   .divider {
     font-size: 1.2rem;
     font-weight: bold;
@@ -232,22 +220,25 @@ onMounted(() => {
     border-radius: 10px;
     @include flex;
     justify-content: start;
+
     .svg-icon {
       height: 30px;
       width: 30px;
       margin-right: 5px;
     }
+
     span {
       font-size: 0.9rem;
       font-weight: 300;
       margin-left: 10px;
     }
   }
+
   .item-cover {
     width: 100%;
     height: 70%;
     position: absolute;
-    top: 320px;
+    top: 18rem;
     transition: all 0.5s linear;
     opacity: 0;
     background: white;

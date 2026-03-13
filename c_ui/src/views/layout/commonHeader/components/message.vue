@@ -1,20 +1,10 @@
 <template>
-  <div class="message" style="height: 18px; display: flex">
-    <el-popover
-      placement="bottom"
-      append-to=".popper-base"
-      :width="330"
-      trigger="click"
-      @show="getData"
-    >
+  <div class="message">
+    <el-popover placement="bottom" append-to=".popper-base" :width="330" trigger="click" @show="getData">
       <template #reference>
         <ElBadge :value="msgCount" :hidden="msgCount === 0" class="item">
-          <i class="svg-icon-wrap" style="margin: 0px 1px">
-            <svg-icon
-              iconName="commonSvg-铃铛"
-              style="font-size: 1.2rem; margin: 0 6px 5px 6px; cursor: pointer"
-              class="header-icon bell"
-            />
+          <i class="svg-icon-wrap" style="margin-bottom: 12px">
+            <svg-icon iconName="commonSvg-铃铛" class="header-icon bell" />
           </i>
         </ElBadge>
       </template>
@@ -194,9 +184,11 @@ onMounted(() => {
 .svg-icon-wrap::before {
   top: -3px;
 }
+
 :deep(.el-badge__content.is-fixed) {
   right: 1rem;
 }
+
 .message-empty {
   display: flex;
   flex-direction: column;
@@ -229,6 +221,7 @@ onMounted(() => {
       overflow: hidden;
       padding: 2px 6px;
       flex-direction: column;
+
       .message-content-top {
         width: 100%;
         display: flex;
@@ -236,6 +229,7 @@ onMounted(() => {
         align-items: center;
         margin-bottom: 5px;
       }
+
       .message-content-bottom {
         width: 100%;
         display: flex;
@@ -253,11 +247,13 @@ onMounted(() => {
     font-size: 0.7rem !important;
     color: get('placeholder') !important;
   }
+
   .message-detail {
     flex: 1;
     font-size: 0.7rem;
     color: get('font-color');
   }
+
   .message-title {
     width: calc(100% - 6rem);
     font-weight: bold;
@@ -268,6 +264,7 @@ onMounted(() => {
     font-size: 0.7rem;
     width: 4.5rem;
   }
+
   .message-tools {
     display: flex;
     justify-content: end;

@@ -7060,7 +7060,7 @@ input[type='password']::-ms-reveal {
   scrollbar-width: thin;
 }
 .ds-setting-drawer {
-  right: 320px !important;
+  right: 18rem !important;
 }
 .primary-color[data-v-dc661e70] {
   color: #409eff;

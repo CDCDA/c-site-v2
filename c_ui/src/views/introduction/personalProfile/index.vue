@@ -4,10 +4,14 @@
 <template>
   <contact-dialog v-model="showContact" />
   <div class="person-fixed-button" @click="router.push({ name: 'projectExperience' })">
-    <el-icon><Right /></el-icon>{{ $t('查看项目') }}
+    <el-icon>
+      <Right />
+    </el-icon>{{ $t('查看项目') }}
   </div>
   <div class="person-fixed-button contact-button" @click="showContact = true">
-    <el-icon><Message /></el-icon>
+    <el-icon>
+      <Message />
+    </el-icon>
     <span>{{ $t('联系我') }}</span>
   </div>
   <a href="https://github.com/CDCDA" target="_blank" class="person-fixed-button github-button">
@@ -56,11 +60,8 @@
         <p class="character-comment">{{ $t('感觉不太准，但又有很多人喜欢玩这个') }}</p>
         <p class="character-associate">
           {{ $t('感兴趣的可以去玩玩')
-          }}<a
-            target="_blank"
-            href="https://www.16personalities.com/ch/%E4%BA%BA%E6%A0%BC%E6%B5%8B%E8%AF%95"
-            >{{ $t('性格测试') }}</a
-          >
+          }}<a target="_blank" href="https://www.16personalities.com/ch/%E4%BA%BA%E6%A0%BC%E6%B5%8B%E8%AF%95">{{
+            $t('性格测试') }}</a>
         </p>
       </div>
       <div class="ps-strong-point">
@@ -90,7 +91,7 @@ const showContact = ref(false);
   .person-fixed-button {
     position: fixed;
     top: 65px;
-    right: 28px;
+    right: 6%;
     z-index: 99;
     width: 6rem;
     height: 2rem;
@@ -106,6 +107,7 @@ const showContact = ref(false);
     justify-content: center;
     cursor: pointer;
     transition: all 0.3s ease;
+
     .el-icon {
       font-size: 18px;
       margin-right: 5px;
@@ -130,6 +132,7 @@ const showContact = ref(false);
   .contact-button {
     top: 115px;
   }
+
   .personal-profile-main {
     @include flex-column;
     justify-content: start;

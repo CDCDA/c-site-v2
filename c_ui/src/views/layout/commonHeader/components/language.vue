@@ -1,20 +1,12 @@
 <template>
-  <el-dropdown trigger="click" @command="changeLanguage" style="color: inherit !important">
-    <i class="svg-icon-wrap" style="margin: 0px 1px">
-      <svg-icon
-        iconName="commonSvg-语言切换"
-        style="font-size: 1.2rem; margin: 0 6px; cursor: pointer"
-        class="header-icon bell"
-      />
+  <el-dropdown trigger="click" @command="changeLanguage" style="height: 1.3rem;color: inherit !important">
+    <i class="svg-icon-wrap">
+      <svg-icon iconName="commonSvg-语言切换" class="header-icon search" @click="searchClick" />
     </i>
     <template #dropdown>
       <el-dropdown-menu>
-        <el-dropdown-item
-          v-for="item in languageList"
-          :key="item.value"
-          :command="item.value"
-          :disabled="language === item.value"
-        >
+        <el-dropdown-item v-for="item in languageList" :key="item.value" :command="item.value"
+          :disabled="language === item.value">
           {{ item.label }}
         </el-dropdown-item>
       </el-dropdown-menu>

@@ -9,7 +9,7 @@
     <span class="glossary">{{ $t('游戏爱好者') }}</span>
     <span class="glossary">{{ $t('AI好强') }}</span>
     <span class="glossary">{{ $t('日常找新歌') }}</span>
-    <el-avatar class="avatar" :src="'http://120.48.127.181/file/avatar/cat-star.jpg'"></el-avatar>
+    <el-avatar class="avatar" :src="'http://120.48.127.181/file/avatar/avatar.jpg'"></el-avatar>
   </div>
 </template>
 <script setup lang="ts">
@@ -26,23 +26,29 @@ const avatarUrl = computed(() => userStore.avatar);
     0% {
       transform: translateY(0);
     }
+
     25% {
       transform: translateY(-5px);
     }
+
     50% {
       transform: translateY(0);
     }
+
     75% {
       transform: translateY(5px);
     }
+
     100% {
       transform: translateY(0);
     }
   }
+
   .personal-info {
     // background: get('bk');
     width: 400px;
     position: relative;
+
     .glossary {
       padding: 3px 15px;
       border-radius: 12px;
@@ -52,31 +58,37 @@ const avatarUrl = computed(() => userStore.avatar);
       position: absolute;
       font-weight: bold;
     }
+
     .glossary:nth-child(1) {
       left: -23px;
       top: 15px;
       animation: up-down 2.6s infinite linear;
     }
+
     .glossary:nth-child(2) {
       left: -27px;
       top: 150px;
       animation: up-down 3.1s infinite linear;
     }
+
     .glossary:nth-child(3) {
       left: -67px;
       top: 89px;
       animation: up-down 2.8s infinite linear;
     }
+
     .glossary:nth-child(4) {
       right: -67px;
       top: 86px;
       animation: up-down 2.9s infinite linear;
     }
+
     .glossary:nth-child(5) {
       right: -20px;
       top: 11px;
       animation: up-down 3s infinite linear;
     }
+
     .glossary:nth-child(6) {
       right: -23px;
       top: 146px;

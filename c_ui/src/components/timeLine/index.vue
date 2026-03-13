@@ -63,6 +63,7 @@ const goalList = ref([
     color: get('font-color');
     position: relative;
     background: get('back');
+
     .timeline-main {
       height: auto;
       margin: 0;
@@ -73,6 +74,7 @@ const goalList = ref([
       width: 100%;
       top: 9%;
       background: transparent;
+
       &:before {
         content: '';
         position: absolute;
@@ -82,6 +84,7 @@ const goalList = ref([
         background: get('font-color');
         height: 120%;
       }
+
       .entries {
         width: calc(100% - 80px);
         max-width: 800px;
@@ -93,6 +96,7 @@ const goalList = ref([
         left: -3px;
         margin-top: 1000px;
         position: relative;
+
         .entry {
           width: calc(50% - 80px);
           float: left;
@@ -100,10 +104,12 @@ const goalList = ref([
           clear: both;
           text-align: right;
           position: relative;
+
           // margin-left: -5px;
           &:not(:first-child) {
             margin-top: -60px;
           }
+
           .body {
             transform: rotate(90deg);
             width: 260px;
@@ -116,10 +122,12 @@ const goalList = ref([
             text-align: left;
             padding: 0 10px;
           }
+
           .title {
             font-size: 32px;
-            margin-bottom: 320px;
+            margin-bottom: 18rem;
             position: relative;
+
             .title-text {
               transform: rotate(90deg);
               position: absolute;
@@ -127,6 +135,7 @@ const goalList = ref([
               top: -29px;
               width: 150px;
             }
+
             &:before {
               content: '';
               position: absolute;
@@ -145,21 +154,25 @@ const goalList = ref([
           &:nth-child(2n) {
             text-align: left;
             float: right;
+
             .title {
               &:before {
                 left: -63px;
               }
+
               .title-text {
                 left: -71px;
                 top: 0;
               }
             }
+
             .body {
               top: 211px;
               left: -85px;
             }
           }
         }
+
         .title:hover {
           &:before {
             transform: scale(1.5);
@@ -170,6 +183,7 @@ const goalList = ref([
       }
     }
   }
+
   .timeline::-webkit-scrollbar {
     width: 0;
   }

@@ -52,7 +52,7 @@
             </if>
         </where>
         <if test="pageNum != null and pageSize != null">
-            LIMIT #{pageSize} OFFSET #{pageSize} * (#{pageNum} - 1)
+            LIMIT #{pageSize} OFFSET ${(pageNum - 1) * pageSize}
         </if>
     </select>
 

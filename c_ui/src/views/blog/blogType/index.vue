@@ -62,6 +62,7 @@ onMounted(() => {
     box-shadow: get('box-shadow');
     border-radius: 8px;
     transform-style: preserve-3d;
+
     .type-list {
       width: calc(100% - 40px);
       padding: 20px 20px;
@@ -70,9 +71,10 @@ onMounted(() => {
       justify-content: center;
       margin: 55px;
     }
+
     .type-item {
-      width: 320px;
-      height: 320px;
+      width: 18rem;
+      height: 18rem;
       overflow: hidden;
       box-shadow: rgba(0, 0, 0, 0.66) 0 30px 60px 0, inset #333 0 0 0 5px,
         inset rgba(255, 255, 255, 0.4) 0 0 0 6px;
@@ -80,6 +82,7 @@ onMounted(() => {
       cursor: pointer;
       border-radius: 12px;
       position: relative;
+
       .el-image {
         filter: brightness(0.7);
         opacity: 0.9;
@@ -92,12 +95,14 @@ onMounted(() => {
         transition: 0.8s cubic-bezier(0.445, 0.05, 0.55, 0.95),
           opacity 4s 0.8s cubic-bezier(0.445, 0.05, 0.55, 0.95);
         pointer-events: none;
+
         :deep(.el-image__inner) {
           background-repeat: no-repeat;
           background-position: left 28%;
           object-fit: cover;
         }
       }
+
       .type-count {
         padding: 15px 18px;
         position: absolute;
@@ -108,12 +113,14 @@ onMounted(() => {
         font-weight: 700;
         text-shadow: rgba(0, 0, 0, 0.1) 0 10px 10px;
         transition: 0.6s 0.2s cubic-bezier(0.215, 0.61, 0.355, 1);
+
         span {
           margin-left: 5px;
           font-size: 0.9rem;
           font-weight: 700;
         }
       }
+
       .type-info {
         padding: 20px;
         position: absolute;
@@ -121,6 +128,7 @@ onMounted(() => {
         color: #fff;
         transform: translateY(42%);
         transition: 0.6s 0.2s cubic-bezier(0.215, 0.61, 0.355, 1);
+
         h1 {
           font-size: 1.7rem;
           font-weight: 700;
@@ -128,12 +136,14 @@ onMounted(() => {
           padding-left: 0;
           text-align: left;
         }
+
         p {
           text-align: left;
           text-shadow: black 0 0.2px 0.5px;
           transition: 0.6s 0.6s cubic-bezier(0.215, 0.61, 0.355, 1);
         }
       }
+
       .type-info:after {
         content: '';
         position: absolute;
@@ -149,17 +159,20 @@ onMounted(() => {
         transition: 5s 1s cubic-bezier(0.445, 0.05, 0.55, 0.95);
       }
     }
+
     .type-item:hover {
       .el-image {
         opacity: 1;
         filter: brightness(1);
         transition: 0.8s cubic-bezier(0.445, 0.05, 0.55, 0.95);
       }
+
       .type-info {
         // transition: 1s cubic-bezier(0.23, 1, 0.32, 1);
         opacity: 1;
         transform: translateY(16%);
       }
+
       .type-count {
         right: 0;
       }

@@ -4,7 +4,9 @@
 <template>
   <div class="common-link">
     <!-- 标题 -->
-    <el-icon class="header-name-icon"><Menu /></el-icon>
+    <el-icon class="header-name-icon">
+      <Menu />
+    </el-icon>
     <!-- 下拉菜单内容 -->
     <div class="link-content">
       <div class="link-title">{{ $t('常用网站') }}</div>
@@ -60,12 +62,14 @@ function clickLink(item: any) {
     position: relative;
     cursor: pointer;
     @include flex;
+
     .header-name-icon {
       margin-right: 10px;
       cursor: pointer;
       color: inherit;
       padding: 6px;
     }
+
     .header-name-icon:hover {
       margin-right: 10px;
       cursor: pointer;
@@ -73,6 +77,7 @@ function clickLink(item: any) {
       color: white;
       border-radius: 25px;
     }
+
     .link-content {
       position: absolute;
       visibility: hidden;
@@ -83,9 +88,10 @@ function clickLink(item: any) {
       z-index: 999;
       border-radius: 8px;
       overflow: hidden;
-      width: 320px;
+      width: 18rem;
       left: -30px;
       box-shadow: get('box-shadow');
+
       .link-title {
         font-size: 14px;
         height: 22px;
@@ -96,6 +102,7 @@ function clickLink(item: any) {
         font-weight: normal;
         color: get('font-color');
       }
+
       .link-list {
         @include flex;
         flex-wrap: wrap;
@@ -104,6 +111,7 @@ function clickLink(item: any) {
         width: 100%;
         backdrop-filter: blur(20px);
         padding: 5px 8px;
+
         .link-item {
           white-space: nowrap;
           @include flex;
@@ -114,19 +122,23 @@ function clickLink(item: any) {
           height: 40px;
           margin: 5px;
           border-radius: 5px;
+
           .link-icon {
             width: 30px;
             height: 30px;
             margin-right: 10px;
           }
+
           .link-text {
             font-size: 0.8rem;
             color: get('font-color');
           }
+
           &:hover {
             background: get('border-color');
             border-radius: 8px;
             box-shadow: get('box-shadow');
+
             .link-text {
               color: get('re-font-color');
             }

@@ -44,7 +44,7 @@
     <div class="header-right">
       <el-tooltip :content="$t('随机文章')" placement="top">
         <i class="svg-icon-wrap">
-          <svg-icon iconName="commonSvg-列车1" class="header-icon train" @click="toRandom" />
+          <svg-icon iconName="commonSvg-列车" class="header-icon train" @click="toRandom" />
         </i>
       </el-tooltip>
       <el-tooltip :content="$t('搜索')" placement="top">
