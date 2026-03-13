@@ -4,24 +4,15 @@
 <template>
   <div class="blog-type-page page-main c-left">
     <div class="type-list">
-      <div
-        class="type-item"
-        :class="item.isActive ? 'is-active' : ''"
-        v-for="item in typeList"
-        @click="getList(item)"
-      >
+      <div class="type-item" :class="item.isActive ? 'is-active' : ''" v-for="item in typeList" @click="getList(item)">
         <span class="type-item-content">{{ item.typeName }}</span>
         <span class="type-item-count">{{ item.total }}</span>
       </div>
     </div>
     <div class="c-divider"></div>
     <div class="blog-list-wrap">
-      <div
-        v-if="loading"
-        class="blog-list-loading"
-        v-cLoading="loading"
-        :class="loading ? 'blog-list-loading-active' : ''"
-      />
+      <div v-if="loading" class="blog-list-loading" v-cLoading="loading"
+        :class="loading ? 'blog-list-loading-active' : ''" />
       <div class="blog-list" :class="loading ? '' : ' slide-in'">
         <div class="blog-item" v-for="(item, i) in blogList" @click="toDetail(item)">
           <c-image class="blog-item-left-img" :src="item.coverUrl" />
@@ -34,7 +25,9 @@
               </div>
             </div>
             <div class="blog-time">
-              <el-icon><Calendar /></el-icon>{{ formatDate(new Date(item.createTime), 'YY-MM-dd') }}
+              <el-icon>
+                <Calendar />
+              </el-icon>{{ formatDate(new Date(item.createTime), 'YY-MM-dd') }}
             </div>
           </div>
           <span class="blog-sort-item-index">{{ i + 1 }}</span>
@@ -47,15 +40,8 @@
       </div>
     </div>
 
-    <Pagination
-      v-model:page="queryParams.pageNum"
-      v-model:page-size="queryParams.pageSize"
-      :total="total"
-      :on-page-change="getBlogList"
-      :showSizes="true"
-      :on-page-size-change="getBlogList"
-      class="pagi page-content"
-    />
+    <Pagination v-model:page="queryParams.pageNum" v-model:page-size="queryParams.pageSize" :total="total"
+      :on-page-change="getBlogList" :showSizes="true" :on-page-size-change="getBlogList" class="pagi page-content" />
   </div>
 </template>
 
@@ -150,10 +136,12 @@ onMounted(() => {
     0% {
       opacity: 0;
     }
+
     100% {
       opacity: 1;
     }
   }
+
   .blog-type-page.page-main {
     position: relative;
     transition: all 0.5s ease-in-out;
@@ -161,23 +149,28 @@ onMounted(() => {
     align-items: center;
     display: flex;
     flex-direction: column;
+
     .pagi {
       margin: 6px 7px 15px 7px;
       width: calc(100% - 66px) !important;
     }
+
     .page-right {
       width: 300px;
       margin-left: 20px;
     }
+
     .header {
       font-weight: bold;
     }
+
     .type-list {
       @include flex;
       justify-content: start;
       flex-wrap: wrap;
       width: calc(100% - 50px);
       margin: 25px 25px 0 25px;
+
       .type-item {
         @include flex;
         cursor: pointer;
@@ -189,14 +182,17 @@ onMounted(() => {
         font-size: 0.9rem;
         transition: all 0.3s ease;
         border: 3px solid get('page-border-color');
+
         .type-item-prefix {
           opacity: 0.8;
           font-weight: bold;
         }
+
         .type-item-content {
           margin-left: 2px;
           font-weight: bold;
         }
+
         .type-item-count {
           // background: get('placeholder');
           color: get('font-color');
@@ -211,9 +207,11 @@ onMounted(() => {
           transition: all 0.3s ease-in-out;
         }
       }
+
       .type-item:active {
         transform: translateY(2px);
       }
+
       .type-item:hover,
       .type-item.is-active {
         background: get('page-border-color');
@@ -226,11 +224,13 @@ onMounted(() => {
         }
       }
     }
+
     .blog-list-wrap {
       margin: 4px 25px 0 25px;
       min-height: calc(100vh - 260px);
       width: calc(100% - 50px);
       position: relative;
+
       .blog-list-loading {
         position: absolute !important;
         margin-top: 7px;
@@ -241,14 +241,17 @@ onMounted(() => {
         border-radius: 10px;
         overflow: hidden;
         min-height: calc(64vh - 10px);
+
         .loading-container {
           background: transparent !important;
         }
       }
+
       .blog-list-loading-active {
         z-index: 1;
       }
     }
+
     .blog-list {
       @include flex;
       flex-wrap: wrap;
@@ -272,6 +275,7 @@ onMounted(() => {
         justify-content: space-between;
         // box-shadow: get('box-shadow');
         border: 3px solid get('page-border-color');
+
         .blog-cursor-cover {
           position: absolute;
           //background: get('border-color');
@@ -287,6 +291,7 @@ onMounted(() => {
           justify-content: center;
           transition: all 0.4s ease-in-out;
         }
+
         .blog-item-left-img {
           object-fit: cover;
           background-position: left 28%;
@@ -296,12 +301,14 @@ onMounted(() => {
           border-radius: 8px;
           margin: 0.5rem;
         }
+
         .blog-item-right {
           @include flex-column;
           width: calc(100% - 13.5rem);
           padding: 0 4.5rem 0 1rem;
           align-items: start;
           text-align: left;
+
           .blog-title {
             font-size: 1rem;
             font-weight: bold;
@@ -309,9 +316,10 @@ onMounted(() => {
             margin: 5px 0;
             height: 1.2rem;
           }
+
           .tag-list {
             width: 100%;
-            height: 25px;
+            height: 30px;
             @include flex;
             margin: 5px 0 10px 0;
             flex-wrap: wrap;
@@ -319,23 +327,28 @@ onMounted(() => {
             text-overflow: ellipsis;
             overflow: hidden;
             white-space: nowrap;
+
             .tag-item {
               margin: 5px 10px 5px 0;
-              font-size: 1rem;
+              font-size: 0.9rem;
               @include flex;
             }
+
             .tag-item-pretend {
               opacity: 0.5;
               font-weight: bold;
               margin-right: 3px;
             }
+
             .tag-item-text {
               @include flex;
             }
           }
+
           .tag-list:hover {
             flex-wrap: wrap;
           }
+
           .blog-time {
             height: 1.5rem;
             display: block;
@@ -346,16 +359,19 @@ onMounted(() => {
             text-align: center;
             font-size: 0.9rem;
             @include flex;
+
             .el-icon {
               margin-right: 5px;
             }
           }
         }
       }
+
       .blog-item:hover {
         .blog-item-left-img {
           width: 0;
         }
+
         .blog-sort-item-index {
           right: calc(100% - 125px);
           z-index: 199;
@@ -364,6 +380,7 @@ onMounted(() => {
           justify-content: start;
           color: white;
         }
+
         // transform: scale(1.02);
         // box-shadow:00 7px 0 get('border-color');
         .blog-cursor-cover {
@@ -373,10 +390,11 @@ onMounted(() => {
       }
     }
   }
+
   .blog-sort-item-index {
     opacity: 0.5;
     position: absolute;
-    top: 13%;
+    top: -5px;
     right: 30px;
     font-style: italic;
     font-size: 68px;
@@ -385,7 +403,9 @@ onMounted(() => {
     justify-content: end;
     align-items: center;
     width: 100px;
+    height: 100%;
   }
+
   .c-divider {
     margin: 15px 32px 6px 32px;
     border-color: get('page-border-color') !important;

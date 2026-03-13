@@ -8,6 +8,12 @@ import { autoClearTimer } from '@/utils/timer.ts';
 
 const routes: Array<RouteRecordRaw> = [
   {
+    path: '/invitation',
+    name: 'invitation',
+    meta: { title: '邀请函', isHidden: true, cache: false },
+    component: () => import('/src/views/invitation/index.vue')
+  },
+  {
     path: '/login',
     name: 'login',
     meta: { title: '登录', isHidden: true, cache: false },
@@ -570,7 +576,7 @@ router.beforeEach(async (to: any) => {
       back.style.background = 'left/cover fixed no-repeat url(' + backUrl + ')';
     }
   }
-  if (to.path.includes('login') || to.path.includes('anage')) {
+  if (to.path.includes('login') || to.path.includes('anage') || to.path.includes('invitation')) {
     themeStore.isFooterShow = false;
     themeStore.isShow = false;
   } else {

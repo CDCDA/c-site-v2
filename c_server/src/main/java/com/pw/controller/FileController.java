@@ -12,7 +12,12 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.InetAddress;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.UUID;
 
 import static com.pw.common.utils.ResultUtil.*;
@@ -44,7 +49,10 @@ public class FileController extends BaseController implements convertController 
 
         String filePath = dirPath + "/" + fileName;
         log.info("上传文件：{}，路径：{}", fileName, filePath);
-        file.transferTo(new File(filePath));
+        Path dest = Paths.get(filePath);
+        try (InputStream in = file.getInputStream()) {
+            Files.copy(in, dest, StandardCopyOption.REPLACE_EXISTING);
+        }
 
         InetAddress address = InetAddress.getLocalHost();
         String host = address.getHostAddress();

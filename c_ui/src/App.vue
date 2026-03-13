@@ -11,21 +11,10 @@
       </el-header>
       <el-main id="main">
         <sakura :new-options="sakuraOptions" v-if="themeStore.options?.isSakura" />
-        <video
-          id="tsparticles"
-          class="tsparticles-video"
-          autoplay
-          loop
-          muted
-          :src="src"
-          v-if="themeStore.backType == 'video'"
-        />
+        <video id="tsparticles" class="tsparticles-video" autoplay loop muted :src="src"
+          v-if="themeStore.backType == 'video'" />
         <div id="tsparticles" class="particles" v-else />
-        <Particles
-          v-if="themeStore.options && themeStore.options.isParticles"
-          id="particles"
-          :options="options"
-        />
+        <Particles v-if="themeStore.options && themeStore.options.isParticles" id="particles" :options="options" />
         <div class="router-container">
           <router-view v-slot="{ Component }">
             <component :is="Component" />
@@ -253,10 +242,19 @@ function initUserData() {
   }
 }
 
+// 检测是否为移动设备或平板
+function isMobileOrTablet() {
+  return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+}
+
 onMounted(() => {
   initUserData();
   getLanguage();
-  if (!window.location.href.includes('anage')) {
+
+  // 检测设备类型，如果是移动设备或平板，跳转到邀请函页面
+  if (isMobileOrTablet()) {
+    router.push({ path: '/invitation' });
+  } else if (!window.location.href.includes('anage')) {
     init();
   }
 });
@@ -276,26 +274,32 @@ onMounted(() => {
   font-family: 'DaoLiTi';
   src: url(/AlimamaDaoLoTi/AlimamaDaoLiTi.ttf);
 }
+
 @font-face {
   font-family: 'FangDaKai';
   src: url(/font-family/AlimamaDongFangDaKai-Regular/AlimamaDongFangDaKai-Regular.ttf);
 }
+
 @font-face {
   font-family: 'DingDing';
   src: url(/font-family/iuMg2dm8ifws/2sjeZLl8aCWp.woff2);
 }
+
 @font-face {
   font-family: 'Uranus';
   src: url(/font-family/Uranus-Pixel-main/Uranus_Pixel_11Px.ttf);
 }
+
 @font-face {
   font-family: 'Shark';
   src: url(/font-family/Shark/shark-subset.woff2);
 }
+
 #app-theme,
 #app {
   @include full();
 }
+
 #app-theme {
   /* 初始状态：向下偏移 20px，透明度 0 */
   // opacity: 0.5;
@@ -310,6 +314,7 @@ onMounted(() => {
     transform: translateY(0);
   }
 }
+
 body,
 html {
   height: 100%;
@@ -318,16 +323,19 @@ html {
   padding: 0;
   overflow: hidden;
 }
+
 @keyframes blur-to-clear {
   0% {
     filter: blur(20px) brightness(0.4);
     transform: scale(1.5);
   }
+
   100% {
     filter: blur(0px) brightness(1);
     transform: scale(1);
   }
 }
+
 #tsparticles {
   height: 100%;
   width: 100%;
@@ -336,6 +344,7 @@ html {
   z-index: -1;
   left: 0;
 }
+
 .particles {
   position: fixed;
   top: 0;
@@ -343,15 +352,18 @@ html {
   @include full();
   z-index: -1;
 }
+
 #app {
   @include getValue() {
     @import '@/assets/styles/common.scss';
     @import '@/assets/styles/element-ui.scss';
   }
 }
+
 .router-container {
   min-height: 100vh;
 }
+
 .el-header {
   text-align: center;
   line-height: 56px;
@@ -369,11 +381,13 @@ html {
   overflow: auto;
   padding: 0 0 0 0 !important;
 }
+
 .container {
   height: 100%;
   background: transparent;
   overflow: auto;
 }
+
 :deep(.el-menu.el-menu--horizontal) {
   border-bottom: solid #e6e6e6;
 }
