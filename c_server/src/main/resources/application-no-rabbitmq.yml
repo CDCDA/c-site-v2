@@ -1,0 +1,43 @@
+server:
+  port: 7000
+
+spring:
+  application:
+    name: c-server
+  profiles:
+    active: no-rabbitmq
+  
+  # 不配置 RabbitMQ，使用空配置
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+    
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://120.48.127.181:3306/C_PW?useUnicode=true&characterEncoding=utf-8&useSSL=false
+    username: root
+    password: 123456
+  
+  data:
+    redis:
+      host: 120.48.127.181
+      port: 6379
+      password: 123456
+      database: 0
+      lettuce:
+        pool:
+          max-active: 20
+          max-idle: 10
+          min-idle: 0
+          max-wait: 2000ms
+      timeout: 2000ms
+
+logging:
+  level:
+    root: INFO
+    org.springframework.amqp: WARN  # 降低 AMQP 日志级别
+    com.pw: DEBUG
+
+# 其他配置保持不变...
