@@ -97,6 +97,7 @@ function logout() {
 
 onMounted(() => {});
 </script>
+
 <style lang="scss" scoped>
 .headerBar {
   height: 2.8rem;
@@ -129,12 +130,15 @@ onMounted(() => {});
   }
 }
 </style>
-<style lang="scss" scoped>
+<style lang="scss">
 @include theme() {
-  .headerBar {
+  .manage-wrap .headerBar {
     box-shadow: get('box-shadow');
-    :deep(.svg-icon-wrap:hover) {
-      color: get('re-font-color') !important;
+    .right-toolbar {
+      .header-icon:hover {
+        color: get('re-font-color') !important;
+        fill: get('re-font-color') !important;
+      }
     }
   }
 }

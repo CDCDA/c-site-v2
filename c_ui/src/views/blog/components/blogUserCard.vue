@@ -22,7 +22,7 @@
             class="footer-icon weixin"
             @click="toQrCode"
           ></svg-icon>
-          <svg-icon iconName="commonSvg-github" class="footer-icon github"></svg-icon>
+          <svg-icon iconName="techStackSvg-git" class="footer-icon github"></svg-icon>
         </div>
       </div>
     </div>
@@ -156,8 +156,8 @@ onMounted(() => {
         @include flex;
         margin-right: -10px;
         .footer-icon {
-          width: 40px;
-          height: 40px;
+          width: 1.8rem;
+          height: 1.8rem;
           margin: 10px;
           cursor: pointer;
         }

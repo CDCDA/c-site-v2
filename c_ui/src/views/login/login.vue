@@ -147,7 +147,7 @@ async function handleTouristLogin() {
       email: user.email,
       nickName: user.nickName,
       avatar: user.avatar,
-      permission: ['add', 'delete', 'show', 'operate']
+      permission: ['show']
     };
     Object.assign(userStore, userData);
     console.log('用户信息', userData);

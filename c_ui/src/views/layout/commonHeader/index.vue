@@ -44,12 +44,20 @@
     <div class="header-right">
       <el-tooltip :content="$t('随机文章')" placement="top">
         <i class="svg-icon-wrap">
-          <svg-icon iconName="commonSvg-列车" class="header-icon train" @click="toRandom" />
+          <svg-icon
+            iconName="commonSvg-列车"
+            class="header-icon header-btn train"
+            @click="toRandom"
+          />
         </i>
       </el-tooltip>
       <el-tooltip :content="$t('搜索')" placement="top">
         <i class="svg-icon-wrap">
-          <svg-icon iconName="commonSvg-搜索" class="header-icon search" @click="searchClick" />
+          <svg-icon
+            iconName="commonSvg-搜索"
+            class="header-icon header-btn search"
+            @click="searchClick"
+          />
         </i>
       </el-tooltip>
       <el-tooltip :content="$t('语言切换')" placement="top">
@@ -62,7 +70,7 @@
         <i class="svg-icon-wrap">
           <svg-icon
             iconName="commonSvg-控制台"
-            class="header-icon console"
+            class="header-icon header-btn console"
             v-permission="'show'"
             @click="toManage"
           />
@@ -262,6 +270,11 @@ onMounted(() => {
 });
 </script>
 <style lang="scss" scoped>
+.header-btn {
+  height: 1.2rem;
+  display: flex;
+  align-items: center;
+}
 .avatar {
   height: 2rem;
   width: 2rem;
@@ -743,13 +756,13 @@ onMounted(() => {
     .svg-icon {
       color: get('re-font-color');
     }
-    // .svg-icon-wrap:hover {
-    //   .header-icon.svg-icon {
-    //     :deep(.theme-icon) {
-    //       fill: white !important;
-    //     }
-    //   }
-    // }
+    .svg-icon-wrap:hover {
+      .header-icon.svg-icon {
+        :deep(.theme-icon) {
+          fill: white !important;
+        }
+      }
+    }
   }
 
   .setting {
@@ -768,6 +781,7 @@ onMounted(() => {
     }
     .setting-item:hover {
       box-shadow: get('box-shadow');
+
       border-radius: 5px;
     }
   }
