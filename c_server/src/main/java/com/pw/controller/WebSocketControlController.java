@@ -13,7 +13,7 @@ import java.util.Map;
 /**
  * WebSocket 控制总线控制器
  * 通过 REST API 发送消息到 RabbitMQ，再由 RabbitMQ 转发到 WebSocket
- * 
+ *
  * @author cyd
  * @create 2026/03/18
  */
@@ -34,10 +34,10 @@ public class WebSocketControlController {
     public Result broadcastMessage(
             @PathVariable String channel,
             @RequestBody Object data) {
-        
+
         log.info("📢 收到广播请求 - 频道：{}, 数据：{}", channel, data);
         webSocketControlService.sendBroadcastMessage(channel, data);
-        
+
         return Result.ok().data("消息已发送到频道：" + channel);
     }
 
@@ -49,10 +49,10 @@ public class WebSocketControlController {
     public Result sendUserMessage(
             @PathVariable Long userId,
             @RequestBody Object message) {
-        
+
         log.info("👤 收到用户消息请求 - 用户 ID: {}, 消息：{}", userId, message);
         webSocketControlService.sendUserMessage(userId, message);
-        
+
         return Result.ok().data("消息已发送给用户：" + userId);
     }
 
@@ -65,10 +65,10 @@ public class WebSocketControlController {
             @RequestParam String title,
             @RequestParam String content,
             @RequestParam(defaultValue = "primary") String status) {
-        
+
         log.info("🔔 收到系统通知请求 - 标题：{}, 内容：{}, 状态：{}", title, content, status);
         webSocketControlService.sendSystemNotice(title, content, status);
-        
+
         return Result.ok().data("系统通知已发送");
     }
 
@@ -80,7 +80,7 @@ public class WebSocketControlController {
     public Result sendDiskInfo(@RequestBody Map<String, Object> diskInfo) {
         log.info("💾 收到磁盘信息更新：{}", diskInfo);
         webSocketControlService.sendDiskInfo(diskInfo);
-        
+
         return Result.ok().data("磁盘信息已更新");
     }
 
@@ -91,23 +91,23 @@ public class WebSocketControlController {
     @Operation(summary = "发送待办事项通知")
     public Result sendTodoNotification(@RequestBody Map<String, Object> todoInfo) {
         log.info("📝 收到待办事项通知：{}", todoInfo);
-        webSocketControlService.sendTodoNotification(todoInfo);
-        
+        webSocketControlService.sendTodoNotification((Long) todoInfo.get("userId"), todoInfo);
+
         return Result.ok().data("待办事项通知已发送");
     }
 
     /**
      * 发送自定义控制消息
      */
-    @PostMapping("/custom")
-    @Operation(summary = "发送自定义控制消息")
-    public Result sendCustomMessage(
-            @RequestParam String type,
-            @RequestBody Map<String, Object> payload) {
-        
-        log.info("📨 收到自定义消息请求 - 类型：{}, 负载：{}", type, payload);
-        webSocketControlService.sendControlMessage(type, payload);
-        
-        return Result.ok().data("自定义消息已发送");
-    }
+//    @PostMapping("/custom")
+//    @Operation(summary = "发送自定义控制消息")
+//    public Result sendCustomMessage(
+//            @RequestParam String type,
+//            @RequestBody Map<String, Object> payload) {
+//
+//        log.info("📨 收到自定义消息请求 - 类型：{}, 负载：{}", type, payload);
+//        webSocketControlService.sendControlMessage(type, payload);
+//
+//        return Result.ok().data("自定义消息已发送");
+//    }
 }

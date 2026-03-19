@@ -8,6 +8,7 @@ import com.pw.service.impl.EmailService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -20,6 +21,7 @@ public class EmailController extends BaseController implements convertController
 
     @PostMapping
     @Operation(summary = "发送邮件")
+    @Async
     public Result send(@RequestBody EmailMessage emailMessage) {
         emailService.sendEmail(emailMessage);
         return Result.ok();

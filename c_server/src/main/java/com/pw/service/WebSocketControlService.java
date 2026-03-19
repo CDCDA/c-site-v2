@@ -28,7 +28,7 @@ public class WebSocketControlService {
     private ObjectMapper objectMapper;
 
     /**
-     * 发送广播消息到指定频道
+     * 发送广播消息（所有订阅广播频道的用户都会收到）
      * 
      * @param channel 目标频道
      * @param data 消息数据
@@ -40,11 +40,13 @@ public class WebSocketControlService {
         message.put("data", data);
         message.put("timestamp", System.currentTimeMillis());
 
-        sendMessageToRabbitMQ(message);
+        // 发送到广播交换机
+        sendMessageToRabbitMQ(message, RabbitMQConfig.WEBSOCKET_BROADCAST_EXCHANGE, 
+                             RabbitMQConfig.WEBSOCKET_BROADCAST_ROUTING_KEY);
     }
 
     /**
-     * 发送消息给特定用户
+     * 发送消息给特定用户（通过用户独立队列）
      * 
      * @param userId 用户 ID
      * @param messageData 消息内容
@@ -56,11 +58,13 @@ public class WebSocketControlService {
         message.put("message", messageData);
         message.put("timestamp", System.currentTimeMillis());
 
-        sendMessageToRabbitMQ(message);
+        // 发送到用户队列
+        String userRoutingKey = RabbitMQConfig.getUserRoutingKey(userId);
+        sendMessageToRabbitMQ(message, RabbitMQConfig.WEBSOCKET_CONTROL_EXCHANGE, userRoutingKey);
     }
 
     /**
-     * 发送系统通知
+     * 发送系统通知（广播到系统通知频道）
      * 
      * @param title 通知标题
      * @param content 通知内容
@@ -74,11 +78,13 @@ public class WebSocketControlService {
         message.put("status", status);
         message.put("timestamp", System.currentTimeMillis());
 
-        sendMessageToRabbitMQ(message);
+        // 发送到广播交换机 - 系统通知频道
+        sendMessageToRabbitMQ(message, RabbitMQConfig.WEBSOCKET_BROADCAST_EXCHANGE,
+                             "broadcast.system_notice");
     }
 
     /**
-     * 发送磁盘信息更新
+     * 发送磁盘信息更新（广播）
      * 
      * @param diskInfo 磁盘信息数据
      */
@@ -88,21 +94,27 @@ public class WebSocketControlService {
         message.put("data", diskInfo);
         message.put("timestamp", System.currentTimeMillis());
 
-        sendMessageToRabbitMQ(message);
+        // 发送到广播交换机 - 磁盘信息频道
+        sendMessageToRabbitMQ(message, RabbitMQConfig.WEBSOCKET_BROADCAST_EXCHANGE,
+                             "broadcast.disk_info");
     }
 
     /**
-     * 发送待办事项通知
+     * 发送待办事项通知（发送给特定用户）
      * 
+     * @param userId 用户 ID
      * @param todoInfo 待办事项数据
      */
-    public void sendTodoNotification(Object todoInfo) {
+    public void sendTodoNotification(Long userId, Object todoInfo) {
         Map<String, Object> message = new HashMap<>();
         message.put("type", "todo_notification");
+        message.put("userId", userId);
         message.put("data", todoInfo);
         message.put("timestamp", System.currentTimeMillis());
 
-        sendMessageToRabbitMQ(message);
+        // 发送到用户队列
+        String userRoutingKey = RabbitMQConfig.getUserRoutingKey(userId);
+        sendMessageToRabbitMQ(message, RabbitMQConfig.WEBSOCKET_CONTROL_EXCHANGE, userRoutingKey);
     }
 
     /**
@@ -110,29 +122,41 @@ public class WebSocketControlService {
      * 
      * @param type 消息类型
      * @param payload 消息负载
+     * @param targetUserId 目标用户 ID（null 表示广播）
      */
-    public void sendControlMessage(String type, Map<String, Object> payload) {
+    public void sendControlMessage(String type, Map<String, Object> payload, Long targetUserId) {
         Map<String, Object> message = new HashMap<>(payload);
         message.put("type", type);
         message.put("timestamp", System.currentTimeMillis());
 
-        sendMessageToRabbitMQ(message);
+        if (targetUserId != null) {
+            // 发送给特定用户
+            String userRoutingKey = RabbitMQConfig.getUserRoutingKey(targetUserId);
+            sendMessageToRabbitMQ(message, RabbitMQConfig.WEBSOCKET_CONTROL_EXCHANGE, userRoutingKey);
+        } else {
+            // 广播
+            sendMessageToRabbitMQ(message, RabbitMQConfig.WEBSOCKET_BROADCAST_EXCHANGE,
+                                 RabbitMQConfig.WEBSOCKET_BROADCAST_ROUTING_KEY);
+        }
     }
 
     /**
      * 发送消息到 RabbitMQ
      */
     private void sendMessageToRabbitMQ(Map<String, Object> message) {
+        sendMessageToRabbitMQ(message, RabbitMQConfig.WEBSOCKET_CONTROL_EXCHANGE,
+                             RabbitMQConfig.WEBSOCKET_CONTROL_ROUTING_KEY);
+    }
+
+    /**
+     * 发送消息到指定的 RabbitMQ 交换机和路由键
+     */
+    private void sendMessageToRabbitMQ(Map<String, Object> message, String exchange, String routingKey) {
         try {
-            String routingKey = RabbitMQConfig.WEBSOCKET_CONTROL_ROUTING_KEY;
+            log.info("📤 发送控制消息到 RabbitMQ - 交换机：{}, 路由键：{}, 类型：{}", 
+                    exchange, routingKey, message.get("type"));
             
-            log.info("📤 发送控制消息到 RabbitMQ: {}", message.get("type"));
-            
-            rabbitTemplate.convertAndSend(
-                RabbitMQConfig.WEBSOCKET_CONTROL_EXCHANGE,
-                routingKey,
-                message
-            );
+            rabbitTemplate.convertAndSend(exchange, routingKey, message);
             
             log.info("✅ 控制消息发送成功");
             

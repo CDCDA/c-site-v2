@@ -345,7 +345,7 @@ export default [
       new URL('@/assets/projectImage/labelCloud/img1.png', import.meta.url).href,
       new URL('@/assets/projectImage/labelCloud/img2.png', import.meta.url).href
     ],
-    title: i18n.global.t('工业云标签打印系统'),
+    title: i18n.global.t('SCM云标签打印系统'),
     intro: i18n.global.t(
       '针对多租户场景设计的云端标签设计与打印中台。支持租户数据库独立部署，提供可视化标签模板编辑器，能够与 MES 系统无缝对接，实现大规模并发下的流水号精准生成。'
     ),

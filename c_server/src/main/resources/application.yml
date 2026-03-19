@@ -8,7 +8,7 @@ spring:
   application:
     name: c-server
   profiles:
-    active: dev
+    active: dev  # 可选：dev, prod, no-rabbitmq
   servlet:
     multipart:
       max-file-size: 10MB       # 单个文件最大10MB
@@ -40,7 +40,7 @@ spring:
       url: jdbc:mysql://120.48.127.181:3306/C_PW?useUnicode=true&characterEncoding=utf-8&useSSL=false
       username: root
       password: 123456
-  # 邮箱 SMTP 配置 (移到与data同级)
+  # 邮箱 SMTP 配置 (移到与 data 同级)
   mail:
     host: smtp.qq.com
     port: 587
@@ -54,6 +54,40 @@ spring:
           starttls:
             enable: true
             required: true
+
+  # RabbitMQ 配置
+  rabbitmq:
+    host: 120.48.127.181
+    port: 5672
+    username: admin
+    password: 123456
+    virtual-host: /
+    
+    # 连接超时配置
+    connection-timeout: 60000  # 连接超时 60 秒
+    requested-heartbeat: 60    # 心跳间隔 60 秒
+    
+    # 连接池配置（修复：使用正确的配置格式）
+    cache:
+      connection:
+        mode: channel   # 通道缓存模式（默认）
+      channel:
+        size: 25        # 通道缓存大小
+        checkout-timeout: 30000  # 获取通道超时时间
+    
+    # 监听器配置
+    listener:
+      simple:
+        acknowledge-mode: manual  # 手动 ACK
+        prefetch: 10              # 预取消息数量
+        concurrency: 3            # 初始并发消费者
+        max-concurrency: 10       # 最大并发消费者
+        retry:
+          enabled: true           # 启用重试
+          initial-interval: 1000  # 初始重试间隔 1 秒
+          max-attempts: 3         # 最大重试次数
+          max-interval: 10000     # 最大重试间隔 10 秒
+          multiplier: 2.0         # 重试间隔倍数
 
 jwt:
   secret: mySecretKeymySecretKeymySecretKeymySecretKeymySecretKeymySecretKey

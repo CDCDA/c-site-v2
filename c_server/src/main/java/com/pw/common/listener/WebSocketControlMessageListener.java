@@ -15,7 +15,7 @@ import java.util.Map;
 /**
  * WebSocket 控制总线消息监听器
  * 处理来自 RabbitMQ 的控制消息并转发到 WebSocket
- * 
+ *
  * @author cyd
  * @create 2026/03/18
  */
@@ -32,14 +32,14 @@ public class WebSocketControlMessageListener implements ChannelAwareMessageListe
     public void onMessage(Message message, com.rabbitmq.client.Channel channel) throws Exception {
         try {
             String messageBody = new String(message.getBody(), "UTF-8");
-            log.info("📨 收到 RabbitMQ 控制消息：{}", messageBody);
+            log.info("收到 RabbitMQ 控制消息：{}", messageBody);
 
             // 解析消息内容
             JsonNode jsonNode = objectMapper.readTree(messageBody);
 
             // 提取消息类型和目标频道
             String type = jsonNode.has("type") ? jsonNode.get("type").asText() : "unknown";
-            
+
             // 根据消息类型处理
             switch (type) {
                 case "broadcast":
@@ -47,34 +47,34 @@ public class WebSocketControlMessageListener implements ChannelAwareMessageListe
                     String targetChannel = jsonNode.has("channel") ? jsonNode.get("channel").asText() : "";
                     handleBroadcastMessage(jsonNode, targetChannel);
                     break;
-                    
+
                 case "user_message":
                     // 发送给特定用户
                     handleUserMessage(jsonNode);
                     break;
-                    
+
                 case "system_notice":
                     // 系统通知（广播到系统通知频道）
                     handleSystemNotice(jsonNode);
                     break;
-                    
+
                 case "disk_info":
                     // 磁盘信息更新
                     handleDiskInfo(jsonNode);
                     break;
-                    
+
                 case "todo_notification":
                     // 待办事项通知
                     handleTodoNotification(jsonNode);
                     break;
-                    
+
                 default:
                     log.warn("⚠️ 未知的消息类型：{}", type);
             }
 
             // 手动 ACK 确认消息已处理
             channel.basicAck(message.getMessageProperties().getDeliveryTag(), false);
-            
+
         } catch (Exception e) {
             log.error("❌ 处理 RabbitMQ 控制消息失败", e);
             // 处理失败，拒绝消息并重新入队
@@ -96,7 +96,7 @@ public class WebSocketControlMessageListener implements ChannelAwareMessageListe
         }
 
         Object data = jsonNode.has("data") ? convertJsonNodeToObject(jsonNode.get("data")) : null;
-        
+
         log.info("📢 向频道 {} 广播消息", channel);
         customWebSocketHandler.sendMessageToChannel(channel, data);
     }
@@ -112,7 +112,7 @@ public class WebSocketControlMessageListener implements ChannelAwareMessageListe
         }
 
         Object message = jsonNode.has("message") ? convertJsonNodeToObject(jsonNode.get("message")) : null;
-        
+
         log.info("👤 向用户 {} 发送消息", userId);
         customWebSocketHandler.sendMessageToUser(userId, message);
     }
