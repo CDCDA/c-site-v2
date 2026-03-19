@@ -140,7 +140,7 @@ onMounted(() => {
       font-weight: bold;
       height: 32px;
       line-height: 32px;
-      width: 40px;
+      width: 2rem;
       // height: 25px;
       display: flex;
       justify-content: center;
@@ -151,7 +151,7 @@ onMounted(() => {
     .blog-info-title {
       font-size: 45px;
       font-weight: bold;
-      margin: 40px 0 20px 0;
+      margin: 2rem 0 20px 0;
       text-align: left;
     }
   }
@@ -302,8 +302,8 @@ onMounted(() => {
 /*Shrinking for mobile*/
 @media (max-width: 768px) {
   .waves {
-    height: 40px;
-    min-height: 40px;
+    height: 2rem;
+    min-height: 2rem;
   }
   .content {
     height: 30vh;

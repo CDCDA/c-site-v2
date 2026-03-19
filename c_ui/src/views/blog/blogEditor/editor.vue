@@ -86,8 +86,12 @@
       </el-form-item>
     </el-form>
     <div class="blog-editor-header">
-      <el-button type="success" @click="blogSave" class="bt-save">{{ $t('保存') }}</el-button>
-      <el-button type="primary" @click="submit" class="bt-release">{{ $t('发布') }}</el-button>
+      <el-button type="success" @click="blogSave" v-permission="['operate']" class="bt-save">{{
+        $t('保存')
+      }}</el-button>
+      <el-button type="primary" @click="submit" v-permission="['operate']" class="bt-release">{{
+        $t('发布')
+      }}</el-button>
     </div>
   </div>
   <c-dialog

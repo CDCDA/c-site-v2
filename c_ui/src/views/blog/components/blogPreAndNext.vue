@@ -84,7 +84,7 @@ watch(
 @include theme() {
   .blog-pre-next {
     box-shadow: get('box-shadow');
-    width: calc(100% - 40px);
+    width: calc(100% - 2rem);
     border-radius: 8px;
     height: 130px;
     margin: 10px 20px 20px 20px;

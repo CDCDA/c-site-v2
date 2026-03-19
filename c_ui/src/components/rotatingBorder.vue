@@ -55,7 +55,7 @@ const { t: $t } = useI18n();
   height: 400px;
   overflow: hidden;
   position: relative;
-  box-shadow: 0 10px 40px -10px rgba(0, 64, 128, 0.2);
+  box-shadow: 0 10px 2rem -10px rgba(0, 64, 128, 0.2);
   border-radius: 8px;
   background: white;
 }

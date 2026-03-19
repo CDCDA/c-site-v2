@@ -313,7 +313,7 @@ onMounted(() => {
 }
 
 #app-theme {
-  /* 初始状态：向下偏移 20px，透明度 0 */
+  /* 初始状态：向下偏移 1rem，透明度 0 */
   // opacity: 0.5;
   transform: translateY(20px);
   animation: settle-in 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;

@@ -4,7 +4,7 @@
     <el-form
       :model="form"
       label-width="55"
-      style="height: calc(100% - 40px); overflow: auto"
+      style="height: calc(100% - 2rem); overflow: auto"
       ref="formRef"
       :rules="rules"
     >

@@ -4,7 +4,11 @@
 <template>
   <div class="page-main game-main">
     <div class="game-top">
-      <div class="game-top-item bounceInDown" :class="getAnimateTime()" v-for="item in gameShowData">
+      <div
+        class="game-top-item bounceInDown"
+        :class="getAnimateTime()"
+        v-for="item in gameShowData"
+      >
         <img :src="item.coverUrl" />
       </div>
     </div>
@@ -14,7 +18,11 @@
         }}<span> {{ $t('我不知道我是谁，不知道我在哪，我只知道我要大开杀戒了') }}</span>
       </div>
       <div class="game-list">
-        <virtual-scroller :items="singlePlayerGames" :item-height="getItemHeight" content-tag="table">
+        <virtual-scroller
+          :items="singlePlayerGames"
+          :item-height="getItemHeight"
+          content-tag="table"
+        >
           <template #default="{ item }">
             <div class="game-list">
               <div class="game-item bounceInUp" @click="toOfficial(item)" v-for="game in item">
@@ -22,8 +30,15 @@
                 <div class="game-info">
                   <div class="game-info-header">
                     <h3 class="no-wrap">{{ game.name }}</h3>
-                    <el-rate v-model="game.rate" disabled show-score allow-half text-color="#ff9900" size="large"
-                      :score-template="`${game.rate * 2}`" />
+                    <el-rate
+                      v-model="game.rate"
+                      disabled
+                      show-score
+                      allow-half
+                      text-color="#ff9900"
+                      size="large"
+                      :score-template="`${game.rate * 2}`"
+                    />
                   </div>
                   <span class="no-wrap">{{ game.intro }}</span>
                 </div>
@@ -42,8 +57,14 @@
           <div class="game-info">
             <div class="game-info-header">
               <h3 class="no-wrap">{{ item.name }}</h3>
-              <el-rate v-model="item.rate" disabled show-score allow-half text-color="#ff9900"
-                :score-template="`${item.rate * 2}`" />
+              <el-rate
+                v-model="item.rate"
+                disabled
+                show-score
+                allow-half
+                text-color="#ff9900"
+                :score-template="`${item.rate * 2}`"
+              />
             </div>
             <span class="no-wrap">{{ item.intro }}</span>
           </div>
@@ -180,7 +201,7 @@ function toOfficial(item: any) {
       font-size: 1.2rem;
       color: get('font-color');
       font-weight: bold;
-      width: calc(100% - 40px);
+      width: calc(100% - 2rem);
       text-align: left;
       margin: 15px 0;
       background: get('back');
@@ -405,7 +426,6 @@ function toOfficial(item: any) {
       font-size: 0.9rem;
       width: calc(100% - 100px);
     }
-
   }
 }
 </style>

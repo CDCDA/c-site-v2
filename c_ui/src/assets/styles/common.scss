@@ -16,13 +16,13 @@ input {
 
 // 卡片外圈样式
 .c-card {
-  width: calc(100% - 20px);
+  width: calc(100% - 1rem);
   background: get('back');
   backdrop-filter: blur(5px);
   box-shadow: get('box-shadow');
   color: get('font-color');
   border-radius: 8px;
-  margin-bottom: 20px;
+  margin-bottom: 1rem;
   padding: 12px 10px 10px 10px;
   transition: cubic-bezier(0.71, 0.15, 0.16, 1.15) 0.5s;
   overflow: hidden;
@@ -175,7 +175,7 @@ input {
 /* 管理 -- 结束 */
 .manage-main {
   width: calc(100% - 22px);
-  height: calc(100% - 20px);
+  height: calc(100% - 1rem);
   margin: 10px;
   position: relative;
   display: flex;
@@ -342,7 +342,7 @@ input {
   color: white;
   border: none;
   height: 35px;
-  padding: 19px 20px;
+  padding: 19px 1rem;
   font-size: 0.9rem !important;
   &:active {
     background: #aa20ff;

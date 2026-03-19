@@ -552,6 +552,26 @@ const router = createRouter({
 
 const navShowRoute = ['login', 'register'];
 const footerNotShowRoute = ['manage', 'statistics', 'personalInfo', 'blogEditor', 'ai'];
+// slice 和 testField 下的路由名称
+const noLoadingRoutes = [
+  'slice',
+  'rubiks',
+  'rotatingRubik',
+  '3dMenu',
+  'cardFlip',
+  'heartLoading',
+  'neonRain',
+  'stackCard',
+  'rotateMenu',
+  'parallax',
+  'rain',
+  'swiper',
+  'testField',
+  'draggle',
+  'ganttChart',
+  'editor',
+  'gridLayout'
+];
 //切换路由后回到顶部
 router.afterEach(() => {
   scrollToView();
@@ -559,7 +579,7 @@ router.afterEach(() => {
 });
 
 router.beforeEach(async (to: any) => {
-  if (to.path !== '/') {
+  if (to.path !== '/' && !noLoadingRoutes.includes(to.name)) {
     loadingService.show({ type: 'loading', text: i18n.global.t('正在跳转...') });
   }
 

@@ -373,7 +373,7 @@ onMounted(() => {
     .register-tip {
       font-size: 0.7rem;
       letter-spacing: 1px;
-      margin: 20px 0 30px;
+      margin: 1rem 0 30px;
     }
   }
   .el-button {
@@ -383,7 +383,7 @@ onMounted(() => {
     color: white !important;
     font-size: 16px;
     font-weight: 700;
-    padding: 20px 45px !important;
+    padding: 1rem 45px !important;
     letter-spacing: 2px;
     cursor: pointer;
     border: 1px solid #fafaf9;

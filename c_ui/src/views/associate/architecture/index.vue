@@ -171,7 +171,7 @@ const features = [
 .architecture-page {
   @include theme();
   min-height: 100vh;
-  padding: 40px 20px;
+  padding: 2rem 20px;
 
   .glass-container {
     max-width: 1200px;
@@ -179,7 +179,7 @@ const features = [
     background: get('back-90'); // 使用带透明度的背景
     backdrop-filter: blur(10px);
     border-radius: 20px;
-    padding: 40px;
+    padding: 2rem;
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
     border: 1px solid rgba(255, 255, 255, 0.1);
   }
@@ -236,7 +236,7 @@ const features = [
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 40px 0;
+    padding: 2rem 0;
 
     .flow-node {
       text-align: center;
@@ -277,7 +277,7 @@ const features = [
 
       .line-active {
         position: absolute;
-        width: 40px;
+        width: 2rem;
         height: 100%;
         background: linear-gradient(90deg, transparent, get('primary'), transparent);
         animation: flowMove 2s infinite linear;

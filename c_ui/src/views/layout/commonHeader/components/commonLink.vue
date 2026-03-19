@@ -119,7 +119,7 @@ function clickLink(item: any) {
           cursor: pointer;
           padding: 0 10px;
           width: 120px;
-          height: 40px;
+          height: 2rem;
           margin: 5px;
           border-radius: 5px;
 

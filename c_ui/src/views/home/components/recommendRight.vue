@@ -154,20 +154,20 @@ onMounted(() => {
 //       position: absolute;
 //     }
 //     .reBlog {
-//       left: 40px;
+//       left: 2rem;
 //       bottom: 80px;
 //       font-size: 14px;
 //       opacity: 0.8;
 //     }
 //     .reBlogTitle {
-//       left: 40px;
+//       left: 2rem;
 //       bottom: 30px;
 //       font-size: 1.2rem;
 //       font-weight: bold;
 //     }
 //     .more-re {
 //       right: 30px;
-//       bottom: 40px;
+//       bottom: 2rem;
 //       color: white;
 //       background: gray;
 //       padding: 5px 10px;

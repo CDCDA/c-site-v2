@@ -97,7 +97,7 @@ onMounted(() => {
         border: 1px solid get('border-color');
         margin: 8px;
         font-size: 16px;
-        width: calc(50% - 40px);
+        width: calc(50% - 2rem);
         .count-up {
           margin-bottom: 10px;
           .count-month {

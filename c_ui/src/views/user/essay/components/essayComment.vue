@@ -113,7 +113,7 @@ onMounted(() => {});
       overflow-x: auto;
       width: 100%;
       @include flex;
-      min-height: 40px;
+      min-height: 2rem;
       flex-wrap: wrap;
       justify-content: start;
       margin-bottom: 12px;
@@ -125,7 +125,7 @@ onMounted(() => {});
       }
     }
     .essay-item-tag-list {
-      width: calc(100% - 40px);
+      width: calc(100% - 2rem);
       display: flex;
       flex-wrap: nowrap;
       .essay-item-tag {

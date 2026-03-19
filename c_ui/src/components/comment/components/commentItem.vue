@@ -109,7 +109,7 @@ onMounted(() => {});
     display: flex;
     align-items: start;
     padding: 20px 20px 10px 20px;
-    width: calc(100% - 40px);
+    width: calc(100% - 2rem);
     margin: 5px 0 0 0;
     .comment-item {
       margin-top: 15px;

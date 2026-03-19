@@ -294,7 +294,7 @@ function isAffix(tag: any) {
     :deep(.el-tabs) {
       .el-tabs__header {
         box-sizing: border-box;
-        height: 40px;
+        height: 2rem;
         padding: 0 10px;
         margin: 0;
         border-bottom: none;

@@ -5,9 +5,7 @@
       <contact-dialog v-model="showContact" />
 
       <div class="person-fixed-button" @click="router.push({ name: 'personalProfile' })">
-        <el-icon>
-          <Right />
-        </el-icon>{{ $t('关于我') }}
+        <el-icon> <Right /> </el-icon>{{ $t('关于我') }}
       </div>
       <div class="person-fixed-button contact-button" @click="showContact = true">
         <el-icon>
@@ -19,9 +17,17 @@
         <svg-icon class="github-svg" iconName="techStackSvg-git-white" />
         <span>{{ $t('git') }}</span>
       </a>
-      <swiper :loop="true" :spaceBetween="20" :pagination="{
-        type: 'fraction'
-      }" :thumbs="{ swiper: thumbsSwiper }" :modules="modules" @swiper="onProjectSwiper" class="project-swiper">
+      <swiper
+        :loop="true"
+        :spaceBetween="20"
+        :pagination="{
+          type: 'fraction'
+        }"
+        :thumbs="{ swiper: thumbsSwiper }"
+        :modules="modules"
+        @swiper="onProjectSwiper"
+        class="project-swiper"
+      >
         <swiper-slide v-for="(item, index) in itemList" class="flex-center" :key="item.id">
           <div class="project-item flex-between">
             <div class="project-img-list">
@@ -41,8 +47,13 @@
               <div class="intro">{{ item.intro }}</div>
               <div class="subTitle" style="margin-bottom: 0.5rem">{{ $t('关联技术栈') }}</div>
               <div class="tech">
-                <el-tag class="tech-tag" effect="dark" :type="getRandomType()" v-for="tag in item.tags">{{ tag
-                  }}</el-tag>
+                <el-tag
+                  class="tech-tag"
+                  effect="dark"
+                  :type="getRandomType()"
+                  v-for="tag in item.tags"
+                  >{{ tag }}</el-tag
+                >
               </div>
               <div class="subTitle" style="margin-top: 0.5rem">{{ $t('负责模块') }}</div>
               <ul class="module">
@@ -61,11 +72,25 @@
   </div>
   <div class="film-container">
     <!--    @wheel.prevent="handleWheel"-->
-    <swiper ref="swiperRef" :grab-cursor="true" :modules="modules" :loop="true" :slides-per-view="slidesPerView"
-      :space-between="5" class="top-swiper" :centered-slides="true" @swiper="onSwiper" :style="swiperStyle">
-      <swiper-slide v-for="(item, index) in itemList" :key="item.id"
-        :class="['film-slide', { active: item.id === activeId }]" :data-swiper-slide-index="index"
-        @click="handleSlideClick()">
+    <swiper
+      ref="swiperRef"
+      :grab-cursor="true"
+      :modules="modules"
+      :loop="true"
+      :slides-per-view="slidesPerView"
+      :space-between="5"
+      class="top-swiper"
+      :centered-slides="true"
+      @swiper="onSwiper"
+      :style="swiperStyle"
+    >
+      <swiper-slide
+        v-for="(item, index) in itemList"
+        :key="item.id"
+        :class="['film-slide', { active: item.id === activeId }]"
+        :data-swiper-slide-index="index"
+        @click="handleSlideClick()"
+      >
         <div class="film-frame">
           <div v-if="item.type === 'primary'" class="primary-badge">
             {{ $t('重点') }}
@@ -163,7 +188,7 @@ onMounted(() => {
 @include theme() {
   .person-fixed-button {
     position: absolute;
-    bottom: 30px;
+    bottom: 3%;
     left: 32px;
     z-index: 99;
 
@@ -268,12 +293,14 @@ onMounted(() => {
         left: 0;
         width: 100%;
         height: 100%;
-        background-image: linear-gradient(0deg,
-            transparent 0%,
-            rgba(128, 128, 128, 0.2) 2%,
-            rgba(128, 128, 128, 0.8) 3%,
-            rgba(128, 128, 128, 0.2) 3%,
-            transparent 100%);
+        background-image: linear-gradient(
+          0deg,
+          transparent 0%,
+          rgba(128, 128, 128, 0.2) 2%,
+          rgba(128, 128, 128, 0.8) 3%,
+          rgba(128, 128, 128, 0.2) 3%,
+          transparent 100%
+        );
         background-repeat: no-repeat;
         animation: scan 10s linear 20s infinite;
       }
@@ -286,10 +313,12 @@ onMounted(() => {
         left: 0;
         width: 100%;
         height: 100%;
-        background: linear-gradient(45deg,
-            rgba(255, 255, 255, 0) 60%,
-            rgba(255, 255, 255, 0.05) 70%,
-            rgba(255, 255, 255, 0) 80%);
+        background: linear-gradient(
+          45deg,
+          rgba(255, 255, 255, 0) 60%,
+          rgba(255, 255, 255, 0.05) 70%,
+          rgba(255, 255, 255, 0) 80%
+        );
         pointer-events: none;
       }
     }
@@ -332,11 +361,12 @@ onMounted(() => {
     :deep(.swiper-pagination) {
       width: fit-content;
       position: absolute;
-      top: 40px;
+      top: 2rem;
       left: 42px;
     }
 
-    .swiper-slide {}
+    .swiper-slide {
+    }
 
     .project-item {
       aspect-ratio: 16/9;
@@ -462,24 +492,29 @@ onMounted(() => {
     justify-content: center;
     align-items: center;
 
-    .title {}
+    .title {
+    }
   }
 }
 
 .film-container {
   position: relative;
   padding: 1.2rem 0;
-  background: linear-gradient(to right,
+  background: linear-gradient(
+      to right,
       rgba(0, 0, 0, 0.8) 0%,
       rgba(0, 0, 0, 0.4) 10%,
       rgba(0, 0, 0, 0) 50%,
       rgba(0, 0, 0, 0.4) 90%,
-      rgba(0, 0, 0, 0.8) 100%),
-    repeating-linear-gradient(90deg,
+      rgba(0, 0, 0, 0.8) 100%
+    ),
+    repeating-linear-gradient(
+      90deg,
       #171717 0px,
       #171717 10px,
       rgba(255, 255, 255, 0.5) 10px,
-      rgba(255, 255, 255, 0.5) 20px);
+      rgba(255, 255, 255, 0.5) 20px
+    );
   border-top: 10px solid #171717;
   border-bottom: 10px solid #171717;
 
@@ -538,7 +573,7 @@ onMounted(() => {
       // 选中时的发光边框
       .film-frame {
         outline: 2px solid #fff; // 亮白色边框
-        box-shadow: 0 0 20px rgba(255, 255, 255, 0.4), 0 0 40px rgba(255, 255, 255, 0.2);
+        box-shadow: 0 0 20px rgba(255, 255, 255, 0.4), 0 0 2rem rgba(255, 255, 255, 0.2);
 
         // 选中时文字层变亮
         .back-filter {
@@ -600,7 +635,6 @@ onMounted(() => {
 
 // 动画效果
 @keyframes bounce {
-
   0%,
   20%,
   50%,
@@ -676,13 +710,15 @@ onMounted(() => {
   right: -8px;
   height: var(--perforation-size);
   transform: translateY(-50%);
-  background: repeating-linear-gradient(to right,
-      transparent 0,
-      transparent 6px,
-      #666 6px,
-      #666 10px,
-      transparent 10px,
-      transparent 16px);
+  background: repeating-linear-gradient(
+    to right,
+    transparent 0,
+    transparent 6px,
+    #666 6px,
+    #666 10px,
+    transparent 10px,
+    transparent 16px
+  );
   opacity: 0.6;
 }
 </style>
