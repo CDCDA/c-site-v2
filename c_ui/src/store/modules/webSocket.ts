@@ -55,7 +55,8 @@ export const useWebSocketStore = defineStore('websocket', {
       autoClearTimer(() => {
         const userStore = useUserStore();
         // 使用新的 WebSocket 路径
-        const url = 'ws://120.48.127.181:7000/ws?userId=' + userStore.userId;
+        const url = `${(import.meta as any).env.VITE_WS_API}/ws?userId=${userStore.userId}`;
+
         console.log('尝试连接到:', url);
 
         try {
