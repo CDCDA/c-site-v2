@@ -22,28 +22,31 @@
       </div>
       <div class="fitness-stage-goal animated bounceInUp">
         <div class="goal-header">
-          <el-icon
-            ><HelpFilled /><span class="tag-name">{{ $t('目标') }}</span></el-icon
-          >
+          <el-icon>
+            <HelpFilled /><span class="tag-name">{{ $t('目标') }}</span>
+          </el-icon>
         </div>
         <div class="goal-content">
           <div class="goal-text">
-            <span>{{ $t('体重') }}</span
-            ><span>59kg</span><el-icon><Right /></el-icon><span>57.5kg</span>
+            <span>{{ $t('体重') }}</span><span>59kg</span><el-icon>
+              <Right />
+            </el-icon><span>57.5kg</span>
           </div>
           <div class="goal-text">
-            <span>{{ $t('体脂') }}</span
-            ><span>15%-16%</span><el-icon><Right /></el-icon><span>13%-14%</span>
+            <span>{{ $t('体脂') }}</span><span>15%-16%</span><el-icon>
+              <Right />
+            </el-icon><span>13%-14%</span>
           </div>
           <div class="goal-text">
-            <span>{{ $t('单次不间断跑步距离') }}</span
-            ><span>4km</span><el-icon><Right /></el-icon><span>5km</span>
+            <span>{{ $t('单次不间断跑步距离') }}</span><span>4km</span><el-icon>
+              <Right />
+            </el-icon><span>5km</span>
           </div>
         </div>
       </div>
     </div>
     <div class="fitness-right animated-1s5 bounceInDown">
-      <img class="fitness-right-img" :src="'http://120.48.127.181/file/fitness.jpg'" />
+      <img class="fitness-right-img" :src="'https://120.48.127.181/file/fitness.jpg'" />
       <div class="fitness-title">{{ $t('健身') }}</div>
       <div class="fitness-motto">
         {{ $t('还是先锻炼起来再说吧') }}<br />{{ $t('不管怎么说，再小的力量也是力量') }}
@@ -297,7 +300,7 @@ function headerRoll(i: any) {
   el.style.transform = `translate3d(0px, ${offset}px,0)`;
 }
 
-onMounted(() => {});
+onMounted(() => { });
 </script>
 
 <style lang="scss" scoped>
@@ -306,6 +309,7 @@ onMounted(() => {});
     transition-duration: 300ms;
     transform: translate3d(0px, 0, 0);
   }
+
   .fitness-card-main {
     overflow: hidden;
     height: 377px;
@@ -317,6 +321,7 @@ onMounted(() => {});
     margin: 15px;
     color: get('font-color');
   }
+
   .fitness-main {
     @include flex;
     align-items: start;
@@ -324,12 +329,14 @@ onMounted(() => {});
     background: transparent !important;
     backdrop-filter: none !important;
   }
+
   .fitness-right {
     background: get('back');
     box-shadow: get('box-shadow');
     border-radius: 8px;
     height: 95vh;
   }
+
   .fitness-left {
     width: calc(100% - 370px);
     @include flex-column;
@@ -337,6 +344,7 @@ onMounted(() => {});
     border-radius: 8px;
     height: 95vh;
     justify-content: start;
+
     .fitness-card-wrap {
       height: 420px;
       width: 100%;
@@ -345,6 +353,7 @@ onMounted(() => {});
       box-shadow: get('box-shadow');
       border-radius: 8px;
       overflow: hidden;
+
       .fitness-nav {
         @include flex;
         width: 90px;
@@ -353,6 +362,7 @@ onMounted(() => {});
         // box-shadow: get('box-shadow');
         border-radius: 15px 0 0 15px;
       }
+
       .fitness-card {
         height: 100%;
         // padding:0 200px;
@@ -361,6 +371,7 @@ onMounted(() => {});
         border-radius: 0 15px 15px 0;
       }
     }
+
     .fitness-stage-goal {
       height: calc(87vh - 400px);
       width: calc(100% - 20px);
@@ -372,37 +383,45 @@ onMounted(() => {});
       border-radius: 8px;
       @include flex-column;
       justify-content: space-between;
+
       .goal-header {
         @include flex;
         width: 100%;
         justify-content: start;
         font-size: 1rem;
         font-weight: bold;
+
         .el-icon {
           margin: 8px;
           font-size: 22px;
           width: auto;
         }
       }
+
       .goal-content {
         width: calc(100% - 60px);
         height: 100%;
+
         .goal-text {
           @include flex;
           justify-content: space-evenly;
           padding: 10px;
           border-bottom: 3px dashed #7d7d7d;
+
           span,
           .el-icon {
             width: 25%;
           }
-          & > span {
+
+          &>span {
             padding: 5px 15px;
           }
-          & > span:last-child {
+
+          &>span:last-child {
             color: green;
           }
-          & > span:hover {
+
+          &>span:hover {
             background: get('bk');
 
             color: white;
@@ -410,6 +429,7 @@ onMounted(() => {});
           }
         }
       }
+
       .goal-grievance {
         background: get('bk');
         color: white;
@@ -417,15 +437,18 @@ onMounted(() => {});
         padding: 10px 30px;
         border-radius: 10px;
       }
+
       .goal-grievance:hover {
         transform: scale(1.03);
       }
     }
   }
+
   .fitness-right {
     width: 350px;
     position: relative;
     color: white;
+
     .fitness-right-img {
       object-fit: cover;
       background-position: center;
@@ -433,53 +456,68 @@ onMounted(() => {});
       width: 100%;
       border-radius: 8px;
     }
+
     .fitness-title {
       position: absolute;
       top: 10px;
       left: 10px;
-      writing-mode: vertical-rl; /* 设置文字竖排 */
-      text-orientation: upright; /* 设置文字正立显示 */
+      writing-mode: vertical-rl;
+      /* 设置文字竖排 */
+      text-orientation: upright;
+      /* 设置文字正立显示 */
     }
+
     .fitness-motto {
       font-weight: bold;
       top: 10px;
       left: 2rem;
-      writing-mode: vertical-rl; /* 设置文字竖排 */
-      text-orientation: upright; /* 设置文字正立显示 */
+      writing-mode: vertical-rl;
+      /* 设置文字竖排 */
+      text-orientation: upright;
+      /* 设置文字正立显示 */
       font-size: 1.2rem;
       position: absolute;
     }
+
     .fitness-grievance {
       position: absolute;
-      writing-mode: vertical-rl; /* 设置文字竖排 */
-      text-orientation: upright; /* 设置文字正立显示 */
+      writing-mode: vertical-rl;
+      /* 设置文字竖排 */
+      text-orientation: upright;
+      /* 设置文字正立显示 */
       bottom: 10px;
       right: 10px;
+
       img {
         width: 20px;
         margin: 3px;
       }
     }
   }
+
   .plan {
     @include flex-column;
     justify-content: start;
     height: calc(100% - 100px);
     width: 100%;
   }
+
   .plan-item {
     display: flex;
     width: calc(100% - 20px);
     justify-content: space-between;
     border-bottom: 3px dashed #7d7d7d;
     padding: 10px 0;
+
     span {
       width: 20%;
       text-align: left;
     }
+
     .movement {
       width: 40%;
     }
+
     .time {
       width: 20%;
       text-align: right;

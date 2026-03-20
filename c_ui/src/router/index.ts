@@ -299,7 +299,7 @@ const routes: Array<RouteRecordRaw> = [
         meta: {
           title: '魔方',
           introduction: '普通3x3动态魔方',
-          url: 'http://120.48.127.181/file/slice/魔方.png'
+          url: 'https://120.48.127.181/file/slice/魔方.png'
         },
         component: () => import('/src/views/assembly/slice/rubiks/index.vue')
       },
@@ -309,7 +309,7 @@ const routes: Array<RouteRecordRaw> = [
         meta: {
           title: '图片旋转魔方',
           introduction: '可旋转展示6面图片的魔方',
-          url: 'http://120.48.127.181/file/slice/图片旋转魔方.png'
+          url: 'https://120.48.127.181/file/slice/图片旋转魔方.png'
         },
         component: () => import('/src/views/assembly/slice/rotatingRubik/index.vue')
       },
@@ -319,7 +319,7 @@ const routes: Array<RouteRecordRaw> = [
         meta: {
           title: '3d菜单',
           introduction: '3d菜单',
-          url: 'http://120.48.127.181/file/slice/3d菜单.png'
+          url: 'https://120.48.127.181/file/slice/3d菜单.png'
         },
         component: () => import('/src/views/assembly/slice/3dMenu/index.vue')
       },
@@ -329,7 +329,7 @@ const routes: Array<RouteRecordRaw> = [
         meta: {
           title: '卡片翻转',
           introduction: '卡片翻转',
-          url: 'http://120.48.127.181/file/slice/卡片翻转.png'
+          url: 'https://120.48.127.181/file/slice/卡片翻转.png'
         },
         component: () => import('/src/views/assembly/slice/cardFlip/index.vue')
       },
@@ -339,7 +339,7 @@ const routes: Array<RouteRecordRaw> = [
         meta: {
           title: '心型加载',
           introduction: '心型加载',
-          url: 'http://120.48.127.181/file/slice/心型加载.png'
+          url: 'https://120.48.127.181/file/slice/心型加载.png'
         },
         component: () => import('/src/views/assembly/slice/heartLoading/index.vue')
       },
@@ -349,7 +349,7 @@ const routes: Array<RouteRecordRaw> = [
         meta: {
           title: '霓虹雨',
           introduction: '雨',
-          url: 'http://120.48.127.181/file/slice/雨.png'
+          url: 'https://120.48.127.181/file/slice/雨.png'
         },
         component: () => import('/src/views/assembly/slice/neonRain/index.vue')
       },
@@ -359,7 +359,7 @@ const routes: Array<RouteRecordRaw> = [
         meta: {
           title: '堆叠卡',
           introduction: '堆叠卡',
-          url: 'http://120.48.127.181/file/slice/堆叠卡.png'
+          url: 'https://120.48.127.181/file/slice/堆叠卡.png'
         },
         component: () => import('/src/views/assembly/slice/stackCard/index.vue')
       },
@@ -369,7 +369,7 @@ const routes: Array<RouteRecordRaw> = [
         meta: {
           title: '旋转菜单',
           introduction: '旋转菜单',
-          url: 'http://120.48.127.181/file/slice/旋转菜单.png'
+          url: 'https://120.48.127.181/file/slice/旋转菜单.png'
         },
         component: () => import('/src/views/assembly/slice/rotateMenu/index.vue')
       },
@@ -379,7 +379,7 @@ const routes: Array<RouteRecordRaw> = [
         meta: {
           title: '视差',
           introduction: '视差',
-          url: 'http://120.48.127.181/file/slice/视差.png'
+          url: 'https://120.48.127.181/file/slice/视差.png'
         },
         component: () => import('/src/views/assembly/slice/parallax/index.vue')
       },
@@ -389,7 +389,7 @@ const routes: Array<RouteRecordRaw> = [
         meta: {
           title: '雨',
           introduction: '雨',
-          url: 'http://120.48.127.181/file/slice/雨.png'
+          url: 'https://120.48.127.181/file/slice/雨.png'
         },
         component: () => import('/src/views/assembly/slice/rain/index.vue')
       },
@@ -399,7 +399,7 @@ const routes: Array<RouteRecordRaw> = [
         meta: {
           title: '倾斜轮播',
           introduction: '倾斜轮播',
-          url: 'http://120.48.127.181/file/slice/雨.png'
+          url: 'https://120.48.127.181/file/slice/雨.png'
         },
         component: () => import('/src/views/assembly/slice/swiper/index.vue')
       }
@@ -417,7 +417,7 @@ const routes: Array<RouteRecordRaw> = [
       //   meta: {
       //     title: '低代码',
       //     introduction: '视差',
-      //     url: 'http://120.48.127.181/file/testField/低代码.png'
+      //     url: 'https://120.48.127.181/file/testField/低代码.png'
       //   },
       //   component: () => import('/src/views/assembly/testField/vForm/index.vue')
       // },
@@ -427,7 +427,7 @@ const routes: Array<RouteRecordRaw> = [
         meta: {
           title: '自由拖拽',
           introduction: '自由拖拽',
-          url: 'http://120.48.127.181/file/testField/自由拖拽.png'
+          url: 'https://120.48.127.181/file/testField/自由拖拽.png'
         },
         component: () => import('/src/views/assembly/testField/draggle/index.vue')
       },
@@ -437,7 +437,7 @@ const routes: Array<RouteRecordRaw> = [
         meta: {
           title: '甘特图',
           introduction: '甘特图',
-          url: 'http://120.48.127.181/file/testField/甘特图.png'
+          url: 'https://120.48.127.181/file/testField/甘特图.png'
         },
         component: () => import('/src/views/assembly/testField/dhxGanttChart/index.vue')
       },
@@ -447,7 +447,7 @@ const routes: Array<RouteRecordRaw> = [
         meta: {
           title: '富文本编辑器',
           introduction: '富文本编辑器',
-          url: 'http://120.48.127.181/file/testField/富文本编辑器.png'
+          url: 'https://120.48.127.181/file/testField/富文本编辑器.png'
         },
         component: () => import('/src/views/assembly/testField/editor/index.vue')
       },
@@ -457,7 +457,7 @@ const routes: Array<RouteRecordRaw> = [
         meta: {
           title: '宫格',
           introduction: '可选宫格',
-          url: 'http://120.48.127.181/file/testField/低代码.png'
+          url: 'https://120.48.127.181/file/testField/低代码.png'
         },
         component: () => import('/src/views/assembly/testField/gridLayout/index.vue')
       }
@@ -467,7 +467,7 @@ const routes: Array<RouteRecordRaw> = [
       //   meta: {
       //     title: 'canvas动画',
       //     introduction: 'canvas动画',
-      //     url: 'http://120.48.127.181/file/testField/canvas动画.png'
+      //     url: 'https://120.48.127.181/file/testField/canvas动画.png'
       //   },
       //   component: () => import('/src/components/sakura/line.vue')
       // }
@@ -582,9 +582,16 @@ router.beforeEach(async (to: any) => {
   if (to.path !== '/' && !noLoadingRoutes.includes(to.name)) {
     loadingService.show({ type: 'loading', text: i18n.global.t('正在跳转...') });
   }
-
-  // 记录路由
-  window.localStorage.setItem('lastRouter', JSON.stringify(to));
+  console.log('TO', to);
+  // 记录路由，只保存必要信息避免循环引用
+  const routerInfo = {
+    path: to.path,
+    name: to.name,
+    query: to.query,
+    params: to.params,
+    meta: to.meta
+  };
+  window.localStorage.setItem('lastRouter', JSON.stringify(routerInfo));
   // 随机壁纸
   let themeStore = useThemeStore();
   if (!themeStore) return;

@@ -5,8 +5,8 @@
   <contact-dialog v-model="showContact" />
   <div class="person-fixed-button" @click="router.push({ name: 'projectExperience' })">
     <el-icon>
-      <Right /> </el-icon
-    >{{ $t('查看项目') }}
+      <Right />
+    </el-icon>{{ $t('查看项目') }}
   </div>
   <div class="person-fixed-button contact-button" @click="showContact = true">
     <el-icon>
@@ -21,7 +21,7 @@
   <div class="page-main personal-profile-main">
     <PersonalInfo class="bounceInDown animated"></PersonalInfo>
     <div class="ps-welcome c-left animated">
-      <video class="welcome-video" :src="'/video/video_1800042575.mp4'" autoplay loop muted />
+      <video class="welcome-video" :src="src" autoplay loop muted />
       <span class="welcome-title">{{ $t('CCCC的记录站点') }}</span>
       <!-- <svg-icon iconName="commonSvg-礼花" /> -->
       <span class="welcome-name">{{ $t('陈毅东(1999年生)') }}</span>
@@ -38,7 +38,7 @@
       </div>
       <div class="ps-info-right">
         <div class="ps-info-map c-right animated">
-          <c-image class="map-img" :src="'http://120.48.127.181/file/other/工作地址.png'" />
+          <c-image class="map-img" :src="'https://120.48.127.181/file/other/工作地址.png'" />
           <div class="map-tip">{{ $t('现居 福州') }}</div>
         </div>
         <div class="ps-info-life c-right animated">
@@ -60,11 +60,8 @@
         <p class="character-comment">{{ $t('感觉不太准，但又有很多人喜欢玩这个') }}</p>
         <p class="character-associate">
           {{ $t('感兴趣的可以去玩玩')
-          }}<a
-            target="_blank"
-            href="https://www.16personalities.com/ch/%E4%BA%BA%E6%A0%BC%E6%B5%8B%E8%AF%95"
-            >{{ $t('性格测试') }}</a
-          >
+          }}<a target="_blank" href="https://www.16personalities.com/ch/%E4%BA%BA%E6%A0%BC%E6%B5%8B%E8%AF%95">{{
+            $t('性格测试') }}</a>
         </p>
       </div>
       <div class="ps-strong-point">
@@ -80,6 +77,7 @@ import { useI18n } from 'vue-i18n';
 const { t: $t } = useI18n();
 import { useRouter } from 'vue-router';
 const router = useRouter();
+const src = new URL('@/assets/video/video_1800042575.mp4', import.meta.url).href
 import { ref } from 'vue';
 import { Message } from '@element-plus/icons-vue';
 import PersonalInfo from './components/personalInfo.vue';

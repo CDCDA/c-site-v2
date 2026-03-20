@@ -20,16 +20,19 @@ const router = useRouter();
 .profile-main {
   height: 100%;
 }
+
 .profile-carousel {
   margin-top: 10px;
   width: 100%;
   height: calc(100% - 10px);
+
   .el-carousel__container {
     height: 100%;
   }
+
   .profile-carousel-item {
     height: calc(100%);
-    background: left / cover fixed no-repeat url('http://120.48.127.181/file/background.jpg');
+    background: left / cover fixed no-repeat url('https://120.48.127.181/file/background.jpg');
     box-shadow: get('box-shadow');
     // backdrop-filter: blur(20px);
     opacity: 0.9;

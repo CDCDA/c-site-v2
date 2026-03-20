@@ -4,9 +4,7 @@
 <template>
   <div id="bubble-wrap" class="bubble-wrap" @click="onClick">
     <i id="bubbleradius"></i>
-    <span v-for="(c, index) in circles" :style="style(c)" :key="c.key" :class="{ popped: c.popped }"
-      > </span
-    >
+    <span v-for="(c, index) in circles" :style="style(c)" :key="c.key" :class="{ popped: c.popped }"> </span>
   </div>
 </template>
 <script setup lang="ts">
@@ -19,13 +17,13 @@ var globalID = null as any;
 const rotate = (x: any, y: any, sin: any, cos: any, reverse: any) => {
   return reverse
     ? {
-        x: cos * x + sin * y,
-        y: cos * y - sin * x
-      }
+      x: cos * x + sin * y,
+      y: cos * y - sin * x
+    }
     : {
-        x: cos * x - sin * y,
-        y: cos * y + sin * x
-      };
+      x: cos * x - sin * y,
+      y: cos * y + sin * x
+    };
 };
 var circles = ref([]) as any;
 var lastExec = null as any;
@@ -182,13 +180,13 @@ function onClick(evt: any) {
 }
 
 const images = [
-  'http://120.48.127.181/file/snowflake.jpg',
-  'http://120.48.127.181/file/ultraman.jpg',
-  'http://120.48.127.181/file/strange-life.jpg',
-  'http://120.48.127.181/file/resting-hexenbiest.jpg',
-  'http://120.48.127.181/file/rainy-night-coffee-shop.jpg',
-  'http://120.48.127.181/file/rain-cyberpunk-city.jpg',
-  'http://120.48.127.181/file/rain-cyberpunk-city.jpg'
+  'https://120.48.127.181/file/snowflake.jpg',
+  'https://120.48.127.181/file/ultraman.jpg',
+  'https://120.48.127.181/file/strange-life.jpg',
+  'https://120.48.127.181/file/resting-hexenbiest.jpg',
+  'https://120.48.127.181/file/rainy-night-coffee-shop.jpg',
+  'https://120.48.127.181/file/rain-cyberpunk-city.jpg',
+  'https://120.48.127.181/file/rain-cyberpunk-city.jpg'
 ];
 
 onMounted(() => {
@@ -196,7 +194,7 @@ onMounted(() => {
     try {
       var box = (document as any).getElementById('bubble-wrap').getBoundingClientRect();
       var radius = (document as any).querySelector('#bubbleradius').getBoundingClientRect().width;
-    } catch {}
+    } catch { }
 
     var max = (box.width * box.height) / 300 / Math.pow(radius, 1.2);
     for (var i = 0; i < max; i++) {
@@ -297,10 +295,12 @@ span {
   	background-color: $black;
   }*/
 }
+
 span.popped {
   transform: translate(-50%, -50%) scale(2);
   opacity: 0;
 }
+
 span:after {
   content: '';
   position: absolute;

@@ -2,10 +2,8 @@
  * @Description: 个人信息管理
 -->
 <template>
-  <div
-    class="personal-main"
-    style="background: url('http://120.48.127.181/file/樱花古风.jpg') center 28% / cover no-repeat"
-  >
+  <div class="personal-main"
+    style="background: url('https://120.48.127.181/file/樱花古风.jpg') center 28% / cover no-repeat">
     <div class="personal-page page-main">
       <div class="user-left">
         <div class="info">
@@ -16,27 +14,19 @@
               <el-form-item :label="$t('入站时间')">
                 <span>{{ userInfo.createTime }}</span>
               </el-form-item>
-              <el-form-item
-                :label="$t('昵&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;称')"
-              >
+              <el-form-item :label="$t('昵&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;称')">
                 <el-input v-model="form.nickName"></el-input>
               </el-form-item>
-              <el-form-item
-                :label="$t('账&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;号')"
-              >
+              <el-form-item :label="$t('账&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;号')">
                 <span>{{ form.userName }}</span>
               </el-form-item>
               <el-form-item :label="$t('联系电话')">
                 <el-input v-model="form.phone"></el-input>
               </el-form-item>
-              <el-form-item
-                :label="$t('邮&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;箱')"
-              >
+              <el-form-item :label="$t('邮&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;箱')">
                 <el-input v-model="form.email"></el-input>
               </el-form-item>
-              <el-form-item
-                :label="$t('性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别')"
-              >
+              <el-form-item :label="$t('性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别')">
                 <el-radio-group v-model="form.sex" style="margin-left: 15px">
                   <el-radio label="0" size="small">{{ $t('男') }}</el-radio>
                   <el-radio label="1" size="small">{{ $t('女') }}</el-radio>
@@ -121,6 +111,7 @@ onMounted(() => {
   width: 100vw;
   height: 100vh;
 }
+
 @include theme() {
   .personal-page {
     height: calc(100% - 2.8rem - 30px);
@@ -134,6 +125,7 @@ onMounted(() => {
     :deep(.el-upload) {
       height: 100%;
     }
+
     :deep(.el-image) {
       height: 100%;
       border-radius: 50%;
@@ -150,18 +142,21 @@ onMounted(() => {
       padding: 1rem;
       color: get(font-color);
       font-size: 1rem;
+
       .user-left-back {
         position: absolute;
         width: 100%;
         filter: brightness(0.6);
         height: 100%;
       }
+
       .user-left-detail {
         text-align: left;
         justify-content: start;
         display: flex;
         flex-direction: column;
       }
+
       .user-avatar,
       :deep(.c-uploader) {
         border-radius: 5rem;
@@ -170,6 +165,7 @@ onMounted(() => {
         margin-bottom: 1rem;
         margin-top: 4rem;
       }
+
       .info {
         display: flex;
         flex-direction: column;
@@ -178,6 +174,7 @@ onMounted(() => {
         justify-content: start;
       }
     }
+
     .user-right {
       width: 50%;
       height: 100%;
@@ -185,39 +182,48 @@ onMounted(() => {
       background: hsla(0, 0%, 100%, 0.3);
       padding: 20px;
     }
+
     .info-form {
       margin: 20px;
       position: relative;
       height: calc(100% - 30vh - 80px);
+
       span {
         font-size: 0.8rem;
       }
+
       :deep(.el-input),
       :deep(.el-textarea) {
         width: 250px !important;
         margin-left: 15px;
         background: transparent !important;
       }
+
       :deep(.el-input__wrapper),
       :deep(.el-textarea__inner) {
         //background-color: hsla(0, 0%, 100%, 0.3);
         background: hsla(0, 0%, 100%, 0.3) !important;
         border: none !important;
       }
+
       .el-textarea {
         width: calc(100% - 100px);
       }
+
       .el-icon {
         font-size: 1.2rem;
         margin-left: 10px;
         // visibility: hidden;
       }
+
       .el-icon:hover {
         visibility: visible;
       }
-      .el-form-item__content > span {
+
+      .el-form-item__content>span {
         margin-left: 15px;
       }
+
       // .el-button {
       //   background: transparent;
       //   color: get('font-color');
@@ -229,12 +235,14 @@ onMounted(() => {
         align-items: center;
         justify-content: center;
       }
+
       .el-pagination {
         display: flex;
         justify-content: center;
       }
     }
   }
+
   // .info-column {
   //   width: 30%;
   //   height: 100%;
@@ -259,15 +267,19 @@ onMounted(() => {
     backdrop-filter: blur(10px);
     border-radius: 8px;
   }
+
   .blog-count {
     margin: 0 10px 5px 10px;
   }
+
   .type-count {
     margin: 5px 10px 0 10px;
   }
+
   .tag-count {
     margin: 0 10px 5px 10px;
   }
+
   .essay-count {
     margin: 5px 10px 0 10px;
   }

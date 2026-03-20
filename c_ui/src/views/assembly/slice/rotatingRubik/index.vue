@@ -184,6 +184,7 @@ body {
   transform: rotateY(45deg) rotateX(-20deg);
   transform-style: preserve-3d;
 }
+
 /* .box:first-child {
   left: 24%;
 }
@@ -191,7 +192,7 @@ body {
   right: 24%;
 } */
 /*里面的盒子*/
-.box > .in {
+.box>.in {
   width: 99px;
   height: 99px;
   display: flex;
@@ -210,7 +211,7 @@ body {
 }
 
 /*里面盒子六个面的共同值*/
-.box > .in > div {
+.box>.in>div {
   width: 99px;
   height: 99px;
   position: absolute;
@@ -224,37 +225,44 @@ body {
   background: #00ffff;
   transform: translateZ(51px);
 }
+
 /*后*/
 .n2 {
   background: black;
   transform: translateZ(-51px);
 }
+
 /*左*/
 .n3 {
   background: black;
   transform: translateX(-51px) rotateY(90deg);
 }
+
 /*右*/
 .n4 {
   background: #00ffff;
   transform: translateX(51px) rotateY(90deg);
 }
+
 /*上*/
 .n5 {
   background: #00ffff;
   transform: translateY(-51px) rotateX(90deg);
 }
+
 /*下*/
 .n6 {
   background: black;
   transform: translateY(51px) rotateX(90deg);
 }
+
 /*里面盒子的六个面结束*/
 /*动画*/
 @keyframes mofan {
   from {
     transform: translate(-50%, -50%) rotateY(0deg) rotateX(0deg);
   }
+
   to {
     transform: translate(-50%, -50%) rotateY(360deg) rotateX(0deg);
   }
@@ -264,6 +272,7 @@ body {
   from {
     transform: translate(-50%, -50%) rotateY(0deg) rotateX(0deg);
   }
+
   to {
     transform: translate(-50%, -50%) rotateY(-360deg) rotateX(0deg);
   }
@@ -271,7 +280,7 @@ body {
 
 /*外面的盒子*/
 
-.box > .out {
+.box>.out {
   width: 200px;
   height: 200px;
   display: flex;
@@ -287,7 +296,7 @@ body {
   color: get('font-color');
 }
 
-.box > .out > .t1,
+.box>.out>.t1,
 .t2,
 .t3,
 .t4,
@@ -299,66 +308,75 @@ body {
   opacity: 0.7;
   border: 1px solid white;
   transition: all 0.3s;
-  background: center / cover fixed no-repeat url('http://120.48.127.181/file/lol.jpg');
+  background: center / cover fixed no-repeat url('https://120.48.127.181/file/lol.jpg');
 }
+
 /*前*/
 .t1 {
   background: #92c7dc;
   transform: translateZ(100px);
 }
-.t1 > img {
+
+.t1>img {
   height: 100%;
 }
+
 /*后*/
 .t2 {
   background: #92c7dc;
   transform: translateZ(-100px);
 }
+
 /*左*/
 .t3 {
   background: #92c7dc;
   transform: translateX(-100px) rotateY(90deg);
 }
+
 /*右*/
 .t4 {
   background: #92c7dc;
   transform: translateX(100px) rotateY(90deg);
 }
+
 /*上*/
 .t5 {
   background: #92c7dc;
   transform: translateY(-100px) rotateX(90deg);
 }
+
 /*下*/
 .t6 {
   background: #92c7dc;
   transform: translateY(100px) rotateX(90deg);
 }
 
-.box:hover > .out > .t1 {
+.box:hover>.out>.t1 {
   transform: translateZ(300px);
 }
 
-.box:hover > .out > .t2 {
+.box:hover>.out>.t2 {
   transform: translateZ(-300px);
 }
-.box:hover > .out > .t3 {
+
+.box:hover>.out>.t3 {
   transform: translateX(-300px) rotateY(90deg);
 }
 
-.box:hover > .out > .t4 {
+.box:hover>.out>.t4 {
   transform: translateX(300px) rotateY(90deg);
 }
 
-.box:hover > .out > .t5 {
+.box:hover>.out>.t5 {
   transform: translateY(-300px) rotateX(90deg);
 }
-.box:hover > .out > .t6 {
+
+.box:hover>.out>.t6 {
   transform: translateY(300px) rotateX(90deg);
 }
 
 /*鼠标悬浮时外盒子逆转*/
-.box:hover > .out {
+.box:hover>.out {
   animation: nixuan 10s linear 0s infinite normal;
 }
 

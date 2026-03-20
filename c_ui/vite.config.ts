@@ -100,7 +100,7 @@ export default defineConfig({
       png: { quality: 70 },
       jpeg: { quality: 70 },
       webp: { quality: 70 }
-    }),
+    })
     // visualizer({
     //   open: true,
     //   gzipSize: true,
@@ -162,7 +162,7 @@ export default defineConfig({
     terserOptions: {
       // 清除console和debugger
       compress: {
-        drop_console: true,
+        // drop_console: true,
         drop_debugger: true
       }
     }
@@ -182,7 +182,7 @@ export default defineConfig({
       },
       // 服务器图片接口
       '/img': {
-        target: 'http://120.48.127.181/file',
+        target: 'https://120.48.127.181/file',
         changeOrigin: true,
         rewrite: p => p.replace(/^\/img/, '')
       },
@@ -208,6 +208,11 @@ export default defineConfig({
         target: 'https://api.moonshot.cn',
         changeOrigin: true,
         rewrite: p => p.replace(/^\/chatApi/, '')
+      },
+      '/ip-api': {
+        target: 'http://ip-api.com',
+        changeOrigin: true,
+        rewrite: p => p.replace(/^\/ip-api/, '')
       }
     }
   }

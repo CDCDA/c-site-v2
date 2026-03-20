@@ -4,18 +4,17 @@
     <div v-if="isUrl">
       <el-input v-if="!isArr" v-model="imageValue">
         <template #prepend>
-          <el-icon @click="uploadSwitch"><Switch /> </el-icon>
+          <el-icon @click="uploadSwitch">
+            <Switch />
+          </el-icon>
         </template>
       </el-input>
       <div v-else>
-        <el-input
-          v-for="(item, i) in imageValue"
-          v-model="imageValue[i].url"
-          :key="i"
-          style="margin-bottom: 10px"
-        >
+        <el-input v-for="(item, i) in imageValue" v-model="imageValue[i].url" :key="i" style="margin-bottom: 10px">
           <template #prepend>
-            <el-icon @click="uploadSwitch"><Switch /> </el-icon>
+            <el-icon @click="uploadSwitch">
+              <Switch />
+            </el-icon>
           </template>
           <template #append>
             <el-icon v-if="isArr" @click="addNewImageUrl"><Select /> </el-icon>
@@ -24,31 +23,20 @@
       </div>
     </div>
     <div v-else>
-      <el-upload
-        v-if="!isArr"
-        class="c-uploader"
-        :action="uploadAction"
-        :headers="uploadHeaders"
-        :show-file-list="false"
-        :data="{ path: props.path }"
-        :on-success="handleAvatarSuccess"
-        :before-upload="beforeAvatarUpload"
-        crossorigin="anonymous"
-      >
+      <el-upload v-if="!isArr" class="c-uploader" :action="uploadAction" :headers="uploadHeaders"
+        :show-file-list="false" :data="{ path: props.path }" :on-success="handleAvatarSuccess"
+        :before-upload="beforeAvatarUpload" crossorigin="anonymous">
         <c-image v-if="imageValue" :src="imageValue" class="avatar" />
-        <el-icon v-else class="c-uploader-icon"><Plus /></el-icon>
+        <el-icon v-else class="c-uploader-icon">
+          <Plus />
+        </el-icon>
       </el-upload>
-      <el-upload
-        v-else
-        v-model:file-list="imageValue"
-        :action="uploadAction"
-        :headers="uploadHeaders"
-        :data="{ path: props.path }"
-        list-type="picture-card"
-        :on-preview="handlePictureCardPreview"
-        :on-success="handleSuccess"
-      >
-        <el-icon><Plus /></el-icon>
+      <el-upload v-else v-model:file-list="imageValue" :action="uploadAction" :headers="uploadHeaders"
+        :data="{ path: props.path }" list-type="picture-card" :on-preview="handlePictureCardPreview"
+        :on-success="handleSuccess">
+        <el-icon>
+          <Plus />
+        </el-icon>
       </el-upload>
     </div>
   </div>
@@ -123,7 +111,7 @@ function handleSuccess(response: any) {
   imageRelations.pop();
   if (response.code === 200) {
     imageRelations.push({
-      name: response.data.replace('http://120.48.127.181/file/', ''),
+      name: response.data.replace('https://120.48.127.181/file/', ''),
       url: response.data
     });
   } else {
@@ -172,32 +160,41 @@ watch(
     opacity: 0;
     cursor: pointer;
     transition: all 0.2s ease;
+
     :deep(.theme-icon) {
       fill: get('border-color') !important;
     }
   }
+
   .upload-switch:hover {
     opacity: 1;
   }
+
   .upload-switch:active {
     transform: translateY(2px);
   }
+
   .c-upload-url {
     width: 100%;
   }
+
   .el-icon {
     cursor: pointer;
     color: get('border-color') !important;
   }
+
   .el-icon:active {
     transform: translateY(2px);
   }
+
   .c-upload {
     position: relative;
+
     .el-input {
       width: 100%;
     }
   }
+
   .c-uploader {
     border: 2px dashed get('border-color');
     background: transparent;
@@ -208,10 +205,12 @@ watch(
     justify-content: center;
     align-items: center;
     border-radius: 4px;
+
     :deep(.el-upload) {
       height: 100%;
       width: 100%;
     }
+
     .c-uploader-icon {
       font-size: 1rem;
     }

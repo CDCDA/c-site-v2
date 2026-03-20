@@ -4,10 +4,7 @@
 <template>
   <div class="update-log page-main">
     <div class="update-log-top fade-in">
-      <c-image
-        :src="'http://120.48.127.181/file/quiet-forest.jpg'"
-        style="width: 100%; height: 100%"
-      />
+      <c-image :src="imageSrc" style="width: 100%; height: 100%" />
     </div>
     <div class="update-log-preface">
       <h2>{{ $t('前言') }}</h2>
@@ -22,8 +19,7 @@
             <time>{{ date }}</time>
             <div class="discovery">
               <h3 v-for="(e, i) in updateLogs[date]">
-                <span>{{ i + 1 }}</span
-                >{{ e }}
+                <span>{{ i + 1 }}</span>{{ e }}
               </h3>
             </div>
           </div>
@@ -40,7 +36,7 @@ import { ref, onMounted } from 'vue';
 import { pageLogs } from '@/api/system/updateLog';
 import { autoClearTimer } from '@/utils/timer';
 const updateLogs = ref({}) as any;
-
+const imageSrc = new URL('@/assets/images/quiet-forest.jpg', import.meta.url).href
 async function getList() {
   const { code, rows } = (await pageLogs({ operation: '', pageNum: 1, pageSize: 999 })) as any;
   if (code === 200) {
@@ -94,12 +90,15 @@ onMounted(() => {
   margin: 2rem 0 30px 0;
   background-position: center;
 }
+
 .update-log-preface {
   width: 100%;
+
   // text-align: left;
   h2 {
     margin-bottom: 20px;
   }
+
   p {
     margin: 10px 0;
   }
@@ -109,6 +108,7 @@ onMounted(() => {
   .update-log-top {
     box-shadow: get('box-shadow');
   }
+
   .page-main.update-log {
     @include flex-column;
     font: normal 16px/1.5 'Titillium Web', sans-serif;
@@ -122,6 +122,7 @@ onMounted(() => {
     color: get('font-color');
   }
 }
+
 *,
 *::before,
 *::after {
@@ -150,6 +151,7 @@ onMounted(() => {
   z-index: 2;
   background: #eee;
 }
+
 .timeline ul li div {
   position: relative;
   bottom: 0;
@@ -161,6 +163,7 @@ onMounted(() => {
   display: flex;
   align-items: center;
 }
+
 .timeline ul li div time {
   position: absolute;
   background: #f5af19;
@@ -175,6 +178,7 @@ onMounted(() => {
   align-items: center;
   letter-spacing: 2px;
 }
+
 .timeline ul li div div {
   height: auto;
   display: flex;
@@ -182,15 +186,19 @@ onMounted(() => {
   justify-content: center;
   align-items: center;
 }
+
 .timeline ul li div div p {
   text-align: center;
 }
+
 .timeline ul li .discovery {
   text-align: left;
   margin-right: 10px;
+
   h3 {
     width: 90%;
   }
+
   span {
     margin-top: 0.65em;
     width: 1.45em;
@@ -205,10 +213,12 @@ onMounted(() => {
     color: white;
   }
 }
-.timeline ul li:nth-of-type(odd) > div {
+
+.timeline ul li:nth-of-type(odd)>div {
   left: 3rem;
 }
-.timeline ul li:nth-of-type(even) > div {
+
+.timeline ul li:nth-of-type(even)>div {
   left: -28rem;
 }
 
@@ -217,12 +227,15 @@ onMounted(() => {
   opacity: 0;
   transition: all 0.5s ease-in-out;
 }
+
 .timeline ul li:nth-of-type(odd) div {
   transform: translate3d(100px, -10px, 0) rotate(10deg);
 }
+
 .timeline ul li:nth-of-type(even) div {
   transform: translate3d(-100px, -10px, 0) rotate(10deg);
 }
+
 .timeline ul li.in-view div {
   transform: none;
   visibility: visible;
@@ -234,14 +247,17 @@ onMounted(() => {
     width: 250px;
     flex-direction: column;
   }
+
   .timeline ul li div div {
     width: 80%;
     margin: 10px;
   }
-  .timeline ul li:nth-of-type(even) > div {
+
+  .timeline ul li:nth-of-type(even)>div {
     left: -289px;
   }
 }
+
 @media screen and (max-width: 600px) {
   body {
     background: #8bfff4;
@@ -250,10 +266,12 @@ onMounted(() => {
   .timeline ul li {
     margin-left: 20px;
   }
+
   .timeline ul li div {
     width: calc(100vw - 91px);
   }
-  .timeline ul li:nth-of-type(even) > div {
+
+  .timeline ul li:nth-of-type(even)>div {
     left: 4rem;
   }
 }

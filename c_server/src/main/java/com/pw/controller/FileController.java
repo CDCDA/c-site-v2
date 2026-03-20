@@ -56,6 +56,6 @@ public class FileController extends BaseController implements convertController 
 
         InetAddress address = InetAddress.getLocalHost();
         String host = address.getHostAddress();
-        return resultData("http://120.48.127.181/file" + path + "/" + fileName);
+        return resultData("https://cccc1203.top/file" + path + "/" + fileName);
     }
 }

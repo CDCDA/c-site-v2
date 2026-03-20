@@ -17,11 +17,7 @@
           </el-tooltip>
         </div>
         <div class="footer-rightSide">
-          <svg-icon
-            iconName="commonSvg-微信"
-            class="footer-icon weixin"
-            @click="toQrCode"
-          ></svg-icon>
+          <svg-icon iconName="commonSvg-微信" class="footer-icon weixin" @click="toQrCode"></svg-icon>
           <svg-icon iconName="techStackSvg-git" class="footer-icon github"></svg-icon>
         </div>
       </div>
@@ -79,13 +75,15 @@ onMounted(() => {
     padding: 1rem;
     @include flex-column;
   }
+
   .blog-user-card {
     transition: cubic-bezier(0.075, 0.82, 0.165, 1) 0.4s;
     overflow: hidden;
     padding: 0 !important;
     width: calc(100%) !important;
-    background: url('http://120.48.127.181/file/other/Ruins.jpg') center 28% / cover no-repeat !important;
+    background: url('https://120.48.127.181/file/other/Ruins.jpg') center 28% / cover no-repeat !important;
     color: get('re-font-color') !important;
+
     .user-header {
       height: 24px;
       width: fit-content;
@@ -98,12 +96,14 @@ onMounted(() => {
       @include flex;
       background: rgba(255, 255, 255, 0.2);
     }
+
     .user-header:hover {
       transform: scale(1.05);
       color: get('font-color');
       background: white;
       transition: ease-in-out 0.3s;
     }
+
     .intro {
       position: absolute;
       opacity: 0;
@@ -113,12 +113,14 @@ onMounted(() => {
       left: 0;
       @include flex;
     }
+
     .user-avatar {
       height: 10rem;
       margin: 10px 0 0 0;
       width: 10rem;
       position: relative;
       @include flex;
+
       .el-avatar {
         width: 7rem;
         height: 7rem;
@@ -129,6 +131,7 @@ onMounted(() => {
         transition: cubic-bezier(0.075, 0.82, 0.165, 1) 0.4s;
       }
     }
+
     .user-footer {
       height: 60px;
       width: 100%;
@@ -137,14 +140,17 @@ onMounted(() => {
       align-items: center;
 
       margin: 1rem 0 0 0;
+
       .footer-leftSide {
         @include flex-column;
         align-items: start;
+
         .user-name {
           font-weight: bold;
           font-size: 22px;
           margin: 2px 0;
         }
+
         .user-motto {
           font-size: 16px;
           float: left;
@@ -152,9 +158,11 @@ onMounted(() => {
           margin: 2px 0;
         }
       }
+
       .footer-rightSide {
         @include flex;
         margin-right: -10px;
+
         .footer-icon {
           width: 1.8rem;
           height: 1.8rem;
@@ -164,6 +172,7 @@ onMounted(() => {
       }
     }
   }
+
   .blog-user-card:hover {
     .el-avatar {
       height: 0;
@@ -171,6 +180,7 @@ onMounted(() => {
       animation: none;
       border: none;
     }
+
     .intro {
       opacity: 1;
       transition: cubic-bezier(0.075, 0.82, 0.165, 1) 0.4s;

@@ -27,16 +27,16 @@ import { formatDate } from '@/utils/date.ts';
 import { ref } from 'vue';
 const newsList = ref([
   {
-    // url: require('http://120.48.127.181/file/app-background1.webp'),
+    // url: require('https://120.48.127.181/file/app-background1.webp'),
     date: formatDate(new Date(), 'YY-MM-dd hh:mm'),
     type: $t('前端'),
-    url: 'http://120.48.127.181/file/2cf465cf-6114-4319-ac33-67bbec0983e2.jpeg'
+    url: 'https://120.48.127.181/file/2cf465cf-6114-4319-ac33-67bbec0983e2.jpeg'
   },
   {
-    // url: require('http://120.48.127.181/file/app-background1.webp'),
+    // url: require('https://120.48.127.181/file/app-background1.webp'),
     date: formatDate(new Date(), 'YY-MM-dd hh:mm'),
     type: $t('前端'),
-    url: 'http://120.48.127.181/file/2cf465cf-6114-4319-ac33-67bbec0983e2.jpeg'
+    url: 'https://120.48.127.181/file/2cf465cf-6114-4319-ac33-67bbec0983e2.jpeg'
   }
 ]) as any;
 </script>
@@ -60,6 +60,7 @@ const newsList = ref([
     margin: 5px 0 0 10px;
     font-size: 0.8rem;
   }
+
   .el-image {
     height: 260px;
   }
@@ -69,6 +70,7 @@ const newsList = ref([
   margin: 5px;
   font-size: 0.8rem;
 }
+
 .news-image {
   border-radius: 5px;
 }
