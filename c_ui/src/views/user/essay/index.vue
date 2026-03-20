@@ -4,13 +4,7 @@
 <template>
   <div class="page-main essay-main">
     <div class="essay-header animated bounceInDown">
-      <video
-        :src="'/video/video_2000212665.mp4'"
-        class="essay-header-video"
-        autoplay
-        loop
-        muted
-      ></video>
+      <video :src="src" class="essay-header-video" autoplay loop muted></video>
       <!-- <span class="essay-header-center"
         >{{ $t('喝一壶清茶，写几行小篆，') }}<br />看一剪流云，梦一回江南。愿与草木，随遇而安</span
       > -->
@@ -21,30 +15,11 @@
       <!-- <div class="essay-header-add">新增+</div> -->
     </div>
     <!-- <div class="essay-center"> -->
-    <grid-layout
-      class="essay-center"
-      :responsive="false"
-      :layout.sync="essayList"
-      :col-num="3"
-      :autoSize="true"
-      :row-height="1"
-      :is-draggable="true"
-      :is-resizable="false"
-      :is-mirrored="false"
-      :vertical-compact="false"
-      :margin="[15, 10]"
-      :use-css-transforms="true"
-      ref="grid"
-    >
-      <grid-item
-        v-for="(item, i) in essayList"
-        :x="item.x"
-        :y="item.y"
-        :w="item.w"
-        :h="item.h"
-        :i="item.i"
-        :key="item.i"
-      >
+    <grid-layout class="essay-center" :responsive="false" :layout.sync="essayList" :col-num="3" :autoSize="true"
+      :row-height="1" :is-draggable="true" :is-resizable="false" :is-mirrored="false" :vertical-compact="false"
+      :margin="[15, 10]" :use-css-transforms="true" ref="grid">
+      <grid-item v-for="(item, i) in essayList" :x="item.x" :y="item.y" :w="item.w" :h="item.h" :i="item.i"
+        :key="item.i">
         <div class="essay-item c-left" :class="`essay-${item.i}`">
           <div class="essay-item-user">
             <c-image class="essay-item-user-avatar" :src="userData.avatar"></c-image>
@@ -70,12 +45,7 @@
       </grid-item>
     </grid-layout>
     <div class="tip">{{ $t('仅展示最近20条') }}</div>
-    <essayComment
-      :visible="commentOpen"
-      @close="close"
-      :essay-data="selectEssay"
-      :user-data="userData"
-    />
+    <essayComment :visible="commentOpen" @close="close" :essay-data="selectEssay" :user-data="userData" />
   </div>
 </template>
 
@@ -88,6 +58,8 @@ import useUserStore from '@/store/modules/user';
 import { sformatDate } from '@/utils/date.ts';
 import essayComment from './components/essayComment.vue';
 import { ElNotification } from 'element-plus';
+const src = new URL('@/assets/video/video_2000212665.mp4', import.meta.url).href
+
 const imgLoading = ref('rotate') as any;
 const userStore = useUserStore();
 const essayList = ref([]) as any;
@@ -205,6 +177,7 @@ onMounted(() => {
     justify-content: start;
     background: transparent !important;
     backdrop-filter: none !important;
+
     // max-width: 1100px !important;
     .essay-header {
       height: 40vh;
@@ -212,6 +185,7 @@ onMounted(() => {
       border-radius: 12px;
       box-shadow: get('box-shadow');
       position: relative;
+
       .essay-header-video {
         opacity: 0.9;
         height: 100%;
@@ -219,13 +193,16 @@ onMounted(() => {
         border-radius: 12px;
         object-fit: cover;
       }
+
       margin-bottom: 30px;
       color: white;
+
       .essay-header-top {
         position: absolute;
         top: 10px;
         left: 15px;
       }
+
       .essay-header-center {
         position: absolute;
         top: 47px;
@@ -234,11 +211,13 @@ onMounted(() => {
         font-weight: bold;
         text-align: left;
       }
+
       .essay-header-bottom {
         position: absolute;
         bottom: 14px;
         left: 16px;
       }
+
       .essay-header-add {
         width: 90px;
         height: 35px;
@@ -254,10 +233,12 @@ onMounted(() => {
         color: black;
       }
     }
+
     .essay-center {
       width: calc(100% + 30px);
       min-height: 100vh;
       display: table;
+
       .essay-item {
         transition: all 0.2s ease-in-out;
         border-radius: 6px;
@@ -267,38 +248,46 @@ onMounted(() => {
         // box-shadow: get('box-shadow');
         background: get('back');
         color: get('font-color');
+
         .essay-item-user {
           display: flex;
           margin-bottom: 12px;
+
           .essay-item-user-avatar {
             width: 47px;
             height: 45px;
             border-radius: 6px;
           }
+
           .essay-item-info {
             width: calc(100% - 50px);
             padding: 3px 10px;
             @include flex-column;
             justify-content: space-between;
+
             .essay-item-user-nickName,
             .essay-item-date {
               text-align: left;
               width: 100%;
             }
+
             .essay-item-user-nickName {
               font-size: 16px;
               font-weight: 400;
               color: #6dbdc3;
             }
+
             .essay-item-date {
               font-size: 12px;
               color: #969394;
             }
           }
         }
+
         .essay-item-content {
           white-space: pre-wrap;
         }
+
         .img-list {
           overflow-x: auto;
           width: 100%;
@@ -307,6 +296,7 @@ onMounted(() => {
           flex-wrap: wrap;
           justify-content: start;
           margin: 12px 0;
+
           .img-list-item {
             // height: 100px;
             width: calc(33.33% - 10px);
@@ -315,13 +305,16 @@ onMounted(() => {
             border-radius: 5px;
           }
         }
+
         .essay-item-footer {
           display: flex;
           justify-content: space-between;
+
           .essay-item-tag-list {
             width: calc(100% - 2rem);
             display: flex;
             flex-wrap: nowrap;
+
             .essay-item-tag {
               margin-right: 10px;
               font-size: 14px;
@@ -331,6 +324,7 @@ onMounted(() => {
               border-radius: 4px;
             }
           }
+
           .svg-icon {
             width: 20px;
             height: 20px;
@@ -338,12 +332,14 @@ onMounted(() => {
           }
         }
       }
+
       .essay-item:hover {
         transform: scale(1.02);
       }
     }
   }
 }
+
 .vue-grid-item {
   // height: auto !important;
   // width: calc(33% - 10px) !important;

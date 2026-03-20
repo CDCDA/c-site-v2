@@ -1,118 +1,58 @@
 <template>
   <div class="blog-editor">
     <el-form :model="blogData" :rules="rules" ref="formEl">
-      <el-form-item :label="$t('标题')" prop="blogTitle" label-width="70px">
-        <el-input
-          class="blog-title-editor"
-          :placeholder="$t('请输入标题')"
-          v-model="blogData.blogTitle"
-        />
+      <el-form-item :label="$t('标题')" prop="blogTitle" label-width="5rem">
+        <el-input class="blog-title-editor" :placeholder="$t('请输入标题')" v-model="blogData.blogTitle" />
       </el-form-item>
-      <MdEditor
-        ref="editorRef"
-        v-model="blogData.content"
-        @onSave="blogSave"
-        @onUploadImg="onUploadImg"
-      />
+      <MdEditor ref="editorRef" v-model="blogData.content" @onSave="blogSave" @onUploadImg="onUploadImg" />
       <el-form-item :label="$t('博客标签')">
-        <el-tag
-          v-for="tag in blogData.tags"
-          :key="tag"
-          class="tag-item"
-          :type="tag.tagType"
-          :effect="tag.effect"
-          closable
-          :disable-transitions="false"
-          @close="tagDel(tag)"
-        >
+        <el-tag v-for="tag in blogData.tags" :key="tag" class="tag-item" :type="tag.tagType" :effect="tag.effect"
+          closable :disable-transitions="false" @close="tagDel(tag)">
           {{ tag.tagName }}
         </el-tag>
 
-        <el-input
-          v-if="inputVisible"
-          ref="InputRef"
-          v-model="inputValue"
-          class="button-new-input"
-          size="small"
-          @keyup.enter="addTag"
-          @blur="addTag"
-        />
+        <el-input v-if="inputVisible" ref="InputRef" v-model="inputValue" class="button-new-input" size="small"
+          @keyup.enter="addTag" @blur="addTag" />
         <el-button v-else class="button-new-tag" size="small" @click="showInput"> + Tag </el-button>
-        <el-icon
-          @click="tagVisible = true"
-          style="font-size: 1rem; margin-left: 10px; cursor: pointer"
-          ><Grid
-        /></el-icon>
+        <el-icon @click="tagVisible = true" style="font-size: 1rem; margin-left: 10px; cursor: pointer">
+          <Grid />
+        </el-icon>
       </el-form-item>
       <el-form-item :label="$t('博客分类')" prop="typeId">
-        <el-tree-select
-          v-model="blogData.typeId"
-          :data="typeList"
-          check-strictly
-          @node-click="typeChange"
-          :props="defaultProps"
-          :render-after-expand="false"
-          ><template #default="{ data: { typeName } }"> {{ typeName }}</template>
+        <el-tree-select v-model="blogData.typeId" :data="typeList" check-strictly @node-click="typeChange"
+          :props="defaultProps" :render-after-expand="false"><template #default="{ data: { typeName } }"> {{ typeName
+            }}</template>
         </el-tree-select>
       </el-form-item>
       <el-form-item :label="$t('博客类型')" prop="publishStatus">
-        <el-switch
-          v-model="blogData.isOriginal"
-          active-value="1"
-          inactive-value="0"
-          :active-text="$t('原创')"
-          :inactive-text="$t('转载')"
-        />
+        <el-switch v-model="blogData.isOriginal" active-value="1" inactive-value="0" :active-text="$t('原创')"
+          :inactive-text="$t('转载')" />
       </el-form-item>
       <el-form-item :label="$t('是否推荐')" prop="isRecommend">
-        <el-switch
-          v-model="blogData.isRecommend"
-          active-value="1"
-          inactive-value="0"
-          :active-text="$t('推荐')"
-          :inactive-text="$t('不推荐')"
-        />
+        <el-switch v-model="blogData.isRecommend" active-value="1" inactive-value="0" :active-text="$t('推荐')"
+          :inactive-text="$t('不推荐')" />
       </el-form-item>
       <el-form-item :label="$t('添加封面')">
         <upload v-model="blogData.coverUrl" path="blogCover"></upload>
       </el-form-item>
       <el-form-item :label="$t('博客摘要')">
-        <el-input
-          v-model="blogData.blogAbstract"
-          type="textarea"
-          :rows="2"
-          :placeholder="$t('请输入...')"
-        ></el-input>
+        <el-input v-model="blogData.blogAbstract" type="textarea" :rows="2" :placeholder="$t('请输入...')"></el-input>
       </el-form-item>
     </el-form>
     <div class="blog-editor-header">
       <el-button type="success" @click="blogSave" v-permission="['operate']" class="bt-save">{{
         $t('保存')
-      }}</el-button>
+        }}</el-button>
       <el-button type="primary" @click="submit" v-permission="['operate']" class="bt-release">{{
         $t('发布')
-      }}</el-button>
+        }}</el-button>
     </div>
   </div>
-  <c-dialog
-    class="tag-dialog"
-    v-model="tagVisible"
-    :title="$t('标签选择')"
-    width="500px"
-    :modal="true"
-  >
+  <c-dialog class="tag-dialog" v-model="tagVisible" :title="$t('标签选择')" width="500px" :modal="true">
     <div class="tag-list">
-      <el-tag
-        v-for="tag in tagList"
-        :key="tag"
-        class="tag-item"
-        :type="tag.tagType"
-        :effect="tag.effect"
-        :class="tag.isActive ? 'is-active' : ''"
-        :disable-transitions="false"
-        style="margin-bottom: 10px; cursor: pointer"
-        @click="chooseTag(tag)"
-      >
+      <el-tag v-for="tag in tagList" :key="tag" class="tag-item" :type="tag.tagType" :effect="tag.effect"
+        :class="tag.isActive ? 'is-active' : ''" :disable-transitions="false"
+        style="margin-bottom: 10px; cursor: pointer" @click="chooseTag(tag)">
         {{ tag.tagName }}
       </el-tag>
     </div>
@@ -121,7 +61,7 @@
         <el-button type="danger" @click="tagVisible = false">{{ $t('取消') }}</el-button>
         <el-button type="primary" @click="setTags()" v-permission="['operate']">{{
           $t('确定')
-        }}</el-button>
+          }}</el-button>
       </span>
     </template>
   </c-dialog>
@@ -402,6 +342,7 @@ onMounted(() => {
     padding: 15px;
     margin: 15px;
     min-height: calc(100% - 60px);
+
     .md-editor__toc-nav-title {
       color: get('font-color');
     }
@@ -434,6 +375,7 @@ onMounted(() => {
     .ml-1 {
       width: 100px;
     }
+
     .content-input-wrapper,
     .content-input,
     .auto-textarea-input,
@@ -450,6 +392,7 @@ onMounted(() => {
       display: flex;
       margin: 30px;
       justify-content: center;
+
       .bt-save {
         margin-right: 10px;
         width: 100px;
@@ -465,9 +408,11 @@ onMounted(() => {
       }
     }
   }
+
   .tag-item.is-active {
     background: get('border-color') !important;
     border: 1px solid transparent !important;
+
     :deep(.el-tag__content) {
       color: get('re-font-color') !important;
     }
@@ -479,6 +424,7 @@ onMounted(() => {
   font-size: 0.75rem !important;
   height: 1.3rem;
 }
+
 .tag-item {
   cursor: pointer;
 }
@@ -490,6 +436,7 @@ onMounted(() => {
   height: 1.2rem !important;
   border-radius: 4px !important;
   border: 1px solid #dcdcdc !important;
+
   .el-input__wrapper {
     height: 100% !important;
     border: none;

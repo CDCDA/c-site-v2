@@ -116,7 +116,7 @@ export default [
     ],
     title: i18n.global.t('基于 Rust 的跨平台桌面工具集'),
     intro: i18n.global.t(
-      '挑战传统 Electron 开发模式，利用 Rust + Tauri 打造的轻量级、原生性能工具箱。包体积从百兆级缩减至十兆，内存占用率降低 70% 以上，为开发者提供极致流畅的系统级操作体验。'
+      '挑战传统 Electron 开发模式，利用 Rust + Tauri 打造的轻量级、原生性能工具箱。包体积从百兆级缩减至十兆，本体内存占用率降低 70% 以上。'
     ),
     date: ['2025-6', '2025-12'],
     tags: ['Rust', 'Tauri', 'TypeScript', 'Vue3', 'Vite'],

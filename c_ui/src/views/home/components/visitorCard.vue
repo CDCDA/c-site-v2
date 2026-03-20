@@ -4,19 +4,15 @@
 <template>
   <div class="visitor-card c-card" id="card">
     <div class="card-header">
-      <svg-icon
-        iconName="commonSvg-礼花"
-        style="width: 20px; height: 20px; margin-right: 8px"
-      /><span class="tag-name">welcome</span>
+      <svg-icon iconName="commonSvg-礼花" style="width: 20px; height: 20px; margin-right: 8px" /><span
+        class="tag-name">welcome</span>
     </div>
     <div class="visitor-location">
       {{ $t('欢迎来自')
-      }}<span>{{ ` ${visitorInfo.location?.regionName} ${visitorInfo.location?.city} ` }}</span
-      >{{ $t('的小伙伴') }}
+      }}<span>{{ ` ${visitorInfo.location?.regionName} ${visitorInfo.location?.city} ` }}</span>{{ $t('的小伙伴') }}
     </div>
     <div class="visitor-distance">
-      {{ $t('当前位置距离博主') }}<span>{{ ` ${visitorInfo.location.distance} ` }}</span
-      >{{ $t('公里') }}
+      {{ $t('当前位置距离博主') }}<span>{{ ` ${visitorInfo.location.distance} ` }}</span>{{ $t('公里') }}
     </div>
     <div class="visitor-ip">
       {{ $t('您的ip地址为') }}<span>{{ ` ${visitorInfo.ip} ` }}</span>
@@ -82,7 +78,7 @@ async function getIp() {
 // 获取地理位置
 async function getLocationByIp(ip: string) {
   axios
-    .get(`http://ip-api.com/json/${ip}?lang=zh-CN`)
+    .get(`/ip-api/json/${ip}?lang=zh-CN`)
     .then(response => {
       const locationData = response.data;
       locationData.distance = getDistance(39.9042, 116.4074, locationData.lat, locationData.lon);
@@ -110,9 +106,9 @@ function getDistance(lat1: any, lon1: any, lat2: any, lon2: any) {
   const a =
     Math.sin(dLat / 2) * Math.sin(dLat / 2) +
     Math.cos(degreeToRadians(lat1)) *
-      Math.cos(degreeToRadians(lat2)) *
-      Math.sin(dLon / 2) *
-      Math.sin(dLon / 2);
+    Math.cos(degreeToRadians(lat2)) *
+    Math.sin(dLon / 2) *
+    Math.sin(dLon / 2);
 
   const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 
@@ -186,12 +182,14 @@ onMounted(() => {
     font-size: 1rem;
     padding: 15px !important;
     width: calc(100% - 30px) !important;
+
     .card-header {
       @include flex;
       width: 100%;
       justify-content: start;
       font-size: 1rem;
       font-weight: bold;
+
       .el-icon {
         margin: 8px;
         font-size: 22px;
@@ -204,15 +202,19 @@ onMounted(() => {
     .visitor-salutation {
       margin: 10px 0;
     }
+
     .visitor-location span {
       color: #49b1f5;
     }
+
     .visitor-distance span {
       color: #e38100;
     }
+
     .visitor-ip span {
       color: #49b1f5;
     }
+
     .visitor-greeting {
       color: #e38100;
     }

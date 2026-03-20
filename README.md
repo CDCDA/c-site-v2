@@ -4,6 +4,10 @@
 
 使用java21 + springboot3 + Vue 3 + Vite构建的个人管理平台。支持jwt认证、rabbitmq管理的WebSocket实时通信、微信公众号接入等。
 
+## 在线地址
+
+- [C-Site-V2](http://120.48.127.181/c-site/#/)
+
 ## 技术栈
 
 ### 后端技术

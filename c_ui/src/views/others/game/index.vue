@@ -4,11 +4,7 @@
 <template>
   <div class="page-main game-main">
     <div class="game-top">
-      <div
-        class="game-top-item bounceInDown"
-        :class="getAnimateTime()"
-        v-for="item in gameShowData"
-      >
+      <div class="game-top-item bounceInDown" :class="getAnimateTime()" v-for="item in gameShowData">
         <img :src="item.coverUrl" />
       </div>
     </div>
@@ -18,34 +14,17 @@
         }}<span> {{ $t('我不知道我是谁，不知道我在哪，我只知道我要大开杀戒了') }}</span>
       </div>
       <div class="game-list">
-        <virtual-scroller
-          :items="singlePlayerGames"
-          :item-height="getItemHeight"
-          content-tag="table"
-        >
-          <template #default="{ item }">
-            <div class="game-list">
-              <div class="game-item bounceInUp" @click="toOfficial(item)" v-for="game in item">
-                <c-image :src="game.coverUrl" />
-                <div class="game-info">
-                  <div class="game-info-header">
-                    <h3 class="no-wrap">{{ game.name }}</h3>
-                    <el-rate
-                      v-model="game.rate"
-                      disabled
-                      show-score
-                      allow-half
-                      text-color="#ff9900"
-                      size="large"
-                      :score-template="`${game.rate * 2}`"
-                    />
-                  </div>
-                  <span class="no-wrap">{{ game.intro }}</span>
-                </div>
-              </div>
+        <div class="game-item bounceInUp" @click="toOfficial(game)" v-for="game in singlePlayerGames">
+          <c-image :src="game.coverUrl" />
+          <div class="game-info">
+            <div class="game-info-header">
+              <h3 class="no-wrap">{{ game.name }}</h3>
+              <el-rate v-model="game.rate" disabled show-score allow-half text-color="#ff9900" size="large"
+                :score-template="`${game.rate * 2}`" />
             </div>
-          </template>
-        </virtual-scroller>
+            <span class="no-wrap">{{ game.intro }}</span>
+          </div>
+        </div>
       </div>
       <div class="divider c-left animated-0s5">
         <svg-icon iconName="commonSvg-手机" />
@@ -57,14 +36,8 @@
           <div class="game-info">
             <div class="game-info-header">
               <h3 class="no-wrap">{{ item.name }}</h3>
-              <el-rate
-                v-model="item.rate"
-                disabled
-                show-score
-                allow-half
-                text-color="#ff9900"
-                :score-template="`${item.rate * 2}`"
-              />
+              <el-rate v-model="item.rate" disabled show-score allow-half text-color="#ff9900"
+                :score-template="`${item.rate * 2}`" />
             </div>
             <span class="no-wrap">{{ item.intro }}</span>
           </div>
@@ -79,7 +52,7 @@ import { useI18n } from 'vue-i18n';
 const { t: $t } = useI18n();
 import { ref, onMounted, computed } from 'vue';
 
-import { VirtualScroller } from 'vue-virtual-scroller-classic';
+
 
 import { pageGames } from '@/api/game.ts';
 const gameList = ref([]) as any;
@@ -91,12 +64,7 @@ async function getList() {
       game.rate = game.rate / 2;
     });
 
-    const tempSinglePlayerGames = [];
-    for (let i = 0; i < rows.filter((game: any) => game.type === '0').length; i += 4) {
-      tempSinglePlayerGames.push(rows.filter((game: any) => game.type === '0').slice(i, i + 4));
-    }
-    singlePlayerGames.value = tempSinglePlayerGames;
-    console.log(tempSinglePlayerGames);
+    singlePlayerGames.value = rows.filter((game: any) => game.type === '0');
     MobileGames.value = rows.filter((game: any) => game.type === '1');
   }
 }
@@ -118,26 +86,7 @@ function getAnimateTime() {
   return `animated-${animateTimeList[Math.floor(Math.random() * 9) + 1]}`;
 }
 
-// 根据屏幕宽度计算 item-height（初始时确定，不动态监听）
-const getItemHeight = computed(() => {
-  const width = window.innerWidth;
 
-  // 基于 CSS 中定义的 game-item 宽高比 (7/6.5) 和实际内容高度计算
-  // 考虑不同屏幕下的布局差异
-  if (width <= 480) {
-    return 340; // 手机端：单列，更大的内容区域
-  } else if (width <= 768) {
-    return 320; // 平板端：双列
-  } else if (width <= 1200) {
-    return 300; // 小屏桌面：三列
-  } else {
-    return 280; // 大屏桌面：四列
-  }
-});
-
-// 移除了动态监听，只在初始时计算一次
-
-// 只在初始时计算，不监听窗口大小变化
 onMounted(() => {
   getList();
 });

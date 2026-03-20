@@ -18,10 +18,10 @@ export default {
   name: '3dMenu',
   mounted() {
     if (typeof THREE != undefined) {
-      loadScript('/3dMenu/three.min.js', () => {
-        loadScript('/3dMenu/tween.min.js', () => {
-          loadScript('/3dMenu/TrackballControls.js', () => {
-            loadScript('/3dMenu/CSS3DRenderer.js', () => {
+      loadScript('../../../../../public/3dMenu/three.min.js', () => {
+        loadScript('../../../../../public/3dMenu/tween.min.js', () => {
+          loadScript('../../../../../public/3dMenu/TrackballControls.js', () => {
+            loadScript('../../../../../public/3dMenu/CSS3DRenderer.js', () => {
               this.initMenu();
             });
           });
@@ -863,6 +863,7 @@ export default {
   height: 100%;
   background-color: #000000 !important;
 }
+
 a {
   color: #ffffff;
 }

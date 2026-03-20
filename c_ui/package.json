@@ -82,6 +82,7 @@
     "vite-plugin-compression": "^0.5.1",
     "vite-plugin-svg-icons": "^2.0.1",
     "vue-tsc": "^2.2.10",
-    "vuepress-plugin-sakura": "^1.2.1"
+    "vuepress-plugin-sakura": "^1.2.1",
+    "zip-a-folder": "^6.1.0"
   }
 }

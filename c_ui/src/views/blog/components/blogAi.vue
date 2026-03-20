@@ -12,7 +12,7 @@
       </div>
     </div>
     <div class="blog-ai-abstract" v-cLoading="loading">
-      <el-input type="textarea" v-model="abstract" />
+      <el-input type="textarea" v-model="abstract" rows="4" />
     </div>
   </div>
 </template>
@@ -35,6 +35,11 @@ const loading = ref(false);
 //获取摘要
 async function getAbstract() {
   if (!props.blogContent) return;
+  console.log(props.blogContent.length);
+  if (props.blogContent.length > 10000) {
+    abstract.value = '博客内容过长';
+    return;
+  }
   let messages = [
     {
       role: 'user',
@@ -48,7 +53,7 @@ async function getAbstract() {
   console.log(response);
 
   if (response.status !== 200) {
-    // ElNotification.error('API returned an error');
+    ElNotification.error('API returned an error');
     abstract.value = response.error || 'api请求失败,请联系管理员';
     loading.value = false;
 
@@ -102,21 +107,25 @@ onMounted(() => {
   border-radius: 12px;
   overflow: hidden;
   background: #f7f7f9;
+
   .blog-ai-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 15px 20px 10px 20px;
     font-size: 0.8rem;
+
     .blog-ai-header-left {
       display: flex;
       align-items: center;
     }
+
     .blog-ai-icon {
       margin-right: 10px;
       margin-left: 5px;
     }
   }
+
   .blog-ai-abstract {
     border: 1px solid #d4d4d4;
     margin: 5px 15px 15px 15px;
@@ -125,22 +134,28 @@ onMounted(() => {
     background: white;
     min-height: 3rem;
   }
+
   .loading-dots {
     display: inline-block;
     color: #6b7280;
+
     &::after {
       content: '';
       animation: dots 1.4s infinite;
     }
   }
+
   @keyframes dots {
+
     0%,
     20% {
       content: '.';
     }
+
     40% {
       content: '..';
     }
+
     60%,
     100% {
       content: '...';
