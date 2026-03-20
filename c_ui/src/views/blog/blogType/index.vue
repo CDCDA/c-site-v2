@@ -64,7 +64,7 @@ onMounted(() => {
     transform-style: preserve-3d;
 
     .type-list {
-      width: calc(100% - 40px);
+      width: calc(100% - 2rem);
       padding: 20px 20px;
       display: flex;
       flex-wrap: wrap;

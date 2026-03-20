@@ -91,7 +91,7 @@ onMounted(() => {
   border-radius: 8px;
   overflow: hidden;
   object-fit: cover;
-  margin: 40px 0 30px 0;
+  margin: 2rem 0 30px 0;
   background-position: center;
 }
 .update-log-preface {

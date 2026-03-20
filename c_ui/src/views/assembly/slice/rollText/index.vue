@@ -41,15 +41,15 @@ onMounted(() => {
 
 <style lang="scss" scoped>
 .tricker {
-  height: 40px;
+  height: 2rem;
   overflow: hidden;
   margin: 100px auto 20px;
 }
 .tricker p {
   color: #333;
   margin: 0;
-  height: 40px;
-  line-height: 40px;
+  height: 2rem;
+  line-height: 2rem;
   font-size: 1rem;
   text-align: center;
   text-transform: uppercase;

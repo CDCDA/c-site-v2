@@ -22,7 +22,7 @@
             class="footer-icon weixin"
             @click="toQrCode"
           ></svg-icon>
-          <svg-icon iconName="commonSvg-github" class="footer-icon github"></svg-icon>
+          <svg-icon iconName="techStackSvg-git" class="footer-icon github"></svg-icon>
         </div>
       </div>
     </div>
@@ -76,7 +76,7 @@ onMounted(() => {
   .filter-bg {
     background: transparent;
     backdrop-filter: blur(5px);
-    padding: 20px;
+    padding: 1rem;
     @include flex-column;
   }
   .blog-user-card {
@@ -89,7 +89,7 @@ onMounted(() => {
     .user-header {
       height: 24px;
       width: fit-content;
-      padding: 2px 20px;
+      padding: 2px 1rem;
       border-radius: 8px;
       font-size: 0.8rem;
       margin: 10px 0 25px 0;
@@ -136,7 +136,7 @@ onMounted(() => {
       justify-content: space-around;
       align-items: center;
 
-      margin: 20px 0 0 0;
+      margin: 1rem 0 0 0;
       .footer-leftSide {
         @include flex-column;
         align-items: start;
@@ -156,8 +156,8 @@ onMounted(() => {
         @include flex;
         margin-right: -10px;
         .footer-icon {
-          width: 40px;
-          height: 40px;
+          width: 1.8rem;
+          height: 1.8rem;
           margin: 10px;
           cursor: pointer;
         }

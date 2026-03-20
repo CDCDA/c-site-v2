@@ -11,10 +11,21 @@
       </el-header>
       <el-main id="main">
         <sakura :new-options="sakuraOptions" v-if="themeStore.options?.isSakura" />
-        <video id="tsparticles" class="tsparticles-video" autoplay loop muted :src="src"
-          v-if="themeStore.backType == 'video'" />
+        <video
+          id="tsparticles"
+          class="tsparticles-video"
+          autoplay
+          loop
+          muted
+          :src="src"
+          v-if="themeStore.backType == 'video'"
+        />
         <div id="tsparticles" class="particles" v-else />
-        <Particles v-if="themeStore.options && themeStore.options.isParticles" id="particles" :options="options" />
+        <Particles
+          v-if="themeStore.options && themeStore.options.isParticles"
+          id="particles"
+          :options="options"
+        />
         <div class="router-container">
           <router-view v-slot="{ Component }">
             <component :is="Component" />
@@ -174,6 +185,7 @@ async function init() {
   let appTheme = document.querySelector('#app-theme') as any;
   // 获取缓存的主题数据
   let themeData = window.localStorage.getItem('themeData') as any;
+  console.log(themeData);
   if (themeData) {
     themeData = JSON.parse(themeData) as any;
     themeStore.theme = themeData.theme ? themeData.theme : 'theme-white';
@@ -254,7 +266,7 @@ onMounted(() => {
   // 检测设备类型，如果是移动设备或平板，跳转到邀请函页面
   if (isMobileOrTablet()) {
     router.push({ path: '/invitation' });
-  } else if (!window.location.href.includes('anage')) {
+  } else {
     init();
   }
 });
@@ -301,7 +313,7 @@ onMounted(() => {
 }
 
 #app-theme {
-  /* 初始状态：向下偏移 20px，透明度 0 */
+  /* 初始状态：向下偏移 1rem，透明度 0 */
   // opacity: 0.5;
   transform: translateY(20px);
   animation: settle-in 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;

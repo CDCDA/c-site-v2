@@ -10,7 +10,7 @@
         <md-preview :editorId="'preview-only'" :modelValue="blogData.content" />
         <div></div>
         <blogPreAndNext :blog-id="blogData.blogId" v-show="preNextShow" />
-        <div class="c-divider" style="margin: 40px 21px 30px 21px"></div>
+        <div class="c-divider" style="margin: 2rem 21px 30px 21px"></div>
         <comment :type="0" :relevanceId="blogData.blogId" :data="blogData" />
         <!-- <el-divider></el-divider> -->
         <div class="blog-display-footer">
@@ -157,7 +157,7 @@ onMounted(() => {
   .md-editor-previewOnly {
     color: get('font-color');
     margin: 20px;
-    width: calc(100% - 40px);
+    width: calc(100% - 2rem);
     // min-height: 100%;
   }
   .blog-display-left:hover {

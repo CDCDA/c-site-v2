@@ -59,7 +59,7 @@
             <g id="cloud1" class="cloud"></g>
           </svg>
           <div class="details">
-            <div class="temp" style="font-size: 40px">{{ weatherData.temp }}<span>℃</span></div>
+            <div class="temp" style="font-size: 2rem">{{ weatherData.temp }}<span>℃</span></div>
             <div class="right">
               <div id="date">{{ weatherData.date }}</div>
               <div id="summary">{{ weatherData.weather }}</div>

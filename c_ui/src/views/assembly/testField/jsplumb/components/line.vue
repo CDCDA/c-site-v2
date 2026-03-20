@@ -198,6 +198,6 @@ onMounted(() => {
 }
 .line-wrap {
   display: flex;
-  margin-bottom: 40px;
+  margin-bottom: 2rem;
 }
 </style>

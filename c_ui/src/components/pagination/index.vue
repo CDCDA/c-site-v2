@@ -285,7 +285,7 @@ onMounted(() => {
         color: #666;
         border: 0;
         font-size: 0.8rem;
-        max-width: 40px;
+        max-width: 2rem;
         padding: 2px 1px;
       }
 
@@ -314,8 +314,8 @@ onMounted(() => {
       display: inline-block;
       color: #888f9c;
       font-size: 14px;
-      height: 40px;
-      line-height: 40px;
+      height: 2rem;
+      line-height: 2rem;
       margin-left: 20px;
       position: relative;
       vertical-align: top;
@@ -330,7 +330,7 @@ onMounted(() => {
         margin: 0 10px 0 2px;
         padding-left: 10px;
         width: 60px;
-        height: 40px;
+        height: 2rem;
       }
 
       & > .icn {
@@ -375,7 +375,7 @@ onMounted(() => {
           position: absolute;
           left: -2px;
           width: 100%;
-          bottom: 40px;
+          bottom: 2rem;
           background: get('back');
           border: 1px solid get('border-color');
           border-radius: 4px;

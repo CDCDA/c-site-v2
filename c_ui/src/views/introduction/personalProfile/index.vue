@@ -5,8 +5,8 @@
   <contact-dialog v-model="showContact" />
   <div class="person-fixed-button" @click="router.push({ name: 'projectExperience' })">
     <el-icon>
-      <Right />
-    </el-icon>{{ $t('查看项目') }}
+      <Right /> </el-icon
+    >{{ $t('查看项目') }}
   </div>
   <div class="person-fixed-button contact-button" @click="showContact = true">
     <el-icon>
@@ -60,8 +60,11 @@
         <p class="character-comment">{{ $t('感觉不太准，但又有很多人喜欢玩这个') }}</p>
         <p class="character-associate">
           {{ $t('感兴趣的可以去玩玩')
-          }}<a target="_blank" href="https://www.16personalities.com/ch/%E4%BA%BA%E6%A0%BC%E6%B5%8B%E8%AF%95">{{
-            $t('性格测试') }}</a>
+          }}<a
+            target="_blank"
+            href="https://www.16personalities.com/ch/%E4%BA%BA%E6%A0%BC%E6%B5%8B%E8%AF%95"
+            >{{ $t('性格测试') }}</a
+          >
         </p>
       </div>
       <div class="ps-strong-point">
@@ -169,8 +172,8 @@ const showContact = ref(false);
 
         // -webkit-text-fill-color: transparent;
         .svg-icon {
-          width: 40px;
-          height: 40px;
+          width: 2rem;
+          height: 2rem;
           margin-left: 10px;
         }
       }
@@ -211,7 +214,7 @@ const showContact = ref(false);
 
     .ps-info-left {
       width: 50%;
-      height: calc(100% - 40px);
+      height: calc(100% - 2rem);
       background: get('back');
       box-shadow: get('box-shadow');
       border-radius: 12px;
@@ -341,8 +344,8 @@ const showContact = ref(false);
   }
 
   .ps-character {
-    width: calc(60% - 40px);
-    height: calc(100% - 40px);
+    width: calc(60% - 2rem);
+    height: calc(100% - 2rem);
     background: get('back');
     box-shadow: get('box-shadow');
     border-radius: 12px;
@@ -377,7 +380,7 @@ const showContact = ref(false);
 
     .character-comment {
       position: absolute;
-      bottom: 40px;
+      bottom: 2rem;
     }
 
     .character-associate {
@@ -388,7 +391,7 @@ const showContact = ref(false);
 
   .ps-strong-point {
     width: calc(40% - 60px);
-    height: calc(100% - 40px);
+    height: calc(100% - 2rem);
     background: url('@/assets/images/star.webp') no-repeat;
     background-size: 100% 100%;
     box-shadow: get('box-shadow');

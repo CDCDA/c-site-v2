@@ -452,7 +452,7 @@ function changeLayout() {
     }
     .draggableContainer {
       margin: 0 20px;
-      width: calc(100% - 40px) !important;
+      width: calc(100% - 2rem) !important;
     }
 
     .vdr-handle-tl {
@@ -517,7 +517,7 @@ function changeLayout() {
       background: get('back');
       box-shadow: 0 1px 1px 1px #000000;
       box-shadow: get('box-shadow');
-      height: 40px;
+      height: 2rem;
       margin: 5px 20px 10px 20px;
       display: flex;
       justify-content: start;

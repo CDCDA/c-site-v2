@@ -14,7 +14,7 @@
     @close="emit('close')"
   >
     <slot></slot>
-    <router-view />
+    <router-view v-cLoading="loading" />
   </c-dialog>
 </template>
 <script setup lang="ts">
@@ -22,6 +22,7 @@ import { useI18n } from 'vue-i18n';
 const { t: $t } = useI18n();
 import { ref, onMounted, watch } from 'vue';
 const dialogVisible = ref(false);
+const loading = ref(false);
 const props = defineProps({
   title: {
     type: String,
@@ -50,7 +51,8 @@ onMounted(() => {
 });
 defineExpose({
   close,
-  open
+  open,
+  loading: false
 });
 </script>
 <style lang="scss">

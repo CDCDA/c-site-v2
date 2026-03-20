@@ -241,7 +241,7 @@ onMounted(() => {
 
 .essay-form {
   width: 100%;
-  height: calc(100% - 40px);
+  height: calc(100% - 2rem);
 }
 :deep(.el-form-item .el-form-item__label) {
   font-size: 0.9rem;
@@ -256,7 +256,7 @@ onMounted(() => {
 .essay-form {
 }
 .essay-editor-footer {
-  width: calc(100% - 40px);
+  width: calc(100% - 2rem);
   display: flex;
   margin: 20px;
   justify-content: center;

@@ -1,9 +1,15 @@
 <template>
-  <div class="message">
-    <el-popover placement="bottom" append-to=".popper-base" :width="330" trigger="click" @show="getData">
+  <div class="message header-btn">
+    <el-popover
+      placement="bottom"
+      append-to=".popper-base"
+      :width="330"
+      trigger="click"
+      @show="getData"
+    >
       <template #reference>
         <ElBadge :value="msgCount" :hidden="msgCount === 0" class="item">
-          <i class="svg-icon-wrap" style="margin-bottom: 12px">
+          <i class="svg-icon-wrap">
             <svg-icon iconName="commonSvg-铃铛" class="header-icon bell" />
           </i>
         </ElBadge>

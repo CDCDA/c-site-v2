@@ -443,7 +443,7 @@ onMounted(() => {});
     .fitness-motto {
       font-weight: bold;
       top: 10px;
-      left: 40px;
+      left: 2rem;
       writing-mode: vertical-rl; /* 设置文字竖排 */
       text-orientation: upright; /* 设置文字正立显示 */
       font-size: 1.2rem;

@@ -31,10 +31,11 @@ const routerDialog = ref(null) as any;
 const title = ref(null) as any;
 const sliceList = ref([]) as any;
 
-function toSlice(item: any) {
+async function toSlice(item: any) {
   title.value = $t(item.meta.title);
   routerDialog.value.open();
-  router.push({ name: item.name });
+
+  await router.push({ path: item.name });
 }
 
 function close() {

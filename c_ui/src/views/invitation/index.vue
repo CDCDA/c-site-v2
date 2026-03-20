@@ -14,12 +14,22 @@
 
       <!-- 功能按钮 -->
       <div class="button-container">
-        <el-button type="primary" size="large" class="action-button github-button" @click="openGitHub">
+        <el-button
+          type="primary"
+          size="large"
+          class="action-button github-button"
+          @click="openGitHub"
+        >
           <svg-icon icon-class="socialSvg-github" class="button-icon" />
           查看 GitHub 源码
         </el-button>
 
-        <el-button type="success" size="large" class="action-button pdf-button" @click="downloadResume">
+        <el-button
+          type="success"
+          size="large"
+          class="action-button pdf-button"
+          @click="downloadResume"
+        >
           <svg-icon icon-class="commonSvg-文档" class="button-icon" />
           下载简历 PDF
         </el-button>
@@ -51,7 +61,8 @@ const downloadResume = () => {
 // 一键复制 PC 链接
 const copyPCLink = () => {
   const pcLink = window.location.origin + window.location.pathname;
-  navigator.clipboard.writeText(pcLink)
+  navigator.clipboard
+    .writeText(pcLink)
     .then(() => {
       ElMessage.success('PC 链接已复制到剪贴板');
     })
@@ -92,7 +103,7 @@ const copyPCLink = () => {
 .content-wrapper {
   background: rgba(0, 0, 0, 0.7);
   border-radius: 16px;
-  padding: 40px;
+  padding: 2rem;
   max-width: 90%;
   width: 500px;
   text-align: center;
@@ -112,7 +123,7 @@ const copyPCLink = () => {
   color: #e0e0e0;
   font-size: 16px;
   line-height: 1.6;
-  margin-bottom: 40px;
+  margin-bottom: 2rem;
 }
 
 .button-container {

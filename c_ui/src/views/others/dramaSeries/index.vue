@@ -3,7 +3,14 @@
 -->
 <template>
   <div class="page-main drama-main">
-    <el-carousel trigger="click" type="card" class="drama-carousel animated bounceInDown" loop autoplay interval="5000">
+    <el-carousel
+      trigger="click"
+      type="card"
+      class="drama-carousel animated bounceInDown"
+      loop
+      autoplay
+      interval="5000"
+    >
       <el-carousel-item v-for="item in showDataList" class="drama-carousel-item">
         <img class="carousel-item-img" :src="item.coverUrl" />
       </el-carousel-item>
@@ -16,8 +23,15 @@
         <c-image :src="item.coverUrl" />
         <div class="drama-info">
           <h3>{{ item.name }}</h3>
-          <el-rate class="drama-rate" v-model="item.rate" disabled show-score allow-half text-color="#ff9900"
-            :score-template="`${item.rate * 2}`" />
+          <el-rate
+            class="drama-rate"
+            v-model="item.rate"
+            disabled
+            show-score
+            allow-half
+            text-color="#ff9900"
+            :score-template="`${item.rate * 2}`"
+          />
           <span class="no-wrap drama-intro">{{ item.intro }}</span>
         </div>
       </div>
@@ -31,8 +45,15 @@
         <c-image :src="item.coverUrl" />
         <div class="drama-info">
           <h3>{{ item.name }}</h3>
-          <el-rate class="drama-rate" v-model="item.rate" disabled show-score allow-half text-color="#ff9900"
-            :score-template="`${item.rate * 2}`" />
+          <el-rate
+            class="drama-rate"
+            v-model="item.rate"
+            disabled
+            show-score
+            allow-half
+            text-color="#ff9900"
+            :score-template="`${item.rate * 2}`"
+          />
           <span class="drama-intro no-wrap">{{ item.intro }}</span>
         </div>
       </div>
@@ -45,8 +66,15 @@
         <c-image :src="item.coverUrl" />
         <div class="drama-info">
           <h3>{{ item.name }}</h3>
-          <el-rate class="drama-rate" v-model="item.rate" disabled show-score allow-half text-color="#ff9900"
-            :score-template="`${item.rate * 2}`" />
+          <el-rate
+            class="drama-rate"
+            v-model="item.rate"
+            disabled
+            show-score
+            allow-half
+            text-color="#ff9900"
+            :score-template="`${item.rate * 2}`"
+          />
           <span class="drama-intro no-wrap">{{ item.intro }}</span>
         </div>
       </div>
@@ -170,7 +198,7 @@ onMounted(() => {
     align-items: start;
     transition: all 0.6s ease;
     bottom: -60%;
-    width: calc(100% - 40px);
+    width: calc(100% - 2rem);
     padding: 0 20px;
     position: absolute;
     background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(0, 0, 0, 0.5) 25%);

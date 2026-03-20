@@ -30,7 +30,7 @@ onMounted(() => {
 .sideNav {
   max-width: 200px;
   background: rgba(0, 0, 0, 0.75);
-  margin: 40px auto;
+  margin: 2rem auto;
   padding: 10px 0 20px 0;
   border: 1px solid #111;
   border-radius: 4px;
@@ -41,8 +41,8 @@ onMounted(() => {
   font-weight: 300;
   text-align: center;
   position: relative;
-  height: 40px;
-  line-height: 40px;
+  height: 2rem;
+  line-height: 2rem;
   margin-top: 10px;
   overflow: hidden;
   width: 90%;

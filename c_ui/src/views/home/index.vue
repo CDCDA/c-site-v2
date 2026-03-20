@@ -271,7 +271,7 @@ onMounted(() => {
     }
     .main-top-title {
       font-weight: bold;
-      font-size: 40px;
+      font-size: 2rem;
     }
     .home-top-buttons {
       display: flex;
@@ -319,7 +319,7 @@ onMounted(() => {
     .CycleUpDown {
       font-size: 70px;
       color: get('font-color');
-      bottom: 40px;
+      bottom: 2rem;
       cursor: pointer;
       position: absolute;
     }

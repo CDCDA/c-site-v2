@@ -157,7 +157,7 @@ onMounted(() => {
   flex-direction: column;
   justify-content: space-between;
   .expression-main {
-    height: calc(100% - 40px);
+    height: calc(100% - 2rem);
     overflow: auto;
     border: 1px solid #ccc;
     border-radius: 3px;
@@ -241,8 +241,8 @@ onMounted(() => {
       }
     }
     .comment-editor-avatar {
-      width: 40px;
-      height: 40px;
+      width: 2rem;
+      height: 2rem;
       border-radius: 20px;
       margin-right: 10px;
       margin-left: 4px;

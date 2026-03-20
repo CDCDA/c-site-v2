@@ -909,7 +909,7 @@ a {
 
 .element .symbol {
   position: absolute;
-  top: 40px;
+  top: 2rem;
   left: 0;
   right: 0;
   font-size: 60px;

@@ -353,7 +353,7 @@ onMounted(() => {
     }
     .main-top-title {
       font-weight: bold;
-      font-size: 40px;
+      font-size: 2rem;
     }
     .main-top-vice-title {
       margin-top: 10px;
@@ -369,10 +369,10 @@ onMounted(() => {
       transform: rotate(90deg);
     }
     .CycleUpDown {
-      font-size: 40px;
+      font-size: 2rem;
       height: 60px;
       color: get('font-color');
-      bottom: 40px;
+      bottom: 2rem;
       cursor: pointer;
       position: absolute;
     }
@@ -535,7 +535,7 @@ onMounted(() => {
                   }
                 }
                 .list-item-footer {
-                  width: calc(100% - 40px);
+                  width: calc(100% - 2rem);
                   height: 100px;
                   display: flex;
                   justify-content: space-evenly;

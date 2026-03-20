@@ -26,6 +26,10 @@
 - **路由**: Vue Router
 - **HTTP**: Axios
 - **构建工具**: Vite
+- **国际化**: Vue I18n
+- **CSS预处理器**: SCSS
+- **代码规范**: ESLint + Prettier
+- **类型检查**: TypeScript
 
 ## 功能特性
 
@@ -92,10 +96,26 @@ c-site-v2/
 │
 └── c_ui/                         # Vue 3 前端
     ├── src/                      # 源代码
-    ├── public/                   # 静态资源
-    ├── dist-pagination/          # 打包组件
+    │   ├── assets/               # 静态资源（图片、图标、样式等）
+    │   ├── components/           # 通用组件
+    │   ├── views/                # 页面视图
+    │   ├── router/               # 路由配置
+    │   ├── store/                # Pinia 状态管理
+    │   ├── api/                  # API 接口封装
+    │   ├── utils/                # 工具函数
+    │   ├── config/               # 配置文件
+    │   ├── locales/              # 国际化语言包
+    │   ├── directives/           # 自定义指令
+    │   ├── composables/          # 组合式API
+    │   └── main.js               # 应用入口
+    ├── public/                   # 静态资源（不经过打包的文件）
+    ├── dist/                     # 生产构建输出目录
+    ├── dist-pagination/          # 分页组件打包输出
     ├── lib/                      # 第三方库
-    └── i18nScripts/             # 国际化脚本
+    ├── i18nScripts/             # 国际化脚本
+    ├── vite.config.js           # Vite 配置文件
+    ├── package.json             # 项目依赖和脚本配置
+    └── index.html               # 应用入口HTML
 ```
 
 ## 环境要求
@@ -141,7 +161,7 @@ spring:
       port: 6379
       password: 123456 # Redis 服务器密码，如果没有则不配置
       database: 0 # Redis 数据库索引 (默认0)
-      # 连接池配置 (强烈推荐生产环境使用)
+      # 连接池配置
       lettuce:
         pool:
           max-active: 20 # 连接池最大连接数（使用负值表示没有限制）
@@ -201,16 +221,60 @@ npm install
 yarn install
 ```
 
-2. **开发模式**
+2. **环境配置**
+
+前端项目支持多环境配置，可在 `.env` 文件中配置：
+
+```bash
+# 开发环境
+VITE_API_BASE_URL=http://localhost:7000/api
+VITE_WS_BASE_URL=ws://localhost:7000/ws
+
+# 生产环境
+# VITE_API_BASE_URL=https://your-domain.com/api
+# VITE_WS_BASE_URL=wss://your-domain.com/ws
+```
+
+3. **开发模式**
 
 ```bash
 npm run dev
 ```
 
-3. **构建生产版本**
+开发服务器启动后，可通过以下地址访问：
+
+- http://localhost:8000
+
+4. **构建生产版本**
 
 ```bash
 npm run build
+```
+
+构建完成后，生成的静态文件位于 `dist` 目录，可部署到任何静态文件服务器。
+
+5. **预览生产构建**
+
+```bash
+npm run preview
+```
+
+6. **代码规范检查**
+
+```bash
+npm run lint
+```
+
+7. **类型检查**
+
+```bash
+npm run type-check
+```
+
+8. **国际化构建**
+
+```bash
+npm run i18n:build
 ```
 
 ## API 文档

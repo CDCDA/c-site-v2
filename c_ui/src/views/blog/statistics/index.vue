@@ -218,9 +218,9 @@ onMounted(() => {
   margin: 0 !important;
   max-width: none !important;
   .statistic-main-content {
-    width: calc(100% - 40px);
-    height: calc(100% - 40px);
-    padding: 70px 20px 20px 20px;
+    width: calc(100% - 2rem);
+    height: calc(100% - 3rem);
+    padding: 2.4rem 1rem 1rem;
     z-index: 1;
     display: flex;
     align-items: center;
@@ -276,7 +276,7 @@ onMounted(() => {
     }
     .count-item {
       color: white;
-      width: calc(25% - 40px);
+      width: calc(25% - 2rem);
       margin: 10px 20px;
       :deep(.el-statistic__head) {
         color: white;

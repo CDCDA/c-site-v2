@@ -10,7 +10,7 @@
       </div>
       <div class="music-search" v-if="isSearch">
         <el-input v-model="searchText"></el-input>
-        <div class="song-list" style="height: calc(100% - 40px)">
+        <div class="song-list" style="height: calc(100% - 2rem)">
           <div
             class="song"
             v-for="(song, i) in searchSongs"
@@ -25,7 +25,7 @@
           </div>
         </div>
       </div>
-      <div class="song-list" style="height: calc(100% - 40px)" v-else>
+      <div class="song-list" style="height: calc(100% - 2rem)" v-else>
         <div
           class="song"
           v-for="(song, i) in songs"
@@ -186,7 +186,7 @@ onMounted(() => {
   }
   .song:hover,
   .song.is-selected {
-    // height: 40px;
+    // height: 2rem;
     transform: scale(1.01);
     // font-size: 1rem;
     margin: 5px 0;

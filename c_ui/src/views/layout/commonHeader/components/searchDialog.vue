@@ -142,7 +142,7 @@ onMounted(() => {
 .finder__inner {
   display: flex;
 
-  border-radius: 40px;
+  border-radius: 2rem;
   padding: 5px 30px;
   align-items: center;
   position: relative;

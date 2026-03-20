@@ -76,7 +76,7 @@ onMounted(() => {});
   .navbar {
     position: sticky;
     background: transparent;
-    box-shadow: 0 0 40px rgba(0, 0, 0, 0.03);
+    box-shadow: 0 0 2rem rgba(0, 0, 0, 0.03);
     height: 100%;
     * {
       padding: 0;

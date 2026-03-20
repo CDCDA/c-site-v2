@@ -33,7 +33,7 @@ const width = computed(() => {
 .manage-container {
   width: 100vw;
   height: 100vh;
-  background: white;
+  // background: white;
   position: absolute;
   font-family: 'shark';
   overflow: hidden;
