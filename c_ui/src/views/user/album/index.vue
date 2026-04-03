@@ -4,11 +4,12 @@
 <template>
   <div class="page-main album-main">
     <div class="album-header animated bounceInDown">
-      <video :src="src" class="album-header-video" autoplay loop muted />
+      <video :src="'https://www.cccc1203.top/file/video/video_1783824280.mp4'" class="album-header-video" autoplay loop
+        muted />
       <div class="album-header-top">{{ $t('相册集') }}</div>
       <!-- <div class="album-header-center">{{ $t('唯有记忆，才是最完美的影像。') }}</div> -->
       <div class="album-header-center">{{ $t('事已至此，先放点壁纸吧。') }}</div>
-      <div class="album-header-bottom">{{ $t('好看的咧') }}</div>
+      <div class="album-header-bottom">{{ $t('好看的') }}</div>
     </div>
     <div class="album-center">
       <div class="album-item" @click="routeTo(item)" v-for="(item, i) in list" :key="i">
@@ -31,7 +32,7 @@ import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import { pageAlbums } from '@/api/album.ts';
 import { formatDate } from '@/utils/date';
-const src = new URL('@/assets/video/video_1783824280.mp4', import.meta.url).href
+// const src = new URL('@/assets/file/video/video_1783824280.mp4', import.meta.url).href
 
 const router = useRouter();
 const list = ref([]) as any;

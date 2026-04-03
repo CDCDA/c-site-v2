@@ -4,13 +4,8 @@
 <template>
   <div class="page-main equipment-main">
     <div class="equipment-header animated bounceInDown">
-      <video
-        :src="'/video/video_1800042575.mp4'"
-        class="equipment-header-video"
-        autoplay
-        loop
-        muted
-      ></video>
+      <video :src="'https://www.cccc1203.top/file/video/video_1800042575.mp4'" class="equipment-header-video" autoplay
+        loop muted></video>
       <span class="equipment-header-top">{{ $t('装备') }}</span>
       <span class="equipment-header-center">{{ $t('科技是第一生产力') }}</span>
       <span class="equipment-header-bottom">{{ $t('但是穷') }}</span>
@@ -72,12 +67,14 @@ onMounted(() => {
     justify-content: start;
     background: transparent !important;
     backdrop-filter: none !important;
+
     .equipment-header {
       height: 40vh;
       width: 100%;
       border-radius: 12px;
       box-shadow: get('box-shadow');
       position: relative;
+
       .equipment-header-video {
         opacity: 0.95;
         height: 100%;
@@ -85,13 +82,16 @@ onMounted(() => {
         border-radius: 12px;
         object-fit: cover;
       }
+
       margin-bottom: 1rem;
       color: white;
+
       .equipment-header-top {
         position: absolute;
         top: 10px;
         left: 15px;
       }
+
       .equipment-header-center {
         position: absolute;
         top: 47px;
@@ -99,18 +99,21 @@ onMounted(() => {
         font-size: 35px;
         font-weight: bold;
       }
+
       .equipment-header-bottom {
         position: absolute;
         bottom: 14px;
         left: 16px;
       }
     }
+
     .equipment-center {
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
       align-items: center;
       width: 100%;
+
       @media screen and (max-width: 1200px) {
         .equipment-item-content-item {
           width: calc(50% - 12px);
@@ -129,6 +132,7 @@ onMounted(() => {
         overflow: hidden;
         @include flex-column;
         justify-content: start;
+
         .equipment-item-cover {
           width: 100%;
           aspect-ratio: 7/5;
@@ -138,6 +142,7 @@ onMounted(() => {
           background: white;
           border-bottom: 1px solid get('border-color');
         }
+
         .equipment-item-info {
           display: flex;
           flex-direction: column;
@@ -145,11 +150,13 @@ onMounted(() => {
           height: 120px;
           width: 100%;
           align-items: center;
+
           .equipment-item-name {
             font-weight: bold;
             font-size: 1rem;
             margin: 10px;
           }
+
           .equipment-item-type {
             margin-bottom: 0;
             opacity: 0.6;
@@ -158,6 +165,7 @@ onMounted(() => {
             text-overflow: ellipsis;
             width: calc(100% - 30px);
           }
+
           .equipment-item-instoction {
             overflow: hidden;
             display: block;
@@ -170,6 +178,7 @@ onMounted(() => {
           }
         }
       }
+
       .equipment-item:hover {
         transform: scale(1.03);
       }

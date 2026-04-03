@@ -1,12 +1,6 @@
 <template>
   <div class="message header-btn">
-    <el-popover
-      placement="bottom"
-      append-to=".popper-base"
-      :width="330"
-      trigger="click"
-      @show="getData"
-    >
+    <el-popover placement="bottom" append-to=".popper-base" :width="330" trigger="click" @show="getData">
       <template #reference>
         <ElBadge :value="msgCount" :hidden="msgCount === 0" class="item">
           <i class="svg-icon-wrap">
@@ -26,7 +20,7 @@
               <span class="message-title no-wrap">{{ item.title }}</span>
               <span class="message-time">{{
                 formatDate(new Date(item.createTime), 'MM-dd hh-mm')
-              }}</span>
+                }}</span>
             </div>
             <div class="message-content-bottom">
               <span class="message-detail no-wrap">{{ item.content }}</span>

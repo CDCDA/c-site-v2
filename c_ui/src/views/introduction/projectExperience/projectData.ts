@@ -118,7 +118,7 @@ export default [
     intro: i18n.global.t(
       '挑战传统 Electron 开发模式，利用 Rust + Tauri 打造的轻量级、原生性能工具箱。包体积从百兆级缩减至十兆，本体内存占用率降低 70% 以上。'
     ),
-    date: ['2025-6', '2025-12'],
+    date: ['2025-4', '至今'],
     tags: ['Rust', 'Tauri', 'TypeScript', 'Vue3', 'Vite'],
     isAll: true,
     modules: [
@@ -154,7 +154,7 @@ export default [
     intro: i18n.global.t(
       '工业级的跨设备数据采集平台。支持主流品牌贴片机协议适配，实现了高频数据的稳定采集、动态驱动加载与远程静默更新，是连接物理工厂与云端 MES 的关键桥梁。'
     ),
-    date: ['2024-5', '2026-2'],
+    date: ['2024-5', '至今'],
     tags: ['Java', 'Spring Boot', 'PostgreSQL', 'Industrial IoT', 'SFTP'],
     isAll: false,
     modules: [
@@ -187,7 +187,7 @@ export default [
     intro: i18n.global.t(
       '基于 Node-RED 二次开发的低代码流式数据处理平台。通过PM2监控node-red子应用，实现了子应用的自动重启、日志监控、内存占用统计等功能。'
     ),
-    date: ['2024-10', '2025-12'],
+    date: ['2024-10', '2025-7'],
     tags: ['JavaScript', 'Node.js', 'Node-RED', 'Distributed Systems'],
     isAll: false,
     modules: [
@@ -261,7 +261,7 @@ export default [
     intro: i18n.global.t(
       '深耕产线效能分析，集 Web 后台、飞书微应用为一体。核心功能包括人员配置自动排班、生产效率实时计算与飞书协同审批流，全方位解决制造企业的人力成本追踪痛点。'
     ),
-    date: ['2025-7', '2026-2'],
+    date: ['2025-8', '2026-3'],
     tags: ['Java', 'TypeScript', 'Vue3', 'Spring Boot', 'SQLServer', 'Feishu/Lark'],
     isAll: false,
     modules: [
@@ -363,6 +363,12 @@ export default [
         title: i18n.global.t('跨系统数据同步机制'),
         intro: i18n.global.t(
           '构建了标准的 REST API 与 Webhook 回调体系，实现了主系统（MES）订单指令下发与子系统（标签云）实时反馈的闭环通信。'
+        )
+      },
+      {
+        title: i18n.global.t('消通信 RabbitMQ 队列管理'),
+        intro: i18n.global.t(
+          '设计并实现了基于 RabbitMQ 的消息队列管理，确保了高并发下的消息可靠传递与处理。'
         )
       }
     ]

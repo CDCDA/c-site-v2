@@ -14,28 +14,18 @@
 
       <!-- 功能按钮 -->
       <div class="button-container">
-        <el-button
-          type="primary"
-          size="large"
-          class="action-button github-button"
-          @click="openGitHub"
-        >
-          <svg-icon icon-class="socialSvg-github" class="button-icon" />
+        <el-button type="primary" size="large" class="action-button github-button" @click="openGitHub">
+
           查看 GitHub 源码
         </el-button>
 
-        <el-button
-          type="success"
-          size="large"
-          class="action-button pdf-button"
-          @click="downloadResume"
-        >
-          <svg-icon icon-class="commonSvg-文档" class="button-icon" />
+        <el-button type="success" size="large" class="action-button pdf-button" @click="downloadResume">
+
           下载简历 PDF
         </el-button>
 
         <el-button type="info" size="large" class="action-button copy-button" @click="copyPCLink">
-          <svg-icon icon-class="commonSvg-复制" class="button-icon" />
+
           一键复制 PC 链接
         </el-button>
       </div>
@@ -44,30 +34,29 @@
 </template>
 
 <script setup lang="ts">
-import { ElMessage } from 'element-plus';
+import { ElNotification } from 'element-plus';
 
 // 打开 GitHub 源码
 const openGitHub = () => {
-  window.open('https://github.com/cccc1495/c-site-v2', '_blank');
+  window.open('https://github.com/CDCDA/c-site-v2', '_blank');
 };
 
 // 下载简历 PDF
 const downloadResume = () => {
   // 这里需要替换为实际的简历 PDF 链接
-  const resumeUrl = 'https://example.com/resume.pdf';
+  const resumeUrl = 'https://www.cccc1203.top/file/other/陈毅东_福州大学_全栈_简历.pdf';
   window.open(resumeUrl, '_blank');
 };
 
 // 一键复制 PC 链接
 const copyPCLink = () => {
-  const pcLink = window.location.origin + window.location.pathname;
   navigator.clipboard
-    .writeText(pcLink)
+    .writeText('https://www.cccc1203.top/c-site/#/login')
     .then(() => {
-      ElMessage.success('PC 链接已复制到剪贴板');
+      ElNotification.success('PC 链接已复制到剪贴板');
     })
     .catch(err => {
-      ElMessage.error('复制失败，请手动复制链接');
+      ElNotification.error('复制失败，请手动复制链接');
       console.error('复制失败:', err);
     });
 };
@@ -201,5 +190,9 @@ const copyPCLink = () => {
     font-size: 14px;
     margin: 0;
   }
+}
+
+.el-button {
+  margin: 0;
 }
 </style>

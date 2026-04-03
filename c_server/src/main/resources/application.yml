@@ -32,14 +32,26 @@ spring:
     serialization:
       fail-on-empty-beans: false # 修正：属性名使用kebab-case
   datasource:
-#    driver-class-name: org.postgresql.Driver
-#    url: jdbc:postgresql://120.48.127.181:5432/C_PW?useUnicode=true&characterEncoding=utf8&useSSL=true&autoReconnect=true&reWriteBatchedInserts=true
-#    username: postgres
-#    password: 123456
-      driver-class-name: com.mysql.jdbc.Driver
-      url: jdbc:mysql://120.48.127.181:3306/C_PW?useUnicode=true&characterEncoding=utf-8&useSSL=false
-      username: root
-      password: 123456
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://120.48.127.181:3306/C_PW?useUnicode=true&characterEncoding=utf-8&useSSL=false
+    username: root
+    password: 123456
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      initial-size: 5
+      max-active: 20
+      min-idle: 5
+      max-wait: 60000
+      stat-view-servlet:
+        enabled: true
+        url-pattern: /druid/*
+        allow: ""
+        login-username: admin
+        login-password: 123456
+      web-stat-filter:
+        enabled: true
+        url-pattern: /*
+        exclusions: "*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*"
   # 邮箱 SMTP 配置 (移到与 data 同级)
   mail:
     host: smtp.qq.com
@@ -62,11 +74,11 @@ spring:
     username: admin
     password: 123456
     virtual-host: /
-    
+
     # 连接超时配置
     connection-timeout: 60000  # 连接超时 60 秒
     requested-heartbeat: 60    # 心跳间隔 60 秒
-    
+
     # 连接池配置（修复：使用正确的配置格式）
     cache:
       connection:
@@ -74,7 +86,7 @@ spring:
       channel:
         size: 25        # 通道缓存大小
         checkout-timeout: 30000  # 获取通道超时时间
-    
+
     # 监听器配置
     listener:
       simple:

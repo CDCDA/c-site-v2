@@ -34,6 +34,8 @@ const abstract = ref('') as any;
 const loading = ref(false);
 //获取摘要
 async function getAbstract() {
+  abstract.value = 'token用光了，暂时关闭';
+  return '';
   if (!props.blogContent) return;
   console.log(props.blogContent.length);
   if (props.blogContent.length > 10000) {

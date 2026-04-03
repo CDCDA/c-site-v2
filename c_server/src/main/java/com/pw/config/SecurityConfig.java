@@ -46,7 +46,8 @@ public class SecurityConfig {
                                 "/css/**",
                                 "/js/**",
                                 "/images/**",
-                                "/ws/**"
+                                "/ws/**",
+                                "/druid/**"
                         ).permitAll()
                         .anyRequest().authenticated()
                 )

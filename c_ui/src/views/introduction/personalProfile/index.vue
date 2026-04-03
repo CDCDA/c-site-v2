@@ -21,7 +21,7 @@
   <div class="page-main personal-profile-main">
     <PersonalInfo class="bounceInDown animated"></PersonalInfo>
     <div class="ps-welcome c-left animated">
-      <video class="welcome-video" :src="src" autoplay loop muted />
+      <video class="welcome-video" :src="'https://cccc1203.top/file/video/video_1800042575.mp4'" autoplay loop muted />
       <span class="welcome-title">{{ $t('CCCC的记录站点') }}</span>
       <!-- <svg-icon iconName="commonSvg-礼花" /> -->
       <span class="welcome-name">{{ $t('陈毅东(1999年生)') }}</span>
@@ -38,7 +38,7 @@
       </div>
       <div class="ps-info-right">
         <div class="ps-info-map c-right animated">
-          <c-image class="map-img" :src="'https://120.48.127.181/file/other/工作地址.png'" />
+          <c-image class="map-img" :src="'https://cccc1203.top/file/other/工作地址.png'" />
           <div class="map-tip">{{ $t('现居 福州') }}</div>
         </div>
         <div class="ps-info-life c-right animated">
@@ -77,7 +77,6 @@ import { useI18n } from 'vue-i18n';
 const { t: $t } = useI18n();
 import { useRouter } from 'vue-router';
 const router = useRouter();
-const src = new URL('@/assets/video/video_1800042575.mp4', import.meta.url).href
 import { ref } from 'vue';
 import { Message } from '@element-plus/icons-vue';
 import PersonalInfo from './components/personalInfo.vue';

@@ -4,7 +4,8 @@
 <template>
   <div class="page-main essay-main">
     <div class="essay-header animated bounceInDown">
-      <video :src="src" class="essay-header-video" autoplay loop muted></video>
+      <video :src="'https://www.cccc1203.top/file/video/video_2000212665.mp4'" class="essay-header-video" autoplay loop
+        muted></video>
       <!-- <span class="essay-header-center"
         >{{ $t('喝一壶清茶，写几行小篆，') }}<br />看一剪流云，梦一回江南。愿与草木，随遇而安</span
       > -->
@@ -58,7 +59,7 @@ import useUserStore from '@/store/modules/user';
 import { sformatDate } from '@/utils/date.ts';
 import essayComment from './components/essayComment.vue';
 import { ElNotification } from 'element-plus';
-const src = new URL('@/assets/video/video_2000212665.mp4', import.meta.url).href
+// const src = new URL('@/assets/file/video/video_2000212665.mp4', import.meta.url).href
 
 const imgLoading = ref('rotate') as any;
 const userStore = useUserStore();
