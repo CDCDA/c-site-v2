@@ -88,6 +88,7 @@ public class WeiXinController extends BaseController implements convertControlle
      * @throws Exception
      */
     @PostMapping
+    @Operation(summary = "接收微信服务器消息")
     public String receiveMessage(@RequestBody WeixinMessage requestMessage, HttpServletResponse response) throws IOException {
         String fromUserName = requestMessage.getFromUserName();
         String toUserName = requestMessage.getToUserName();

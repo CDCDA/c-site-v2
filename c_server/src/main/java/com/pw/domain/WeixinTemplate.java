@@ -19,7 +19,6 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@TableName("user")
 @Schema(name = "微信公众号消息模板")
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class WeixinTemplate {

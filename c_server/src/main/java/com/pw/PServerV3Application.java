@@ -1,17 +1,23 @@
 package com.pw;
 
+import com.baomidou.mybatisplus.autoconfigure.MybatisPlusAutoConfiguration;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
+import org.springframework.boot.autoconfigure.jdbc.JdbcTemplateAutoConfiguration;
+import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadLocalRandom;
 
-@SpringBootApplication(scanBasePackages = {"com.pw"})
+@SpringBootApplication(scanBasePackages = {"com.pw"}, exclude = {DataSourceAutoConfiguration.class})
 @EnableScheduling
+@EnableTransactionManagement
 @EnableAsync
 public class PServerV3Application implements CommandLineRunner {
 

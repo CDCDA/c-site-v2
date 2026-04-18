@@ -1,0 +1,46 @@
+# sharding.yaml
+dataSources:
+  db_0:
+    dataSourceClassName: com.alibaba.druid.pool.DruidDataSource
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://120.48.127.181:3306/C_PW?useUnicode=true&characterEncoding=utf-8&useSSL=false&rewriteBatchedStatements=true
+    username: root
+    password: 123456
+  db_1:
+    dataSourceClassName: com.alibaba.druid.pool.DruidDataSource
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://120.48.127.181:3306/C_PW1?useUnicode=true&characterEncoding=utf-8&useSSL=false&rewriteBatchedStatements=true
+    username: root
+    password: 123456
+
+rules:
+  - !SHARDING
+    tables:
+      t_order:
+        actualDataNodes: db_${0..1}.t_order_${0..2}
+        databaseStrategy:
+          standard:
+            shardingColumn: id
+            shardingAlgorithmName: database_inline
+        tableStrategy:
+          standard:
+            shardingColumn: id
+            shardingAlgorithmName: table_inline
+    shardingAlgorithms:
+      database_inline:
+        type: INLINE
+        props:
+          algorithm-expression: db_${id % 2}
+      table_inline:
+        type: INLINE
+        props:
+          algorithm-expression: t_order_${id % 3}
+
+  - !SINGLE
+    tables:
+      - "*.*.*"        # 加载所有数据源中的所有单表
+    defaultDataSource: db_0 # 执行 DDL 语句（如 CREATE TABLE）时使用的默认数据源
+
+props:
+  sql-show: true
+  check.table.metadata.enabled: false

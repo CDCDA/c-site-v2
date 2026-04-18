@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@TableName("user")
+@TableName("`user`")
 @Schema(description  = "用户")
 public class UserDTO extends BasePageDto {
     @TableField

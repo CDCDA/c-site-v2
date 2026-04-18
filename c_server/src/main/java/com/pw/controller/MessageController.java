@@ -35,6 +35,7 @@ public class MessageController extends BaseController implements convertControll
     }
 
     @GetMapping("/listUserMessages")
+    @Operation(summary = "查询用户消息列表")
     public Result listUnRead(Message message) {
         message.setPageSize(100);
         message.setReceiverId(JwtTokenUtil.getLoginUserId());

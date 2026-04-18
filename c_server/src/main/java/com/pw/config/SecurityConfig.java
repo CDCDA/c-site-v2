@@ -31,6 +31,8 @@ public class SecurityConfig {
                                 "/prod-api/**",
                                 "/auth/**",
                                 "/user/**",
+                                "/sharding/order/**",
+                                "/large-data/**",
                                 "/public/**",
                                 // Swagger/Knife4j 相关路径
                                 "/doc.html",

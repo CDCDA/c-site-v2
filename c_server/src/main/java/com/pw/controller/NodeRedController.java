@@ -21,7 +21,7 @@ public class NodeRedController extends BaseController implements convertControll
 
 
     @PostMapping("httpTest")
-    @Operation(summary = "")
+    @Operation(summary = "HTTP测试接口")
     public Result handleValidation(@RequestBody String params) {
         Object obj = JSON.parse(params);
         System.out.println(params);

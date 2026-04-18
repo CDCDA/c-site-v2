@@ -19,7 +19,6 @@ import java.util.Map;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@TableName("user")
 @Schema(name = "微信公众号模板消息")
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class TemplateMessage {

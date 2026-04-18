@@ -69,4 +69,24 @@ class RedisTest {
         Set<String> members = redisTemplate.opsForSet().members("friends:1001");
         log.info(members.toString());
     }
+
+    @Test
+    void testSortedSet() {
+        // ZADD friends:1001 10 Alice 20 Bob
+        redisTemplate.opsForZSet().add("friends:1001", "Alice", 10);
+        redisTemplate.opsForZSet().add("friends:1001", "Bob", 20);
+        log.info(redisTemplate.opsForZSet().range("friends:1001", 0, -1).toString());
+
+        redisTemplate.opsForZSet().add("friends:1002", "Bob", 20);
+        redisTemplate.opsForZSet().add("friends:1002", "Charlie", 30);
+        log.info(redisTemplate.opsForZSet().range("friends:1002", 0, -1).toString());
+
+        Boolean isMember = redisTemplate.opsForSet().isMember("friends:1001", "Alice");  // true
+        log.info(isMember.toString());
+
+        Set<String> common = redisTemplate.opsForSet().intersect("friends:1001", "friends:1002");
+        log.info(common.toString());
+        Set<String> members = redisTemplate.opsForSet().members("friends:1001");
+        log.info(members.toString());
+    }
 }

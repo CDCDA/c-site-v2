@@ -14,7 +14,11 @@ import com.pw.service.BlogTagRelationSerivce;
 import com.pw.service.BlogTagService;
 import com.pw.vo.*;
 import lombok.extern.slf4j.Slf4j;
+import org.redisson.api.RLock;
+import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.util.Lock;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,6 +27,7 @@ import org.apache.commons.lang3.ObjectUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import static org.apache.commons.lang3.ObjectUtils.isEmpty;
 
@@ -44,6 +49,9 @@ public class BlogServiceImpl extends ServiceImpl<BlogMapper, Blog> implements Bl
 
     @Autowired
     private BlogTagRelationSerivce blogTagRelationSerivce;
+
+    @Autowired
+    private RedissonClient redissonClient;
 
     @Override
     @Transactional
@@ -142,28 +150,43 @@ public class BlogServiceImpl extends ServiceImpl<BlogMapper, Blog> implements Bl
     @Override
     @Transactional
     public Long updateBlog(Blog blog) {
-        this.updateById(blog);
-
-        if (ObjectUtils.isNotEmpty(blog.getTags())) {
-            // 删除原有标签关联
-            QueryWrapper<BlogTagRealation> wrapper = new QueryWrapper<>();
-            wrapper.eq("blog_id", blog.getBlogId());
-            blogTagRelationSerivce.remove(wrapper);
-
-            // 重新插入标签关联
-            List<Long> tagIds = new ArrayList<>();
-            for (BlogTag blogTag : blog.getTags()) {
-                if (!isEmpty(blogTag.getTagId())) {
-                    tagIds.add(blogTag.getTagId());
-                } else {
-                    blogTag.setTagId(new SnowFlake(1, 0).nextId());
-                    blogTagService.save(blogTag);
-                    tagIds.add(blogTag.getTagId());
-                }
+        String lockKey = "blog:" + blog.getBlogId();
+        RLock lock = redissonClient.getLock(lockKey);
+        try {
+            boolean isLocked = lock.tryLock(3, 10, TimeUnit.SECONDS);
+            if (!isLocked) {
+                throw new RuntimeException("更新博客失败，请稍后重试");
             }
-            blogTagRelationSerivce.insertTags(tagIds, blog.getBlogId());
+            this.updateById(blog);
+            if (ObjectUtils.isNotEmpty(blog.getTags())) {
+                // 删除原有标签关联
+                QueryWrapper<BlogTagRealation> wrapper = new QueryWrapper<>();
+                wrapper.eq("blog_id", blog.getBlogId());
+                blogTagRelationSerivce.remove(wrapper);
+
+                // 重新插入标签关联
+                List<Long> tagIds = new ArrayList<>();
+                for (BlogTag blogTag : blog.getTags()) {
+                    if (!isEmpty(blogTag.getTagId())) {
+                        tagIds.add(blogTag.getTagId());
+                    } else {
+                        blogTag.setTagId(new SnowFlake(1, 0).nextId());
+                        blogTagService.save(blogTag);
+                        tagIds.add(blogTag.getTagId());
+                    }
+                }
+                blogTagRelationSerivce.insertTags(tagIds, blog.getBlogId());
+            }
+
+            return blog.getBlogId();
+        } catch (Exception e) {
+            log.error("更新博客失败", e);
+            throw new RuntimeException("更新博客失败");
+        } finally {
+            if (lock.isHeldByCurrentThread()) {
+                lock.unlock();
+            }
         }
 
-        return blog.getBlogId();
     }
 }

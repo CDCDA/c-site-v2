@@ -7,6 +7,9 @@ mybatis:
 spring:
   application:
     name: c-server
+  datasource:
+    driver-class-name: org.apache.shardingsphere.driver.ShardingSphereDriver
+    url: jdbc:shardingsphere:classpath:sharding.yml
   profiles:
     active: dev  # 可选：dev, prod, no-rabbitmq
   servlet:
@@ -30,28 +33,28 @@ spring:
       timeout: 2000ms # 连接超时时间
   jackson:
     serialization:
-      fail-on-empty-beans: false # 修正：属性名使用kebab-case
-  datasource:
-    driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://120.48.127.181:3306/C_PW?useUnicode=true&characterEncoding=utf-8&useSSL=false
-    username: root
-    password: 123456
-    type: com.alibaba.druid.pool.DruidDataSource
-    druid:
-      initial-size: 5
-      max-active: 20
-      min-idle: 5
-      max-wait: 60000
-      stat-view-servlet:
-        enabled: true
-        url-pattern: /druid/*
-        allow: ""
-        login-username: admin
-        login-password: 123456
-      web-stat-filter:
-        enabled: true
-        url-pattern: /*
-        exclusions: "*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*"
+      fail-on-empty-beans: false
+#  datasource:
+#    driver-class-name: com.mysql.jdbc.Driver
+#    url: jdbc:mysql://120.48.127.181:3306/C_PW?useUnicode=true&characterEncoding=utf-8&useSSL=false&rewriteBatchedStatements=true
+#    username: root
+#    password: 123456
+#    type: com.alibaba.druid.pool.DruidDataSource
+#    druid:
+#      initial-size: 5
+#      max-active: 20
+#      min-idle: 5
+#      max-wait: 60000
+#      stat-view-servlet:
+#        enabled: true
+#        url-pattern: /druid/*
+#        allow: ""
+#        login-username: admin
+#        login-password: 123456
+#      web-stat-filter:
+#        enabled: true
+#        url-pattern: /*
+#        exclusions: "*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*"
   # 邮箱 SMTP 配置 (移到与 data 同级)
   mail:
     host: smtp.qq.com
@@ -78,6 +81,10 @@ spring:
     # 连接超时配置
     connection-timeout: 60000  # 连接超时 60 秒
     requested-heartbeat: 60    # 心跳间隔 60 秒
+
+    # 生产者确认配置（Confirm Callback）
+    publisher-confirm-type: correlated  # 确认类型：none/simple/correlated
+    publisher-returns: true              # 启用返回确认（Returns Callback）
 
     # 连接池配置（修复：使用正确的配置格式）
     cache:
@@ -150,3 +157,14 @@ mybatis-plus:
     #    map-underscore-to-camel-case: false
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
     default-enum-type-handler: org.apache.ibatis.type.EnumOrdinalTypeHandler
+  # 批量插入优化配置
+  global-config:
+    db-config:
+      # 主键类型（雪花算法）
+      id-type: auto
+      insert-strategy: ALWAYS
+    # 是否打印 Banner
+    banner: false
+  # 批量插入优化
+  # JDBC url 需要配置 rewriteBatchedStatements=true
+  jdbc-type-for-null: null

@@ -285,8 +285,6 @@ public class CustomWebSocketHandler extends TextWebSocketHandler {
 
     // 辅助方法
     private String getUserIdFromSession(WebSocketSession session) {
-        // 根据你的业务逻辑实现用户识别
-        // 这里使用sessionId作为示例
         return "user_" + session.getId();
     }
 
