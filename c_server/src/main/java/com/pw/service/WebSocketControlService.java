@@ -40,10 +40,6 @@ public class WebSocketControlService {
         message.put("channel", channel);
         message.put("data", data);
         message.put("timestamp", System.currentTimeMillis());
-
-        // 发送到广播交换机
-        sendMessageToRabbitMQ(message, RabbitMQConfig.WEBSOCKET_BROADCAST_EXCHANGE,
-                RabbitMQConfig.WEBSOCKET_BROADCAST_ROUTING_KEY);
     }
 
     /**
@@ -64,41 +60,7 @@ public class WebSocketControlService {
         sendMessageToRabbitMQ(message, RabbitMQConfig.WEBSOCKET_CONTROL_EXCHANGE, userRoutingKey);
     }
 
-    /**
-     * 发送系统通知（广播到系统通知频道）
-     *
-     * @param title   通知标题
-     * @param content 通知内容
-     * @param status  通知状态（primary/warning/error）
-     */
-    public void sendSystemNotice(String title, String content, String status) {
-        Map<String, Object> message = new HashMap<>();
-        message.put("type", "system_notice");
-        message.put("title", title);
-        message.put("content", content);
-        message.put("status", status);
-        message.put("timestamp", System.currentTimeMillis());
 
-        // 发送到广播交换机 - 系统通知频道
-        sendMessageToRabbitMQ(message, RabbitMQConfig.WEBSOCKET_BROADCAST_EXCHANGE,
-                "broadcast.system_notice");
-    }
-
-    /**
-     * 发送磁盘信息更新（广播）
-     *
-     * @param diskInfo 磁盘信息数据
-     */
-    public void sendDiskInfo(Object diskInfo) {
-        Map<String, Object> message = new HashMap<>();
-        message.put("type", "disk_info");
-        message.put("data", diskInfo);
-        message.put("timestamp", System.currentTimeMillis());
-
-        // 发送到广播交换机 - 磁盘信息频道
-        sendMessageToRabbitMQ(message, RabbitMQConfig.WEBSOCKET_BROADCAST_EXCHANGE,
-                "broadcast.disk_info");
-    }
 
     /**
      * 发送待办事项通知（发送给特定用户）
@@ -134,10 +96,6 @@ public class WebSocketControlService {
             // 发送给特定用户
             String userRoutingKey = RabbitMQConfig.getUserRoutingKey(targetUserId);
             sendMessageToRabbitMQ(message, RabbitMQConfig.WEBSOCKET_CONTROL_EXCHANGE, userRoutingKey);
-        } else {
-            // 广播
-            sendMessageToRabbitMQ(message, RabbitMQConfig.WEBSOCKET_BROADCAST_EXCHANGE,
-                    RabbitMQConfig.WEBSOCKET_BROADCAST_ROUTING_KEY);
         }
     }
 

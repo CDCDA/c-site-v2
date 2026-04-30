@@ -1,10 +1,12 @@
 package com.pw.config;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.pw.common.filter.JwtAuthenticationFilter;
 import com.pw.common.utils.JwtTokenUtil;
 import com.pw.service.UserService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -31,7 +33,9 @@ public class SecurityConfig {
                                 "/prod-api/**",
                                 "/auth/**",
                                 "/user/**",
+                                "/files/**",
                                 "/sharding/order/**",
+                                "/readwrite/**",
                                 "/large-data/**",
                                 "/public/**",
                                 // Swagger/Knife4j 相关路径
@@ -60,7 +64,9 @@ public class SecurityConfig {
 
     @Bean
     public JwtAuthenticationFilter jwtAuthenticationFilter(JwtTokenUtil jwtTokenUtil,
-                                                           UserService userService) {
-        return new JwtAuthenticationFilter(jwtTokenUtil, userService);
+                                                           UserService userService,
+                                                           StringRedisTemplate redisTemplate,
+                                                           ObjectMapper objectMapper) {
+        return new JwtAuthenticationFilter(jwtTokenUtil, userService, redisTemplate, objectMapper);
     }
 }

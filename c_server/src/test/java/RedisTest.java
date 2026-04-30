@@ -28,7 +28,8 @@ class RedisTest {
     void testHash() {
         redisTemplate.delete("testHash");
         redisTemplate.opsForHash().put("testHash", "field1", 1);
-        Integer value = (Integer) redisTemplate.opsForHash().get("testHash", 1);
+        Integer value = (Integer) redisTemplate.opsForHash().get("testHash", "field1");
+        log.info("testHash-field1:{}",value);
         redisTemplate.opsForHash().put("testHash", "field2", 2);
         redisTemplate.opsForHash().increment("testHash", "field1", 1);
         Map<String, String> entries = redisTemplate.opsForHash().entries("testHash");
@@ -39,10 +40,10 @@ class RedisTest {
     void testList() {
         redisTemplate.delete("testList");
         redisTemplate.opsForList().leftPush("testList", "1");
-        redisTemplate.opsForList().leftPush("testList", "1");
         redisTemplate.opsForList().leftPush("testList", "2");
+        redisTemplate.opsForList().leftPush("testList", "3");
         log.info(redisTemplate.opsForList().range("testList", 0, -1).toString());
-        redisTemplate.opsForList().remove("testList", 1, "1");
+        redisTemplate.opsForList().remove("testList", 1, "2");
         log.info(redisTemplate.opsForList().range("testList", 0, -1).toString());
         redisTemplate.opsForList().leftPop("testList");
 
@@ -53,21 +54,23 @@ class RedisTest {
     void testSet() {
         // SADD friends:1001 Alice Bob
         redisTemplate.opsForSet().add("friends:1001", "Alice", "Bob");
-        log.info(redisTemplate.opsForSet().members("friends:1001").toString());
+        log.info("friends:1001：{}",redisTemplate.opsForSet().members("friends:1001").toString());
+        redisTemplate.opsForSet().remove("friends:1001","Bob");
+        log.info("删除后：{}",redisTemplate.opsForSet().members("friends:1001").toString());
 // SADD friends:1002 Bob Charlie
         redisTemplate.opsForSet().add("friends:1002", "Bob", "Charlie");
-        log.info(redisTemplate.opsForSet().members("friends:1002").toString());
+        log.info("friends:1002：{}",redisTemplate.opsForSet().members("friends:1002").toString());
 // SISMEMBER friends:1001 Alice
         Boolean isMember = redisTemplate.opsForSet().isMember("friends:1001", "Alice");  // true
-        log.info(isMember.toString());
+        log.info("Alice是否1001的成员:{}", isMember.toString());
 // SINTER friends:1001 friends:1002 (交集)
         Set<String> common = redisTemplate.opsForSet().intersect("friends:1001", "friends:1002");
-        log.info(common.toString());
+        log.info("交集:{}",common.toString());
 // common: ["Bob"]
 
 // SMEMBERS friends:1001
         Set<String> members = redisTemplate.opsForSet().members("friends:1001");
-        log.info(members.toString());
+        log.info("friends:1001：{}",members.toString());
     }
 
     @Test

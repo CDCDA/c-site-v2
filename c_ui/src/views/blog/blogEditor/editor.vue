@@ -246,7 +246,8 @@ async function onUploadImg(files: any, callback: any) {
             form,
             {
               headers: {
-                'Content-Type': 'multipart/form-data'
+                'Content-Type': 'multipart/form-data',
+                Authorization: userStore.token
               }
             }
           )

@@ -30,11 +30,11 @@ public class DeadLetterQueueListener implements ChannelAwareMessageListener {
             String routingKey = message.getMessageProperties().getReceivedRoutingKey();
             String queue = message.getMessageProperties().getConsumerQueue();
 
-            log.error("💀 死信队列收到失败消息");
-            log.error("   消息内容: {}", messageBody);
-            log.error("   来源交换机: {}", exchange);
-            log.error("   路由键: {}", routingKey);
-            log.error("   死信队列: {}", queue);
+//            log.error("💀 死信队列收到失败消息");
+//            log.error("   消息内容: {}", messageBody);
+//            log.error("   来源交换机: {}", exchange);
+//            log.error("   路由键: {}", routingKey);
+//            log.error("   死信队列: {}", queue);
 
             // 解析消息内容
             try {
@@ -70,16 +70,14 @@ public class DeadLetterQueueListener implements ChannelAwareMessageListener {
             }
 
             // 记录消息的其他属性
-            log.error("   消息ID: {}", message.getMessageProperties().getMessageId());
-            log.error("   优先级: {}", message.getMessageProperties().getPriority());
-            log.error("   过期时间: {}", message.getMessageProperties().getExpiration());
+//            log.error("   消息ID: {}", message.getMessageProperties().getMessageId());
+//            log.error("   优先级: {}", message.getMessageProperties().getPriority());
+//            log.error("   过期时间: {}", message.getMessageProperties().getExpiration());
 
             // 手动 ACK 确认消息已处理
             // 注意：死信队列的消息通常需要人工介入或特殊处理，这里只是记录日志
             channel.basicAck(message.getMessageProperties().getDeliveryTag(), false);
-
-            log.info("✅ 死信消息已确认处理");
-
+            log.info("✅ 死信消息已确认处理:{}:{}:{}:{}",exchange,routingKey,queue,messageBody);
         } catch (Exception e) {
             log.error("❌ 处理死信队列消息时发生异常", e);
             try {

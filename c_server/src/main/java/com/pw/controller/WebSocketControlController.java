@@ -56,33 +56,6 @@ public class WebSocketControlController {
         return Result.ok().data("消息已发送给用户：" + userId);
     }
 
-    /**
-     * 发送系统通知
-     */
-    @PostMapping("/system-notice")
-    @Operation(summary = "发送系统通知")
-    public Result sendSystemNotice(
-            @RequestParam String title,
-            @RequestParam String content,
-            @RequestParam(defaultValue = "primary") String status) {
-
-        log.info("🔔 收到系统通知请求 - 标题：{}, 内容：{}, 状态：{}", title, content, status);
-        webSocketControlService.sendSystemNotice(title, content, status);
-
-        return Result.ok().data("系统通知已发送");
-    }
-
-    /**
-     * 发送磁盘信息更新
-     */
-    @PostMapping("/disk-info")
-    @Operation(summary = "发送磁盘信息更新")
-    public Result sendDiskInfo(@RequestBody Map<String, Object> diskInfo) {
-        log.info("💾 收到磁盘信息更新：{}", diskInfo);
-        webSocketControlService.sendDiskInfo(diskInfo);
-
-        return Result.ok().data("磁盘信息已更新");
-    }
 
     /**
      * 发送待办事项通知

@@ -42,8 +42,7 @@ public class test {
 
 
     public static void main(String[] args) throws InterruptedException {
-       List<Integer> list = Arrays.asList(1, 2, 3, 4, 5);
-       log.info(list.getLast().toString());
+       testDeadLock();
     }
 
 //    public static void testThreadPoolExecutor() throws InterruptedException {
@@ -66,35 +65,37 @@ public class test {
 //        }
 //    }
 
-    private static final Object lock1 = new Object();
-    private static final Object lock2 = new Object();
+    private static final Object s1= new Object();
+    private static final Object s2 = new Object();
 
     public static void testDeadLock() {
-        Thread t1 = new Thread(() -> {
-           synchronized(lock1){
-               log.info("线程1获取到锁1");
+        Thread t1 = new Thread(()->{
+           synchronized (s1){
                try{
-                   sleep(100);
-               } catch (InterruptedException e) {
-                   throw new RuntimeException(e);
+                   Thread.sleep(1000);
+               }catch(InterruptedException e){
+
                }
-               synchronized(lock2){
-                   log.info("线程1获取到锁2");
+               synchronized (s2){
+                   log.info("S2");
                }
            }
+
         });
-        Thread t2 = new Thread(() -> {
-            synchronized(lock2){
-                log.info("线程2获取到锁2");
+
+        Thread t2 = new Thread(()->{
+            synchronized (s2){
                 try{
-                    sleep(100);
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
+                    Thread.sleep(1000);
+                }catch(InterruptedException e){
+
                 }
-//                synchronized(lock1){
-//                    log.info("线程2获取到锁1");
-//                }
+                synchronized (s1){
+                    log.info("S1");
+
+                }
             }
+
         });
         t1.start();
         t2.start();
