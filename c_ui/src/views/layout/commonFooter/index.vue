@@ -13,12 +13,15 @@
     <!--      </div>-->
     <!--    </div>-->
     <div class="footer-bottom">
-      <div>©2023 - 2023 By 记录</div>
+      <a href="https://beian.miit.gov.cn" target="_blank" class="beian-link">
+        闽ICP备2026008390号-1
+      </a>
       <div>
         距离下一次英仙座流星雨还有{{ meteorDifference }}
         <svg-icon iconName="commonSvg-流星" />
       </div>
       <div>本站已运行{{ timeDifference }} <svg-icon iconName="commonSvg-火箭" /></div>
+
     </div>
   </div>
 </template>
@@ -69,6 +72,7 @@ onMounted(() => {
 @include theme() {
   .common-footer {
     height: auto;
+    opacity: 0.9;
     background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgb(255 255 255 / 60%) 25%);
     // background: get('back-tr');
     // backdrop-filter: blur(5px);
@@ -77,52 +81,73 @@ onMounted(() => {
     align-items: center;
     justify-content: space-between;
 
+    .beian-link {
+      font-size: 0.9rem;
+      color: inherit;
+      text-decoration: none;
+      transition: opacity 0.3s ease;
+
+    }
+
     .footer-top,
     .footer-main,
     .footer-bottom {
       width: 100%;
     }
+
     .footer-top {
       height: auto;
       margin: 50px 0 20px 0;
     }
+
     .footer-bottom {
       @keyframes upDown {
         0% {
           transform: translateY(0);
         }
+
         25% {
           transform: translateY(-1px);
         }
+
         50% {
           transform: translateY(0);
         }
+
         75% {
           transform: translateY(1px);
         }
+
         100% {
           transform: translateY(0);
         }
       }
+
       margin: 0 0 30px 0;
-      & > div {
+
+      &>div {
         margin: 8px 0;
         @include flex;
+
         .svg-icon {
           font-size: 1.25rem;
           margin-left: 8px;
           animation: upDown 2s infinite linear;
         }
       }
-      & > div:nth-child(1) {
+
+      &>div:nth-child(1) {
         font-size: 0.9rem;
       }
+
     }
+
     .footer-main {
       height: auto;
       display: flex;
       align-items: flex-start;
       justify-content: center;
+
       // padding:0 20%;
       .footer-col {
         width: 15%;
@@ -131,6 +156,7 @@ onMounted(() => {
         font-weight: bold;
         color: rgba(60, 60, 67, 0.8);
       }
+
       .footer-row {
         width: 100%;
         height: auto;

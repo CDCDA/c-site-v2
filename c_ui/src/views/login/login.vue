@@ -4,18 +4,8 @@
       <div class="login" :class="pageType === 'register' ? 'login-hidden' : ''">
         <h3 class="login-title">{{ $t('登录') }}</h3>
         <div class="login-input">
-          <input
-            type="text"
-            :placeholder="$t('用户名/邮箱')"
-            class="userName"
-            v-model="loginForm.userName"
-          />
-          <input
-            type="password"
-            :placeholder="$t('密码')"
-            class="password"
-            v-model="loginForm.password"
-          />
+          <input type="text" :placeholder="$t('用户名/邮箱')" class="userName" v-model="loginForm.userName" />
+          <input type="password" :placeholder="$t('密码')" class="password" v-model="loginForm.password" />
         </div>
         <div class="login-edit">
           <span class="edit-pw">{{ $t('修改密码?') }}</span>
@@ -23,24 +13,14 @@
         <div class="login-btn">
           <el-button @click="handleLogin" :loading="loading" :disabled="loading">{{
             $t('登录')
-          }}</el-button>
+            }}</el-button>
         </div>
       </div>
       <div class="register" :class="pageType === 'register' ? 'register-show' : ''">
         <h3 class="register-title">{{ $t('注册') }}</h3>
         <div class="register-input">
-          <input
-            type="text"
-            :placeholder="$t('昵称')"
-            class="nickName"
-            v-model="registerForm.nickName"
-          />
-          <input
-            type="password"
-            :placeholder="$t('密码')"
-            class="password"
-            v-model="registerForm.password"
-          />
+          <input type="text" :placeholder="$t('昵称')" class="nickName" v-model="registerForm.nickName" />
+          <input type="password" :placeholder="$t('密码')" class="password" v-model="registerForm.password" />
           <input type="text" :placeholder="$t('邮箱')" class="email" v-model="registerForm.email" />
           <input type="text" :placeholder="$t('验证码')" class="code" v-model="registerForm.code" />
         </div>
@@ -50,7 +30,7 @@
         <div class="register-btn">
           <el-button @click="handleRegister" :loading="loading" :disabled="loading">{{
             $t('暂不开放注册')
-          }}</el-button>
+            }}</el-button>
         </div>
       </div>
       <div class="register-pre" :class="pageType === 'register' ? 'login-pre' : ''">
@@ -61,17 +41,17 @@
           {{ `${pageType === 'login' ? $t('立即注册') : '请登录🚀'}` }}
         </div>
         <div class="register-btn">
-          <el-button
-            @click="openRegister"
-            :class="pageType === 'register' ? 'login-btn' : 'register-btn'"
-            >{{ `${pageType === 'login' ? $t('注册') : $t('登录')}` }}</el-button
-          >
+          <el-button @click="openRegister" :class="pageType === 'register' ? 'login-btn' : 'register-btn'">{{
+            `${pageType === 'login' ? $t('注册') : $t('登录')}` }}</el-button>
           <el-button @click="handleTouristLogin" :loading="touristLoading" :disabled="loading">{{
             $t('游客登录')
-          }}</el-button>
+            }}</el-button>
         </div>
       </div>
     </div>
+    <a href="https://beian.miit.gov.cn" target="_blank" class="beian-link">
+      闽ICP备2026008390号-1
+    </a>
   </div>
 </template>
 
@@ -88,8 +68,6 @@ import useUserStore from '@/store/modules/user';
 import Cookies from 'js-cookie';
 import useThemeStore from '@/store/modules/theme.ts';
 const themeStore = useThemeStore();
-themeStore.isShow = false;
-themeStore.isFooterShow = false;
 const userStore = useUserStore();
 const router = useRouter();
 const loading = ref(false);
@@ -275,6 +253,7 @@ onMounted(() => {
     justify-content: center;
     cursor: pointer;
   }
+
   .login-main {
     opacity: 0.9;
     border-radius: 10px;
@@ -289,6 +268,7 @@ onMounted(() => {
     display: flex;
     align-items: center;
   }
+
   .login {
     width: 50%;
     height: 100%;
@@ -297,17 +277,20 @@ onMounted(() => {
     top: 0;
     transition: all 0.5s ease-in-out;
     background: white;
+
     .login-title {
       margin-top: 22%;
       margin-bottom: 10%;
       font-size: 1.6rem;
     }
+
     .login-input {
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
     }
+
     .login-edit {
       color: black;
       font-size: 0.7rem;
@@ -315,19 +298,23 @@ onMounted(() => {
       margin: 15px 0;
     }
   }
+
   .login-hidden.login {
     opacity: 0;
     top: 100%;
   }
+
   .login-pre.register-pre {
     left: 0;
   }
+
   .register-show.register {
     opacity: 1;
     left: 50%;
     top: 0;
     z-index: 0;
   }
+
   .register {
     width: 50%;
     height: 100%;
@@ -338,17 +325,20 @@ onMounted(() => {
     z-index: -1;
     transition: all 0.5s ease-in-out;
     background: white;
+
     .register-title {
       margin-top: 10%;
       margin-bottom: 4%;
       font-size: 1.6rem;
     }
+
     .register-input {
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
     }
+
     .register-edit {
       color: black;
       font-size: 0.7rem;
@@ -356,6 +346,7 @@ onMounted(() => {
       margin: 15px 0;
     }
   }
+
   .register-pre {
     width: 50%;
     height: 100%;
@@ -365,17 +356,20 @@ onMounted(() => {
     transition: all 0.5s ease-in-out;
     background: linear-gradient(90deg, #ff4b2b, #ff416c);
     color: white;
+
     .register-title {
       margin-top: 40%;
       margin-bottom: 13%;
       font-size: 1.6rem;
     }
+
     .register-tip {
       font-size: 0.7rem;
       letter-spacing: 1px;
       margin: 1rem 0 30px;
     }
   }
+
   .el-button {
     border-radius: 2rem !important;
     border: none;
@@ -388,11 +382,26 @@ onMounted(() => {
     cursor: pointer;
     border: 1px solid #fafaf9;
   }
+
   .el-button:hover {
     transform: scale(1.05);
   }
+
   .el-button:active {
     transform: translateY(2px);
+  }
+
+  .beian-link {
+    position: absolute;
+    bottom: 20px;
+    font-size: 0.8rem;
+    width: 100%;
+    opacity: 0.8;
+    color: white;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   input {
@@ -403,9 +412,11 @@ onMounted(() => {
     margin: 10px 0;
     width: calc(100% - 80px);
     outline: none;
+
     &:active {
       background-color: #eee;
     }
+
     &::selection {
       background-color: #eee;
     }

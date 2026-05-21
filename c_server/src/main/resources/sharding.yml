@@ -2,34 +2,34 @@ dataSources:
   db_0: # 写库 & 分片库0
     dataSourceClassName: com.alibaba.druid.pool.DruidDataSource
     driverClassName: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://120.48.127.181:3306/C_PW?useUnicode=true&characterEncoding=utf-8&useSSL=false&rewriteBatchedStatements=true
+    url: jdbc:mysql://120.48.127.181:3306/C_PW?useUnicode=true&characterEncoding=utf-8&useSSL=false&rewriteBatchedStatements=true&allowPublicKeyRetrieval=true
     username: root
     password: 123456
   db_1: # 分片库1
     dataSourceClassName: com.alibaba.druid.pool.DruidDataSource
     driverClassName: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://120.48.127.181:3306/C_PW1?useUnicode=true&characterEncoding=utf-8&useSSL=false&rewriteBatchedStatements=true
+    url: jdbc:mysql://120.48.127.181:3306/C_PW1?useUnicode=true&characterEncoding=utf-8&useSSL=false&rewriteBatchedStatements=true&allowPublicKeyRetrieval=true
     username: root
     password: 123456
   db_2: # 读库（db_0的从库）
     dataSourceClassName: com.alibaba.druid.pool.DruidDataSource
     driverClassName: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://120.48.127.181:3306/C_PW2?useUnicode=true&characterEncoding=utf-8&useSSL=false&rewriteBatchedStatements=true
+    url: jdbc:mysql://120.48.127.181:3306/C_PW2?useUnicode=true&characterEncoding=utf-8&useSSL=false&rewriteBatchedStatements=true&allowPublicKeyRetrieval=true
     username: root
     password: 123456
 
 rules:
   # 1. 定义读写分离规则
-  - !READWRITE_SPLITTING
-    dataSourceGroups:
-      rw_ds: # 这是一个逻辑数据源名称，包含了主库db_0和从库db_2
-        writeDataSourceName: db_0
-        readDataSourceNames:
-          - db_2
-        loadBalancerName: my_round_robin
-    loadBalancers:
-      my_round_robin:
-        type: ROUND_ROBIN
+#  - !READWRITE_SPLITTING
+#    dataSourceGroups:
+#      rw_ds: # 这是一个逻辑数据源名称，包含了主库db_0和从库db_2
+#        writeDataSourceName: db_0
+#        readDataSourceNames:
+#          - db_2
+#        loadBalancerName: my_round_robin
+#    loadBalancers:
+#      my_round_robin:
+#        type: ROUND_ROBIN
 
   # 2. 定义分库分表规则
   - !SHARDING

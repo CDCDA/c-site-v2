@@ -81,7 +81,7 @@ onMounted(() => {
     overflow: hidden;
     padding: 0 !important;
     width: calc(100%) !important;
-    background: url('https://120.48.127.181/file/other/Ruins.jpg') center 28% / cover no-repeat !important;
+    background: url('https://cccc1203.top/file/other/Ruins.jpg') center 28% / cover no-repeat !important;
     color: get('re-font-color') !important;
 
     .user-header {
